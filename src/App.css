@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Monoton&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "roboto", sans-serif;
+}
+
+:root {
+  --very-dark: #012a4a;
+  --primary-dark: #013a63;
+  --primary-color: #2c7da0;
+  --primary-light: #468faf;
+  --very-light: #e4ecee;
+  --primay-gray: #5e5e5e;
+  --primay-gray\60: #5e5e5e99;
+  --primay-gray\40: #5e5e5e66;
+  --primay-gray\24: #5e5e5e3d;
+  --secondary-gray: #d9d9d9;
+  --secondary-gray\36: #d9d9d95c;
+  --very-light: #f9fafb;
+  --third-gray: #aea9a9;
+}
