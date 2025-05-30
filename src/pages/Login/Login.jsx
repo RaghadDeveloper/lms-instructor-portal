@@ -4,14 +4,18 @@ import PasswordField from "../../components/PasswordInput/PasswordInput";
 import AuthLayout from "../../components/AuthLayout/AuthLayout";
 import Button from "../../components/Button/Button";
 import EmailField from "../../components/EmailInput/EmailInput";
-import UserState from "../../components/UserState/UserState";
+import InlineActionText from "../../components/InlineActionText/InlineActionText";
 import AuthHeader from "../../components/AuthHeader/AuthHeader";
 import AuthForm from "../../components/AuthForm/AuthForm";
 import { Link } from "react-router-dom";
 
 function Login() {
   const loginData = {
-    title: "Log in to",
+    title: (
+      <>
+        Log in to <span> NEXORA</span> Academy
+      </>
+    ),
     description:
       "Welcome back, Instructor! Log in to manage your courses and connect with your students.",
   };
@@ -25,9 +29,9 @@ function Login() {
         <PasswordField id="password" label="Password" page="login" />
 
         <Button>Log in</Button>
-        <UserState>
+        <InlineActionText>
           Don't have an account? <Link to={"/signup"}>Sign up</Link>
-        </UserState>
+        </InlineActionText>
       </AuthForm>
     </AuthLayout>
   );

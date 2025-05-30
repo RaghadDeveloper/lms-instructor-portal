@@ -4,14 +4,18 @@ import signup from "./../../assets/images/signup.png";
 import Button from "../../components/Button/Button";
 import PasswordInput from "../../components/PasswordInput/PasswordInput";
 import EmailInput from "../../components/EmailInput/EmailInput";
-import UserState from "../../components/UserState/UserState";
+import InlineActionText from "../../components/InlineActionText/InlineActionText";
 import AuthHeader from "../../components/AuthHeader/AuthHeader";
 import AuthForm from "../../components/AuthForm/AuthForm";
 import { Link } from "react-router-dom";
 
 function Signup() {
   const signupData = {
-    title: "Sign up to",
+    title: (
+      <>
+        Sign up to <span> NEXORA</span> Academy
+      </>
+    ),
     description:
       "Welcome to NEXORA Academy! Sign up to create your account and start learning.",
   };
@@ -30,9 +34,9 @@ function Signup() {
         <PasswordInput id="confirm-password" label="Confirm Password" />
 
         <Button>Sign up</Button>
-        <UserState>
+        <InlineActionText>
           Already have an account? <Link to={"/login"}>Log in</Link>
-        </UserState>
+        </InlineActionText>
       </AuthForm>
     </AuthLayout>
   );

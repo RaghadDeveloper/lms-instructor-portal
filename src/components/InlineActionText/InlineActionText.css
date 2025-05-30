@@ -1,8 +1,9 @@
-.auth-layout form .user-state {
+.auth-layout .question {
   color: var(--very-dark);
 }
 
-.auth-layout form .user-state a {
+.auth-layout .question a,
+.verification p span {
   text-decoration: none;
   color: var(--primary-color);
   cursor: pointer;

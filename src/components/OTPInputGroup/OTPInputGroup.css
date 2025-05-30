@@ -1,0 +1,21 @@
+.verification .input-group {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+  margin-top: 1.5rem;
+}
+
+.verification .input-group input {
+  width: 3rem;
+  height: 3rem;
+  text-align: center;
+  border: 1px solid var(--primary-color);
+  border-radius: 0.25rem;
+  font-size: 1.5rem;
+  color: var(--very-dark);
+}
+
+.verification .input-group input:focus {
+  outline: none;
+  border: 2px solid var(--primary-color);
+}
