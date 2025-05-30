@@ -1,8 +1,8 @@
 import { useState } from "react";
-import "./PasswordField.css";
+import "./PasswordInput.css";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
-function PasswordField({ id, label }) {
+function PasswordInput({ id, label, page }) {
   const [show, setShow] = useState(false);
 
   return (
@@ -12,8 +12,9 @@ function PasswordField({ id, label }) {
       <span className="icon" onClick={() => setShow(!show)}>
         {show ? <FaRegEyeSlash /> : <FaRegEye />}
       </span>
+      {page === "login" && <p className="forget">Forgot Password?</p>}
     </div>
   );
 }
 
-export default PasswordField;
+export default PasswordInput;

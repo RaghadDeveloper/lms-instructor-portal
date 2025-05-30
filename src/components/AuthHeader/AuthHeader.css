@@ -1,0 +1,22 @@
+.auth-layout .auth-layout-form header {
+  display: flex;
+  flex-direction: column;
+  margin-right: 2rem;
+}
+
+.auth-layout .auth-layout-form header h2 {
+  font-size: 1.75rem;
+  font-weight: 400;
+  color: var(--very-dark);
+  margin-bottom: 2rem;
+}
+
+.auth-layout .auth-layout-form header h2 span {
+  color: var(--primary-color);
+  font-size: 2rem;
+}
+
+.auth-layout .auth-layout-form header p {
+  margin-bottom: 1.5rem;
+  color: var(--primary-dark);
+}

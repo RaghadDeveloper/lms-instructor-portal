@@ -2,47 +2,38 @@ import "./Signup.css";
 import AuthLayout from "../../components/AuthLayout/AuthLayout";
 import signup from "./../../assets/images/signup.png";
 import Button from "../../components/Button/Button";
-import { FaRegEye } from "react-icons/fa";
-import PasswordField from "../../components/PasswordField/PasswordField";
+import PasswordInput from "../../components/PasswordInput/PasswordInput";
+import EmailInput from "../../components/EmailInput/EmailInput";
+import UserState from "../../components/UserState/UserState";
+import AuthHeader from "../../components/AuthHeader/AuthHeader";
+import AuthForm from "../../components/AuthForm/AuthForm";
+import { Link } from "react-router-dom";
 
 function Signup() {
+  const signupData = {
+    title: "Sign up to",
+    description:
+      "Welcome to NEXORA Academy! Sign up to create your account and start learning.",
+  };
+
   return (
     <AuthLayout imageSrc={signup}>
-      <header>
-        <h2>
-          Sign up to <span>NEXORA</span> Academy
-        </h2>
-        <p>
-          Welcome to NEXORA Academy! Sign up to create your account and start
-          learning.
-        </p>
-      </header>
+      <AuthHeader
+        title={signupData.title}
+        description={signupData.description}
+      />
 
-      <form>
-        <div className="email">
-          <input id="email" type="email" required />
-          <label htmlFor="email">Email</label>
-        </div>
+      <AuthForm>
+        <EmailInput />
 
-        {/* <div className="password">
-          <input id="password" type="password" required />
-          <label htmlFor="password">Password</label>
-          <FaRegEye className="icon" />
-        </div>
-
-        <div className="password">
-          <input id="confirm-password" type="password" required />
-          <label htmlFor="confirm-password">Confirm password</label>
-        </div> */}
-
-        <PasswordField id="password" label="Password" />
-        <PasswordField id="confirm-password" label="Confirm Password" />
+        <PasswordInput id="password" label="Password" />
+        <PasswordInput id="confirm-password" label="Confirm Password" />
 
         <Button>Sign up</Button>
-        <p className="user-state">
-          Already have an account? <span>Log in</span>
-        </p>
-      </form>
+        <UserState>
+          Already have an account? <Link to={"/login"}>Log in</Link>
+        </UserState>
+      </AuthForm>
     </AuthLayout>
   );
 }
