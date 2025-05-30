@@ -4,16 +4,21 @@
   background-color: var(--very-light);
   padding: 10rem;
   gap: 2rem;
+  background-image: url("./../../assets/images/Subtract.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  /* background-position: center; */
 }
 
 .auth-layout .auth-layout-image {
-  width: 50%;
+  /* width: 50%; */
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .auth-layout .auth-layout-form {
+  margin-left: 40%;
   width: 50%;
   display: flex;
   flex-direction: column;

@@ -1,5 +1,5 @@
 import "./Login.css";
-import signup from "./../../assets/images/signup.png";
+import login from "./../../assets/images/l.png";
 import PasswordField from "../../components/PasswordInput/PasswordInput";
 import AuthLayout from "../../components/AuthLayout/AuthLayout";
 import Button from "../../components/Button/Button";
@@ -20,7 +20,7 @@ function Login() {
       "Welcome back, Instructor! Log in to manage your courses and connect with your students.",
   };
   return (
-    <AuthLayout imageSrc={signup}>
+    <AuthLayout imageSrc={login}>
       <AuthHeader title={loginData.title} description={loginData.description} />
 
       <AuthForm>
