@@ -1,0 +1,36 @@
+/* .upload-profile-image {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+} */
+
+.upload-profile-image label {
+  color: var(--very-dark);
+}
+
+.upload-profile-image img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.upload-icon {
+  position: absolute;
+  bottom: 10px;
+  right: 6px;
+  background-color: #d4d4d4;
+  color: white;
+  padding: 5px;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.upload-icon:hover {
+  opacity: 0.8;
+}

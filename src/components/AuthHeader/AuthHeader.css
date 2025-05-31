@@ -1,7 +1,5 @@
 .auth-layout .auth-layout-form header {
-  display: flex;
-  flex-direction: column;
-  margin-right: 2rem;
+  max-width: 450px;
 }
 
 .auth-layout .auth-layout-form header h2 {

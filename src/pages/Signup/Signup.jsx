@@ -1,9 +1,8 @@
 import "./Signup.css";
 import AuthLayout from "../../components/AuthLayout/AuthLayout";
-import signup from "./../../assets/images/signup.png";
 import Button from "../../components/Button/Button";
 import PasswordInput from "../../components/PasswordInput/PasswordInput";
-import EmailInput from "../../components/EmailInput/EmailInput";
+import TextInput from "../../components/TextInput/TextInput";
 import InlineActionText from "../../components/InlineActionText/InlineActionText";
 import AuthHeader from "../../components/AuthHeader/AuthHeader";
 import AuthForm from "../../components/AuthForm/AuthForm";
@@ -21,14 +20,14 @@ function Signup() {
   };
 
   return (
-    <AuthLayout imageSrc={signup}>
+    <AuthLayout>
       <AuthHeader
         title={signupData.title}
         description={signupData.description}
       />
 
       <AuthForm>
-        <EmailInput />
+        <TextInput id="email" type="email" label="Email" />
 
         <PasswordInput id="password" label="Password" />
         <PasswordInput id="confirm-password" label="Confirm Password" />

@@ -1,12 +1,10 @@
 import "./AuthLayout.css";
+import img from "./../../assets/images/Subtract.png";
 
-// function AuthLayout({ imageSrc, children }) {
 function AuthLayout({ children }) {
   return (
     <div className="auth-layout">
-      {/* <div className="auth-layout-image">
-        <img src={imageSrc} alt="auth image" width={"450px"} />
-      </div> */}
+      <img src={img} className="background" alt="background" />
       <div className="auth-layout-form">{children}</div>
     </div>
   );

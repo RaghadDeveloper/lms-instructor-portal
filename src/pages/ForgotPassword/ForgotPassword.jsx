@@ -2,7 +2,7 @@ import AuthForm from "../../components/AuthForm/AuthForm";
 import AuthHeader from "../../components/AuthHeader/AuthHeader";
 import AuthLayout from "../../components/AuthLayout/AuthLayout";
 import Button from "../../components/Button/Button";
-import EmailInput from "../../components/EmailInput/EmailInput";
+import TextInput from "../../components/TextInput/TextInput";
 import "./ForgotPassword.css";
 
 function ForgotPassword() {
@@ -17,7 +17,7 @@ function ForgotPassword() {
         description={headerData.description}
       />
       <AuthForm>
-        <EmailInput />
+        <TextInput id="email" type="email" label="Email" />
         <Button>Continue</Button>
       </AuthForm>
     </AuthLayout>

@@ -5,6 +5,7 @@ import Login from "./pages/Login/Login";
 import Verification from "./pages/Verification/Verification";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
+import ProfileSetup from "./pages/ProfileSetup/ProfileSetup";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="verification" element={<Verification />} />
         <Route path="forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/complete-profile" element={<ProfileSetup />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,0 +1,29 @@
+.option {
+  padding: 0.75rem 2rem;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  margin-top: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  width: fit-content;
+  border: 2px solid var(--primary-color);
+}
+
+.option label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.option label input[type="checkbox"] {
+  margin-right: 0.5rem;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.option.selected {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+}

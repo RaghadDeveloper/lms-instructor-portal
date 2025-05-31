@@ -1,6 +1,7 @@
 import AuthForm from "../../components/AuthForm/AuthForm";
 import AuthHeader from "../../components/AuthHeader/AuthHeader";
 import AuthLayout from "../../components/AuthLayout/AuthLayout";
+import Button from "../../components/Button/Button";
 import PasswordInput from "../../components/PasswordInput/PasswordInput";
 import "./ResetPassword.css";
 function ResetPassword() {
@@ -18,6 +19,8 @@ function ResetPassword() {
       <AuthForm>
         <PasswordInput id="password" label="Password" />
         <PasswordInput id="confirm-password" label="Confirm Password" />
+
+        <Button>Confirm password</Button>
       </AuthForm>
     </AuthLayout>
   );

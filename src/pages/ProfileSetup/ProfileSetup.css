@@ -1,0 +1,17 @@
+.profile-setup {
+  margin-left: 30%;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--very-dark);
+  margin-bottom: 0.5rem;
+}
+
+.profile-setup .button-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 3rem;
+}
