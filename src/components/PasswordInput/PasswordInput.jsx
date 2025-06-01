@@ -3,12 +3,19 @@ import "./PasswordInput.css";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-function PasswordInput({ id, label, page }) {
+function PasswordInput({ id, label, page, name, value, onChange }) {
   const [show, setShow] = useState(false);
 
   return (
     <div className="password">
-      <input id={id} type={show ? "text" : "password"} required />
+      <input
+        id={id}
+        type={show ? "text" : "password"}
+        name={name}
+        value={value}
+        onChange={onChange}
+        required
+      />
       <label htmlFor={id} className="label">
         {label}
       </label>

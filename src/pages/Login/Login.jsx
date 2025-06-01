@@ -7,25 +7,49 @@ import InlineActionText from "../../components/InlineActionText/InlineActionText
 import AuthHeader from "../../components/AuthHeader/AuthHeader";
 import AuthForm from "../../components/AuthForm/AuthForm";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { loginHeader } from "../../data/headers";
 
 function Login() {
-  const loginData = {
-    title: (
-      <>
-        Log in to <span> NEXORA</span> Academy
-      </>
-    ),
-    description:
-      "Welcome back, Instructor! Log in to manage your courses and connect with your students.",
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+  };
+
   return (
     <AuthLayout>
-      <AuthHeader title={loginData.title} description={loginData.description} />
+      <AuthHeader
+        title={loginHeader.title}
+        description={loginHeader.description}
+      />
 
-      <AuthForm>
-        <TextInput id="email" type="email" label="Email" />
+      <AuthForm onSubmit={handleSubmit}>
+        <TextInput
+          id="email"
+          type="email"
+          label="Email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+        />
 
-        <PasswordField id="login-password" label="Password" page="login" />
+        <PasswordField
+          id="login-password"
+          label="Password"
+          page="login"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+        />
 
         <Button>Log in</Button>
         <InlineActionText>

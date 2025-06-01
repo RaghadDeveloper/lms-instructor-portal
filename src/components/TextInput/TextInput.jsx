@@ -1,9 +1,16 @@
 import "./TextInput.css";
 
-function EmailInput({ id, type, label }) {
+function TextInput({ id, type, label, name, value, onChange }) {
   return (
     <div className="email">
-      <input id={id} type={type} required />
+      <input
+        id={id}
+        type={type}
+        name={name}
+        value={value}
+        onChange={onChange}
+        required
+      />
       <label htmlFor={id} className="label">
         {label}
       </label>
@@ -11,4 +18,4 @@ function EmailInput({ id, type, label }) {
   );
 }
 
-export default EmailInput;
+export default TextInput;

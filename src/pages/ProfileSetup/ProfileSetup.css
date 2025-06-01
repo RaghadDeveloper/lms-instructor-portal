@@ -1,5 +1,6 @@
 .profile-setup {
-  margin-left: 30%;
+  /* margin-left: 30%; */
+  max-width: 700px;
 }
 
 h2 {
