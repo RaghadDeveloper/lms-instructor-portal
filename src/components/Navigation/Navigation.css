@@ -1,0 +1,78 @@
+.navigation {
+  position: sticky;
+  top: 0;
+  min-width: max-content;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  gap: 0.3rem;
+  transition: position 0.2s ease;
+}
+
+.navigation.active {
+  width: max-content;
+}
+
+.navigation header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--very-dark);
+  padding: 2rem;
+  padding-left: 1rem;
+}
+
+.navigation.active header {
+  padding: 2rem 0rem;
+}
+
+.navigation.active header .logo {
+  margin: 0 auto;
+}
+
+.navigation header h1 {
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 0;
+}
+
+.navigation header h1 span {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.navigation.active header h1 {
+  display: none;
+}
+
+.navigation .menu {
+  position: absolute;
+  right: -1rem;
+  top: 2rem;
+  cursor: pointer;
+  color: var(--very-dark);
+  z-index: 100;
+  background-color: var(--very-light);
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  transition: rotate 0.2s ease;
+}
+
+.navigation.active .menu {
+  rotate: 180deg;
+  right: -2rem;
+}
+
+.navigation .line {
+  position: relative;
+  width: 90%;
+  height: 1px;
+  background-color: var(--primary-color);
+  margin: 0 auto;
+}

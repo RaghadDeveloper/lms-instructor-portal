@@ -1,0 +1,44 @@
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  padding: 12px 20px;
+  transition: background-color 0.2s ease;
+  color: var(--very-dark);
+}
+
+.nav h2 {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.nav:hover {
+  background-color: #ffffff34;
+}
+
+.navigation.active h2 {
+  display: none;
+}
+.icon {
+  font-size: 20px;
+}
+
+.nav.active {
+  background-color: var(--secondary-gray\36);
+  color: var(--primary-color);
+  padding: 0;
+}
+
+.nav.active::before {
+  content: "";
+  width: 5px;
+  height: 44px;
+  background-color: var(--primary-color);
+  border-radius: 4px;
+}
+
+.nav.active h2 {
+  color: var(--primary-color);
+}

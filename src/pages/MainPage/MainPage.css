@@ -1,0 +1,4 @@
+.main {
+  background-color: var(--very-light);
+  display: flex;
+}
