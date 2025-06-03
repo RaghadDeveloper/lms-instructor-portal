@@ -7,6 +7,9 @@ import InlineActionText from "../../components/InlineActionText/InlineActionText
 import AuthHeader from "../../components/AuthHeader/AuthHeader";
 import AuthForm from "../../components/AuthForm/AuthForm";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { signup } from "../../features/auth/authThunks";
 
 function Signup() {
   const signupData = {
@@ -19,6 +22,24 @@ function Signup() {
       "Welcome to NEXORA Academy! Sign up to create your account and start learning.",
   };
 
+  const dispatch = useDispatch();
+  const { error } = useSelector((state) => state.auth);
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+    password_confirmation: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(signup(formData));
+  };
+
   return (
     <AuthLayout>
       <AuthHeader
@@ -26,17 +47,45 @@ function Signup() {
         description={signupData.description}
       />
 
-      <AuthForm>
-        <TextInput id="email" type="email" label="Email" />
+      <AuthForm onSubmit={handleSubmit}>
+        <TextInput
+          id="user-name"
+          type="text"
+          label={"User Name"}
+          name={"username"}
+          value={formData.username}
+          onChange={handleChange}
+        />
+        <TextInput
+          id="email"
+          type="email"
+          label="Email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+        />
 
-        <PasswordInput id="password" label="Password" />
-        <PasswordInput id="confirm-password" label="Confirm Password" />
+        <PasswordInput
+          id="password"
+          label="Password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+        />
+        <PasswordInput
+          id="confirm-password"
+          label="Confirm Password"
+          name="password_confirmation"
+          value={formData.password_confirmation}
+          onChange={handleChange}
+        />
 
         <Button>Sign up</Button>
         <InlineActionText>
           Already have an account? <Link to={"/login"}>Log in</Link>
         </InlineActionText>
       </AuthForm>
+      {error && <p className="error">{error}</p>}
     </AuthLayout>
   );
 }

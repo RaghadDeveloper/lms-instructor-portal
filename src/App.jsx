@@ -6,6 +6,7 @@ import Verification from "./pages/Verification/Verification";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import ProfileSetup from "./pages/ProfileSetup/ProfileSetup";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute ";
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
         <Route path="forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/complete-profile" element={<ProfileSetup />} />
+        <Route element={<PrivateRoute />}>
+          <Route path="/" element={<p>Home Page</p>} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
