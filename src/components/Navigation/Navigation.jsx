@@ -1,21 +1,23 @@
 import "./Navigation.css";
 import { useState } from "react";
 import Nav from "../Nav/Nav";
-import { TbDashboard, TbMessages } from "react-icons/tb";
 import { FiChevronLeft } from "react-icons/fi";
-import { MdNotificationsActive, MdSwapHoriz } from "react-icons/md";
+import { MdSwapHoriz } from "react-icons/md";
 import { HiOutlineLogout } from "react-icons/hi";
 import Logo from "./../../assets/images/logo.png";
-import { PiArticleNyTimesLight } from "react-icons/pi";
-import { RiLineChartLine } from "react-icons/ri";
-import { FaBookOpen } from "react-icons/fa";
-import { AiOutlineUser } from "react-icons/ai";
+import { useTheme } from "../../context/ThemeContext";
+import { navigationData } from "../../data/navigationData";
 
 function Navigation() {
   const [nav, setNav] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   return (
-    <div className={`navigation ${nav ? "active" : ""}`}>
+    <div
+      className={`navigation ${nav ? "active" : ""} ${
+        theme === "dark" ? "dark" : ""
+      }`}
+    >
       <span className="menu" onClick={() => setNav((prev) => !prev)}>
         <FiChevronLeft />
       </span>
@@ -26,33 +28,23 @@ function Navigation() {
         </h1>
       </header>
 
-      <Nav Icon={TbDashboard} title={"Dashboard"} link={"/"} />
-      <Nav Icon={FaBookOpen} title={"Courses"} link={"/courses"} />
-      <Nav
-        Icon={RiLineChartLine}
-        title={"Course Statisics"}
-        link={"/course-statistics"}
-      />
-
-      <div className="line"></div>
-
-      <Nav Icon={AiOutlineUser} title={"Profile"} link={"/profile"} />
-      <Nav Icon={TbMessages} title={"Messages"} link={"/messages"} />
-      <Nav
-        Icon={MdNotificationsActive}
-        title={"Notifications"}
-        link={"/notifications"}
-      />
-      <Nav Icon={PiArticleNyTimesLight} title={"Articles"} link={"/articles"} />
+      {navigationData.map((navData) => (
+        <div key={navData.title}>
+          <Nav Icon={navData.icon} title={navData.title} link={navData.link} />
+          {navData.title === "Course Statisics" && <div className="line"></div>}
+        </div>
+      ))}
 
       <div className="line"></div>
 
       <Nav
         Icon={MdSwapHoriz}
-        title={"Switch To Light Mode"}
-        disableActive={true}
+        title={`${
+          theme === "light" ? "Switch To Dark Mode" : "Switch To Light Mode"
+        }`}
+        onClick={toggleTheme}
       />
-      <Nav Icon={HiOutlineLogout} title={"Logout"} disableActive={true} />
+      <Nav Icon={HiOutlineLogout} title={"Logout"} />
     </div>
   );
 }

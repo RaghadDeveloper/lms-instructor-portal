@@ -1,13 +1,17 @@
 .navigation {
   position: sticky;
   top: 0;
+  width: 20%;
   min-width: max-content;
   height: 100vh;
   display: flex;
   flex-direction: column;
   background-color: white;
-  gap: 0.3rem;
   transition: position 0.2s ease;
+}
+
+.navigation.dark {
+  background-color: var(--dark-bg);
 }
 
 .navigation.active {
@@ -31,6 +35,10 @@
   font-size: 1.2rem;
   font-weight: 400;
   margin-bottom: 0;
+}
+
+.navigation.dark header h1 {
+  color: var(--very-light);
 }
 
 .navigation header h1 span {

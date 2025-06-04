@@ -8,10 +8,12 @@ import { HiOutlineLogout, HiOutlineMoon } from "react-icons/hi";
 import { RiSettingsLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { MdNotificationsActive } from "react-icons/md";
+import { useTheme } from "../../context/ThemeContext";
 
 function Header() {
+  const { theme, toggleTheme } = useTheme();
   return (
-    <header>
+    <header className={`${theme}`}>
       <div className="search-bar">
         <input type="text" placeholder="search..." />
         <BiSearch className="icon" />
@@ -26,7 +28,7 @@ function Header() {
         </Link>
 
         <div className="divider"></div>
-        <HiOutlineMoon className="icon" />
+        <HiOutlineMoon className="icon" onClick={toggleTheme} />
         <HiOutlineLogout className="icon" />
         <div className="divider"></div>
         <Link to={"/profile"}>

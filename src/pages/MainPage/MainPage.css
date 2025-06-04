@@ -3,6 +3,11 @@
   display: flex;
 }
 
+.main-page.dark {
+  background-color: var(--very-dark-bg);
+  color: var(--very-light);
+}
+
 .main-page main {
   width: 100%;
 }

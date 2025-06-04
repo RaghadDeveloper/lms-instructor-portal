@@ -21,4 +21,8 @@
   --secondary-gray\36: #d9d9d95c;
   --very-light-gray: #f9fafb;
   --third-gray: #aea9a9;
+  --dark-bg: #383838;
+  --very-dark-bg: #232323;
+  /* --dark-bg: #262b2e;
+  --very-dark-bg: #1f2427; */
 }

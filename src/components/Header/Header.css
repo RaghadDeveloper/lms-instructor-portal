@@ -1,10 +1,13 @@
-header {
+main > header {
   display: flex;
   justify-content: space-between;
   width: 100%;
   background-color: white;
   padding: 0.5rem;
-  border-left: 2px solid var(--very-light);
+  border-left: 1.5px solid var(--secondary-gray\36);
+}
+header.dark {
+  background-color: var(--dark-bg);
 }
 
 header .search-bar {
@@ -22,7 +25,9 @@ header .search-bar input {
   background-color: transparent;
   font-size: 16px;
 }
-
+header.dark .search-bar input {
+  border-color: var(--very-light);
+}
 header .search-bar input:focus {
   outline: none;
   border: 1px solid var(--primary-color);
@@ -37,7 +42,6 @@ header .search-bar .icon {
   right: 8px;
   color: var(--very-dark);
 }
-
 header .search-bar input:focus ~ .icon {
   color: var(--primary-color);
 }
@@ -54,6 +58,12 @@ header .header-icons .icon {
   cursor: pointer;
 }
 
+header.dark .header-icons .icon,
+header.dark .search-bar .icon {
+  color: var(--very-light);
+}
+
+header.dark .header-icons .icon:hover,
 header .header-icons .icon:hover {
   color: var(--primary-color);
 }
