@@ -26,17 +26,17 @@ function App() {
         <Route path="forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/complete-profile" element={<ProfileSetup />} />
-        <Route element={<PrivateRoute />}>
-          <Route path="/" element={<MainPage />}>
-            <Route index element={<Dashboard />} />
-            <Route path="/articles" element={<Articles />} />
-            <Route path="/courses" element={<Courses />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/course-statistics" element={<CourseStatistics />} />
-            <Route path="/messages" element={<Messages />} />
-            <Route path="/notifications" element={<Notifications />} />
-          </Route>
+        {/* <Route element={<PrivateRoute />}> */}
+        <Route path="/" element={<MainPage />}>
+          <Route index element={<Dashboard />} />
+          <Route path="/articles" element={<Articles />} />
+          <Route path="/courses" element={<Courses />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/course-statistics" element={<CourseStatistics />} />
+          <Route path="/messages" element={<Messages />} />
+          <Route path="/notifications" element={<Notifications />} />
         </Route>
+        {/* </Route> */}
       </Routes>
     </BrowserRouter>
   );

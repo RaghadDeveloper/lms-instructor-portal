@@ -25,6 +25,11 @@
   font-size: 20px;
 }
 
+.nav:hover,
+.nav:hover h2 {
+  color: var(--primary-color);
+}
+
 .nav.active {
   background-color: var(--secondary-gray\36);
   color: var(--primary-color);

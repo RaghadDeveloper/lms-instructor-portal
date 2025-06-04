@@ -1,0 +1,72 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  background-color: white;
+  padding: 0.5rem;
+  border-left: 2px solid var(--very-light);
+}
+
+header .search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 25%;
+}
+
+header .search-bar input {
+  border: 1px solid var(--very-dark);
+  border-radius: 4px;
+  padding: 8px;
+  flex: 1;
+  background-color: transparent;
+  font-size: 16px;
+}
+
+header .search-bar input:focus {
+  outline: none;
+  border: 1px solid var(--primary-color);
+}
+
+header .search-bar input:focus::placeholder {
+  color: var(--primary-color);
+}
+
+header .search-bar .icon {
+  position: absolute;
+  right: 8px;
+  color: var(--very-dark);
+}
+
+header .search-bar input:focus ~ .icon {
+  color: var(--primary-color);
+}
+
+header .header-icons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+header .header-icons .icon {
+  color: var(--very-dark);
+  font-size: 24px;
+  cursor: pointer;
+}
+
+header .header-icons .icon:hover {
+  color: var(--primary-color);
+}
+
+header .header-icons .user {
+  width: 40px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid var(--primary-color);
+}
+
+header .header-icons .divider {
+  width: 1px;
+  align-self: stretch;
+  background-color: var(--primary-color);
+}

@@ -1,4 +1,8 @@
-.main {
+.main-page {
   background-color: var(--very-light);
   display: flex;
+}
+
+.main-page main {
+  width: 100%;
 }

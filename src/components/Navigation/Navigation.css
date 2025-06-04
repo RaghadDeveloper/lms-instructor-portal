@@ -19,12 +19,8 @@
   align-items: center;
   gap: 1rem;
   color: var(--very-dark);
-  padding: 2rem;
-  padding-left: 1rem;
-}
-
-.navigation.active header {
-  padding: 2rem 0rem;
+  padding: 1rem;
+  padding-bottom: 3rem;
 }
 
 .navigation.active header .logo {
@@ -49,7 +45,7 @@
 .navigation .menu {
   position: absolute;
   right: -1rem;
-  top: 2rem;
+  top: 4rem;
   cursor: pointer;
   color: var(--very-dark);
   z-index: 100;

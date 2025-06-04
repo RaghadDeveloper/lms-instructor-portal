@@ -1,19 +1,15 @@
 import "./Navigation.css";
 import { useState } from "react";
 import Nav from "../Nav/Nav";
-import { TbDashboard } from "react-icons/tb";
+import { TbDashboard, TbMessages } from "react-icons/tb";
 import { FiChevronLeft } from "react-icons/fi";
-import {
-  MdNotificationsActive,
-  MdQueryStats,
-  MdSwapHoriz,
-} from "react-icons/md";
-import { HiOutlineLogout, HiOutlineUser } from "react-icons/hi";
+import { MdNotificationsActive, MdSwapHoriz } from "react-icons/md";
+import { HiOutlineLogout } from "react-icons/hi";
 import Logo from "./../../assets/images/logo.png";
 import { PiArticleNyTimesLight } from "react-icons/pi";
-import { LuMessageCircleMore } from "react-icons/lu";
 import { RiLineChartLine } from "react-icons/ri";
 import { FaBookOpen } from "react-icons/fa";
+import { AiOutlineUser } from "react-icons/ai";
 
 function Navigation() {
   const [nav, setNav] = useState(false);
@@ -40,8 +36,8 @@ function Navigation() {
 
       <div className="line"></div>
 
-      <Nav Icon={HiOutlineUser} title={"Profile"} link={"/profile"} />
-      <Nav Icon={LuMessageCircleMore} title={"Messages"} link={"/messages"} />
+      <Nav Icon={AiOutlineUser} title={"Profile"} link={"/profile"} />
+      <Nav Icon={TbMessages} title={"Messages"} link={"/messages"} />
       <Nav
         Icon={MdNotificationsActive}
         title={"Notifications"}
