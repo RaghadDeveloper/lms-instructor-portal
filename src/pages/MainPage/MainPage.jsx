@@ -11,7 +11,9 @@ function MainPage() {
       <Navigation />
       <main>
         <Header />
-        <Outlet />
+        <div className="content">
+          <Outlet />
+        </div>
       </main>
     </div>
   );

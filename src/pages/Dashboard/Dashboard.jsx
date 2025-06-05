@@ -1,7 +1,12 @@
+import Welcome from "../../components/Welcome/Welcome";
 import "./Dashboard.css";
 
 function Dashboard() {
-  return <div>Dashboard</div>;
+  return (
+    <div>
+      <Welcome name={"Raghad Muhammad"} />
+    </div>
+  );
 }
 
 export default Dashboard;

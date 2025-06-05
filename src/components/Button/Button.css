@@ -1,4 +1,4 @@
-button {
+.btn-primary {
   background-color: var(--primary-color);
   color: white;
   border: none;
