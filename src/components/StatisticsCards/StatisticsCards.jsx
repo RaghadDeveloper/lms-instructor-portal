@@ -2,6 +2,7 @@ import StatisticCard from "../StatisticCard/StatisticCard";
 import "./StatisticsCards.css";
 import { StatisticsCardsData } from "./../../data/StatisticsCardsData.jsx";
 import ReLineChart from "../ReLineChart/ReLineChart.jsx";
+import ReBarChart from "../ReBarChart/ReBarChart.jsx";
 
 function StatisticsCards() {
   return (
@@ -14,6 +15,7 @@ function StatisticsCards() {
           />
         ))}
         <ReLineChart />
+        <ReBarChart />
       </div>
     </>
   );

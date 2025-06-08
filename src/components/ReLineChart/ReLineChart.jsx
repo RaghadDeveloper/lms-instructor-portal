@@ -31,6 +31,7 @@ function ReLineChart() {
 
   return (
     <div className="statistic-card">
+      <h4>Followers</h4>
       <LineChart
         width={600}
         height={410}
