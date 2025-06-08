@@ -14,7 +14,8 @@ header .search-bar {
   position: relative;
   display: flex;
   align-items: center;
-  width: 25%;
+  width: 35%;
+  margin-left: 1rem;
 }
 
 header .search-bar input {
@@ -27,6 +28,7 @@ header .search-bar input {
 }
 header.dark .search-bar input {
   border-color: var(--very-light);
+  color: white;
 }
 header .search-bar input:focus {
   outline: none;
