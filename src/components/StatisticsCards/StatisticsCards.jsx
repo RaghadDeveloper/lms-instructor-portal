@@ -1,20 +1,21 @@
 import StatisticCard from "../StatisticCard/StatisticCard";
 import "./StatisticsCards.css";
 import { StatisticsCardsData } from "./../../data/StatisticsCardsData.jsx";
+import ReLineChart from "../ReLineChart/ReLineChart.jsx";
 
 function StatisticsCards() {
   return (
-    <div className="Statistics-Cards row m-0 gap-3">
-      {StatisticsCardsData.map((statisticCardData) => (
-        <StatisticCard
-          key={statisticCardData.title}
-          // Icon={statisticCardData.icon}
-          // title={statisticCardData.title}
-          // value={statisticCardData.value}
-          data={statisticCardData}
-        />
-      ))}
-    </div>
+    <>
+      <div className="statistics-cards">
+        {StatisticsCardsData.map((statisticCardData) => (
+          <StatisticCard
+            key={statisticCardData.title}
+            data={statisticCardData}
+          />
+        ))}
+        <ReLineChart />
+      </div>
+    </>
   );
 }
 
