@@ -62,7 +62,9 @@ function Login() {
           onChange={handleChange}
         />
 
-        <Button>Log in</Button>
+        <Button type="submit" className={"primary"}>
+          Log in
+        </Button>
         <InlineActionText>
           Don't have an account? <Link to={"/signup"}>Sign up</Link>
         </InlineActionText>

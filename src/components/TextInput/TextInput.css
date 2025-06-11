@@ -1,4 +1,15 @@
-.auth-layout .auth-layout-form form .email {
+.auth-layout-form .field {
   position: relative;
   max-width: 450px;
+}
+
+.remove-tag {
+  position: absolute;
+  top: 18px;
+  right: 10px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  font-size: 1.5rem;
 }

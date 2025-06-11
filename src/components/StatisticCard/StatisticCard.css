@@ -33,3 +33,17 @@
   background-color: var(--dark-bg);
   color: var(--very-light);
 }
+.percentage,
+.text-success,
+.text-danger {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.text-success {
+  color: green;
+}
+.text-danger {
+  color: rgb(219, 0, 0);
+}

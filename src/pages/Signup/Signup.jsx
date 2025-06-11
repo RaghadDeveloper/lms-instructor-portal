@@ -80,7 +80,9 @@ function Signup() {
           onChange={handleChange}
         />
 
-        <Button>Sign up</Button>
+        <Button type={"submit"} className={"primary"}>
+          Sign up
+        </Button>
         <InlineActionText>
           Already have an account? <Link to={"/login"}>Log in</Link>
         </InlineActionText>

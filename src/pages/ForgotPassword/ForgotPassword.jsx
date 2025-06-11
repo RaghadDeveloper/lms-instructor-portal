@@ -18,7 +18,9 @@ function ForgotPassword() {
       />
       <AuthForm>
         <TextInput id="email" type="email" label="Email" />
-        <Button>Continue</Button>
+        <Button type={"submit"} className={"primary"}>
+          Continue
+        </Button>
       </AuthForm>
     </AuthLayout>
   );

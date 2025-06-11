@@ -6,7 +6,7 @@ function CoursesPageHeader() {
     <header className="courses-page-header">
       <div>
         <h1>Courses</h1>
-        <Button>Add Course</Button>
+        <Button className={"primary"}>&#43; Add Course</Button>
       </div>
       <div>
         <input type="text" placeholder="Search in your courses..." />

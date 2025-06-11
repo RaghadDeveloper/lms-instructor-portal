@@ -1,0 +1,15 @@
+select {
+  padding: 0.5rem 0rem;
+  border: none;
+  background-color: transparent;
+  color: var(--very-dark);
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+  max-width: 450px;
+  border-bottom: 1.5px solid var(--primary-color);
+}
+
+select:focus {
+  outline: none;
+}

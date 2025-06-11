@@ -1,8 +1,8 @@
-.auth-layout .question {
+.question {
   color: var(--very-dark);
 }
 
-.auth-layout .question a,
+.question a,
 .verification p span {
   text-decoration: none;
   color: var(--primary-color);

@@ -6,6 +6,8 @@ import AuthLayout from "../../components/AuthLayout/AuthLayout";
 import AuthHeader from "../../components/AuthHeader/AuthHeader";
 import Option from "../../components/Option/Option";
 import Button from "../../components/Button/Button";
+import profileImg from "./../../assets/images/profileImg.jpg";
+import { IoIosCamera } from "react-icons/io";
 
 const allSpecializations = [
   "Web Development",
@@ -23,23 +25,25 @@ function ProfileSetup() {
         <AuthHeader title="Profile Setup" />
         <h2>Your Profile</h2>
         <AuthForm>
-          <div className="d-flex justify-content-between align-items-center mb-4">
-            <UploadProfileImage />
-            <div className="w-100 d-flex flex-column gap-3 align-items-end">
+          <div className="row">
+            <UploadProfileImage image={profileImg} Icon={IoIosCamera} />
+            <div className="column">
               <TextInput id="user-name" type="text" label={"User Name"} />
               <TextInput id="headline" type="text" label={"Headline"} />
             </div>
           </div>
 
           <h2>Specialization</h2>
-          <div className="d-flex align-items-center flex-wrap gap-3">
+          <div className="row specialization">
             {allSpecializations.map((spec) => (
               <Option key={spec} text={spec} />
             ))}
           </div>
         </AuthForm>
         <div className="button-container">
-          <Button>Continue</Button>
+          <Button type={"submit"} className={"primary"}>
+            Continue
+          </Button>
         </div>
       </div>
     </AuthLayout>

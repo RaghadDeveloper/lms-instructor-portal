@@ -8,7 +8,7 @@ function StatisticCard({ data }) {
       <div className="info">
         <h3>{data.title}</h3>
         <span>{data.value}</span>
-        <div className="d-flex gap-1 align-items-center">
+        <div className="percentage">
           <span
             className={data.percentage > 0 ? "text-success" : "text-danger"}
           >

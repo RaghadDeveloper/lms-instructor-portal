@@ -1,9 +1,8 @@
 import "./UploadProfileImage.css";
 import { useState } from "react";
-import profileImg from "./../../assets/images/profileImg.jpg";
-import { IoIosCamera } from "react-icons/io";
+import CameraImg from "./../../assets/images/camera.jpg";
 
-function UploadProfileImage() {
+function UploadProfileImage({ image, Icon }) {
   const [preview, setPreview] = useState(null);
 
   const handleImageChange = (e) => {
@@ -14,10 +13,10 @@ function UploadProfileImage() {
   };
 
   return (
-    <div className="upload-profile-image position-relative">
-      <img src={preview || profileImg} alt="Profile Image" />
+    <div className="upload-image">
+      <img src={preview || image || CameraImg} alt="Upload Image" />
       <label htmlFor="fileInput" className="upload-icon">
-        <IoIosCamera />
+        {Icon ? <Icon /> : <span>&#43;</span>}
       </label>
       <input
         id="fileInput"

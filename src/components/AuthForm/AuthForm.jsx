@@ -2,10 +2,7 @@ import "./AuthForm.css";
 
 function AuthForm({ children, onSubmit }) {
   return (
-    <form
-      className="position-relative d-flex flex-column gap-3"
-      onSubmit={onSubmit}
-    >
+    <form className="auth-layout-form" onSubmit={onSubmit}>
       {children}
     </form>
   );

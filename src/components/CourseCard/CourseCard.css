@@ -12,6 +12,11 @@
   box-shadow: 2px 5px 5px var(--primay-gray\24);
 }
 
+.dark .course-card {
+  background-color: var(--dark-bg);
+  color: var(--very-light);
+}
+
 .course-card img {
   width: 100%;
   height: 200px;
@@ -59,9 +64,4 @@
   width: 100%;
   height: 1px;
   background-color: var(--primay-gray);
-}
-
-.dark .course-card {
-  background-color: var(--dark-bg);
-  color: var(--very-light);
 }

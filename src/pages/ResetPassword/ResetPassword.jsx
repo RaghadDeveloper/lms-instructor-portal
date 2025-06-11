@@ -20,7 +20,9 @@ function ResetPassword() {
         <PasswordInput id="password" label="Password" />
         <PasswordInput id="confirm-password" label="Confirm Password" />
 
-        <Button>Confirm password</Button>
+        <Button type={"submit"} className={"primary"}>
+          Confirm password
+        </Button>
       </AuthForm>
     </AuthLayout>
   );

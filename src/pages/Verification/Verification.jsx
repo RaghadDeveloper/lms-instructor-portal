@@ -22,7 +22,9 @@ function Verification() {
         <InlineActionText>
           Don't recieve code? <span>Resend</span>
         </InlineActionText>
-        <Button type="primary">Confirm code</Button>
+        <Button type="submit" className={"primary"}>
+          Confirm code
+        </Button>
       </div>
     </AuthLayout>
   );

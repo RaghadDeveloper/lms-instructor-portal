@@ -1,4 +1,4 @@
-@import "bootstrap/dist/css/bootstrap.min.css";
+/* @import "bootstrap/dist/css/bootstrap.min.css"; */
 @import url("https://fonts.googleapis.com/css2?family=Monoton&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap");
 * {
   margin: 0;
@@ -32,4 +32,13 @@ h1,
 h2,
 h3 {
   margin: 0;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  background-color: var(--very-light);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border-radius: 6px;
 }
