@@ -1,0 +1,23 @@
+.details-layout {
+  width: 60%;
+  color: var(--very-dark);
+  height: fit-content;
+  position: sticky;
+  top: 1rem;
+}
+
+.details-layout .category {
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 0.2rem;
+}
+
+.details-layout .title {
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+
+.dark .details-layout {
+  color: var(--very-light);
+}

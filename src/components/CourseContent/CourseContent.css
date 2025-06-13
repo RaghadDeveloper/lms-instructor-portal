@@ -1,0 +1,19 @@
+.course-content {
+  width: 40%;
+  background-color: #fff;
+  padding: 1rem;
+  color: var(--very-dark);
+  margin-top: 3.3rem;
+  border-radius: 4px;
+  height: fit-content;
+}
+
+.course-content .btn {
+  min-width: 100%;
+  font-size: 1.2rem;
+}
+
+.dark .course-content {
+  background-color: var(--dark-bg);
+  color: var(--very-light);
+}

@@ -1,10 +1,12 @@
 import "./CourseCard.css";
 import courseImg from "./../../assets/images/courseImg.png";
 import { FaRegUser, FaStar } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 function CourseCard() {
+  const navigate = useNavigate();
   return (
-    <div className="course-card">
+    <div className="course-card" onClick={() => navigate("details/1")}>
       <img src={courseImg} alt="courseImg" />
       <div>
         <p className="category">Category</p>

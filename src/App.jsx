@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Signup from "./pages/Signup/Signup";
 import Login from "./pages/Login/Login";
@@ -15,6 +15,10 @@ import Profile from "./pages/Profile/Profile";
 import CourseStatistics from "./pages/CourseStatistics/CourseStatistics";
 import Messages from "./pages/Messages/Messages";
 import Notifications from "./pages/Notifications/Notifications";
+import CourseDetails from "./pages/CourseDetails/CourseDetails";
+import AddCourse from "./pages/AddCourse/AddCourse";
+import CourseInfo from "./components/CourseInfo/CourseInfo";
+import VideoInfo from "./components/VideoInfo/VideoInfo";
 
 function App() {
   return (
@@ -30,7 +34,15 @@ function App() {
         <Route path="/" element={<MainPage />}>
           <Route index element={<Dashboard />} />
           <Route path="/articles" element={<Articles />} />
-          <Route path="/courses" element={<Courses />} />
+          <Route path="/courses">
+            <Route index element={<Courses />} />
+            <Route path="create" element={<AddCourse />} />
+            <Route path="details" element={<CourseDetails />}>
+              <Route path="1" element={<CourseInfo />} />
+              <Route path="lesson" element={<VideoInfo />} />
+            </Route>
+          </Route>
+          <Route path="/courseId" element={<CourseDetails />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/course-statistics" element={<CourseStatistics />} />
           <Route path="/messages" element={<Messages />} />
