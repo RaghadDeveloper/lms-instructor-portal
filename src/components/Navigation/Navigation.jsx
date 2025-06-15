@@ -7,10 +7,19 @@ import { HiOutlineLogout } from "react-icons/hi";
 import Logo from "./../../assets/images/logo.png";
 import { useTheme } from "../../context/ThemeContext";
 import { navigationData } from "../../data/navigationData";
+import { useDispatch } from "react-redux";
+import { logout } from "../../features/auth/authThunks";
 
 function Navigation() {
+  const dispatch = useDispatch();
   const [nav, setNav] = useState(false);
   const { theme, toggleTheme } = useTheme();
+
+  function handleLogout() {
+    dispatch(logout());
+    localStorage.clear();
+    window.location.reload();
+  }
 
   return (
     <div
@@ -44,7 +53,7 @@ function Navigation() {
         }`}
         onClick={toggleTheme}
       />
-      <Nav Icon={HiOutlineLogout} title={"Logout"} />
+      <Nav Icon={HiOutlineLogout} title={"Logout"} onClick={handleLogout} />
     </div>
   );
 }

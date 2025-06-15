@@ -30,25 +30,25 @@ function App() {
         <Route path="forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/complete-profile" element={<ProfileSetup />} />
-        {/* <Route element={<PrivateRoute />}> */}
-        <Route path="/" element={<MainPage />}>
-          <Route index element={<Dashboard />} />
-          <Route path="/articles" element={<Articles />} />
-          <Route path="/courses">
-            <Route index element={<Courses />} />
-            <Route path="create" element={<AddCourse />} />
-            <Route path="details" element={<CourseDetails />}>
-              <Route path="1" element={<CourseInfo />} />
-              <Route path="lesson" element={<VideoInfo />} />
+        <Route element={<PrivateRoute />}>
+          <Route path="/" element={<MainPage />}>
+            <Route index element={<Dashboard />} />
+            <Route path="/articles" element={<Articles />} />
+            <Route path="/courses">
+              <Route index element={<Courses />} />
+              <Route path="create" element={<AddCourse />} />
+              <Route path="details" element={<CourseDetails />}>
+                <Route path="1" element={<CourseInfo />} />
+                <Route path="lesson" element={<VideoInfo />} />
+              </Route>
             </Route>
+            <Route path="/courseId" element={<CourseDetails />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/course-statistics" element={<CourseStatistics />} />
+            <Route path="/messages" element={<Messages />} />
+            <Route path="/notifications" element={<Notifications />} />
           </Route>
-          <Route path="/courseId" element={<CourseDetails />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/course-statistics" element={<CourseStatistics />} />
-          <Route path="/messages" element={<Messages />} />
-          <Route path="/notifications" element={<Notifications />} />
         </Route>
-        {/* </Route> */}
       </Routes>
     </BrowserRouter>
   );

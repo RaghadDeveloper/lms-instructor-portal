@@ -1,6 +1,15 @@
 import "./TextInput.css";
 
-function TextInput({ id, type, label, name, value, onChange, onClick }) {
+function TextInput({
+  id,
+  type,
+  label,
+  name,
+  value,
+  onChange,
+  onClick,
+  disabled,
+}) {
   return (
     <div className="field">
       <input
@@ -11,6 +20,7 @@ function TextInput({ id, type, label, name, value, onChange, onClick }) {
         value={value}
         onChange={onChange}
         required
+        disabled={disabled}
       />
       <label htmlFor={id} className="label">
         {label}

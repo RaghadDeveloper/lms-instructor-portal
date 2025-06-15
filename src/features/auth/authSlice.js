@@ -1,5 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { login, signup } from "./authThunks";
+import {
+  login,
+  signup,
+  logout,
+  resetPassword,
+  verification,
+  resendOTP,
+  forgotPassword,
+} from "./authThunks";
 
 const initialState = {
   user: null,
@@ -15,7 +23,16 @@ const handlePending = (state) => {
 
 const handleRejected = (state, action) => {
   state.loading = false;
-  state.error = action.payload?.message || "Something went wrong";
+  const message = action.payload?.message;
+
+  if (typeof message === "string") {
+    state.error = message;
+  } else if (typeof message === "object" && message !== null) {
+    const messages = Object.values(message).flat().join(" ");
+    state.error = messages || "Something went wrong";
+  } else {
+    state.error = "Something went wrong";
+  }
 };
 
 const authSlice = createSlice({
@@ -25,6 +42,10 @@ const authSlice = createSlice({
     logoutSuccess: (state) => {
       state.user = null;
       state.isAuthenticated = false;
+      localStorage.removeItem("token");
+    },
+    clearError: (state) => {
+      state.error = null;
     },
   },
   extraReducers: (builder) => {
@@ -35,7 +56,8 @@ const authSlice = createSlice({
         state.user = action.payload.data.user;
         state.isAuthenticated = true;
       })
-      .addCase(login.rejected, handleRejected)
+      .addCase(login.rejected, handleRejected);
+    builder
       .addCase(signup.pending, handlePending)
       .addCase(signup.fulfilled, (state, action) => {
         state.loading = false;
@@ -43,8 +65,45 @@ const authSlice = createSlice({
         state.isAuthenticated = true;
       })
       .addCase(signup.rejected, handleRejected);
+
+    builder
+      .addCase(logout.pending, handlePending)
+      .addCase(logout.fulfilled, (state) => {
+        state.loading = false;
+        state.user = null;
+        state.isAuthenticated = false;
+      })
+      .addCase(logout.rejected, handleRejected);
+
+    builder
+      .addCase(resetPassword.pending, handlePending)
+      .addCase(resetPassword.fulfilled, (state) => {
+        state.loading = false;
+      })
+      .addCase(resetPassword.rejected, handleRejected);
+
+    builder
+      .addCase(verification.pending, handlePending)
+      .addCase(verification.fulfilled, (state) => {
+        state.loading = false;
+      })
+      .addCase(verification.rejected, handleRejected);
+
+    builder
+      .addCase(resendOTP.pending, handlePending)
+      .addCase(resendOTP.fulfilled, (state) => {
+        state.loading = false;
+      })
+      .addCase(resendOTP.rejected, handleRejected);
+
+    builder
+      .addCase(forgotPassword.pending, handlePending)
+      .addCase(forgotPassword.fulfilled, (state) => {
+        state.loading = false;
+      })
+      .addCase(forgotPassword.rejected, handleRejected);
   },
 });
 
-export const { logoutSuccess } = authSlice.actions;
+export const { logoutSuccess, clearError } = authSlice.actions;
 export default authSlice.reducer;
