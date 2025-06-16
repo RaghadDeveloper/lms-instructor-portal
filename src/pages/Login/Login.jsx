@@ -42,6 +42,10 @@ function Login() {
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+
+    if (formErrors[e.target.name]) {
+      setFormErrors((prev) => ({ ...prev, [e.target.name]: undefined }));
+    }
   };
 
   const handleSubmit = (e) => {

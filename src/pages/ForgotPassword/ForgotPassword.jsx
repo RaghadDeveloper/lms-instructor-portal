@@ -46,7 +46,7 @@ function ForgotPassword() {
 
   useEffect(() => {
     if (hasSubmitted && !loading && !error && email) {
-      navigate("/verification");
+      navigate("/verification", { state: { from: "forgot-password" } });
     }
   }, [hasSubmitted, loading, error, navigate, email]);
 

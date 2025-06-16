@@ -22,6 +22,7 @@ export const signup = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const response = await signupAPI(data);
+      localStorage.setItem("token", response.data.data.token);
       return response.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(extractError(err));
@@ -66,6 +67,7 @@ export const verification = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const response = await verificationAPI(data);
+      console.log(localStorage.getItem("token"));
       return response.data;
     } catch (err) {
       return thunkAPI.rejectWithValue(extractError(err));

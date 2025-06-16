@@ -29,6 +29,18 @@ function OTPInputGroup({ length, value, onChange, disabled }) {
     }
   };
 
+  const handlePaste = (e) => {
+    e.preventDefault();
+    const pasted = e.clipboardData.getData("Text").trim().replace(/\D/g, "");
+    if (pasted.length !== length) return;
+
+    const newCode = pasted.split("").slice(0, length);
+    onChange(newCode);
+
+    const last = document.getElementById(`otp-${length - 1}`);
+    if (last) last.focus();
+  };
+
   return (
     <div className="input-group">
       {[...Array(length)].map((_, i) => (
@@ -41,6 +53,7 @@ function OTPInputGroup({ length, value, onChange, disabled }) {
           value={value[i] || ""}
           onChange={(e) => handleChange(e, i)}
           onKeyDown={(e) => handleKeyDown(e, i)}
+          onPaste={handlePaste}
         />
       ))}
     </div>

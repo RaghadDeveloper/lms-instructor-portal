@@ -19,8 +19,19 @@ import CourseDetails from "./pages/CourseDetails/CourseDetails";
 import AddCourse from "./pages/AddCourse/AddCourse";
 import CourseInfo from "./components/CourseInfo/CourseInfo";
 import VideoInfo from "./components/VideoInfo/VideoInfo";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { setAuthFromToken } from "./features/auth/authSlice";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      dispatch(setAuthFromToken(token));
+    }
+  }, [dispatch]);
   return (
     <BrowserRouter>
       <Routes>

@@ -1,7 +1,7 @@
 import "./Verification.css";
 import { useEffect, useState } from "react";
 import { headers } from "../../data/headers";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { resendOTP, verification } from "../../features/auth/authThunks";
 import AuthLayout from "../../components/AuthLayout/AuthLayout";
@@ -11,8 +11,11 @@ import OTPInputGroup from "../../components/OTPInputGroup/OTPInputGroup ";
 import InlineActionText from "../../components/InlineActionText/InlineActionText";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import AuthErrorReset from "../../components/AuthErrorReset/AuthErrorReset";
+import AuthForm from "../../components/AuthForm/AuthForm";
 
 function Verification() {
+  const location = useLocation();
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { error, loading } = useSelector((state) => state.auth);
@@ -28,10 +31,10 @@ function Verification() {
   };
 
   const finalCode = code.join("");
-  console.log(finalCode);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(error);
     if (finalCode.length < 6 || code.includes("")) {
       alert("Please enter all 6 digits");
       return;
@@ -44,43 +47,52 @@ function Verification() {
   function handleResend(e) {
     e.preventDefault();
     dispatch(resendOTP());
-    window.alert("Code sent successfully");
   }
+
+  const from = location.state?.from;
 
   useEffect(() => {
     if (hasSubmitted && !loading && !error) {
-      navigate("/");
+      if (from === "signup") {
+        navigate("/complete-profile");
+      } else if (from === "forgot-password") {
+        navigate("/reset-password");
+      } else {
+        navigate("/");
+      }
     }
-  }, [hasSubmitted, loading, error, navigate]);
+  }, [hasSubmitted, loading, error, navigate, from]);
 
   return (
     <AuthLayout>
       <AuthErrorReset />
-      <div className="verification">
-        <AuthHeader
-          title={headers.verification.title}
-          description={headers.verification.description}
-        />
-        <OTPInputGroup
-          length={6}
-          value={code}
-          onChange={handleCodeChange}
-          disabled={loading}
-        />
-        <InlineActionText>
-          Don't recieve code? <span onClick={handleResend}>Resend</span>
-        </InlineActionText>
-        <Button
-          type="submit"
-          className={"primary"}
-          onClick={handleSubmit}
-          disabled={loading}
-        >
-          Confirm code
-        </Button>
-      </div>
-      {localError && <ErrorMessage>{localError}</ErrorMessage>}
-      {error && <ErrorMessage>{error}</ErrorMessage>}
+      <AuthForm>
+        <div className="verification">
+          <AuthHeader
+            title={headers.verification.title}
+            description={headers.verification.description}
+          />
+          <OTPInputGroup
+            length={6}
+            value={code}
+            onChange={handleCodeChange}
+            disabled={loading}
+          />
+          <InlineActionText>
+            Don't recieve code? <span onClick={handleResend}>Resend</span>
+          </InlineActionText>
+          <Button
+            type="submit"
+            className={"primary"}
+            onClick={handleSubmit}
+            disabled={loading}
+          >
+            Confirm code
+          </Button>
+          {localError && <ErrorMessage>{localError}</ErrorMessage>}
+        </div>
+        {error && <ErrorMessage>{error}</ErrorMessage>}
+      </AuthForm>
     </AuthLayout>
   );
 }

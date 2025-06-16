@@ -61,7 +61,7 @@ function Signup() {
 
   useEffect(() => {
     if (hasSubmitted && !loading && !error && isAuthenticated) {
-      navigate("/verification");
+      navigate("/verification", { state: { from: "signup" } });
     }
   }, [hasSubmitted, loading, error, isAuthenticated, navigate]);
 
