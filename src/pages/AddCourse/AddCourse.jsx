@@ -8,9 +8,10 @@ import TextInput from "../../components/TextInput/TextInput";
 import UploadProfileImage from "../../components/UploadProfileImage/UploadProfileImage";
 import Button from "../../components/Button/Button";
 import CameraImg from "./../../assets/images/camera.jpg";
+import { useSelector } from "react-redux";
 
 function AddCourse() {
-  const category = ["Web Development", "Graphic Design", "Data Science"];
+  const { categories } = useSelector((state) => state.categories);
   const [tags, setTags] = useState([""]);
 
   // const handleTagChange = (index, value) => {
@@ -27,26 +28,26 @@ function AddCourse() {
     const newTags = tags.filter((_, i) => i !== index);
     setTags(newTags);
   };
+
   return (
     <section className="add-course">
       <AuthForm>
         <UploadProfileImage image={CameraImg} />
         <Grid>
           <TextInput id={"title"} type={"text"} label={"Course Title"} />
-          <Select text={"Category"} options={category} />
+          <Select text={"Category"} options={categories} />
           <TextArea id={"requirement"} label={"Requirement to start"} />
           <TextArea id={"description"} label={"Description"} />
           <TextInput id={"price"} type={"number"} label={"Price"} />
           {tags.map((tag, index) => (
-            <div key={index} style={{ marginBottom: "8px" }}>
-              <TextInput
-                id={`Tag${index + 1}`}
-                name={"tags"}
-                type={"text"}
-                label={`Tag ${index + 1}`}
-                onClick={() => removeTag(index)}
-              />
-            </div>
+            <TextInput
+              key={index}
+              id={`Tag${index + 1}`}
+              name={"tags"}
+              type={"text"}
+              label={`Tag ${index + 1}`}
+              onClick={() => removeTag(index)}
+            />
           ))}
 
           <Button type={"button"} className={"border"} onClick={addTag}>

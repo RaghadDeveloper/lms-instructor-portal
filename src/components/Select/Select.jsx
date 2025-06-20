@@ -2,12 +2,12 @@ import "./Select.css";
 
 function Select({ text, options }) {
   return (
-    <select required>
-      <option value="" disabled defaultValue hidden>
+    <select required defaultValue="">
+      <option value="" disabled hidden>
         {text}
       </option>
       {options.map((option) => (
-        <option key={option}>{option}</option>
+        <option key={option.id}>{option.name}</option>
       ))}
     </select>
   );

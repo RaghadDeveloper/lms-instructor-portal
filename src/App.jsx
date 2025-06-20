@@ -19,12 +19,14 @@ import CourseDetails from "./pages/CourseDetails/CourseDetails";
 import AddCourse from "./pages/AddCourse/AddCourse";
 import CourseInfo from "./components/CourseInfo/CourseInfo";
 import VideoInfo from "./components/VideoInfo/VideoInfo";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { setAuthFromToken } from "./features/auth/authSlice";
+import { fetchCategories } from "./features/category/categoryThunks";
 
 function App() {
   const dispatch = useDispatch();
+  const status = useSelector((state) => state.category.status);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -32,6 +34,11 @@ function App() {
       dispatch(setAuthFromToken(token));
     }
   }, [dispatch]);
+
+  useEffect(() => {
+    if (status === "idle") dispatch(fetchCategories());
+  }, [dispatch, status]);
+
   return (
     <BrowserRouter>
       <Routes>
