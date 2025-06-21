@@ -8,37 +8,94 @@ import TextInput from "../../components/TextInput/TextInput";
 import UploadProfileImage from "../../components/UploadProfileImage/UploadProfileImage";
 import Button from "../../components/Button/Button";
 import CameraImg from "./../../assets/images/camera.jpg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { createCourse } from "../../features/course/courseThunk";
 
 function AddCourse() {
-  const { categories } = useSelector((state) => state.categories);
+  const dispatch = useDispatch();
+  const { categories } = useSelector((state) => state.category);
   const [tags, setTags] = useState([""]);
+  const [courseInfo, setCourseInfo] = useState({
+    image_url: "",
+    title: "",
+    category_id: "",
+    requirements_to_start: "",
+    description: "",
+    price: "",
+    tags,
+  });
 
-  // const handleTagChange = (index, value) => {
-  //   const newTags = [...tags];
-  //   newTags[index] = value;
-  //   setTags(newTags);
-  // };
+  const handleChange = (e) => {
+    setCourseInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleTagChange = (index, value) => {
+    const newTags = [...tags];
+    newTags[index] = value;
+    setTags(newTags);
+    setCourseInfo((prev) => ({ ...prev, tags: newTags }));
+  };
 
   const addTag = () => {
-    setTags([...tags, ""]);
+    const newTags = [...tags, ""];
+    setTags(newTags);
+    setCourseInfo((prev) => ({ ...prev, tags: newTags }));
   };
 
   const removeTag = (index) => {
     const newTags = tags.filter((_, i) => i !== index);
     setTags(newTags);
+    setCourseInfo((prev) => ({ ...prev, tags: newTags }));
   };
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log(courseInfo);
+    dispatch(createCourse(courseInfo));
+  }
 
   return (
     <section className="add-course">
-      <AuthForm>
+      <AuthForm onSubmit={handleSubmit}>
         <UploadProfileImage image={CameraImg} />
         <Grid>
-          <TextInput id={"title"} type={"text"} label={"Course Title"} />
-          <Select text={"Category"} options={categories} />
-          <TextArea id={"requirement"} label={"Requirement to start"} />
-          <TextArea id={"description"} label={"Description"} />
-          <TextInput id={"price"} type={"number"} label={"Price"} />
+          <TextInput
+            id={"title"}
+            type={"text"}
+            name={"title"}
+            label={"Course Title"}
+            value={courseInfo.title}
+            onChange={handleChange}
+          />
+          <Select
+            name={"category_id"}
+            text={"Category"}
+            options={categories}
+            value={courseInfo.category_id}
+            onChange={handleChange}
+          />
+          <TextArea
+            id={"requirement"}
+            name={"requirements_to_start"}
+            label={"Requirement to start"}
+            value={courseInfo.requirements_to_start}
+            onChange={handleChange}
+          />
+          <TextArea
+            id={"description"}
+            name={"description"}
+            label={"Description"}
+            value={courseInfo.description}
+            onChange={handleChange}
+          />
+          <TextInput
+            id={"price"}
+            type={"number"}
+            name={"price"}
+            label={"Price"}
+            value={courseInfo.price}
+            onChange={handleChange}
+          />
           {tags.map((tag, index) => (
             <TextInput
               key={index}
@@ -46,6 +103,7 @@ function AddCourse() {
               name={"tags"}
               type={"text"}
               label={`Tag ${index + 1}`}
+              onChange={(e) => handleTagChange(index, e.target.value)}
               onClick={() => removeTag(index)}
             />
           ))}
