@@ -1,14 +1,12 @@
 import CourseCard from "../CourseCard/CourseCard";
 import "./CoursesGroup.css";
 
-function CoursesGroup() {
+function CoursesGroup({ courses }) {
   return (
     <div className="courses">
-      <CourseCard />
-      <CourseCard />
-      <CourseCard />
-      <CourseCard />
-      <CourseCard />
+      {courses.map((course) => (
+        <CourseCard key={course.id} course={course} />
+      ))}
     </div>
   );
 }

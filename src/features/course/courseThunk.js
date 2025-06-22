@@ -1,5 +1,25 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { createCourseApi } from "./courseApi";
+import { createCourseApi, getAllCoursesApi } from "./courseApi";
+
+const extractError = (error) => {
+  return (
+    error?.response?.data || {
+      message: "An unexpected error occurred. Please try again.",
+    }
+  );
+};
+
+export const getAllCourses = createAsyncThunk(
+  "courses/getAllCourses",
+  async (_, thunkAPI) => {
+    try {
+      const response = await getAllCoursesApi();
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(extractError(error));
+    }
+  }
+);
 
 export const createCourse = createAsyncThunk(
   "course/create",
@@ -8,11 +28,7 @@ export const createCourse = createAsyncThunk(
       const response = await createCourseApi(data);
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(
-        error?.response?.data || {
-          message: "An unexpected error occurred. Please try again.",
-        }
-      );
+      return thunkAPI.rejectWithValue(extractError(error));
     }
   }
 );

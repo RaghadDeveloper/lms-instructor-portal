@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createCourse } from "./courseThunk";
+import { createCourse, getAllCourses } from "./courseThunk";
 
 const initialState = {
   loading: false,
@@ -12,6 +12,20 @@ const courseSlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder
+      // getAllCourses
+      .addCase(getAllCourses.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getAllCourses.fulfilled, (state, action) => {
+        state.loading = false;
+        state.courses = action.payload.data;
+      })
+      .addCase(getAllCourses.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+
+      // createCourse
       .addCase(createCourse.pending, (state) => {
         state.loading = true;
       })
