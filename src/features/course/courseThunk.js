@@ -3,9 +3,9 @@ import { createCourseApi } from "./courseApi";
 
 export const createCourse = createAsyncThunk(
   "course/create",
-  async (_, thunkAPI) => {
+  async (data, thunkAPI) => {
     try {
-      const response = await createCourseApi();
+      const response = await createCourseApi(data);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(

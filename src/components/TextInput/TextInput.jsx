@@ -19,7 +19,7 @@ function TextInput({
         name={name}
         value={value}
         onChange={onChange}
-        required={name === "tags" ? false : true}
+        required
         disabled={disabled}
       />
       <label htmlFor={id} className="label">

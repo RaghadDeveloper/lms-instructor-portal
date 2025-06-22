@@ -39,3 +39,10 @@
   color: var(--primary-color);
   font-size: 1rem;
 }
+
+.dark .auth-layout-form input {
+  color: var(--very-light);
+}
+.dark .auth-layout-form .label {
+  color: var(--primary-light);
+}

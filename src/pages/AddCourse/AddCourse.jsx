@@ -15,6 +15,8 @@ function AddCourse() {
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.category);
   const [tags, setTags] = useState([""]);
+  const [preview, setPreview] = useState(null);
+
   const [courseInfo, setCourseInfo] = useState({
     image_url: "",
     title: "",
@@ -48,16 +50,27 @@ function AddCourse() {
     setCourseInfo((prev) => ({ ...prev, tags: newTags }));
   };
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setPreview(URL.createObjectURL(file));
+      setCourseInfo((prev) => ({ ...prev, image_url: file }));
+    }
+  };
+
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(courseInfo);
     dispatch(createCourse(courseInfo));
   }
 
   return (
     <section className="add-course">
       <AuthForm onSubmit={handleSubmit}>
-        <UploadProfileImage image={CameraImg} />
+        <UploadProfileImage
+          image={CameraImg}
+          preview={preview}
+          handleImageChange={handleImageChange}
+        />
         <Grid>
           <TextInput
             id={"title"}

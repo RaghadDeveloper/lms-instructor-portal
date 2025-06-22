@@ -13,3 +13,12 @@ select {
 select:focus {
   outline: none;
 }
+
+.dark select {
+  color: var(--primary-light);
+}
+
+.dark option {
+  color: var(--very-light);
+  background-color: var(--dark-bg);
+}

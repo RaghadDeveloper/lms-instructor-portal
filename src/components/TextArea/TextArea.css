@@ -37,3 +37,10 @@
   color: var(--primary-color);
   font-size: 1rem;
 }
+
+.dark .textarea textarea {
+  color: var(--very-light);
+}
+.dark .textarea label {
+  color: var(--primary-light);
+}

@@ -1,17 +1,7 @@
 import "./UploadProfileImage.css";
-import { useState } from "react";
 import CameraImg from "./../../assets/images/camera.jpg";
 
-function UploadProfileImage({ image, Icon }) {
-  const [preview, setPreview] = useState(null);
-
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setPreview(URL.createObjectURL(file));
-    }
-  };
-
+function UploadProfileImage({ image, Icon, preview, handleImageChange }) {
   return (
     <div className="upload-image">
       <img src={preview || image || CameraImg} alt="Upload Image" />
