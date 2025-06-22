@@ -55,12 +55,11 @@ function App() {
             <Route path="/courses">
               <Route index element={<Courses />} />
               <Route path="create" element={<AddCourse />} />
-              <Route path="details" element={<CourseDetails />}>
-                <Route path="1" element={<CourseInfo />} />
-                <Route path="lesson" element={<VideoInfo />} />
+              <Route path=":courseId" element={<CourseDetails />}>
+                <Route index element={<CourseInfo />} />
+                <Route path="lesson/:lessonId" element={<VideoInfo />} />
               </Route>
             </Route>
-            <Route path="/courseId" element={<CourseDetails />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/course-statistics" element={<CourseStatistics />} />
             <Route path="/messages" element={<Messages />} />

@@ -1,14 +1,29 @@
-import { Outlet } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import CourseContent from "../../components/CourseContent/CourseContent";
-import CourseInfo from "../../components/CourseInfo/CourseInfo";
 import DetailsLayout from "../../components/DetailsLayout/DetailsLayout";
-import VideoInfo from "../../components/VideoInfo/VideoInfo";
 import "./CourseDetails.css";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getCourseDetails } from "../../features/course/courseThunk";
 
 function CourseDetails() {
+  const dispatch = useDispatch();
+  const { courseId } = useParams();
+  const { course, loading, error } = useSelector((state) => state.course);
+
+  useEffect(() => {
+    if (courseId) {
+      dispatch(getCourseDetails(courseId));
+    }
+  }, [dispatch, courseId]);
+
+  if (loading) return <p>Loading course...</p>;
+  if (error) return <p className="error">{error}</p>;
+  if (!course) return <p>No course found.</p>;
+
   return (
     <div className="course-details">
-      <DetailsLayout />
+      <DetailsLayout course={course} />
       <CourseContent />
     </div>
   );

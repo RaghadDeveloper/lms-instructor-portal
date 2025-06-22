@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 function CourseCard({ course }) {
   const navigate = useNavigate();
   return (
-    <div className="course-card" onClick={() => navigate("details/1")}>
+    <div className="course-card" onClick={() => navigate(`${course.id}`)}>
       <img
         src={`/${course.image_url.replace("public/", "")}`}
         alt="Course Img"

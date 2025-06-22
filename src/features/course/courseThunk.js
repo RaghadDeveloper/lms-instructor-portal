@@ -1,5 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { createCourseApi, getAllCoursesApi } from "./courseApi";
+import {
+  createCourseApi,
+  getAllCoursesApi,
+  getCourseDetailsApi,
+} from "./courseApi";
 
 const extractError = (error) => {
   return (
@@ -14,6 +18,18 @@ export const getAllCourses = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await getAllCoursesApi();
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(extractError(error));
+    }
+  }
+);
+
+export const getCourseDetails = createAsyncThunk(
+  "courses/getCourseDetails",
+  async (courseId, thunkAPI) => {
+    try {
+      const response = await getCourseDetailsApi(courseId);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(extractError(error));
