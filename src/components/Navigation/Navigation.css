@@ -22,10 +22,14 @@
 .navigation header {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
   color: var(--very-dark);
   padding: 1rem;
   padding-bottom: 3rem;
+}
+
+.navigation header .logo {
+  width: 40px;
 }
 
 .navigation.active header .logo {

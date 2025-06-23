@@ -1,5 +1,5 @@
 import "./AddCourse.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AuthForm from "../../components/AuthForm/AuthForm";
 import Grid from "../../components/Grid/Grid";
 import Select from "../../components/Select/Select";
@@ -9,10 +9,17 @@ import UploadProfileImage from "../../components/UploadProfileImage/UploadProfil
 import Button from "../../components/Button/Button";
 import CameraImg from "./../../assets/images/camera.jpg";
 import { useDispatch, useSelector } from "react-redux";
-import { createCourse } from "../../features/course/courseThunk";
+import {
+  createCourse,
+  getCourseDetails,
+  updateCourse,
+} from "../../features/course/courseThunk";
+import { useParams } from "react-router-dom";
 
 function AddCourse() {
   const dispatch = useDispatch();
+  const { courseId } = useParams();
+  const { course } = useSelector((state) => state.course);
   const { categories } = useSelector((state) => state.category);
   const [tags, setTags] = useState([""]);
   const [preview, setPreview] = useState(null);
@@ -26,6 +33,20 @@ function AddCourse() {
     price: "",
     tags,
   });
+  useEffect(() => {
+    if (courseId && course) {
+      setCourseInfo({
+        image_url: course.image_url || "",
+        title: course.title || "",
+        category_id: course.category_id || "",
+        requirements_to_start: course.requirements_to_start || "",
+        description: course.description || "",
+        price: course.price === "Free" ? 0 : course.price,
+        tags: course.tags,
+      });
+      setTags(course.tags);
+    }
+  }, [course, courseId]);
 
   const handleChange = (e) => {
     setCourseInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -60,8 +81,13 @@ function AddCourse() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(createCourse(courseInfo));
+    if (courseId) dispatch(updateCourse({ courseId, courseInfo }));
+    else dispatch(createCourse(courseInfo));
   }
+
+  useEffect(() => {
+    if (courseId) dispatch(getCourseDetails(courseId));
+  }, [courseId, dispatch]);
 
   return (
     <section className="add-course">
@@ -106,7 +132,7 @@ function AddCourse() {
             type={"number"}
             name={"price"}
             label={"Price"}
-            value={courseInfo.price}
+            value={courseInfo.price === "Free" ? 0 : Number(courseInfo.price)}
             onChange={handleChange}
           />
           {tags.map((tag, index) => (
@@ -116,6 +142,7 @@ function AddCourse() {
               name={"tags"}
               type={"text"}
               label={`Tag ${index + 1}`}
+              value={tags[index]}
               onChange={(e) => handleTagChange(index, e.target.value)}
               onClick={() => removeTag(index)}
             />

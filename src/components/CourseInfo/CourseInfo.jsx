@@ -2,6 +2,11 @@ import "./CourseInfo.css";
 import { FaRegUser, FaStar } from "react-icons/fa";
 import { useSelector } from "react-redux";
 
+function formatTime(timeStr) {
+  const [hours, minutes] = timeStr.split(":").map(Number);
+  return `${hours}Hr ${minutes}Min`;
+}
+
 function CourseInfo() {
   const { course, loading, error } = useSelector((state) => state.course);
 
@@ -37,13 +42,13 @@ function CourseInfo() {
       <div className="row">
         <div>
           <h4>Price </h4>
-          <span>{price}</span>
+          <span>{price === "Free" ? price : `$${price}`}</span>
         </div>
 
         <div>
           <h4>Duration </h4>
           {/* <span>12Hr 30Min</span> */}
-          <span>{course_duration}</span>
+          <span>{formatTime(course_duration)}</span>
         </div>
 
         <div>

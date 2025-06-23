@@ -8,6 +8,10 @@
   height: fit-content;
 }
 
+.course-content h3 {
+  margin-bottom: 0.5rem;
+}
+
 .course-content .btn {
   min-width: 100%;
   font-size: 1.2rem;

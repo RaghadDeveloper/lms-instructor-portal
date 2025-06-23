@@ -10,7 +10,7 @@ function VideoCard() {
       </h4>
       <div className="details">
         <p>Duration: 45Min</p>
-        <p>Status: Pending</p>
+        <p>Free</p>
       </div>
     </div>
   );

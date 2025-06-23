@@ -20,3 +20,7 @@
   margin-left: 1rem;
   margin-top: 0.5rem;
 }
+
+.video-card:hover {
+  background-color: var(--secondary-gray\36);
+}

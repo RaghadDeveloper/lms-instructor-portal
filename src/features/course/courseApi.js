@@ -11,3 +11,10 @@ export const createCourseApi = (data) =>
       "Content-Type": "multipart/form-data",
     },
   });
+
+export const updateCourseApi = ({ courseId, courseInfo }) =>
+  axiosInstance.post(`/course/update/${courseId}`, courseInfo, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
