@@ -13,64 +13,63 @@ const initialState = {
   course: null,
 };
 
+const handlePending = (state) => {
+  state.loading = true;
+  state.error = null;
+};
+
+const handleRejected = (state, action) => {
+  state.loading = false;
+  const message = action.payload?.message;
+
+  if (typeof message === "string") {
+    state.error = message;
+  } else if (typeof message === "object" && message !== null) {
+    const messages = Object.values(message).flat().join(" ");
+    state.error = messages || "Something went wrong";
+  } else {
+    state.error = "Something went wrong";
+  }
+};
+
 const courseSlice = createSlice({
   name: "course",
   initialState,
   extraReducers: (builder) => {
     builder
       // getAllCourses
-      .addCase(getAllCourses.pending, (state) => {
-        state.loading = true;
-      })
+      .addCase(getAllCourses.pending, handlePending)
       .addCase(getAllCourses.fulfilled, (state, action) => {
         state.loading = false;
         state.courses = action.payload.data;
       })
-      .addCase(getAllCourses.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      })
+      .addCase(getAllCourses.rejected, handleRejected)
 
       // getCourseDetails
-      .addCase(getCourseDetails.pending, (state) => {
-        state.loading = true;
-      })
+      .addCase(getCourseDetails.pending, handlePending)
       .addCase(getCourseDetails.fulfilled, (state, action) => {
         state.loading = false;
         state.course = action.payload.data;
       })
-      .addCase(getCourseDetails.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      })
+      .addCase(getCourseDetails.rejected, handleRejected)
 
       // createCourse
-      .addCase(createCourse.pending, (state) => {
-        state.loading = true;
-      })
+      .addCase(createCourse.pending, handlePending)
       .addCase(createCourse.fulfilled, (state, action) => {
         state.loading = false;
-        state.courses.push(action.payload.data);
+        state.courses.unshift(action.payload.data);
       })
-      .addCase(createCourse.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload.message || "errr";
-      })
+      .addCase(createCourse.rejected, handleRejected)
 
       // updateCourse
-      .addCase(updateCourse.pending, (state) => {
-        state.loading = true;
-      })
+      .addCase(updateCourse.pending, handlePending)
       .addCase(updateCourse.fulfilled, (state, action) => {
         state.loading = false;
         state.courses = state.courses.map((course) =>
-          course._id === action.payload.data._id ? action.payload.data : course
+          course.id === action.payload.data.id ? action.payload.data : course
         );
       })
-      .addCase(updateCourse.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload.message || "errr";
-      });
+      .addCase(updateCourse.rejected, handleRejected);
   },
 });
 

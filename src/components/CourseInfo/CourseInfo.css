@@ -28,6 +28,11 @@
   margin-bottom: 1rem;
 }
 
+.course-info .about .tags {
+  display: flex;
+  gap: 1rem;
+}
+
 .course-info .row {
   display: flex;
   justify-content: space-evenly;

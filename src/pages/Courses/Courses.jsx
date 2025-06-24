@@ -10,8 +10,8 @@ function Courses() {
   const { courses } = useSelector((state) => state.course);
 
   useEffect(() => {
-    dispatch(getAllCourses());
-  }, [dispatch]);
+    if (courses.length === 0) dispatch(getAllCourses());
+  }, [dispatch, courses.length]);
 
   return (
     <div>

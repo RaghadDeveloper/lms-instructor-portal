@@ -8,11 +8,7 @@ function formatTime(timeStr) {
 }
 
 function CourseInfo() {
-  const { course, loading, error } = useSelector((state) => state.course);
-
-  if (loading) return <p>Loading course...</p>;
-  if (error) return <p className="error">{error}</p>;
-  if (!course) return <p>No course found.</p>;
+  const { course } = useSelector((state) => state.course);
 
   const {
     image_url,
@@ -23,6 +19,7 @@ function CourseInfo() {
     lessons_count,
     rating,
     subscribers_count,
+    tags,
   } = course;
 
   return (
@@ -37,6 +34,15 @@ function CourseInfo() {
       <div className="about">
         <h4>Description</h4>
         <p>{description}</p>
+      </div>
+
+      <div className="about">
+        <h4>Tags</h4>
+        <div className="tags">
+          {tags.map((tag, index) => (
+            <p key={index}>{tag}</p>
+          ))}
+        </div>
       </div>
 
       <div className="row">

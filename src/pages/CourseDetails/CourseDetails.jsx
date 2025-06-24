@@ -5,6 +5,8 @@ import "./CourseDetails.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getCourseDetails } from "../../features/course/courseThunk";
+import Loader from "../../components/Loader/Loader";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
 function CourseDetails() {
   const dispatch = useDispatch();
@@ -17,8 +19,8 @@ function CourseDetails() {
     }
   }, [dispatch, courseId]);
 
-  if (loading) return <p>Loading course...</p>;
-  if (error) return <p className="error">{error}</p>;
+  if (loading) return <Loader />;
+  if (error) return <ErrorMessage>{error}</ErrorMessage>;
   if (!course) return <p>No course found.</p>;
 
   return (

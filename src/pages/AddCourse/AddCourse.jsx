@@ -14,15 +14,17 @@ import {
   getCourseDetails,
   updateCourse,
 } from "../../features/course/courseThunk";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function AddCourse() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { courseId } = useParams();
   const { course } = useSelector((state) => state.course);
   const { categories } = useSelector((state) => state.category);
   const [tags, setTags] = useState([""]);
   const [preview, setPreview] = useState(null);
+  const [hasSubmit, setHasSubmit] = useState(false);
 
   const [courseInfo, setCourseInfo] = useState({
     image_url: "",
@@ -33,20 +35,6 @@ function AddCourse() {
     price: "",
     tags,
   });
-  useEffect(() => {
-    if (courseId && course) {
-      setCourseInfo({
-        image_url: course.image_url || "",
-        title: course.title || "",
-        category_id: course.category_id || "",
-        requirements_to_start: course.requirements_to_start || "",
-        description: course.description || "",
-        price: course.price === "Free" ? 0 : course.price,
-        tags: course.tags,
-      });
-      setTags(course.tags);
-    }
-  }, [course, courseId]);
 
   const handleChange = (e) => {
     setCourseInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -81,6 +69,7 @@ function AddCourse() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    setHasSubmit(true);
     if (courseId) dispatch(updateCourse({ courseId, courseInfo }));
     else dispatch(createCourse(courseInfo));
   }
@@ -88,6 +77,25 @@ function AddCourse() {
   useEffect(() => {
     if (courseId) dispatch(getCourseDetails(courseId));
   }, [courseId, dispatch]);
+
+  useEffect(() => {
+    if (courseId && course) {
+      setCourseInfo({
+        image_url: course.image_url || "",
+        title: course.title || "",
+        category_id: course.category_id || "",
+        requirements_to_start: course.requirements_to_start || "",
+        description: course.description || "",
+        price: course.price === "Free" ? 0 : course.price,
+        tags: course.tags,
+      });
+      setTags(course.tags);
+    }
+  }, [course, courseId]);
+
+  useEffect(() => {
+    if (courseId && hasSubmit) navigate("/courses");
+  }, [courseId, navigate, hasSubmit]);
 
   return (
     <section className="add-course">
