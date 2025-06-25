@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 function CoursesPageHeader() {
   const navigate = useNavigate();
-  const { categories } = useSelector((state) => state.category);
+  const { categories } = useSelector((state) => state.categories);
   return (
     <header className="courses-page-header">
       <div>

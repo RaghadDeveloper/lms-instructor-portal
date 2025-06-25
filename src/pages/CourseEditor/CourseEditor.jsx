@@ -21,10 +21,10 @@ function CourseEditor() {
   const navigate = useNavigate();
   const { courseId } = useParams();
   const { course } = useSelector((state) => state.course);
-  const { categories } = useSelector((state) => state.category);
+  const { categories } = useSelector((state) => state.categories);
   const [tags, setTags] = useState([""]);
   const [preview, setPreview] = useState(null);
-  const [hasSubmit, setHasSubmit] = useState(false);
+  // const [hasSubmit, setHasSubmit] = useState(false);
 
   const [courseInfo, setCourseInfo] = useState({
     image_url: "",
@@ -69,7 +69,7 @@ function CourseEditor() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    setHasSubmit(true);
+    // setHasSubmit(true);
 
     if (
       !courseInfo.title ||

@@ -7,7 +7,7 @@ import { resendOTP, verification } from "../../features/auth/authThunks";
 import AuthLayout from "../../components/AuthLayout/AuthLayout";
 import Button from "../../components/Button/Button";
 import AuthHeader from "../../components/AuthHeader/AuthHeader";
-import OTPInputGroup from "../../components/OTPInputGroup/OTPInputGroup ";
+import OTPInputGroup from "../../components/OTPInputGroup/OTPInputGroup";
 import InlineActionText from "../../components/InlineActionText/InlineActionText";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import AuthErrorReset from "../../components/AuthErrorReset/AuthErrorReset";

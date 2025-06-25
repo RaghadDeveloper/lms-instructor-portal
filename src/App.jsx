@@ -22,11 +22,11 @@ import VideoInfo from "./components/VideoInfo/VideoInfo";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { setAuthFromToken } from "./features/auth/authSlice";
-import { fetchCategories } from "./features/category/categoryThunk";
+import { fetchCategories } from "./features/categories/categoriesThunk";
 
 function App() {
   const dispatch = useDispatch();
-  const status = useSelector((state) => state.category.status);
+  const status = useSelector((state) => state.categories.status);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
