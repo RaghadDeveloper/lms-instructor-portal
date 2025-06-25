@@ -9,9 +9,19 @@ import { RiSettingsLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { MdNotificationsActive } from "react-icons/md";
 import { useTheme } from "../../context/ThemeContext";
+import { useDispatch } from "react-redux";
+import { logout } from "../../features/auth/authThunks";
 
 function Header() {
+  const dispatch = useDispatch();
   const { theme, toggleTheme } = useTheme();
+
+  function handleLogout() {
+    dispatch(logout());
+    localStorage.clear();
+    window.location.reload();
+  }
+
   return (
     <header className={`${theme}`}>
       <div className="search-bar">
@@ -29,7 +39,7 @@ function Header() {
 
         <div className="divider"></div>
         <HiOutlineMoon className="icon" onClick={toggleTheme} />
-        <HiOutlineLogout className="icon" />
+        <HiOutlineLogout className="icon" onClick={handleLogout} />
         <div className="divider"></div>
         <Link to={"/profile"}>
           <img className="user" src={ProfileImg} alt="" />

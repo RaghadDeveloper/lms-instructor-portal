@@ -1,7 +1,7 @@
-import "./UploadProfileImage.css";
+import "./UploadImage.css";
 import CameraImg from "./../../assets/images/camera.jpg";
 
-function UploadProfileImage({ image, Icon, preview, handleImageChange }) {
+function UploadImage({ image, Icon, preview, handleImageChange }) {
   return (
     <div className="upload-image">
       <img src={preview || image || CameraImg} alt="Upload Image" />
@@ -19,4 +19,4 @@ function UploadProfileImage({ image, Icon, preview, handleImageChange }) {
   );
 }
 
-export default UploadProfileImage;
+export default UploadImage;

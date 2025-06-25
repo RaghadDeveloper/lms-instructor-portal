@@ -1,9 +1,11 @@
 import "./CoursesPageHeader.css";
 import Button from "../Button/Button";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function CoursesPageHeader() {
   const navigate = useNavigate();
+  const { categories } = useSelector((state) => state.category);
   return (
     <header className="courses-page-header">
       <div>
@@ -22,10 +24,14 @@ function CoursesPageHeader() {
             <option value="price">Sort by Price</option>
             <option value="enrolled">Sort by Enrolled</option>
           </select>
+
           <select>
-            <option value="all">All Category</option>
-            <option value="web">web development</option>
-            <option value="graphic">graphic design</option>
+            <option value="all">All Categories</option>
+            {categories.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
           </select>
         </div>
       </div>

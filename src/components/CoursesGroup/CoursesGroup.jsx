@@ -5,9 +5,11 @@ import Loader from "../Loader/Loader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 function CoursesGroup({ courses }) {
-  const { loading, error } = useSelector((state) => state.course);
+  const { loading, error } = useSelector((state) => state.courses);
+
   if (loading) return <Loader />;
   if (error) return <ErrorMessage>{error}</ErrorMessage>;
+
   return (
     <div className="courses">
       {courses.map((course) => (

@@ -1,11 +1,11 @@
-import "./AddCourse.css";
+import "./CourseEditor.css";
 import { useEffect, useState } from "react";
 import AuthForm from "../../components/AuthForm/AuthForm";
 import Grid from "../../components/Grid/Grid";
 import Select from "../../components/Select/Select";
 import TextArea from "../../components/TextArea/TextArea";
 import TextInput from "../../components/TextInput/TextInput";
-import UploadProfileImage from "../../components/UploadProfileImage/UploadProfileImage";
+import UploadImage from "../../components/UploadImage/UploadImage";
 import Button from "../../components/Button/Button";
 import CameraImg from "./../../assets/images/camera.jpg";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,7 +16,7 @@ import {
 } from "../../features/course/courseThunk";
 import { useNavigate, useParams } from "react-router-dom";
 
-function AddCourse() {
+function CourseEditor() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { courseId } = useParams();
@@ -67,11 +67,74 @@ function AddCourse() {
     }
   };
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     setHasSubmit(true);
-    if (courseId) dispatch(updateCourse({ courseId, courseInfo }));
-    else dispatch(createCourse(courseInfo));
+
+    if (
+      !courseInfo.title ||
+      !courseInfo.category_id ||
+      !courseInfo.description
+    ) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+
+    let imageUrl = courseInfo.image_url;
+
+    if (courseInfo.image_url instanceof File) {
+      const data = new FormData();
+      data.append("file", courseInfo.image_url);
+      data.append("upload_preset", "Learning_management_system");
+      data.append("cloud_name", "dqtqpsg2m");
+
+      const res = await fetch(
+        "https://api.cloudinary.com/v1_1/dqtqpsg2m/image/upload",
+        {
+          method: "POST",
+          body: data,
+        }
+      );
+      const imageData = await res.json();
+
+      if (!imageData.secure_url) {
+        alert("Image upload failed");
+        return;
+      }
+
+      imageUrl = imageData.secure_url;
+    }
+
+    const finalCourseInfo = {
+      ...courseInfo,
+      image_url: imageUrl,
+    };
+
+    let resultAction;
+
+    if (courseId) {
+      resultAction = await dispatch(
+        updateCourse({ courseId, courseInfo: finalCourseInfo })
+      );
+    } else {
+      resultAction = await dispatch(createCourse(finalCourseInfo));
+    }
+
+    // if (courseId) {
+
+    //   dispatch(updateCourse({ courseId, courseInfo: finalCourseInfo }));
+    // } else {
+    //   dispatch(createCourse(finalCourseInfo));
+    // }
+
+    // if ( hasSubmit &&
+    if (
+      updateCourse.fulfilled.match(resultAction) ||
+      createCourse.fulfilled.match(resultAction)
+    ) {
+      // dispatch(clearCourseError());
+      navigate("/courses");
+    }
   }
 
   useEffect(() => {
@@ -93,14 +156,17 @@ function AddCourse() {
     }
   }, [course, courseId]);
 
-  useEffect(() => {
-    if (courseId && hasSubmit) navigate("/courses");
-  }, [courseId, navigate, hasSubmit]);
+  // useEffect(() => {
+  //   if (courseId && hasSubmit) {
+  //     dispatch(clearCourseError());
+  //     navigate("/courses");
+  //   }
+  // }, [courseId, navigate, hasSubmit, dispatch]);
 
   return (
     <section className="add-course">
       <AuthForm onSubmit={handleSubmit}>
-        <UploadProfileImage
+        <UploadImage
           image={CameraImg}
           preview={preview}
           handleImageChange={handleImageChange}
@@ -168,4 +234,4 @@ function AddCourse() {
   );
 }
 
-export default AddCourse;
+export default CourseEditor;

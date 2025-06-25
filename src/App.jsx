@@ -16,13 +16,13 @@ import CourseStatistics from "./pages/CourseStatistics/CourseStatistics";
 import Messages from "./pages/Messages/Messages";
 import Notifications from "./pages/Notifications/Notifications";
 import CourseDetails from "./pages/CourseDetails/CourseDetails";
-import AddCourse from "./pages/AddCourse/AddCourse";
+import CourseEditor from "./pages/CourseEditor/CourseEditor";
 import CourseInfo from "./components/CourseInfo/CourseInfo";
 import VideoInfo from "./components/VideoInfo/VideoInfo";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { setAuthFromToken } from "./features/auth/authSlice";
-import { fetchCategories } from "./features/category/categoryThunks";
+import { fetchCategories } from "./features/category/categoryThunk";
 
 function App() {
   const dispatch = useDispatch();
@@ -54,8 +54,8 @@ function App() {
             <Route path="/articles" element={<Articles />} />
             <Route path="/courses">
               <Route index element={<Courses />} />
-              <Route path="create" element={<AddCourse />} />
-              <Route path="edit/:courseId" element={<AddCourse />} />
+              <Route path="create" element={<CourseEditor />} />
+              <Route path="edit/:courseId" element={<CourseEditor />} />
               <Route path=":courseId" element={<CourseDetails />}>
                 <Route index element={<CourseInfo />} />
                 <Route path="lesson/:lessonId" element={<VideoInfo />} />

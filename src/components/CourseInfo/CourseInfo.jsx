@@ -1,6 +1,7 @@
 import "./CourseInfo.css";
 import { FaRegUser, FaStar } from "react-icons/fa";
 import { useSelector } from "react-redux";
+const BASE_URL = "http://localhost:8000";
 
 function formatTime(timeStr) {
   const [hours, minutes] = timeStr.split(":").map(Number);
@@ -24,7 +25,10 @@ function CourseInfo() {
 
   return (
     <div className="course-info">
-      <img src={`/${image_url.replace("public/", "")}`} />
+      <img
+        src={`${BASE_URL}/${image_url.replace("public/", "")}`}
+        alt="Course Img"
+      />
 
       <div className="about">
         <h4>Requirement to Start</h4>

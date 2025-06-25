@@ -19,9 +19,8 @@ function CourseDetails() {
     }
   }, [dispatch, courseId]);
 
-  if (loading) return <Loader />;
+  if (loading || !course) return <Loader />;
   if (error) return <ErrorMessage>{error}</ErrorMessage>;
-  if (!course) return <p>No course found.</p>;
 
   return (
     <div className="course-details">

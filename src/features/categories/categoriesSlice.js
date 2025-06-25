@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCategories } from "./categoryThunks";
+import { fetchCategories } from "./categoriesThunk";
 
 const initialState = {
   error: null,
@@ -8,7 +8,7 @@ const initialState = {
 };
 
 const categorySlice = createSlice({
-  name: "category",
+  name: "categories",
   initialState,
   extraReducers: (builder) => {
     builder

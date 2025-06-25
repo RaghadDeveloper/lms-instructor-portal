@@ -1,5 +1,5 @@
 import "./ProfileSetup.css";
-import UploadProfileImage from "../../components/UploadProfileImage/UploadProfileImage";
+import UploadImage from "../../components/UploadImage/UploadImage";
 import TextInput from "../../components/TextInput/TextInput";
 import AuthForm from "../../components/AuthForm/AuthForm";
 import AuthLayout from "../../components/AuthLayout/AuthLayout";
@@ -26,7 +26,7 @@ function ProfileSetup() {
         <h2>Your Profile</h2>
         <AuthForm>
           <div className="row">
-            <UploadProfileImage image={profileImg} Icon={IoIosCamera} />
+            <UploadImage image={profileImg} Icon={IoIosCamera} />
             <div className="column">
               <TextInput id="user-name" type="text" label={"User Name"} />
               <TextInput id="headline" type="text" label={"Headline"} />
