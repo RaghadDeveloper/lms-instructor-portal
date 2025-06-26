@@ -2,6 +2,8 @@ import "./VideoInfo.css";
 import video from "../../assets/images/video.mp4";
 import courseImg from "../../assets/images/courseImg.png";
 import { BsEye } from "react-icons/bs";
+import FileCard from "../FileCard/FileCard";
+import Grid from "../Grid/Grid";
 
 function VideoInfo() {
   return (
@@ -51,6 +53,11 @@ function VideoInfo() {
 
       <div className="card">
         <h2>Lesson fils:</h2>
+        <Grid>
+          <FileCard />
+          <FileCard />
+          <FileCard />
+        </Grid>
       </div>
 
       <div className="card">

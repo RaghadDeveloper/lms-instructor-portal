@@ -164,7 +164,7 @@ function CourseEditor() {
   // }, [courseId, navigate, hasSubmit, dispatch]);
 
   return (
-    <section className="add-course">
+    <section className="course-editor">
       <AuthForm onSubmit={handleSubmit}>
         <UploadImage
           image={CameraImg}

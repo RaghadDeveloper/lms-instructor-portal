@@ -1,0 +1,25 @@
+.file-card {
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem;
+  border: 1px solid var(--primary-color);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.file-card:hover {
+  transform: translateY(-2px);
+}
+
+.file-card img {
+  width: 100px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.file-card .lesson-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}

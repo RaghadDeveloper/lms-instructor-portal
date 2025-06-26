@@ -4,6 +4,10 @@
   gap: 1rem;
 }
 
+.video-info h2 {
+  margin-bottom: 1rem;
+}
+
 .video-info .card {
   background-color: #fff;
   padding: 1.5rem;
@@ -49,4 +53,10 @@
 
 .video-info .card .row h4 {
   font-weight: 500;
+}
+
+.video-info .grid {
+  margin: 0;
+  grid-template-columns: repeat(2, 49%);
+  row-gap: 1rem;
 }
