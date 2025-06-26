@@ -1,6 +1,13 @@
 import "./CourseEditor.css";
 import { useEffect, useState } from "react";
-import AuthForm from "../../components/AuthForm/AuthForm";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  createCourse,
+  getCourseDetails,
+  updateCourse,
+} from "../../features/course/courseThunk";
+import FormBody from "../../components/FormBody/FormBody";
 import Grid from "../../components/Grid/Grid";
 import Select from "../../components/Select/Select";
 import TextArea from "../../components/TextArea/TextArea";
@@ -8,13 +15,6 @@ import TextInput from "../../components/TextInput/TextInput";
 import UploadImage from "../../components/UploadImage/UploadImage";
 import Button from "../../components/Button/Button";
 import CameraImg from "./../../assets/images/camera.jpg";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  createCourse,
-  getCourseDetails,
-  updateCourse,
-} from "../../features/course/courseThunk";
-import { useNavigate, useParams } from "react-router-dom";
 
 function CourseEditor() {
   const dispatch = useDispatch();
@@ -165,7 +165,7 @@ function CourseEditor() {
 
   return (
     <section className="course-editor">
-      <AuthForm onSubmit={handleSubmit}>
+      <FormBody onSubmit={handleSubmit}>
         <UploadImage
           image={CameraImg}
           preview={preview}
@@ -229,7 +229,7 @@ function CourseEditor() {
         <Button type={"submit"} className={"primary"}>
           Continue
         </Button>
-      </AuthForm>
+      </FormBody>
     </section>
   );
 }

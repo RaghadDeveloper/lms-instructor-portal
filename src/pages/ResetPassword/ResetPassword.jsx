@@ -4,13 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { resetPassword } from "../../features/auth/authThunks";
-import AuthForm from "../../components/AuthForm/AuthForm";
-import AuthHeader from "../../components/AuthHeader/AuthHeader";
-import AuthLayout from "../../components/AuthLayout/AuthLayout";
+import FormLayout from "../../components/FormLayout/FormLayout";
+import FormHeader from "../../components/FormHeader/FormHeader";
+import FormBody from "../../components/FormBody/FormBody";
 import Button from "../../components/Button/Button";
 import PasswordInput from "../../components/PasswordInput/PasswordInput";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import AuthErrorReset from "../../components/AuthErrorReset/AuthErrorReset";
+
 function ResetPassword() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -60,13 +61,13 @@ function ResetPassword() {
   }, [hasSubmitted, loading, error, navigate]);
 
   return (
-    <AuthLayout>
+    <FormLayout>
       <AuthErrorReset />
-      <AuthHeader
+      <FormHeader
         title={headers.resetPassword.title}
         description={headers.resetPassword.description}
       />
-      <AuthForm onSubmit={handleSubmit}>
+      <FormBody onSubmit={handleSubmit}>
         <PasswordInput
           id="password"
           label="Password"
@@ -87,15 +88,13 @@ function ResetPassword() {
         <Button type={"submit"} className={"primary"} disabled={loading}>
           Confirm password
         </Button>
-      </AuthForm>
-      {formErrors.password && (
-        <ErrorMessage>{formErrors.password}</ErrorMessage>
-      )}
+      </FormBody>
+      {formErrors.password && <ErrorMessage error={formErrors.password} />}
       {formErrors.password_confirmation && (
-        <ErrorMessage>{formErrors.password_confirmation}</ErrorMessage>
+        <ErrorMessage error={formErrors.password_confirmation} />
       )}
-      {error && <ErrorMessage>{error}</ErrorMessage>}
-    </AuthLayout>
+      {error && <ErrorMessage error={error} />}
+    </FormLayout>
   );
 }
 

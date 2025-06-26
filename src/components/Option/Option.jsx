@@ -3,6 +3,7 @@ import "./Option.css";
 
 function Option({ text }) {
   const [isSelected, setIsSelected] = useState(false);
+
   return (
     <div
       className={`option ${isSelected ? "selected" : ""} `}

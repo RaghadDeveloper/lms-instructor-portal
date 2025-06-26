@@ -4,6 +4,7 @@ import courseImg from "../../assets/images/courseImg.png";
 import { BsEye } from "react-icons/bs";
 import FileCard from "../FileCard/FileCard";
 import Grid from "../Grid/Grid";
+import InfoBlock from "../InfoBlock/InfoBlock";
 
 function VideoInfo() {
   return (
@@ -24,30 +25,11 @@ function VideoInfo() {
           voluptatibus.
         </p>
         <div className="row">
-          <div>
-            <h4>Duration </h4>
-            <span>2Hr 30Min</span>
-          </div>
-
-          <div>
-            <h4>views</h4>
-            <span>23</span>
-          </div>
-
-          <div>
-            <h4>Likes </h4>
-            <span>50</span>
-          </div>
-
-          <div>
-            <h4>Comments </h4>
-            <span>24</span>
-          </div>
-
-          <div>
-            <h4>Reports</h4>
-            <span>4</span>
-          </div>
+          <InfoBlock label={"Duration"} value={"2Hr 30Min"} />
+          <InfoBlock label={"views"} value={"23"} />
+          <InfoBlock label={"Likes"} value={"50"} />
+          <InfoBlock label={"Comments"} value={"24"} />
+          <InfoBlock label={"Reports"} value={"4"} />
         </div>
       </div>
 

@@ -3,7 +3,7 @@ function Button({ children, onClick, type, className, disabled }) {
   return (
     <button
       type={type}
-      className={`btn ${className}`}
+      className={`btn ${className} ${disabled ? "disabled" : ""}`}
       onClick={onClick}
       disabled={disabled}
     >

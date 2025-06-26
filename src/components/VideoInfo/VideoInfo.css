@@ -57,6 +57,5 @@
 
 .video-info .grid {
   margin: 0;
-  grid-template-columns: repeat(2, 49%);
   row-gap: 1rem;
 }

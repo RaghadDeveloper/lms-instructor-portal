@@ -4,14 +4,14 @@ import { headers } from "../../data/headers";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { resendOTP, verification } from "../../features/auth/authThunks";
-import AuthLayout from "../../components/AuthLayout/AuthLayout";
+import FormLayout from "../../components/FormLayout/FormLayout";
 import Button from "../../components/Button/Button";
-import AuthHeader from "../../components/AuthHeader/AuthHeader";
+import FormHeader from "../../components/FormHeader/FormHeader";
 import OTPInputGroup from "../../components/OTPInputGroup/OTPInputGroup";
 import InlineActionText from "../../components/InlineActionText/InlineActionText";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import AuthErrorReset from "../../components/AuthErrorReset/AuthErrorReset";
-import AuthForm from "../../components/AuthForm/AuthForm";
+import FormBody from "../../components/FormBody/FormBody";
 
 function Verification() {
   const location = useLocation();
@@ -64,14 +64,14 @@ function Verification() {
   }, [hasSubmitted, loading, error, navigate, from]);
 
   return (
-    <AuthLayout>
+    <FormLayout>
       <AuthErrorReset />
-      <AuthForm>
+      <FormHeader
+        title={headers.verification.title}
+        description={headers.verification.description}
+      />
+      <FormBody>
         <div className="verification">
-          <AuthHeader
-            title={headers.verification.title}
-            description={headers.verification.description}
-          />
           <OTPInputGroup
             length={6}
             value={code}
@@ -89,11 +89,11 @@ function Verification() {
           >
             Confirm code
           </Button>
-          {localError && <ErrorMessage>{localError}</ErrorMessage>}
+          {localError && <ErrorMessage error={localError} />}
         </div>
-        {error && <ErrorMessage>{error}</ErrorMessage>}
-      </AuthForm>
-    </AuthLayout>
+        {error && <ErrorMessage error={error} />}
+      </FormBody>
+    </FormLayout>
   );
 }
 

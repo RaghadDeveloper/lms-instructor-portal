@@ -39,20 +39,7 @@
   padding: 1rem 0;
 }
 
-.course-info .row > div {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  align-items: center;
-  padding-right: 3rem;
-  border-right: 1px solid var(--primary-color);
-}
-
-.course-info .row > div:last-child {
+.course-info .row > .info-block:last-child {
   border-right: none;
   padding-right: 0;
-}
-
-.course-info .row h4 {
-  font-weight: 500;
 }

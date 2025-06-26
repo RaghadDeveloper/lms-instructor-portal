@@ -5,10 +5,13 @@ const BASE_URL = "http://localhost:8000";
 
 function CourseCard({ course }) {
   const navigate = useNavigate();
+
+  const { id, image_url, rating, title, subscribers_count, price } = course;
+
   return (
-    <div className="course-card" onClick={() => navigate(`${course.id}`)}>
+    <div className="course-card" onClick={() => navigate(`${id}`)}>
       <img
-        src={`${BASE_URL}/${course.image_url.replace("public/", "")}`}
+        src={`${BASE_URL}/${image_url.replace("public/", "")}`}
         alt="Course Img"
       />
 
@@ -16,21 +19,19 @@ function CourseCard({ course }) {
         <p className="category">Category</p>
         <div>
           <FaStar className="star" />
-          <p>{course.rating}</p>
+          <p>{rating}</p>
         </div>
       </div>
-      <h3>{course.title}</h3>
+      <h3>{title}</h3>
       <div className="line"></div>
       <div>
         <div>
           <FaRegUser />
           <p>
-            {course.subscribers_count} <span>students</span>
+            {subscribers_count} <span>students</span>
           </p>
         </div>
-        <p className="price">
-          {course.price === "Free" ? course.price : `$${course.price}`}
-        </p>
+        <p className="price">{price === "Free" ? price : `$${price}`}</p>
       </div>
     </div>
   );

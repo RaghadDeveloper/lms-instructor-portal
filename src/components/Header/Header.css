@@ -1,4 +1,4 @@
-main > header {
+.main-header {
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -8,11 +8,11 @@ main > header {
   /* position: fixed; */
   /* z-index: 100; */
 }
-header.dark {
+.main-header.dark {
   background-color: var(--dark-bg);
 }
 
-header .search-bar {
+.main-header .search-bar {
   position: relative;
   display: flex;
   align-items: center;
@@ -20,7 +20,7 @@ header .search-bar {
   margin-left: 1rem;
 }
 
-header .search-bar input {
+.main-header .search-bar input {
   border: 1px solid var(--very-dark);
   border-radius: 4px;
   padding: 8px;
@@ -28,58 +28,58 @@ header .search-bar input {
   background-color: transparent;
   font-size: 16px;
 }
-header.dark .search-bar input {
+.main-header.dark .search-bar input {
   border-color: var(--very-light);
   color: white;
 }
-header .search-bar input:focus {
+.main-header .search-bar input:focus {
   outline: none;
   border: 1px solid var(--primary-color);
 }
 
-header .search-bar input:focus::placeholder {
+.main-header .search-bar input:focus::placeholder {
   color: var(--primary-color);
 }
 
-header .search-bar .icon {
+.main-header .search-bar .icon {
   position: absolute;
   right: 8px;
   color: var(--very-dark);
 }
-header .search-bar input:focus ~ .icon {
+.main-header .search-bar input:focus ~ .icon {
   color: var(--primary-color);
 }
 
-header .header-icons {
+.main-header .header-icons {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
-header .header-icons .icon {
+.main-header .header-icons .icon {
   color: var(--very-dark);
   font-size: 24px;
   cursor: pointer;
 }
 
-header.dark .header-icons .icon,
-header.dark .search-bar .icon {
+.main-header.dark .header-icons .icon,
+.main-header.dark .search-bar .icon {
   color: var(--very-light);
 }
 
-header.dark .header-icons .icon:hover,
-header .header-icons .icon:hover {
+.main-header.dark .header-icons .icon:hover,
+.main-header .header-icons .icon:hover {
   color: var(--primary-color);
 }
 
-header .header-icons .user {
+.main-header .header-icons .user {
   width: 40px;
   aspect-ratio: 1;
   border-radius: 50%;
   border: 1px solid var(--primary-color);
 }
 
-header .header-icons .divider {
+.main-header .header-icons .divider {
   width: 1px;
   align-self: stretch;
   background-color: var(--primary-color);

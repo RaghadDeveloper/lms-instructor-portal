@@ -1,6 +1,7 @@
 import "./CourseInfo.css";
 import { FaRegUser, FaStar } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import InfoBlock from "../InfoBlock/InfoBlock";
 const BASE_URL = "http://localhost:8000";
 
 function formatTime(timeStr) {
@@ -50,37 +51,14 @@ function CourseInfo() {
       </div>
 
       <div className="row">
-        <div>
-          <h4>Price </h4>
-          <span>{price === "Free" ? price : `$${price}`}</span>
-        </div>
-
-        <div>
-          <h4>Duration </h4>
-          {/* <span>12Hr 30Min</span> */}
-          <span>{formatTime(course_duration)}</span>
-        </div>
-
-        <div>
-          <h4>Lessons </h4>
-          <span>{lessons_count}</span>
-        </div>
-
-        <div>
-          <h4>Rating</h4>
-          <div>
-            {/* <FaStar className="star" /> */}
-            <span> {rating}</span>
-          </div>
-        </div>
-
-        <div>
-          <h4>students</h4>
-          <div>
-            {/* <FaRegUser /> */}
-            <span> {subscribers_count}</span>
-          </div>
-        </div>
+        <InfoBlock
+          label={"price"}
+          value={price === "Free" ? price : `$${price}`}
+        />
+        <InfoBlock label={"Duration"} value={formatTime(course_duration)} />
+        <InfoBlock label={"Lessons"} value={lessons_count} />
+        <InfoBlock label={"Rating"} value={rating} />
+        <InfoBlock label={"Students"} value={subscribers_count} />
       </div>
     </div>
   );

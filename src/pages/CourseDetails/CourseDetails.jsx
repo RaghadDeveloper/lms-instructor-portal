@@ -1,10 +1,10 @@
-import { useParams } from "react-router-dom";
-import CourseContent from "../../components/CourseContent/CourseContent";
-import DetailsLayout from "../../components/DetailsLayout/DetailsLayout";
 import "./CourseDetails.css";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getCourseDetails } from "../../features/course/courseThunk";
+import CourseContent from "../../components/CourseContent/CourseContent";
+import DetailsLayout from "../../components/DetailsLayout/DetailsLayout";
 import Loader from "../../components/Loader/Loader";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 

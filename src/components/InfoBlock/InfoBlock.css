@@ -1,0 +1,11 @@
+.info-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  padding-right: 3rem;
+  border-right: 1px solid var(--primary-color);
+}
+.info-block h4 {
+  font-weight: 500;
+}

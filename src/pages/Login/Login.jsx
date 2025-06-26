@@ -5,12 +5,12 @@ import { headers } from "../../data/headers";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../features/auth/authThunks";
 import PasswordInput from "../../components/PasswordInput/PasswordInput";
-import AuthLayout from "../../components/AuthLayout/AuthLayout";
+import FormLayout from "../../components/FormLayout/FormLayout";
 import Button from "../../components/Button/Button";
 import TextInput from "../../components/TextInput/TextInput";
 import InlineActionText from "../../components/InlineActionText/InlineActionText";
-import AuthHeader from "../../components/AuthHeader/AuthHeader";
-import AuthForm from "../../components/AuthForm/AuthForm";
+import FormHeader from "../../components/FormHeader/FormHeader";
+import FormBody from "../../components/FormBody/FormBody";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import AuthErrorReset from "../../components/AuthErrorReset/AuthErrorReset";
 
@@ -61,14 +61,14 @@ function Login() {
   }, [isAuthenticated, navigate]);
 
   return (
-    <AuthLayout>
+    <FormLayout>
       <AuthErrorReset />
-      <AuthHeader
+      <FormHeader
         title={headers.login.title}
         description={headers.login.description}
       />
 
-      <AuthForm onSubmit={handleSubmit}>
+      <FormBody onSubmit={handleSubmit}>
         <TextInput
           id="email"
           type="email"
@@ -96,13 +96,11 @@ function Login() {
           Don't have an account? <Link to={"/signup"}>Sign up</Link>
         </InlineActionText>
 
-        {formErrors.email && <ErrorMessage>{formErrors.email}</ErrorMessage>}
-        {formErrors.password && (
-          <ErrorMessage>{formErrors.password}</ErrorMessage>
-        )}
-        {error && <ErrorMessage>{error}</ErrorMessage>}
-      </AuthForm>
-    </AuthLayout>
+        {formErrors.email && <ErrorMessage error={formErrors.email} />}
+        {formErrors.password && <ErrorMessage error={formErrors.password} />}
+        {error && <ErrorMessage error={error} />}
+      </FormBody>
+    </FormLayout>
   );
 }
 

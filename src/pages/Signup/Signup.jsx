@@ -1,16 +1,16 @@
 import "./Signup.css";
-import AuthLayout from "../../components/AuthLayout/AuthLayout";
-import Button from "../../components/Button/Button";
-import PasswordInput from "../../components/PasswordInput/PasswordInput";
-import TextInput from "../../components/TextInput/TextInput";
-import InlineActionText from "../../components/InlineActionText/InlineActionText";
-import AuthHeader from "../../components/AuthHeader/AuthHeader";
-import AuthForm from "../../components/AuthForm/AuthForm";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { signup } from "../../features/auth/authThunks";
 import { headers } from "../../data/headers";
+import FormLayout from "../../components/FormLayout/FormLayout";
+import Button from "../../components/Button/Button";
+import PasswordInput from "../../components/PasswordInput/PasswordInput";
+import TextInput from "../../components/TextInput/TextInput";
+import InlineActionText from "../../components/InlineActionText/InlineActionText";
+import FormHeader from "../../components/FormHeader/FormHeader";
+import FormBody from "../../components/FormBody/FormBody";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import AuthErrorReset from "../../components/AuthErrorReset/AuthErrorReset";
 
@@ -66,14 +66,14 @@ function Signup() {
   }, [hasSubmitted, loading, error, isAuthenticated, navigate]);
 
   return (
-    <AuthLayout>
+    <FormLayout>
       <AuthErrorReset />
-      <AuthHeader
+      <FormHeader
         title={headers.signup.title}
         description={headers.signup.description}
       />
 
-      <AuthForm onSubmit={handleSubmit}>
+      <FormBody onSubmit={handleSubmit}>
         <TextInput
           id="user-name"
           type="text"
@@ -117,19 +117,15 @@ function Signup() {
           Already have an account? <Link to={"/login"}>Log in</Link>
         </InlineActionText>
 
-        {formErrors.username && (
-          <ErrorMessage>{formErrors.username}</ErrorMessage>
-        )}
-        {formErrors.email && <ErrorMessage>{formErrors.email}</ErrorMessage>}
-        {formErrors.password && (
-          <ErrorMessage>{formErrors.password}</ErrorMessage>
-        )}
+        {formErrors.username && <ErrorMessage error={formErrors.username} />}
+        {formErrors.email && <ErrorMessage error={formErrors.email} />}
+        {formErrors.password && <ErrorMessage error={formErrors.password} />}
         {formErrors.password_confirmation && (
-          <ErrorMessage>{formErrors.password_confirmation}</ErrorMessage>
+          <ErrorMessage error={formErrors.password_confirmation} />
         )}
-        {error && <ErrorMessage>{error}</ErrorMessage>}
-      </AuthForm>
-    </AuthLayout>
+        {error && <ErrorMessage error={error} />}
+      </FormBody>
+    </FormLayout>
   );
 }
 

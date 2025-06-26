@@ -26,8 +26,7 @@
   gap: 1rem;
 }
 
-.courses-page-header div input,
-.courses-page-header div select {
+.courses-page-header div input {
   padding: 0.5rem 1rem;
   border-radius: 4px;
   border: 1px solid var(--primay-gray);
@@ -39,9 +38,21 @@
   width: 300px;
 }
 
-.dark .courses-page-header div input,
-.dark .courses-page-header div select {
+.dark .courses-page-header div input {
   border-color: var(--very-light);
   background-color: var(--dark-bg);
   color: white;
+}
+
+.courses-page-header div input:focus {
+  outline: none;
+  border: 1px solid var(--primary-color);
+}
+
+.courses-page-header div input:focus::placeholder {
+  color: var(--primary-color);
+}
+
+.courses-page-header div select {
+  min-width: 155px;
 }

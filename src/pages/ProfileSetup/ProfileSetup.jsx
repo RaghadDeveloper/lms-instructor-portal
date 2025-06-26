@@ -1,13 +1,13 @@
 import "./ProfileSetup.css";
+import { IoIosCamera } from "react-icons/io";
 import UploadImage from "../../components/UploadImage/UploadImage";
 import TextInput from "../../components/TextInput/TextInput";
-import AuthForm from "../../components/AuthForm/AuthForm";
-import AuthLayout from "../../components/AuthLayout/AuthLayout";
-import AuthHeader from "../../components/AuthHeader/AuthHeader";
+import FormBody from "../../components/FormBody/FormBody";
+import FormLayout from "../../components/FormLayout/FormLayout";
+import FormHeader from "../../components/FormHeader/FormHeader";
 import Option from "../../components/Option/Option";
 import Button from "../../components/Button/Button";
 import profileImg from "./../../assets/images/profileImg.jpg";
-import { IoIosCamera } from "react-icons/io";
 
 const allSpecializations = [
   "Web Development",
@@ -20,11 +20,11 @@ const allSpecializations = [
 
 function ProfileSetup() {
   return (
-    <AuthLayout>
+    <FormLayout>
       <div className="profile-setup">
-        <AuthHeader title="Profile Setup" />
+        <FormHeader title="Profile Setup" />
         <h2>Your Profile</h2>
-        <AuthForm>
+        <FormBody>
           <div className="row">
             <UploadImage image={profileImg} Icon={IoIosCamera} />
             <div className="column">
@@ -39,14 +39,14 @@ function ProfileSetup() {
               <Option key={spec} text={spec} />
             ))}
           </div>
-        </AuthForm>
+        </FormBody>
         <div className="button-container">
           <Button type={"submit"} className={"primary"}>
             Continue
           </Button>
         </div>
       </div>
-    </AuthLayout>
+    </FormLayout>
   );
 }
 

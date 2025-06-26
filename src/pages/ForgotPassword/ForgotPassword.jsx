@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { forgotPassword } from "../../features/auth/authThunks";
-import AuthForm from "../../components/AuthForm/AuthForm";
-import AuthHeader from "../../components/AuthHeader/AuthHeader";
-import AuthLayout from "../../components/AuthLayout/AuthLayout";
+import FormBody from "../../components/FormBody/FormBody";
+import FormHeader from "../../components/FormHeader/FormHeader";
+import FormLayout from "../../components/FormLayout/FormLayout";
 import Button from "../../components/Button/Button";
 import TextInput from "../../components/TextInput/TextInput";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
@@ -51,13 +51,13 @@ function ForgotPassword() {
   }, [hasSubmitted, loading, error, navigate, email]);
 
   return (
-    <AuthLayout>
+    <FormLayout>
       <AuthErrorReset />
-      <AuthHeader
+      <FormHeader
         title={headers.forgotPassword.title}
         description={headers.forgotPassword.description}
       />
-      <AuthForm onSubmit={handleSubmit}>
+      <FormBody onSubmit={handleSubmit}>
         <TextInput
           id="email"
           name="email"
@@ -70,11 +70,10 @@ function ForgotPassword() {
         <Button type={"submit"} className={"primary"} disabled={loading}>
           Continue
         </Button>
-        {(formError || error) && (
-          <ErrorMessage className="error">{formError || error}</ErrorMessage>
-        )}
-      </AuthForm>
-    </AuthLayout>
+        {formError && <ErrorMessage error={formError} />}
+        {formError && <ErrorMessage error={formError} />}
+      </FormBody>
+    </FormLayout>
   );
 }
 

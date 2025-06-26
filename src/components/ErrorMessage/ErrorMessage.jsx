@@ -1,7 +1,7 @@
 import "./ErrorMessage.css";
 
-function ErrorMessage({ children }) {
-  return <p className="error">{children}</p>;
+function ErrorMessage({ error }) {
+  return <p className="error">{error}</p>;
 }
 
 export default ErrorMessage;

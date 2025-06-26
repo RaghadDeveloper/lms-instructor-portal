@@ -5,6 +5,7 @@ function TextInput({
   type,
   label,
   name,
+  placeholder,
   value,
   onChange,
   onClick,
@@ -19,6 +20,7 @@ function TextInput({
         name={name}
         value={value}
         onChange={onChange}
+        placeholder={placeholder}
         required
         disabled={disabled}
       />

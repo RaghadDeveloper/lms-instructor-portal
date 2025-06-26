@@ -1,11 +1,14 @@
 import "./CoursesPageHeader.css";
-import Button from "../Button/Button";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { sortBy } from "../../data/sortBy";
+import Button from "../Button/Button";
+import Select from "../Select/Select";
 
 function CoursesPageHeader() {
   const navigate = useNavigate();
   const { categories } = useSelector((state) => state.categories);
+
   return (
     <header className="courses-page-header">
       <div>
@@ -17,22 +20,17 @@ function CoursesPageHeader() {
       <div>
         <input type="text" placeholder="Search in your courses..." />
         <div>
-          <select>
-            <option value="latest">Sort by Latest</option>
-            <option value="oldest">Sort by Oldest</option>
-            <option value="rating">Sort by Rating</option>
-            <option value="price">Sort by Price</option>
-            <option value="enrolled">Sort by Enrolled</option>
-          </select>
+          <Select
+            text={"Paid or Free"}
+            options={[
+              { id: 1, name: "Paid" },
+              { id: 2, name: "Free" },
+            ]}
+          />
 
-          <select>
-            <option value="all">All Categories</option>
-            {categories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
-              </option>
-            ))}
-          </select>
+          <Select text={"Sort by Latest"} options={sortBy} name={"sortBy"} />
+
+          <Select text={"All Categories"} options={categories} />
         </div>
       </div>
     </header>

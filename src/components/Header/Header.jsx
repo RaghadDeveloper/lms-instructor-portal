@@ -1,6 +1,5 @@
-import { BiSearch } from "react-icons/bi";
 import "./Header.css";
-import ProfileImg from "./../../assets/images/profileImg.jpg";
+import { BiSearch } from "react-icons/bi";
 import { AiOutlineUser } from "react-icons/ai";
 import { TbMessages } from "react-icons/tb";
 import { IoAnalytics } from "react-icons/io5";
@@ -11,6 +10,7 @@ import { MdNotificationsActive } from "react-icons/md";
 import { useTheme } from "../../context/ThemeContext";
 import { useDispatch } from "react-redux";
 import { logout } from "../../features/auth/authThunks";
+import ProfileImg from "./../../assets/images/profileImg.jpg";
 
 function Header() {
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ function Header() {
   }
 
   return (
-    <header className={`${theme}`}>
+    <header className={`main-header ${theme}`}>
       <div className="search-bar">
         <input type="text" placeholder="search..." />
         <BiSearch className="icon" />
