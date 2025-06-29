@@ -25,6 +25,7 @@ function Signup() {
     email: "",
     password: "",
     password_confirmation: "",
+    fcm_token: "ll",
   });
 
   const [formErrors, setFormErrors] = useState({});

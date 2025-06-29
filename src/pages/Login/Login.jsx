@@ -24,6 +24,7 @@ function Login() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
+    fcm_token: "ll",
   });
 
   const [formErrors, setFormErrors] = useState({});

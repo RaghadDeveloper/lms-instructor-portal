@@ -23,6 +23,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { setAuthFromToken } from "./features/auth/authSlice";
 import { fetchCategories } from "./features/categories/categoriesThunk";
+import VideoEditor from "./pages/VideoEditor/VideoEditor";
 
 function App() {
   const dispatch = useDispatch();
@@ -60,6 +61,7 @@ function App() {
                 <Route index element={<CourseInfo />} />
                 <Route path="lesson/:lessonId" element={<VideoInfo />} />
               </Route>
+              <Route path=":courseId/lesson/create" element={<VideoEditor />} />
             </Route>
             <Route path="/profile" element={<Profile />} />
             <Route path="/course-statistics" element={<CourseStatistics />} />

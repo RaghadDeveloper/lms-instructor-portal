@@ -1,0 +1,78 @@
+.upload-video {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  margin-bottom: 4rem;
+}
+
+.upload-video .upload-icon {
+  color: var(--very-dark);
+  height: 100%;
+  background-color: #d4d4d4;
+  color: white;
+  padding: 5px;
+  font-size: 28px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.upload-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.upload-video .upload-icon span {
+  font-size: 48px;
+}
+
+.upload-icon:hover {
+  opacity: 0.8;
+}
+
+.progress {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--primary-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.progress .uploading {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.progress .btn.icon {
+  padding: 0;
+}
+
+.progress .uploader {
+  display: block;
+  position: relative;
+  height: 6px;
+  width: 100%;
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress .uploader-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: var(--primary-color);
+  transition: width 0.3s ease;
+}

@@ -1,0 +1,45 @@
+.file-field {
+  position: relative;
+  max-width: 450px;
+  height: 50px;
+  border-bottom: 1.5px solid var(--primary-color);
+  margin-bottom: 0.75rem;
+}
+
+.file-field input {
+  padding: 20px 10px 3px;
+  display: none;
+  width: 100%;
+}
+
+.custom-file-label {
+  position: absolute;
+  top: 16px;
+  left: 3px;
+  width: 100%;
+  display: inline-block;
+  font-size: 1.15rem;
+  cursor: pointer;
+  color: var(--primary-dark);
+}
+
+.file-selected {
+  top: 0px;
+  color: var(--primary-color);
+  font-size: 1rem;
+}
+
+.file-name {
+  position: absolute;
+  bottom: 8px;
+  font-size: 0.9rem;
+  color: var(--primary-dark);
+}
+
+.dark .custom-file-label {
+  color: var(--primary-light);
+}
+
+.dark .file-name {
+  color: var(--very-light);
+}
