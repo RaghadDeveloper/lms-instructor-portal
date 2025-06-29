@@ -4,19 +4,30 @@ import CoursesPageHeader from "../../components/CoursesPageHeader/CoursesPageHea
 import "./Courses.css";
 import { useEffect } from "react";
 import { getAllCourses } from "../../features/courses/coursesThunk";
+import Loader from "../../components/Loader/Loader";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
 function Courses() {
   const dispatch = useDispatch();
-  const { courses } = useSelector((state) => state.courses);
+  const { loading, error, courses } = useSelector((state) => state.courses);
 
   useEffect(() => {
-    if (courses.length === 0) dispatch(getAllCourses());
-  }, [dispatch, courses.length]);
+    if (courses?.length === 0) dispatch(getAllCourses());
+  }, [dispatch, courses?.length]);
 
   return (
     <div>
       <CoursesPageHeader />
-      <CoursesGroup courses={courses} />
+
+      {loading && <Loader />}
+
+      {error && <ErrorMessage error={error} />}
+
+      {!loading && !error && !courses?.length && <p>No Courses Found</p>}
+
+      {!loading && !error && courses?.length > 0 && (
+        <CoursesGroup courses={courses} />
+      )}
     </div>
   );
 }
