@@ -2,7 +2,7 @@ import "./CourseDetails.css";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getCourseDetails } from "../../features/course/courseThunk";
+import { getCourseDetails } from "../../features/courses/coursesThunk";
 import CourseContent from "../../components/CourseContent/CourseContent";
 import DetailsLayout from "../../components/DetailsLayout/DetailsLayout";
 import Loader from "../../components/Loader/Loader";

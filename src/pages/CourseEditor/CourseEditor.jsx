@@ -6,7 +6,7 @@ import {
   createCourse,
   getCourseDetails,
   updateCourse,
-} from "../../features/course/courseThunk";
+} from "../../features/courses/coursesThunk";
 import FormBody from "../../components/FormBody/FormBody";
 import Grid from "../../components/Grid/Grid";
 import Select from "../../components/Select/Select";
