@@ -3,6 +3,7 @@ import {
   createCourseApi,
   getAllCoursesApi,
   getCourseDetailsApi,
+  searchCoursesApi,
   updateCourseApi,
 } from "./coursesApi";
 
@@ -19,6 +20,18 @@ export const getAllCourses = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await getAllCoursesApi();
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(extractError(error));
+    }
+  }
+);
+
+export const searchCourses = createAsyncThunk(
+  "courses/searchCourses",
+  async (data, thunkAPI) => {
+    try {
+      const response = await searchCoursesApi(data);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(extractError(error));

@@ -1,13 +1,26 @@
 import "./CoursesPageHeader.css";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { sortBy } from "../../data/sortBy";
 import Button from "../Button/Button";
 import Select from "../Select/Select";
+import { useEffect, useState } from "react";
+import {
+  getAllCourses,
+  searchCourses,
+} from "../../features/courses/coursesThunk";
 
 function CoursesPageHeader() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { categories } = useSelector((state) => state.categories);
+  const [search_key, setSearch_key] = useState("");
+
+  useEffect(() => {
+    console.log(search_key);
+    if (!search_key) dispatch(getAllCourses());
+    else dispatch(searchCourses({ search_key }));
+  }, [search_key, dispatch]);
 
   return (
     <header className="courses-page-header">
@@ -18,7 +31,12 @@ function CoursesPageHeader() {
         </Button>
       </div>
       <div>
-        <input type="text" placeholder="Search in your courses..." />
+        <input
+          type="text"
+          placeholder="Search in your courses..."
+          value={search_key}
+          onChange={(e) => setSearch_key(e.target.value)}
+        />
         <div>
           <Select
             text={"Paid or Free"}

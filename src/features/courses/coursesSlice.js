@@ -3,6 +3,7 @@ import {
   createCourse,
   getAllCourses,
   getCourseDetails,
+  searchCourses,
   updateCourse,
 } from "./coursesThunk";
 
@@ -49,6 +50,14 @@ const courseSlice = createSlice({
         state.courses = action.payload.data;
       })
       .addCase(getAllCourses.rejected, handleRejected)
+
+      // searchCourses
+      .addCase(searchCourses.pending, handlePending)
+      .addCase(searchCourses.fulfilled, (state, action) => {
+        state.loading = false;
+        state.courses = action.payload.data;
+      })
+      .addCase(searchCourses.rejected, handleRejected)
 
       // getCourseDetails
       .addCase(getCourseDetails.pending, handlePending)
