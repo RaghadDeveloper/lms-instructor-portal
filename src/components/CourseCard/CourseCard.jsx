@@ -1,29 +1,37 @@
 import "./CourseCard.css";
 import { FaRegUser, FaStar } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-const BASE_URL = "http://localhost:8000";
 
 function CourseCard({ course }) {
   const navigate = useNavigate();
 
-  const { id, image_url, rating, title, subscribers_count, price } = course;
+  const {
+    id,
+    image_url,
+    category: { name: category },
+    rating,
+    title,
+    subscribers_count,
+    price,
+    approval_status,
+  } = course;
 
   return (
     <div className="course-card" onClick={() => navigate(`${id}`)}>
-      <img
-        src={`${BASE_URL}/${image_url.replace("public/", "")}`}
-        alt="Course Img"
-      />
+      <img src={image_url} alt="Course Img" />
 
       <div>
-        <p className="category">Category</p>
+        <p className="category">{category}</p>
         <div>
           <FaStar className="star" />
           <p>{rating}</p>
         </div>
       </div>
-      <h3>{title}</h3>
-      <div className="line"></div>
+      <div className="title">
+        <h3>{title}</h3>
+        <p className={`approval ${approval_status}`}>{approval_status}</p>
+        <div className="line"></div>
+      </div>
       <div>
         <div>
           <FaRegUser />
