@@ -2,10 +2,11 @@ import "./CourseInfo.css";
 import { FaRegUser, FaStar } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import InfoBlock from "../InfoBlock/InfoBlock";
-const BASE_URL = "http://localhost:8000";
 
 function formatTime(timeStr) {
   const [hours, minutes] = timeStr.split(":").map(Number);
+  if (hours === 0) return `${minutes}Min`;
+  if (minutes === 0) return `${hours}Hr`;
   return `${hours}Hr ${minutes}Min`;
 }
 
@@ -26,10 +27,7 @@ function CourseInfo() {
 
   return (
     <div className="course-info">
-      <img
-        src={`${BASE_URL}/${image_url.replace("public/", "")}`}
-        alt="Course Img"
-      />
+      <img src={image_url} alt="Course Img" />
 
       <div className="about">
         <h4>Requirement to Start</h4>
@@ -41,14 +39,16 @@ function CourseInfo() {
         <p>{description}</p>
       </div>
 
-      <div className="about">
-        <h4>Tags</h4>
-        <div className="tags">
-          {tags.map((tag, index) => (
-            <p key={index}>{tag}</p>
-          ))}
+      {tags.length > 0 && (
+        <div className="about">
+          <h4>Tags</h4>
+          <div className="tags">
+            {tags.map((tag, index) => (
+              <p key={index}>{tag}</p>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       <div className="row">
         <InfoBlock
