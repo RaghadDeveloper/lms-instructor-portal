@@ -11,7 +11,7 @@ import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 function CourseDetails() {
   const dispatch = useDispatch();
   const { courseId } = useParams();
-  const { course, loading, error } = useSelector((state) => state.course);
+  const { course, loading, error } = useSelector((state) => state.courses);
 
   useEffect(() => {
     if (courseId) {

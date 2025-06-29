@@ -20,7 +20,7 @@ function CourseEditor() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { courseId } = useParams();
-  const { course } = useSelector((state) => state.course);
+  const { course } = useSelector((state) => state.courses);
   const { categories } = useSelector((state) => state.categories);
   const [tags, setTags] = useState([""]);
   const [preview, setPreview] = useState(null);

@@ -1,11 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createCourse, updateCourse } from "../course/courseThunk";
-import { getAllCourses } from "./coursesThunk";
+import {
+  createCourse,
+  getAllCourses,
+  getCourseDetails,
+  updateCourse,
+} from "./coursesThunk";
 
 const initialState = {
   loading: false,
   error: null,
   courses: [],
+  course: null,
 };
 
 const handlePending = (state) => {
@@ -30,6 +35,11 @@ const handleRejected = (state, action) => {
 const courseSlice = createSlice({
   name: "courses",
   initialState,
+  reducers: {
+    clearCourseError: (state) => {
+      state.error = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       // getAllCourses
@@ -40,24 +50,35 @@ const courseSlice = createSlice({
       })
       .addCase(getAllCourses.rejected, handleRejected)
 
+      // getCourseDetails
+      .addCase(getCourseDetails.pending, handlePending)
+      .addCase(getCourseDetails.fulfilled, (state, action) => {
+        state.loading = false;
+        state.course = action.payload.data;
+      })
+      .addCase(getCourseDetails.rejected, handleRejected)
+
       // createCourse
-      // .addCase(createCourse.pending, handlePending)
+      .addCase(createCourse.pending, handlePending)
       .addCase(createCourse.fulfilled, (state, action) => {
         state.loading = false;
+        state.course = action.payload.data;
         state.courses.unshift(action.payload.data);
       })
-      // .addCase(createCourse.rejected, handleRejected)
+      .addCase(createCourse.rejected, handleRejected)
 
       // updateCourse
-      // .addCase(updateCourse.pending, handlePending)
+      .addCase(updateCourse.pending, handlePending)
       .addCase(updateCourse.fulfilled, (state, action) => {
         state.loading = false;
+        state.course = action.payload.data;
         state.courses = state.courses.map((course) =>
           course.id === action.payload.data.id ? action.payload.data : course
         );
-      });
-    // .addCase(updateCourse.rejected, handleRejected);
+      })
+      .addCase(updateCourse.rejected, handleRejected);
   },
 });
 
+export const { clearCourseError } = courseSlice.actions;
 export default courseSlice.reducer;

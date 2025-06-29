@@ -11,7 +11,7 @@ function formatTime(timeStr) {
 }
 
 function CourseInfo() {
-  const { course } = useSelector((state) => state.course);
+  const { course } = useSelector((state) => state.courses);
 
   const {
     image_url,
