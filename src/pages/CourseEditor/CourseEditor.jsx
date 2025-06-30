@@ -20,10 +20,10 @@ function CourseEditor() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { courseId } = useParams();
-  const { course } = useSelector((state) => state.courses);
+  const { loading, course } = useSelector((state) => state.courses);
   const { categories } = useSelector((state) => state.categories);
   const [tags, setTags] = useState([""]);
-  const [preview, setPreview] = useState(null);
+  const [preview, setPreview] = useState(courseId ? course.image_url : null);
   // const [hasSubmit, setHasSubmit] = useState(false);
 
   const [courseInfo, setCourseInfo] = useState({
@@ -133,12 +133,15 @@ function CourseEditor() {
       createCourse.fulfilled.match(resultAction)
     ) {
       // dispatch(clearCourseError());
-      navigate("/courses");
+      navigate(`/courses/${courseId}`);
     }
   }
 
   useEffect(() => {
-    if (courseId) dispatch(getCourseDetails(courseId));
+    if (courseId) {
+      dispatch(getCourseDetails(courseId));
+      // setPreview(course.image_url);
+    }
   }, [courseId, dispatch]);
 
   useEffect(() => {
@@ -146,7 +149,7 @@ function CourseEditor() {
       setCourseInfo({
         image_url: course.image_url || "",
         title: course.title || "",
-        category_id: course.category_id || "",
+        category_id: course.category.id,
         requirements_to_start: course.requirements_to_start || "",
         description: course.description || "",
         price: course.price === "Free" ? 0 : course.price,
@@ -168,6 +171,7 @@ function CourseEditor() {
       <FormBody onSubmit={handleSubmit}>
         <UploadImage
           image={CameraImg}
+          // preview={courseInfo.image_url || preview}
           preview={preview}
           handleImageChange={handleImageChange}
         />
@@ -226,7 +230,7 @@ function CourseEditor() {
             &#43; Add Tag
           </Button>
         </Grid>
-        <Button type={"submit"} className={"primary"}>
+        <Button type={"submit"} className={"primary"} disabled={loading}>
           Continue
         </Button>
       </FormBody>
