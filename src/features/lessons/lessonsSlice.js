@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllLessons } from "./lessonsThunk";
+import { getAllLessons, getLessonDetails } from "./lessonsThunk";
 
 const initialState = {
   loading: false,
   error: null,
   lessons: [],
+  lesson: null,
 };
 
 const handlePending = (state) => {
@@ -29,15 +30,31 @@ const handleRejected = (state, action) => {
 const lessonsSlice = createSlice({
   name: "lessons",
   initialState,
+  reducers: {
+    clearError: (state) => {
+      state.loading = false;
+      state.error = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
+      // getAllLessons
       .addCase(getAllLessons.pending, handlePending)
       .addCase(getAllLessons.fulfilled, (state, action) => {
         state.loading = false;
         state.lessons = action.payload.data;
       })
-      .addCase(getAllLessons.rejected, handleRejected);
+      .addCase(getAllLessons.rejected, handleRejected)
+
+      // getLessonDetails
+      .addCase(getLessonDetails.pending, handlePending)
+      .addCase(getLessonDetails.fulfilled, (state, action) => {
+        state.loading = false;
+        state.lesson = action.payload.data;
+      })
+      .addCase(getLessonDetails.rejected, handleRejected);
   },
 });
 
+export const { clearError } = lessonsSlice.actions;
 export default lessonsSlice.reducer;

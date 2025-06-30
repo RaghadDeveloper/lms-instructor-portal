@@ -8,13 +8,13 @@ function formatTime(timeStr) {
   return `${hours}Hr ${minutes}Min`;
 }
 
-function VideoCard({ id, lesson }) {
+function VideoCard({ num, lesson }) {
   const navigate = useNavigate();
-  const { title, video_duration, is_free } = lesson;
+  const { id, title, video_duration, is_free } = lesson;
   return (
-    <div className="video-card" onClick={() => navigate("lesson/1")}>
+    <div className="video-card" onClick={() => navigate(`lesson/${id}`)}>
       <h4>
-        <span>{id}. </span>
+        <span>{num}. </span>
         {title}
       </h4>
       <div className="details">

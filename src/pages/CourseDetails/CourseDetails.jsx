@@ -7,16 +7,18 @@ import CourseContent from "../../components/CourseContent/CourseContent";
 import DetailsLayout from "../../components/DetailsLayout/DetailsLayout";
 import Loader from "../../components/Loader/Loader";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+import { getAllLessons } from "../../features/lessons/lessonsThunk";
 
 function CourseDetails() {
   const dispatch = useDispatch();
   const { courseId } = useParams();
   const { course, loading, error } = useSelector((state) => state.courses);
+  const { lessons } = useSelector((state) => state.lessons);
 
   useEffect(() => {
-    if (courseId) {
-      dispatch(getCourseDetails(courseId));
-    }
+    if (!courseId) return;
+    dispatch(getCourseDetails(courseId));
+    dispatch(getAllLessons(courseId));
   }, [dispatch, courseId]);
 
   if (loading || !course) return <Loader />;
@@ -25,7 +27,7 @@ function CourseDetails() {
   return (
     <div className="course-details">
       <DetailsLayout course={course} />
-      <CourseContent />
+      <CourseContent lessons={lessons} />
     </div>
   );
 }
