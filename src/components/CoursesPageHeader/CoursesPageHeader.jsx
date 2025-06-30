@@ -17,7 +17,6 @@ function CoursesPageHeader() {
   const [search_key, setSearch_key] = useState("");
 
   useEffect(() => {
-    console.log(search_key);
     if (!search_key) dispatch(getAllCourses());
     else dispatch(searchCourses({ search_key }));
   }, [search_key, dispatch]);
