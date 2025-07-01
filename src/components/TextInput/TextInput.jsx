@@ -23,6 +23,7 @@ function TextInput({
         placeholder={placeholder}
         required
         disabled={disabled}
+        min={type === "number" ? 0 : null}
       />
       <label htmlFor={id} className="label">
         {label}
