@@ -13,9 +13,11 @@ function CourseContent({ lessons }) {
     <div className="course-content">
       <h3>Course Content</h3>
 
-      {lessons.map((lesson, index) => (
+      {lessons?.map((lesson, index) => (
         <VideoCard key={index} num={index + 1} lesson={lesson} />
       ))}
+
+      {!lessons && <p>This course doesn't have any lesson.</p>}
 
       <Button className={"border"} onClick={() => navigate("lesson/create")}>
         &#43; Add Video

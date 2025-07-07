@@ -4,7 +4,7 @@ import "./CoursesGroup.css";
 function CoursesGroup({ courses }) {
   return (
     <div className="courses">
-      {courses.map((course) => (
+      {courses?.map((course) => (
         <CourseCard key={course.id} course={course} />
       ))}
     </div>

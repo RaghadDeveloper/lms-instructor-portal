@@ -8,7 +8,7 @@ function CourseCard({ course }) {
   const {
     id,
     image_url,
-    category: { name: category },
+    category,
     rating,
     title,
     subscribers_count,
@@ -21,7 +21,7 @@ function CourseCard({ course }) {
       <img src={image_url} alt="Course Img" />
 
       <div>
-        <p className="category">{category}</p>
+        <p className="category">{category?.name}</p>
         <div>
           <FaStar className="star" />
           <p>{rating}</p>
