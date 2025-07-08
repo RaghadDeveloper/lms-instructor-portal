@@ -2,10 +2,11 @@ import "./VideoInfo.css";
 import FileCard from "../FileCard/FileCard";
 import Grid from "../Grid/Grid";
 import InfoBlock from "../InfoBlock/InfoBlock";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getLessonDetails } from "../../features/lessons/lessonsThunk";
+import { FaRegEdit } from "react-icons/fa";
 
 function formatTime(timeStr) {
   const [hours, minutes] = timeStr.split(":").map(Number);
@@ -16,7 +17,8 @@ function formatTime(timeStr) {
 
 function VideoInfo() {
   const dispatch = useDispatch();
-  const { lessonId } = useParams();
+  const navigate = useNavigate();
+  const { lessonId, courseId } = useParams();
   const { loading, error, lesson } = useSelector((state) => state.lessons);
 
   useEffect(() => {
@@ -33,9 +35,18 @@ function VideoInfo() {
           <source src={lesson?.video_url} type="video/mp4" />
         </video>
 
-        <h2>
-          <span>01. </span>Video Title
-        </h2>
+        <div className="header">
+          <h2>
+            <span>01. </span>Video Title
+          </h2>
+          <button
+            onClick={() =>
+              navigate(`/courses/${courseId}/lesson/edit/${lessonId}`)
+            }
+          >
+            <FaRegEdit />
+          </button>
+        </div>
 
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa cumque

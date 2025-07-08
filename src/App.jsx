@@ -57,6 +57,10 @@ function App() {
                 <Route path="lesson/:lessonId" element={<VideoInfo />} />
               </Route>
               <Route path=":courseId/lesson/create" element={<VideoEditor />} />
+              <Route
+                path=":courseId/lesson/edit/:lessonId"
+                element={<VideoEditor />}
+              />
             </Route>
             <Route path="/profile" element={<Profile />} />
             <Route path="/course-statistics" element={<CourseStatistics />} />

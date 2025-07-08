@@ -1,5 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getAllLessonsApi, getLessonDetailsApi } from "./lessonsApi";
+import {
+  createLessonApi,
+  getAllLessonsApi,
+  getLessonDetailsApi,
+  updateLessonApi,
+} from "./lessonsApi";
 
 const extractError = (error) => {
   return (
@@ -26,6 +31,30 @@ export const getLessonDetails = createAsyncThunk(
   async (lessonId, thunkAPI) => {
     try {
       const response = await getLessonDetailsApi(lessonId);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(extractError(error));
+    }
+  }
+);
+
+export const createLesson = createAsyncThunk(
+  "lesson/create",
+  async (lessonInfo, thunkAPI) => {
+    try {
+      const response = await createLessonApi(lessonInfo);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(extractError(error));
+    }
+  }
+);
+
+export const updateLesson = createAsyncThunk(
+  "lesson/update",
+  async ({ lessonId, lessonInfo }, thunkAPI) => {
+    try {
+      const response = await updateLessonApi({ lessonId, lessonInfo });
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(extractError(error));

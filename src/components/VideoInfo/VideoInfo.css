@@ -4,14 +4,26 @@
   gap: 1rem;
 }
 
-.video-info h2 {
-  margin-bottom: 1rem;
-}
-
 .video-info .card {
   background-color: #fff;
   padding: 1.5rem;
   border-radius: 4px;
+}
+
+.video-info .card .header {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 1rem;
+}
+
+.video-info .card button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--primary-dark);
+  cursor: pointer;
 }
 
 .dark .video-info .card {
