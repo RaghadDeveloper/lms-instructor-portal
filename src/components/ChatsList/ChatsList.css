@@ -1,0 +1,16 @@
+.chats-list {
+  width: 30%;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+.chats-list h2 {
+  font-size: 1.2rem;
+  margin: 0.4rem 0 1rem 0.4rem;
+}
+
+.dark .chats-list {
+  background-color: var(--dark-bg);
+  color: var(--very-light);
+}

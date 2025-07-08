@@ -1,0 +1,26 @@
+.chat-card {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1rem;
+  border-bottom: 1px solid gray;
+  cursor: pointer;
+}
+
+.chat-card:hover {
+  background-color: var(--secondary-gray\36);
+}
+
+.chat-card .user-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.chat-card .user-name {
+  font-size: 1.2rem;
+}
+
+.chat-card:last-child {
+  border: none;
+}
