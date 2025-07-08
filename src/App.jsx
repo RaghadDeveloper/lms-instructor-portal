@@ -17,7 +17,7 @@ import Messages from "./pages/Messages/Messages";
 import Notifications from "./pages/Notifications/Notifications";
 import CourseDetails from "./pages/CourseDetails/CourseDetails";
 import CourseInfo from "./components/CourseInfo/CourseInfo";
-import VideoInfo from "./components/VideoInfo/VideoInfo";
+import LessonInfo from "./components/LessonInfo/LessonInfo";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { setAuthFromToken } from "./features/auth/authSlice";
@@ -54,7 +54,7 @@ function App() {
               <Route path="edit/:courseId" element={<UpdateCourse />} />
               <Route path=":courseId" element={<CourseDetails />}>
                 <Route index element={<CourseInfo />} />
-                <Route path="lesson/:lessonId" element={<VideoInfo />} />
+                <Route path="lesson/:lessonId" element={<LessonInfo />} />
               </Route>
               <Route path=":courseId/lesson/create" element={<VideoEditor />} />
               <Route
