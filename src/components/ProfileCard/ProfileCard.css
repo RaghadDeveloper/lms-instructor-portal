@@ -1,0 +1,83 @@
+.profile-card {
+  width: 60%;
+  background-color: white;
+  border-radius: 4px;
+  padding: 2rem;
+  color: var(--very-dark);
+}
+
+.dark .profile-card {
+  background-color: var(--dark-bg);
+  color: var(--very-light);
+}
+
+.profile-card .profile-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 2rem;
+}
+
+.profile-card .profile-header .profile-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.profile-card .profile-header .user-name {
+  font-weight: 500;
+  letter-spacing: 2px;
+}
+
+.profile-card .profile-header .headline {
+  font-weight: 400;
+}
+
+.profile-card .profile-header .info-group {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 8rem;
+}
+
+.profile-card .info-group .info-block {
+  border: none;
+  padding: 0;
+}
+
+.profile-card .user-info {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  border-bottom: 1px solid gray;
+  padding: 2rem 0;
+}
+
+.profile-card .user-info:last-child {
+  border: none;
+  padding-bottom: 0;
+}
+
+.profile-card .user-info h5 {
+  width: 18%;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.profile-card .user-info .password,
+.profile-card .user-info .specializations {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+}
+
+.profile-card .user-info .password {
+  letter-spacing: 4px;
+}
+
+.profile-card .user-info .password button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--very-dark);
+}
