@@ -1,6 +1,7 @@
 .main-page {
   background-color: var(--very-light);
   display: flex;
+  color: var(--very-dark);
 }
 
 .main-page.dark {

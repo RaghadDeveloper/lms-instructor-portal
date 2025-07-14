@@ -7,6 +7,7 @@ import { getAllCourses } from "../../features/courses/coursesThunk";
 import Loader from "../../components/Loader/Loader";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import { clearCourseError } from "../../features/courses/coursesSlice";
+import NoCourses from "../../components/NoCourses/NoCourses";
 
 function Courses() {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ function Courses() {
 
       {error && <ErrorMessage error={error} />}
 
-      {!loading && !error && !courses?.length && <p>No Courses Found</p>}
+      {!loading && !error && !courses?.length && <NoCourses />}
 
       {!loading && !error && courses?.length > 0 && (
         <CoursesGroup courses={courses} />

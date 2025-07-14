@@ -1,0 +1,22 @@
+.no-courses {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.no-courses img {
+  width: 350px;
+  margin-bottom: 3rem;
+}
+
+.no-courses p {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.no-courses .btn {
+  width: fit-content;
+}
