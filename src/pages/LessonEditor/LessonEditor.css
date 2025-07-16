@@ -1,0 +1,32 @@
+.lesson-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.lesson-editor h2 {
+  margin-bottom: 1rem;
+}
+
+.lesson-editor .grid {
+  margin: 2rem auto;
+  min-width: 600px;
+}
+
+.lesson-editor .grid .field,
+.lesson-editor .grid .file-field {
+  max-width: none;
+}
+
+.lesson-editor .grid .textarea,
+.lesson-editor .grid .upload-video {
+  grid-column: span 2;
+  justify-self: center;
+  max-width: none;
+}
+
+.lesson-editor .btn {
+  width: 49%;
+  margin-top: 0;
+  align-self: center;
+}

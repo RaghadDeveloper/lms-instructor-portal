@@ -1,8 +1,12 @@
 .upload-video {
-  position: relative;
   width: 100%;
   height: 350px;
   margin-bottom: 4rem;
+}
+
+.upload-video video.disabled {
+  pointer-events: none;
+  opacity: 0.7;
 }
 
 .upload-video .upload-icon {
@@ -35,44 +39,18 @@
   opacity: 0.8;
 }
 
-.progress {
-  margin-top: 1rem;
-  padding: 1rem;
-  border: 1px solid var(--primary-color);
+.upload-video .loading-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 2rem;
-  border-radius: 4px;
-  font-size: 0.8rem;
-}
-
-.progress .uploading {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.progress .btn.icon {
-  padding: 0;
-}
-
-.progress .uploader {
-  display: block;
-  position: relative;
-  height: 6px;
-  width: 100%;
+  padding-bottom: 2rem;
   border: 1px solid var(--primary-color);
-  border-radius: 10px;
-  overflow: hidden;
+  margin-top: 1rem;
+  padding: 0 1rem;
+  border-radius: 4px;
+  margin-bottom: 4rem;
 }
 
-.progress .uploader-fill {
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  background: var(--primary-color);
-  transition: width 0.3s ease;
+.upload-video .loading-info .btn {
+  padding: 1rem;
 }

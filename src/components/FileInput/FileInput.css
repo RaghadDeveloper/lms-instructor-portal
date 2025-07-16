@@ -23,6 +23,10 @@
   color: var(--primary-dark);
 }
 
+.custom-file-label.disabled {
+  cursor: auto;
+}
+
 .file-selected {
   top: 0px;
   color: var(--primary-color);

@@ -5,7 +5,10 @@ function FileInput({ id, label, name, onChange, disabled }) {
   const [fileName, setFileName] = useState("");
 
   const handleFileChange = (e) => {
-    setFileName(e.target.files[0]?.name || "");
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setFileName(file.name);
     onChange?.(e);
   };
 
@@ -22,7 +25,9 @@ function FileInput({ id, label, name, onChange, disabled }) {
       />
       <label
         htmlFor={id}
-        className={`custom-file-label ${fileName ? "file-selected" : ""}`}
+        className={`custom-file-label ${fileName ? "file-selected" : ""} ${
+          disabled ? "disabled" : ""
+        }`}
       >
         {label}
       </label>

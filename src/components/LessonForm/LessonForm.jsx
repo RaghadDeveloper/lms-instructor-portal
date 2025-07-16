@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./LessonForm.css";
 import FormBody from "../FormBody/FormBody";
 import Grid from "../Grid/Grid";
@@ -7,8 +7,9 @@ import UploadVideo from "../UploadVideo/UploadVideo";
 import FileInput from "../FileInput/FileInput";
 import TextArea from "../TextArea/TextArea";
 import CheckBox from "../../components/CheckBox/CheckBox";
-
 import Button from "../Button/Button";
+import { useSelector } from "react-redux";
+import Progress from "../Progress/Progress";
 
 function LessonForm({
   initialData,
@@ -23,38 +24,59 @@ function LessonForm({
 }) {
   const [lessonInfo, setLessonInfo] = useState(initialData);
   const [fileSize, setFileSize] = useState(0);
-
-  useEffect(() => {
-    setLessonInfo(initialData);
-  }, [initialData]);
+  const [fileName, setFileName] = useState("");
+  const { loading } = useSelector((state) => state.lessons);
+  const [isSubmit, setIsSubmit] = useState(false);
 
   const handleChange = (e) => {
-    setLessonInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    const { name, type, checked, value } = e.target;
+    setLessonInfo((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? (checked ? 1 : 0) : value,
+    }));
   };
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    if (file) {
-      setLessonInfo((prev) => ({ ...prev, image_url: file }));
-    }
+    if (!file) return;
+    setLessonInfo((prev) => ({ ...prev, image_url: file }));
   };
 
   const handleVideoChange = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
-    setPreview(URL.createObjectURL(file));
+    const videoUrl = URL.createObjectURL(file);
+    setPreview(videoUrl);
     setUploading(true);
     setUploadProgress(0);
     setFileSize(file.size);
-    setLessonInfo((prev) => ({ ...prev, video_url: file }));
+    setFileName(file.name);
+
+    const video = document.createElement("video");
+    video.preload = "metadata";
+    video.src = videoUrl;
+
+    video.onloadedmetadata = () => {
+      const durationInSeconds = Math.ceil(video.duration);
+
+      setLessonInfo((prev) => ({
+        ...prev,
+        video_url: file,
+        video_duration: durationInSeconds,
+      }));
+    };
   };
 
   const clearPreview = () => {
+    if (preview) {
+      URL.revokeObjectURL(preview);
+    }
     setPreview("");
     setUploadProgress(0);
     setUploading(false);
     setFileSize(0);
+    setFileName("");
     document.getElementById("fileInput").value = "";
   };
 
@@ -62,13 +84,17 @@ function LessonForm({
     if (cancelTokenSource.current) {
       cancelTokenSource.current.cancel("User canceled upload.");
     }
-    clearPreview();
+    setUploading(false);
+    setUploadProgress(0);
+    setIsSubmit(false);
   };
 
   function handleSubmit(e) {
     e.preventDefault();
+    setIsSubmit(true);
     onSubmit(lessonInfo);
   }
+
   return (
     <FormBody onSubmit={handleSubmit}>
       <Grid>
@@ -76,10 +102,9 @@ function LessonForm({
           preview={preview}
           handleVideoChange={handleVideoChange}
           uploading={uploading}
-          uploadProgress={uploadProgress}
-          fileSize={fileSize}
           clearPreview={clearPreview}
-          cancelUpload={cancelUpload}
+          fileName={fileName}
+          disabled={loading || isSubmit}
         />
 
         <TextInput
@@ -89,6 +114,7 @@ function LessonForm({
           name="title"
           value={lessonInfo.title}
           onChange={handleChange}
+          disabled={loading || isSubmit}
         />
 
         <FileInput
@@ -96,6 +122,7 @@ function LessonForm({
           label="Lesson cover "
           name="img"
           onChange={handleImageChange}
+          disabled={loading || isSubmit}
         />
 
         <TextArea
@@ -104,6 +131,7 @@ function LessonForm({
           label={"Description"}
           value={lessonInfo.description}
           onChange={handleChange}
+          disabled={loading || isSubmit}
         />
 
         <CheckBox
@@ -112,11 +140,23 @@ function LessonForm({
           label={"Free"}
           value={lessonInfo.is_free}
           onChange={handleChange}
+          disabled={loading || isSubmit}
         />
       </Grid>
-      <Button type={"submit"} className={"primary"}>
-        Continue
+      <Button
+        type={"submit"}
+        className={"primary"}
+        disabled={loading || isSubmit}
+      >
+        {loading ? "Loading..." : "Submit"}
       </Button>
+      {isSubmit && (
+        <Progress
+          uploadProgress={uploadProgress}
+          fileSize={fileSize}
+          cancelUpload={cancelUpload}
+        />
+      )}
     </FormBody>
   );
 }

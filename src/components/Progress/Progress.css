@@ -1,0 +1,52 @@
+.progress {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  position: absolute;
+  background-color: white;
+  box-shadow: 3px 3px 10px gray;
+  padding: 4rem;
+  width: 50%;
+  z-index: 1;
+  top: 0;
+  font-size: 1.2rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.progress .uploading {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.progress .btn.icon {
+  padding: 0;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.progress .uploader {
+  display: block;
+  position: relative;
+  height: 10px;
+  width: 100%;
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress .uploader-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: var(--primary-color);
+  transition: width 0.3s ease;
+}

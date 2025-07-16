@@ -35,6 +35,12 @@
   cursor: pointer;
 }
 
+.checkbox-wrapper.disabled .circle-checkbox,
+.checkbox-wrapper.disabled .checkbox-label {
+  cursor: auto;
+  opacity: 0.7;
+}
+
 .dark .checkbox-label {
   color: var(--very-light);
 }

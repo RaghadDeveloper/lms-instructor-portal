@@ -1,12 +1,12 @@
-import "./VideoEditor.css";
-import { useState, useRef } from "react";
+import "./LessonEditor.css";
+import { useState, useRef, useEffect } from "react";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { createLesson } from "../../features/lessons/lessonsThunk";
 import LessonForm from "../../components/LessonForm/LessonForm";
 
-function VideoEditor() {
+function LessonEditor() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { courseId } = useParams();
@@ -15,35 +15,32 @@ function VideoEditor() {
   const [uploading, setUploading] = useState(false);
   const cancelTokenSource = useRef(null);
 
-  const { lesson } = useSelector((state) => state.lessons);
   const initialLessonInfo = {
     image_url: "",
     video_url: "",
     course_id: courseId,
     title: "",
     description: "",
-    is_free: true,
+    is_free: 0,
+    video_duration: 0,
   };
+
+  useEffect(() => {
+    setPreview("");
+    setUploadProgress(0);
+    setUploading(false);
+  }, [courseId]);
 
   async function handleSubmit(lessonInfo) {
     console.log(lessonInfo);
     let imageUrl = lessonInfo.image_url;
     let videoUrl = lessonInfo.video_url;
 
-    if (
-      lessonInfo.image_url instanceof File &&
-      lessonInfo.video_url instanceof File
-    ) {
+    if (lessonInfo.image_url instanceof File) {
       const imgData = new FormData();
-      imgData.append("img_file", lessonInfo.image_url);
+      imgData.append("file", lessonInfo.image_url);
       imgData.append("upload_preset", "Learning_management_system");
       imgData.append("cloud_name", "dqtqpsg2m");
-
-      const videoData = new FormData();
-      videoData.append("file", lessonInfo.video_url);
-      videoData.append("upload_preset", "Learning_management_system");
-      videoData.append("cloud_name", "dqtqpsg2m");
-      cancelTokenSource.current = axios.CancelToken.source();
 
       try {
         const response = await axios.post(
@@ -55,7 +52,20 @@ function VideoEditor() {
           return;
         }
         imageUrl = response.data.secure_url;
+      } catch (error) {
+        alert("Image upload failed" + error);
+        return;
+      }
+    }
 
+    if (lessonInfo.video_url instanceof File) {
+      const videoData = new FormData();
+      videoData.append("file", lessonInfo.video_url);
+      videoData.append("upload_preset", "Learning_management_system");
+      videoData.append("cloud_name", "dqtqpsg2m");
+      cancelTokenSource.current = axios.CancelToken.source();
+
+      try {
         const res = await axios.post(
           "https://api.cloudinary.com/v1_1/dqtqpsg2m/video/upload",
           videoData,
@@ -75,18 +85,17 @@ function VideoEditor() {
         }
         videoUrl = res.data.secure_url;
 
-        console.log("Uploaded:", res.data.secure_url);
         setUploading(false);
       } catch (error) {
         if (axios.isCancel(error)) {
-          console.log("Upload canceled");
+          console.log("Video upload canceled");
         } else {
-          console.error("Upload failed", error);
           alert("Upload failed");
         }
         setUploading(false);
         setUploadProgress(0);
         setPreview("");
+        return;
       }
     }
 
@@ -96,17 +105,16 @@ function VideoEditor() {
       video_url: videoUrl,
     };
 
-    console.log(finalLessonInfo);
-
     const resultAction = await dispatch(createLesson(finalLessonInfo));
 
     if (createLesson.fulfilled.match(resultAction)) {
-      navigate(`lesson/${lesson.id}`);
+      const createdLesson = resultAction.payload.data;
+      navigate(`/courses/${courseId}/lesson/${createdLesson.id}`);
     }
   }
 
   return (
-    <div className="video-editor">
+    <div className="lesson-editor">
       <LessonForm
         initialData={initialLessonInfo}
         onSubmit={handleSubmit}
@@ -122,4 +130,4 @@ function VideoEditor() {
   );
 }
 
-export default VideoEditor;
+export default LessonEditor;

@@ -1,29 +1,21 @@
 import { IoCloudUpload } from "react-icons/io5";
 import "./UploadVideo.css";
-import { FaRegTrashCan } from "react-icons/fa6";
 import Button from "../Button/Button";
+import { FaRegTrashCan } from "react-icons/fa6";
 
 function UploadVideo({
   preview,
   handleVideoChange,
   uploading,
-  uploadProgress,
   clearPreview,
-  fileSize,
-  cancelUpload,
+  fileName,
+  disabled,
 }) {
-  const formatSize = (bytes) => {
-    if (bytes > 1024 * 1024 * 1024) {
-      return (bytes / 1024 / 1024 / 1024).toFixed(2) + " GB";
-    }
-    return (bytes / 1024 / 1024).toFixed(2) + " MB";
-  };
-
   return (
     <div className="upload-video">
       {preview ? (
         <>
-          <video controls>
+          <video controls className={`${disabled ? "disabled" : ""}`}>
             <source src={preview} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
@@ -43,31 +35,14 @@ function UploadVideo({
         accept="video/*"
         onChange={handleVideoChange}
         hidden
-        disabled={uploading}
+        disabled={uploading || disabled}
       />
 
       {(uploading || preview) && (
-        <div className="progress">
-          <div className="uploading">
-            <div className="uploader" style={{ position: "relative" }}>
-              <div
-                className="uploader-fill"
-                style={{
-                  width: `${uploadProgress}%`,
-                }}
-              />
-            </div>
+        <div className="loading-info">
+          <div className="name">{fileName}</div>
 
-            <div>
-              {uploadProgress}% ({formatSize((uploadProgress / 100) * fileSize)}{" "}
-              / {formatSize(fileSize)})
-            </div>
-          </div>
-
-          <Button
-            className="icon"
-            onClick={uploading ? cancelUpload : clearPreview}
-          >
+          <Button className="icon" onClick={clearPreview} disabled={disabled}>
             <FaRegTrashCan />
           </Button>
         </div>

@@ -1,12 +1,8 @@
-import { useEffect } from "react";
 import "./CheckBox.css";
 
-function CheckBox({ id, name, label, value, onChange }) {
-  useEffect(() => {
-    console.log(value);
-  }, [value]);
+function CheckBox({ id, name, label, value, onChange, disabled }) {
   return (
-    <div className="checkbox-wrapper">
+    <div className={`checkbox-wrapper ${disabled ? "disabled" : ""}`}>
       <input
         type="checkbox"
         id={id}
@@ -15,6 +11,7 @@ function CheckBox({ id, name, label, value, onChange }) {
         value={value}
         onChange={onChange}
         checked={value}
+        disabled={disabled}
       />
       <label htmlFor="isFree" className="checkbox-label">
         {label}
