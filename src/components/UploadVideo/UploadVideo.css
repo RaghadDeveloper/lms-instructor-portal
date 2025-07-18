@@ -51,6 +51,11 @@
   margin-bottom: 4rem;
 }
 
+.upload-video .loading-info .name {
+  width: 80%;
+  overflow: hidden;
+}
+
 .upload-video .loading-info .btn {
   padding: 1rem;
 }

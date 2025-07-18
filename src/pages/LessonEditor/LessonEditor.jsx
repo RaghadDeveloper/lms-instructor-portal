@@ -1,10 +1,14 @@
 import "./LessonEditor.css";
 import { useState, useRef, useEffect } from "react";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { createLesson } from "../../features/lessons/lessonsThunk";
+import {
+  createLesson,
+  updateLesson,
+} from "../../features/lessons/lessonsThunk";
 import LessonForm from "../../components/LessonForm/LessonForm";
+import { getLessonDetails } from "../../features/lessons/lessonsThunk";
 
 function LessonEditor() {
   const dispatch = useDispatch();
@@ -14,8 +18,10 @@ function LessonEditor() {
   const [uploadProgress, setUploadProgress] = useState(0);
   const [uploading, setUploading] = useState(false);
   const cancelTokenSource = useRef(null);
+  const { lessonId } = useParams();
+  const { lesson } = useSelector((state) => state.lessons);
 
-  const initialLessonInfo = {
+  const [initialLessonInfo, setInitialLessonInfo] = useState({
     image_url: "",
     video_url: "",
     course_id: courseId,
@@ -23,7 +29,22 @@ function LessonEditor() {
     description: "",
     is_free: 0,
     video_duration: 0,
-  };
+  });
+
+  useEffect(() => {
+    if (lessonId) {
+      dispatch(getLessonDetails(lessonId));
+    }
+  }, [lessonId, dispatch]);
+
+  useEffect(() => {
+    if (lesson && lessonId) {
+      setInitialLessonInfo({
+        ...lesson,
+        video_duration: parseInt(lesson.video_duration, 10) || 0,
+      });
+    }
+  }, [lesson, lessonId]);
 
   useEffect(() => {
     setPreview("");
@@ -32,7 +53,6 @@ function LessonEditor() {
   }, [courseId]);
 
   async function handleSubmit(lessonInfo) {
-    console.log(lessonInfo);
     let imageUrl = lessonInfo.image_url;
     let videoUrl = lessonInfo.video_url;
 
@@ -103,7 +123,21 @@ function LessonEditor() {
       ...lessonInfo,
       image_url: imageUrl,
       video_url: videoUrl,
+      video_duration: parseInt(lessonInfo.video_duration, 10) || 0,
     };
+
+    if (lessonId) {
+      const resultAction = await dispatch(
+        updateLesson({ lessonId, lessonInfo: finalLessonInfo })
+      );
+
+      if (updateLesson.fulfilled.match(resultAction)) {
+        const createdLesson = resultAction.payload.data;
+        navigate(`/courses/${courseId}/lesson/${createdLesson.id}`);
+      }
+
+      return;
+    }
 
     const resultAction = await dispatch(createLesson(finalLessonInfo));
 

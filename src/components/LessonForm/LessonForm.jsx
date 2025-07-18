@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./LessonForm.css";
 import FormBody from "../FormBody/FormBody";
 import Grid from "../Grid/Grid";
@@ -10,6 +10,7 @@ import CheckBox from "../../components/CheckBox/CheckBox";
 import Button from "../Button/Button";
 import { useSelector } from "react-redux";
 import Progress from "../Progress/Progress";
+import { useParams } from "react-router-dom";
 
 function LessonForm({
   initialData,
@@ -25,8 +26,19 @@ function LessonForm({
   const [lessonInfo, setLessonInfo] = useState(initialData);
   const [fileSize, setFileSize] = useState(0);
   const [fileName, setFileName] = useState("");
-  const { loading } = useSelector((state) => state.lessons);
+  const { loading, error } = useSelector((state) => state.lessons);
   const [isSubmit, setIsSubmit] = useState(false);
+  const { lessonId } = useParams();
+
+  useEffect(() => {
+    if (!lessonId) return;
+    setPreview(initialData.video_url);
+    setFileName(initialData.video_url);
+  }, [initialData, setPreview, lessonId]);
+
+  useEffect(() => {
+    setLessonInfo(initialData);
+  }, [initialData]);
 
   const handleChange = (e) => {
     const { name, type, checked, value } = e.target;
@@ -57,6 +69,7 @@ function LessonForm({
     video.preload = "metadata";
     video.src = videoUrl;
 
+    // =====================================================
     video.onloadedmetadata = () => {
       const durationInSeconds = Math.ceil(video.duration);
 
@@ -95,6 +108,14 @@ function LessonForm({
     onSubmit(lessonInfo);
   }
 
+  useEffect(() => {
+    if (error) {
+      alert(error);
+      cancelUpload();
+      setIsSubmit(false);
+    }
+  }, [error]);
+
   return (
     <FormBody onSubmit={handleSubmit}>
       <Grid>
@@ -121,6 +142,7 @@ function LessonForm({
           id="img"
           label="Lesson cover "
           name="img"
+          value={lessonInfo.image_url}
           onChange={handleImageChange}
           disabled={loading || isSubmit}
         />

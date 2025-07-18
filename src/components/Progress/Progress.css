@@ -18,6 +18,10 @@
   transform: translate(-50%, -50%);
 }
 
+.dark .progress {
+  background-color: var(--dark-bg);
+}
+
 .progress .uploading {
   width: 100%;
   display: flex;

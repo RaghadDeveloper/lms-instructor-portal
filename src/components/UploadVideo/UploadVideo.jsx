@@ -28,7 +28,6 @@ function UploadVideo({
           Upload Video
         </label>
       )}
-
       <input
         id="fileInput"
         type="file"
@@ -37,12 +36,16 @@ function UploadVideo({
         hidden
         disabled={uploading || disabled}
       />
-
       {(uploading || preview) && (
         <div className="loading-info">
           <div className="name">{fileName}</div>
 
-          <Button className="icon" onClick={clearPreview} disabled={disabled}>
+          <Button
+            type={"button"}
+            className="icon"
+            onClick={clearPreview}
+            disabled={disabled}
+          >
             <FaRegTrashCan />
           </Button>
         </div>

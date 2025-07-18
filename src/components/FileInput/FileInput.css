@@ -4,6 +4,7 @@
   height: 50px;
   border-bottom: 1.5px solid var(--primary-color);
   margin-bottom: 0.75rem;
+  overflow: hidden;
 }
 
 .file-field input {
@@ -38,6 +39,7 @@
   bottom: 8px;
   font-size: 0.9rem;
   color: var(--primary-dark);
+  text-wrap: nowrap;
 }
 
 .dark .custom-file-label {

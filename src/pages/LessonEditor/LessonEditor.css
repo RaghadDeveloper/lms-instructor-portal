@@ -10,6 +10,7 @@
 
 .lesson-editor .grid {
   margin: 2rem auto;
+  width: 70%;
   min-width: 600px;
 }
 
