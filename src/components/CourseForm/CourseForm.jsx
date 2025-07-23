@@ -10,9 +10,9 @@ import Select from "../Select/Select";
 import TextArea from "../TextArea/TextArea";
 import Button from "../Button/Button";
 
-function CourseForm({ initialData, onSubmit, isUpdate }) {
+function CourseForm({ initialData, onSubmit, isUpdate, isLoading }) {
   const { categories } = useSelector((state) => state.categories);
-  const { loading } = useSelector((state) => state.courses);
+  const { loading, error } = useSelector((state) => state.courses);
 
   const [formData, setFormData] = useState(initialData);
   const [tags, setTags] = useState(initialData.tags || []);
@@ -27,6 +27,10 @@ function CourseForm({ initialData, onSubmit, isUpdate }) {
       initialData.image_url instanceof File ? null : initialData.image_url
     );
   }, [initialData]);
+
+  useEffect(() => {
+    if (error) alert(error);
+  }, [error]);
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -65,7 +69,12 @@ function CourseForm({ initialData, onSubmit, isUpdate }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!formData.title || !formData.category_id || !formData.description) {
+    if (
+      !formData.title ||
+      !formData.category_id ||
+      !formData.description ||
+      !formData.image_url
+    ) {
       alert("Please fill in all required fields.");
       return;
     }
@@ -79,6 +88,7 @@ function CourseForm({ initialData, onSubmit, isUpdate }) {
         image={CameraImg}
         preview={preview}
         handleImageChange={handleImageChange}
+        disabled={loading || isLoading}
       />
       <Grid>
         <TextInput
@@ -88,6 +98,7 @@ function CourseForm({ initialData, onSubmit, isUpdate }) {
           type="text"
           value={formData.title}
           onChange={handleChange}
+          disabled={loading || isLoading}
         />
         <Select
           name="category_id"
@@ -95,6 +106,7 @@ function CourseForm({ initialData, onSubmit, isUpdate }) {
           options={categories}
           value={formData.category_id}
           onChange={handleChange}
+          disabled={loading || isLoading}
         />
         <TextArea
           id="requirement"
@@ -102,6 +114,7 @@ function CourseForm({ initialData, onSubmit, isUpdate }) {
           label="Requirement to start"
           value={formData.requirements_to_start}
           onChange={handleChange}
+          disabled={loading || isLoading}
         />
         <TextArea
           id="description"
@@ -109,6 +122,7 @@ function CourseForm({ initialData, onSubmit, isUpdate }) {
           label="Description"
           value={formData.description}
           onChange={handleChange}
+          disabled={loading || isLoading}
         />
         <TextInput
           id="price"
@@ -117,6 +131,7 @@ function CourseForm({ initialData, onSubmit, isUpdate }) {
           label="Price"
           value={formData.price === "Free" ? 0 : Number(formData.price)}
           onChange={handleChange}
+          disabled={loading || isLoading}
         />
         {tags.map((tag, index) => (
           <TextInput
@@ -128,13 +143,19 @@ function CourseForm({ initialData, onSubmit, isUpdate }) {
             value={tag}
             onChange={(e) => handleTagChange(index, e.target.value)}
             onClick={() => removeTag(index)}
+            disabled={loading || isLoading}
           />
         ))}
-        <Button type="button" className="border" onClick={addTag}>
+        <Button
+          type="button"
+          className="border"
+          onClick={addTag}
+          disabled={loading || isLoading}
+        >
           + Add Tag
         </Button>
       </Grid>
-      <Button type="submit" className="primary" disabled={loading}>
+      <Button type="submit" className="primary" disabled={loading || isLoading}>
         {isUpdate
           ? `${loading ? "Submitting..." : "Submit"}`
           : `${loading ? "Loading..." : "Continue"}`}

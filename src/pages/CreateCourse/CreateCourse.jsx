@@ -1,23 +1,32 @@
-import { useNavigate } from "react-router-dom";
 import "./CreateCourse.css";
-import { useDispatch } from "react-redux";
-import { createCourse } from "../../features/courses/coursesThunk";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import CourseForm from "../../components/CourseForm/CourseForm";
+import axios from "axios";
+import { useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addCourseDraft } from "../../features/courses/courseDraftSlice";
 
 function CreateCourse() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
-  const initialCourseData = {
-    image_url: "",
-    title: "",
-    category_id: "",
-    requirements_to_start: "",
-    description: "",
-    price: "",
-    tags: [],
-  };
+  const draft = useSelector((state) => state.courseDraft.draft);
+
+  const initialCourseData = useMemo(
+    () =>
+      draft || {
+        image_url: "",
+        title: "",
+        category_id: "",
+        requirements_to_start: "",
+        description: "",
+        price: "",
+        tags: [],
+        lessons: [],
+      },
+    [draft]
+  );
 
   const handleSubmit = async (formData) => {
     let imageUrl = formData.image_url;
@@ -29,6 +38,7 @@ function CreateCourse() {
       data.append("cloud_name", "dqtqpsg2m");
 
       try {
+        setIsLoading(true);
         const response = await axios.post(
           "https://api.cloudinary.com/v1_1/dqtqpsg2m/image/upload",
           data
@@ -43,27 +53,27 @@ function CreateCourse() {
       } catch (error) {
         console.error("Image upload error:", error);
         alert("Image upload failed");
+        setIsLoading(false);
         return;
+      } finally {
+        setIsLoading(false);
       }
     }
 
-    const finalCourseInfo = {
-      ...formData,
-      image_url: imageUrl,
-    };
+    const courseData = { ...formData, image_url: imageUrl, lessons: [] };
 
-    const resultAction = await dispatch(createCourse(finalCourseInfo));
+    dispatch(addCourseDraft(courseData));
 
-    if (createCourse.fulfilled.match(resultAction)) {
-      navigate(`/courses/`);
-    }
+    navigate("/courses/lesson/create", { state: { courseData } });
   };
 
   return (
     <section className="course-editor">
-      {initialCourseData && (
-        <CourseForm initialData={initialCourseData} onSubmit={handleSubmit} />
-      )}
+      <CourseForm
+        initialData={initialCourseData}
+        onSubmit={handleSubmit}
+        isLoading={isLoading}
+      />
     </section>
   );
 }

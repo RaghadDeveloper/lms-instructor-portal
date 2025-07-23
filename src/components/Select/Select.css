@@ -10,6 +10,10 @@ select {
   border-bottom: 1.5px solid var(--primary-color);
 }
 
+select.disabled {
+  cursor: auto;
+}
+
 select:focus {
   outline: none;
 }

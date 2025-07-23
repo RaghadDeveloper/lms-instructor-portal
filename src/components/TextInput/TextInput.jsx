@@ -29,7 +29,12 @@ function TextInput({
         {label}
       </label>
       {name === "tags" && (
-        <button type="button" className="remove-tag" onClick={onClick}>
+        <button
+          type="button"
+          className={`remove-tag ${disabled ? "disabled" : ""}`}
+          onClick={onClick}
+          disabled={disabled}
+        >
           &times;
         </button>
       )}

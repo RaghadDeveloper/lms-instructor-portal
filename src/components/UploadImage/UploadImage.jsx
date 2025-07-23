@@ -1,11 +1,14 @@
 import "./UploadImage.css";
 import CameraImg from "./../../assets/images/camera.jpg";
 
-function UploadImage({ image, Icon, preview, handleImageChange }) {
+function UploadImage({ image, Icon, preview, handleImageChange, disabled }) {
   return (
     <div className="upload-image">
       <img src={preview || image || CameraImg} alt="Upload Image" />
-      <label htmlFor="fileInput" className="upload-icon">
+      <label
+        htmlFor="fileInput"
+        className={`upload-icon ${disabled ? "disabled" : ""}`}
+      >
         {Icon ? <Icon /> : <span>&#43;</span>}
       </label>
       <input
@@ -14,6 +17,7 @@ function UploadImage({ image, Icon, preview, handleImageChange }) {
         accept="image/*"
         onChange={handleImageChange}
         hidden
+        disabled={disabled}
       />
     </div>
   );

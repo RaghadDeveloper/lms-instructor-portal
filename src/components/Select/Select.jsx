@@ -1,8 +1,15 @@
 import "./Select.css";
 
-function Select({ text, options, name, onChange, value }) {
+function Select({ text, options, name, onChange, value, disabled }) {
   return (
-    <select required name={name} value={value} onChange={onChange}>
+    <select
+      required
+      className={`${disabled ? "disabled" : ""}`}
+      name={name}
+      value={value}
+      onChange={onChange}
+      disabled={disabled}
+    >
       <option value="" disabled hidden>
         {text}
       </option>

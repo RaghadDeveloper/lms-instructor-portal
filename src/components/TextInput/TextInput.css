@@ -53,3 +53,7 @@
   color: var(--primary-color);
   font-size: 1.5rem;
 }
+
+.remove-tag.disabled {
+  cursor: not-allowed;
+}

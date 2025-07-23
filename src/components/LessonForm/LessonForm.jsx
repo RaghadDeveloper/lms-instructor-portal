@@ -57,7 +57,6 @@ function LessonForm({
   const handleVideoChange = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
-
     const videoUrl = URL.createObjectURL(file);
     setPreview(videoUrl);
     setUploading(true);
@@ -69,7 +68,6 @@ function LessonForm({
     video.preload = "metadata";
     video.src = videoUrl;
 
-    // =====================================================
     video.onloadedmetadata = () => {
       const durationInSeconds = Math.ceil(video.duration);
 
@@ -90,6 +88,7 @@ function LessonForm({
     setUploading(false);
     setFileSize(0);
     setFileName("");
+
     document.getElementById("fileInput").value = "";
   };
 

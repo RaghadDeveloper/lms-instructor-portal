@@ -28,7 +28,11 @@ function Progress({ uploadProgress, fileSize, cancelUpload }) {
         </div>
       </div>
 
-      <Button className="icon" onClick={cancelUpload}>
+      <Button
+        className="icon"
+        onClick={cancelUpload}
+        disabled={uploadProgress === 100}
+      >
         &times;
       </Button>
     </div>

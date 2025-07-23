@@ -33,6 +33,10 @@
   transition: background-color 0.3s ease;
 }
 
+.upload-image .upload-icon.disabled {
+  cursor: not-allowed;
+}
+
 .upload-image .upload-icon:hover {
   opacity: 0.8;
 }

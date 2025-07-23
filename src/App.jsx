@@ -22,6 +22,7 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { setAuthFromToken } from "./features/auth/authSlice";
 import LessonEditor from "./pages/LessonEditor/LessonEditor";
+import CreateLesson from "./pages/CreateLesson/CreateLesson";
 import UpdateCourse from "./pages/UpdateCourse/UpdateCourse";
 import CreateCourse from "./pages/CreateCourse/CreateCourse";
 
@@ -56,6 +57,7 @@ function App() {
                 <Route index element={<CourseInfo />} />
                 <Route path="lesson/:lessonId" element={<LessonInfo />} />
               </Route>
+              <Route path="lesson/create" element={<CreateLesson />} />
               <Route
                 path=":courseId/lesson/create"
                 element={<LessonEditor />}

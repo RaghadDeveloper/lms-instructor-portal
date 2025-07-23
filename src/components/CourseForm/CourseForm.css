@@ -1,3 +1,7 @@
 .form-body .btn.primary {
   align-self: center;
 }
+
+.form-body .grid .btn.border {
+  margin: 0;
+}
