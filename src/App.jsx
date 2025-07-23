@@ -37,7 +37,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/lms-instructor-portal">
       <Routes>
         <Route path="signup" element={<Signup />} />
         <Route path="login" element={<Login />} />
