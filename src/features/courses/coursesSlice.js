@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   createCourse,
+  filterCourses,
   getAllCourses,
   getCourseDetails,
   searchCourses,
@@ -50,6 +51,14 @@ const courseSlice = createSlice({
         state.courses = action.payload.data;
       })
       .addCase(getAllCourses.rejected, handleRejected)
+
+      // filterCourses
+      .addCase(filterCourses.pending, handlePending)
+      .addCase(filterCourses.fulfilled, (state, action) => {
+        state.loading = false;
+        state.courses = action.payload.data;
+      })
+      .addCase(filterCourses.rejected, handleRejected)
 
       // searchCourses
       .addCase(searchCourses.pending, handlePending)
