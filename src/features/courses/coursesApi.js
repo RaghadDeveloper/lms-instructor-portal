@@ -7,8 +7,8 @@ export const filterCoursesApi = (filters) => {
   return axiosInstance.get(`/courses?${params}`);
 };
 
-export const searchCoursesApi = (data) =>
-  axiosInstance.post(`course/search`, data);
+export const searchCoursesApi = (search_key) =>
+  axiosInstance.get(`course/search?search_key=${search_key}`);
 
 export const getCourseDetailsApi = (courseId) =>
   axiosInstance.get(`/course/details/${courseId}`);

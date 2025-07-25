@@ -21,9 +21,15 @@
   width: 166px;
 }
 
+.courses-page-header div form,
 .courses-page-header div div {
   display: flex;
   gap: 1rem;
+}
+
+.courses-page-header div form .btn {
+  width: fit-content;
+  padding: 0.5rem 1rem;
 }
 
 .courses-page-header div input {

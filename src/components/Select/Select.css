@@ -22,7 +22,7 @@ select:focus {
   color: var(--primary-light);
 }
 
-.dark option {
+.dark select option {
   color: var(--very-light);
   background-color: var(--dark-bg);
 }

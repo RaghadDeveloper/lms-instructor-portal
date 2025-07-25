@@ -3,7 +3,7 @@ import axiosInstance from "../../api/axiosInstance";
 export const signupAPI = (data) =>
   axiosInstance.post("/teacher/register", data);
 
-export const loginAPI = (data) => axiosInstance.post("/login", data);
+export const loginAPI = (data) => axiosInstance.post("/teacher/login", data);
 
 export const verificationAPI = (data) =>
   axiosInstance.post("/email/verification", data);
@@ -16,4 +16,4 @@ export const forgotPasswordAPI = (data) =>
 export const resetPasswordAPI = (data) =>
   axiosInstance.post("/reset/password", data);
 
-export const logoutAPI = () => axiosInstance.get("/logout");
+export const logoutAPI = () => axiosInstance.post("/logout");

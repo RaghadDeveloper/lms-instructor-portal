@@ -42,9 +42,10 @@ export const filterCourses = createAsyncThunk(
 
 export const searchCourses = createAsyncThunk(
   "courses/searchCourses",
-  async (data, thunkAPI) => {
+  async (search_key, thunkAPI) => {
     try {
-      const response = await searchCoursesApi(data);
+      const response = await searchCoursesApi(search_key);
+      console.log(response);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(extractError(error));
