@@ -9,3 +9,7 @@
 .info-block h4 {
   font-weight: 500;
 }
+
+.info-block.clickable {
+  cursor: pointer;
+}

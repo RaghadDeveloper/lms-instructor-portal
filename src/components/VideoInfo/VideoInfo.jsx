@@ -10,7 +10,7 @@ function formatTime(timeStr) {
   return `${hours}Hr ${minutes}Min`;
 }
 
-function VideoInfo({ lesson }) {
+function VideoInfo({ lesson, onCommentsClick }) {
   const navigate = useNavigate();
   const { lessonId, courseId } = useParams();
 
@@ -22,9 +22,11 @@ function VideoInfo({ lesson }) {
 
       <div className="header">
         <h2>
-          <span>01. </span>Video Title
+          <span>01. </span>
+          {lesson?.title}
         </h2>
         <button
+          className="edit-btn"
           onClick={() =>
             navigate(`/courses/${courseId}/lesson/edit/${lessonId}`)
           }
@@ -33,12 +35,7 @@ function VideoInfo({ lesson }) {
         </button>
       </div>
 
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa cumque
-        laborum soluta delectus magni nam iure nihil? Voluptatum consectetur
-        dicta quo expedita non, corrupti quaerat unde fugit explicabo nam
-        voluptatibus.
-      </p>
+      <p>{lesson?.description}</p>
       <div className="row">
         <InfoBlock
           label={"Duration"}
@@ -46,8 +43,11 @@ function VideoInfo({ lesson }) {
         />
         <InfoBlock label={"views"} value={lesson?.views_count} />
         <InfoBlock label={"Likes"} value={lesson?.likes_count} />
-        <InfoBlock label={"Comments"} value={lesson?.comment_count} />
-        <InfoBlock label={"Reports"} value={"X"} />
+        <InfoBlock
+          label={"Comments"}
+          value={lesson?.comment_count}
+          onClick={onCommentsClick}
+        />
       </div>
     </div>
   );

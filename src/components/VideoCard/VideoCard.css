@@ -10,6 +10,10 @@
   color: var(--very-light);
 }
 
+.video-card.active {
+  background-color: var(--very-light);
+}
+
 .video-card > div {
   display: flex;
   justify-content: space-between;
@@ -21,6 +25,7 @@
   margin-top: 0.5rem;
 }
 
-.video-card:hover {
+.video-card:hover,
+.dark .video-card.active {
   background-color: var(--secondary-gray\36);
 }

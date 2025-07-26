@@ -3,6 +3,7 @@
   object-fit: cover;
   margin-bottom: 1rem;
   border-radius: 4px;
+  max-height: 400px;
 }
 .video-info.card .header {
   margin-bottom: 1rem;
@@ -12,12 +13,16 @@
   margin-right: 1rem;
 }
 
-.video-info.card button {
+.video-info.card .edit-btn {
   background: none;
   border: none;
   font-size: 1.5rem;
   color: var(--primary-dark);
   cursor: pointer;
+}
+
+.dark .video-info.card .edit-btn {
+  color: var(--very-light);
 }
 
 .video-info.card .row {

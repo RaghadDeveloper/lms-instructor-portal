@@ -1,6 +1,6 @@
 import "./LessonInfo.css";
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getLessonDetails } from "../../features/lessons/lessonsThunk";
 import VideoInfo from "../VideoInfo/VideoInfo";
@@ -11,21 +11,28 @@ function LessonInfo() {
   const dispatch = useDispatch();
   const { lessonId } = useParams();
   const { loading, error, lesson } = useSelector((state) => state.lessons);
+  const commentsRef = useRef(null);
 
   useEffect(() => {
     dispatch(getLessonDetails(lessonId));
   }, [lessonId, dispatch]);
+
+  const handleScrollToComments = () => {
+    commentsRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p className="card">{error}</p>;
 
   return (
     <div className="lesson-info">
-      <VideoInfo lesson={lesson} />
+      <VideoInfo lesson={lesson} onCommentsClick={handleScrollToComments} />
 
       <LessonFiles />
 
-      <LessonComments />
+      <div ref={commentsRef}>
+        <LessonComments />
+      </div>
     </div>
   );
 }
