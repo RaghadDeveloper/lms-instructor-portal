@@ -1,11 +1,11 @@
 import "./UserItem.css";
 import img from "./../../assets/images/profileImg.jpg";
 
-function UserItem() {
+function UserItem({ user }) {
   return (
     <li className="user-item">
-      <img src={img} className="user-img" />
-      <p className="user-name">User Name</p>
+      <img src={user.avatar_url || img} className="user-img" />
+      <p className="user-name">{user.user.username || "User Name"}</p>
     </li>
   );
 }

@@ -4,6 +4,7 @@ import categoriesReducer from "../features/categories/categoriesSlice";
 import coursesReducer from "../features/courses/coursesSlice";
 import courseDraftReducer from "../features/courses/courseDraftSlice";
 import lessonsReducer from "../features/lessons/lessonsSlice";
+import profileReducer from "../features/profile/profileSlice";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     courses: coursesReducer,
     courseDraft: courseDraftReducer,
     lessons: lessonsReducer,
+    profile: profileReducer,
   },
 });
 

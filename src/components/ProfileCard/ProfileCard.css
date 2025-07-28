@@ -4,7 +4,7 @@
   border-radius: 4px;
   padding: 2rem;
   color: var(--very-dark);
-  height: calc(100vh - 60px - 3rem);
+  height: 100%;
 }
 
 .dark .profile-card {
@@ -25,6 +25,7 @@
   height: 150px;
   border-radius: 50%;
   border: 2px solid var(--primary-color);
+  object-fit: cover;
 }
 
 .profile-card .profile-header .user-name {
@@ -35,6 +36,11 @@
 
 .profile-card .profile-header .headline {
   font-weight: 400;
+  overflow-wrap: anywhere;
+  text-align: center;
+  max-width: 450px;
+  line-height: 1.5;
+  margin-bottom: 1rem;
 }
 
 .profile-card .profile-header .info-group {
@@ -53,7 +59,7 @@
   align-items: center;
   gap: 3rem;
   border-bottom: 1px solid gray;
-  padding: 2rem 0;
+  padding: 1.8rem 0;
 }
 
 .profile-card .user-info:last-child {
