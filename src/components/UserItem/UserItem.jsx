@@ -1,13 +1,13 @@
-import "./ChatCard.css";
+import "./UserItem.css";
 import img from "./../../assets/images/profileImg.jpg";
 
-function ChatCard() {
+function UserItem() {
   return (
-    <li className="chat-card">
+    <li className="user-item">
       <img src={img} className="user-img" />
       <p className="user-name">User Name</p>
     </li>
   );
 }
 
-export default ChatCard;
+export default UserItem;

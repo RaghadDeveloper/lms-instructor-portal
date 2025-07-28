@@ -33,7 +33,7 @@ function ProfileCard() {
         </ul>
       </div>
       <div className="user-info">
-        <h5>Change password</h5>
+        <h5>Change password:</h5>
         <div className="password">
           <p>*********</p>
           <button

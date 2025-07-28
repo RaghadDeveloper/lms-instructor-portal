@@ -4,6 +4,7 @@
   border-radius: 4px;
   padding: 2rem;
   color: var(--very-dark);
+  height: calc(100vh - 60px - 3rem);
 }
 
 .dark .profile-card {
@@ -23,11 +24,13 @@
   width: 150px;
   height: 150px;
   border-radius: 50%;
+  border: 2px solid var(--primary-color);
 }
 
 .profile-card .profile-header .user-name {
   font-weight: 500;
   letter-spacing: 2px;
+  color: var(--primary-light);
 }
 
 .profile-card .profile-header .headline {
@@ -80,4 +83,9 @@
   background: none;
   cursor: pointer;
   color: var(--very-dark);
+  font-size: 1rem;
+}
+
+.dark .profile-card .user-info .password button {
+  color: var(--very-light);
 }

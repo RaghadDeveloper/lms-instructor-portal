@@ -1,10 +1,12 @@
-import ProfileCard from "../../components/ProfileCard/ProfileCard";
 import "./Profile.css";
+import ProfileCard from "../../components/ProfileCard/ProfileCard";
+import FollowersList from "../../components/FollowersList/FollowersList";
 
 function Profile() {
   return (
-    <div>
+    <div className="profile">
       <ProfileCard />
+      <FollowersList />
     </div>
   );
 }

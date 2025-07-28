@@ -1,14 +1,14 @@
 import "./ChatsList.css";
-import ChatCard from "../ChatCard/ChatCard";
+import UserItem from "../UserItem/UserItem";
 
 function ChatsList() {
   return (
     <div className="chats-list">
       <h2>All Chats</h2>
       <ul>
-        <ChatCard />
-        <ChatCard />
-        <ChatCard />
+        <UserItem />
+        <UserItem />
+        <UserItem />
       </ul>
     </div>
   );

@@ -1,7 +1,6 @@
 import "./LessonComments.css";
 import img from "./../../assets/images/profileImg.jpg";
 import { AiOutlineLike } from "react-icons/ai";
-import Comment from "../Comment/Comment";
 
 function LessonComments() {
   return (
