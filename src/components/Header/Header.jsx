@@ -1,20 +1,18 @@
 import "./Header.css";
 import { BiSearch } from "react-icons/bi";
-import { AiOutlineUser } from "react-icons/ai";
 import { TbMessages } from "react-icons/tb";
-import { IoAnalytics } from "react-icons/io5";
 import { HiOutlineLogout, HiOutlineMoon } from "react-icons/hi";
-import { RiSettingsLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { MdNotificationsActive } from "react-icons/md";
 import { useTheme } from "../../context/ThemeContext";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../features/auth/authThunks";
 import ProfileImg from "./../../assets/images/profileImg.jpg";
 
 function Header() {
   const dispatch = useDispatch();
   const { theme, toggleTheme } = useTheme();
+  const { profile } = useSelector((state) => state.profile);
 
   function handleLogout() {
     dispatch(logout());
@@ -42,7 +40,11 @@ function Header() {
         <HiOutlineLogout className="icon" onClick={handleLogout} />
         <div className="divider"></div>
         <Link to={"/profile"}>
-          <img className="user" src={ProfileImg} alt="" />
+          <img
+            className="user"
+            src={profile?.avatar_url || ProfileImg}
+            alt=""
+          />
         </Link>
       </div>
     </header>

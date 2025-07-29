@@ -1,117 +1,119 @@
 import "./PostCard.css";
 import { AiOutlineLike } from "react-icons/ai";
 import { FaRegComment } from "react-icons/fa";
-import img from "./../../assets/images/profileImg.jpg";
-import video from "./../../assets/images/video.mp4";
+import { useSelector } from "react-redux";
+function getMediaType(mediaUrl) {
+  if (!mediaUrl) return null;
 
-function PostCard() {
+  const extension = mediaUrl.split(".").pop().split("?")[0];
+
+  const imageExtensions = ["jpg", "jpeg", "png", "gif", "webp"];
+  const videoExtensions = ["mp4", "webm", "mov"];
+  const audioExtensions = ["mp3", "wav", "ogg"];
+
+  if (imageExtensions.includes(extension)) return "image";
+  if (videoExtensions.includes(extension)) return "video";
+  if (audioExtensions.includes(extension)) return "audio";
+
+  return "unknown";
+}
+
+function formatDate(dateString, label = "Created at") {
+  const date = new Date(dateString);
+  const day = date.getDate();
+  const month = date.toLocaleString("default", { month: "short" });
+  return `${label} ${day} ${month}`;
+}
+
+function PostCard({ post }) {
+  const { profile } = useSelector((state) => state.profile);
+  const type = getMediaType(post.media_url);
+  const date =
+    post?.created_at === post?.updated_at
+      ? formatDate(post?.created_at, "Created at ")
+      : formatDate(post?.updated_at, "Updated at ");
   return (
     <>
-      {/* text */}
-      <div className="post-card">
-        <header className="post-card-header">
-          <img src={img} className="user-img" />
-          <div>
-            <h4 className="user-name">user name</h4>
-            <p className="post-date">Updated at 28 jun</p>
+      {type === "image" ? (
+        <div className="post-card">
+          <header className="post-card-header">
+            <img src={profile.avatar_url} className="user-img" />
+            <div>
+              <h4 className="user-name">{post?.author?.username}</h4>
+              <p className="post-date">{date}</p>
+            </div>
+          </header>
+          <div className="post-body">
+            <h5 className="title">{post?.title}</h5>
+            <p className="text">{post?.content}</p>
+            <img src={post.media_url} className="img" />
           </div>
-        </header>
-        <div className="post-body">
-          <p className="text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
-            iure commodi nostrum! Delectus provident inventore officia odit
-            aspernatur labore corrupti placeat dolor minima. Ab quibusdam
-            ratione, cupiditate corporis perferendis maxime. Lorem ipsum dolor
-            sit amet consectetur adipisicing elit. Accusantium iure commodi
-            nostrum! Delectus provident inventore officia odit aspernatur labore
-            corrupti placeat dolor minima. Ab quibusdam ratione, cupiditate
-            corporis perferendis maxime.
-          </p>
-        </div>
-        <div className="post-footer">
-          <div>
-            <AiOutlineLike />
-            <span>102</span>
-          </div>
-          <div className="divider"></div>
-          <div>
-            <FaRegComment />
-            <span>102</span>
+          <div className="post-footer">
+            <div>
+              <AiOutlineLike />
+              <span>X</span>
+            </div>
+            <div className="divider"></div>
+            <div>
+              <FaRegComment />
+              <span>X</span>
+            </div>
           </div>
         </div>
-      </div>
-
-      {/* img */}
-      <div className="post-card">
-        <header className="post-card-header">
-          <img src={img} className="user-img" />
-          <div>
-            <h4 className="user-name">user name</h4>
-            <p className="post-date">Created at 12 Feb</p>
+      ) : type === "video" ? (
+        <div className="post-card">
+          <header className="post-card-header">
+            <img src={profile.avatar_url} className="user-img" />
+            <div>
+              <h4 className="user-name">{post?.author?.username}</h4>
+              <p className="post-date">{date}</p>
+            </div>
+          </header>
+          <div className="post-body">
+            <h5 className="title">{post?.title}</h5>
+            <p className="text">{post?.content}</p>
+            <video className="video" controls>
+              <source src={post.media_url} type="video/mp4" />
+            </video>
           </div>
-        </header>
-        <div className="post-body">
-          <p className="text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
-            iure commodi nostrum! Delectus provident inventore officia odit
-            aspernatur labore corrupti placeat dolor minima. Ab quibusdam
-            ratione, cupiditate corporis perferendis maxime. Lorem ipsum dolor
-            sit amet consectetur adipisicing elit. Accusantium iure commodi
-            nostrum! Delectus provident inventore officia odit aspernatur labore
-            corrupti placeat dolor minima. Ab quibusdam ratione, cupiditate
-            corporis perferendis maxime.
-          </p>
-          <img src={img} className="img" />
-        </div>
-        <div className="post-footer">
-          <div>
-            <AiOutlineLike />
-            <span>102</span>
-          </div>
-          <div className="divider"></div>
-          <div>
-            <FaRegComment />
-            <span>102</span>
+          <div className="post-footer">
+            <div>
+              <AiOutlineLike />
+              <span>X</span>
+            </div>
+            <div className="divider"></div>
+            <div>
+              <FaRegComment />
+              <span>X</span>
+            </div>
           </div>
         </div>
-      </div>
-
-      {/* video */}
-      <div className="post-card">
-        <header className="post-card-header">
-          <img src={img} className="user-img" />
-          <div>
-            <h4 className="user-name">user name</h4>
-            <p className="post-date">Updated at 28 jun</p>
+      ) : (
+        <div className="post-card">
+          <header className="post-card-header">
+            <img src={profile.avatar_url} className="user-img" />
+            <div>
+              <h4 className="user-name">{post?.author?.username}</h4>
+              <p className="post-date">{date}</p>
+            </div>
+          </header>
+          <div className="post-body">
+            <h5 className="title">{post?.title}</h5>
+            <p className="text">{post?.content}</p>
           </div>
-        </header>
-        <div className="post-body">
-          <p className="text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
-            iure commodi nostrum! Delectus provident inventore officia odit
-            aspernatur labore corrupti placeat dolor minima. Ab quibusdam
-            ratione, cupiditate corporis perferendis maxime. Lorem ipsum dolor
-            sit amet consectetur adipisicing elit. Accusantium iure commodi
-            nostrum! Delectus provident inventore officia odit aspernatur labore
-            corrupti placeat dolor minima. Ab quibusdam ratione, cupiditate
-            corporis perferendis maxime.
-          </p>
-          <video className="video" controls>
-            <source src={video} type="video/mp4" />
-          </video>
-        </div>
-        <div className="post-footer">
-          <div>
-            <AiOutlineLike />
-            <span>102</span>
-          </div>
-          <div className="divider"></div>
-          <div>
-            <FaRegComment />
-            <span>102</span>
+          <div className="post-footer">
+            <div>
+              <AiOutlineLike />
+              <span>X</span>
+            </div>
+            <div className="divider"></div>
+            <div>
+              <FaRegComment />
+              <span>X</span>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 }

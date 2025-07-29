@@ -3,10 +3,7 @@ import ProfileCard from "../../components/ProfileCard/ProfileCard";
 import FollowersList from "../../components/FollowersList/FollowersList";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import {
-  getMyFollowers,
-  getProfile,
-} from "../../features/profile/profileThunks";
+import { getMyFollowers } from "../../features/profile/profileThunks";
 import Loader from "../../components/Loader/Loader";
 
 function Profile() {
@@ -15,7 +12,6 @@ function Profile() {
 
   useEffect(() => {
     dispatch(getMyFollowers());
-    dispatch(getProfile());
   }, [dispatch]);
 
   if (loading) return <Loader />;

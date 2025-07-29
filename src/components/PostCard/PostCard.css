@@ -21,6 +21,8 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--primary-color);
 }
 
 .post-card-header .user-name {
@@ -41,6 +43,12 @@
   gap: 1rem;
 }
 
+.post-card .post-body .title {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 0;
+}
+
 .post-card .post-body .text {
   line-height: 1.5rem;
   font-size: 1rem;
@@ -49,6 +57,8 @@
 .post-card .post-body .video {
   width: 100%;
   border-radius: 4px;
+  height: 350px;
+  object-fit: cover;
 }
 
 .post-card .post-footer {

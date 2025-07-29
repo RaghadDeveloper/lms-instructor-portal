@@ -1,11 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createPost } from "./postsThunk";
+import { createPost, getAllPosts } from "./postsThunk";
 
 const initialState = {
   loading: false,
   error: null,
   posts: [],
   post: null,
+  pagination: {
+    currentPage: 1,
+    lastPage: 1,
+    next: null,
+    prev: null,
+  },
 };
 const handlePending = (state) => {
   state.loading = true;
@@ -36,12 +42,27 @@ const postsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+
+      // getAllPosts
+      .addCase(getAllPosts.pending, handlePending)
+      .addCase(getAllPosts.fulfilled, (state, action) => {
+        state.loading = false;
+        state.posts = action.payload.data;
+        state.pagination = {
+          currentPage: action.payload.meta.current_page,
+          lastPage: action.payload.meta.last_page,
+          next: action.payload.links.next,
+          prev: action.payload.links.prev,
+        };
+      })
+      .addCase(getAllPosts.rejected, handleRejected)
+
       // createPost
       .addCase(createPost.pending, handlePending)
       .addCase(createPost.fulfilled, (state, action) => {
         state.loading = false;
         state.post = action.payload.post;
-        state.posts.push(action.payload.post);
+        state.posts.unshift(action.payload.post);
       })
       .addCase(createPost.rejected, handleRejected);
   },

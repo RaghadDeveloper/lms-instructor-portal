@@ -6,6 +6,7 @@ import { useTheme } from "../../context/ThemeContext";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCategories } from "../../features/categories/categoriesThunk";
+import { getProfile } from "../../features/profile/profileThunks";
 
 function MainPage() {
   const dispatch = useDispatch();
@@ -15,6 +16,11 @@ function MainPage() {
   useEffect(() => {
     if (status === "idle") dispatch(fetchCategories());
   }, [dispatch, status]);
+
+  useEffect(() => {
+    dispatch(getProfile());
+  }, [dispatch]);
+
   return (
     <div className={`main-page ${theme}`}>
       <Navigation />

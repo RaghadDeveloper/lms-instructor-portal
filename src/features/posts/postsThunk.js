@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { createPostApi } from "./postsApi";
+import { createPostApi, getAllPostsApi } from "./postsApi";
 
 const extractError = (error) => {
   return (
@@ -8,6 +8,18 @@ const extractError = (error) => {
     }
   );
 };
+
+export const getAllPosts = createAsyncThunk(
+  "posts/getAllPosts",
+  async ({ userId, page }, thunkAPI) => {
+    try {
+      const response = await getAllPostsApi(userId, page);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(extractError(error));
+    }
+  }
+);
 
 export const createPost = createAsyncThunk(
   "post/create",
