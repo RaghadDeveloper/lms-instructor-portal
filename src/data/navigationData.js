@@ -38,7 +38,7 @@ export const navigationData = [
   },
   {
     icon: PiArticleNyTimesLight,
-    title: "Articles",
-    link: "/articles",
+    title: "Posts",
+    link: "/posts",
   },
 ];

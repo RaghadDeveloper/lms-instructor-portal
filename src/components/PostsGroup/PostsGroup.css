@@ -1,0 +1,9 @@
+.posts-group {
+  width: 60%;
+}
+
+.posts-group h2 {
+  margin-bottom: 1rem;
+  font-weight: 500;
+  color: var(--primary-light);
+}

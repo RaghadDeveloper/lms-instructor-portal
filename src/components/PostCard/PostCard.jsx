@@ -1,22 +1,22 @@
-import "./ArticleCard.css";
+import "./PostCard.css";
 import { AiOutlineLike } from "react-icons/ai";
 import { FaRegComment } from "react-icons/fa";
 import img from "./../../assets/images/profileImg.jpg";
 import video from "./../../assets/images/video.mp4";
 
-function ArticleCard() {
+function PostCard() {
   return (
     <>
       {/* text */}
-      <div className="article-card">
-        <header className="article-card-header">
+      <div className="post-card">
+        <header className="post-card-header">
           <img src={img} className="user-img" />
           <div>
             <h4 className="user-name">user name</h4>
-            <p className="article-date">Updated at 28 jun</p>
+            <p className="post-date">Updated at 28 jun</p>
           </div>
         </header>
-        <div className="article-body">
+        <div className="post-body">
           <p className="text">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
             iure commodi nostrum! Delectus provident inventore officia odit
@@ -28,7 +28,7 @@ function ArticleCard() {
             corporis perferendis maxime.
           </p>
         </div>
-        <div className="article-footer">
+        <div className="post-footer">
           <div>
             <AiOutlineLike />
             <span>102</span>
@@ -42,15 +42,15 @@ function ArticleCard() {
       </div>
 
       {/* img */}
-      <div className="article-card">
-        <header className="article-card-header">
+      <div className="post-card">
+        <header className="post-card-header">
           <img src={img} className="user-img" />
           <div>
             <h4 className="user-name">user name</h4>
-            <p className="article-date">Created at 12 Feb</p>
+            <p className="post-date">Created at 12 Feb</p>
           </div>
         </header>
-        <div className="article-body">
+        <div className="post-body">
           <p className="text">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
             iure commodi nostrum! Delectus provident inventore officia odit
@@ -63,7 +63,7 @@ function ArticleCard() {
           </p>
           <img src={img} className="img" />
         </div>
-        <div className="article-footer">
+        <div className="post-footer">
           <div>
             <AiOutlineLike />
             <span>102</span>
@@ -77,15 +77,15 @@ function ArticleCard() {
       </div>
 
       {/* video */}
-      <div className="article-card">
-        <header className="article-card-header">
+      <div className="post-card">
+        <header className="post-card-header">
           <img src={img} className="user-img" />
           <div>
             <h4 className="user-name">user name</h4>
-            <p className="article-date">Updated at 28 jun</p>
+            <p className="post-date">Updated at 28 jun</p>
           </div>
         </header>
-        <div className="article-body">
+        <div className="post-body">
           <p className="text">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
             iure commodi nostrum! Delectus provident inventore officia odit
@@ -96,11 +96,11 @@ function ArticleCard() {
             corrupti placeat dolor minima. Ab quibusdam ratione, cupiditate
             corporis perferendis maxime.
           </p>
-          <video controls>
+          <video className="video" controls>
             <source src={video} type="video/mp4" />
           </video>
         </div>
-        <div className="article-footer">
+        <div className="post-footer">
           <div>
             <AiOutlineLike />
             <span>102</span>
@@ -116,4 +116,4 @@ function ArticleCard() {
   );
 }
 
-export default ArticleCard;
+export default PostCard;

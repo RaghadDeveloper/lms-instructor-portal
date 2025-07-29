@@ -1,0 +1,81 @@
+.create-post {
+  width: 40%;
+  height: 100%;
+  position: sticky;
+  top: 1rem;
+  right: 0;
+  z-index: 2;
+  color: var(--very-dark);
+}
+
+.create-post.disabled {
+  opacity: 0.7;
+}
+
+.create-post h2 {
+  margin-bottom: 1rem;
+  font-weight: 500;
+  color: var(--primary-light);
+}
+
+.create-post .card {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+.dark .create-post .card {
+  background-color: var(--dark-bg);
+}
+
+.create-post .card input {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  background: transparent;
+  border: 1px solid gray;
+  border-radius: 4px;
+  color: var(--very-dark);
+}
+
+.create-post .card textarea {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  height: 135px;
+  resize: none;
+  background: transparent;
+  border: 1px solid gray;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  color: var(--very-dark);
+}
+
+.create-post .card input:focus,
+.create-post .card textarea:focus {
+  outline: none;
+  border: 1px solid var(--primary-color);
+}
+
+.create-post .card input:focus::placeholder,
+.create-post .card textarea:focus::placeholder {
+  color: var(--primary-color);
+}
+
+.dark .create-post .card input,
+.dark .create-post .card textarea {
+  color: var(--very-light);
+}
+
+.create-post .card img,
+.create-post .card video {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.create-post .card .btn {
+  max-width: none;
+}

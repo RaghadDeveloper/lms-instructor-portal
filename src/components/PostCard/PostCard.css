@@ -1,39 +1,39 @@
-.article-card {
+.post-card {
   background-color: white;
   color: var(--very-dark);
   border-radius: 4px;
   margin-bottom: 2rem;
 }
 
-.dark .article-card {
+.dark .post-card {
   background-color: var(--dark-bg);
   color: var(--very-light);
 }
 
-.article-card-header {
+.post-card-header {
   display: flex;
   gap: 1rem;
   align-items: center;
   padding: 1.2rem;
 }
 
-.article-card-header .user-img {
+.post-card-header .user-img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
 }
 
-.article-card-header .user-name {
+.post-card-header .user-name {
   font-size: 1.2rem;
   font-weight: 400;
 }
 
-.article-card-header .article-date {
+.post-card-header .post-date {
   font-size: 0.8rem;
   font-weight: 300;
 }
 
-.article-card .article-body {
+.post-card .post-body {
   width: 100%;
   padding: 0 2rem 1rem;
   display: flex;
@@ -41,24 +41,24 @@
   gap: 1rem;
 }
 
-.article-card .article-body .text {
+.post-card .post-body .text {
   line-height: 1.5rem;
   font-size: 1rem;
 }
-.article-card .article-body .img,
-.article-card .article-body .video {
+.post-card .post-body .img,
+.post-card .post-body .video {
   width: 100%;
   border-radius: 4px;
 }
 
-.article-card .article-footer {
+.post-card .post-footer {
   display: flex;
   gap: 2rem;
   background-color: var(--secondary-gray\36);
   padding: 1rem 2rem;
 }
 
-.article-card .article-footer div {
+.post-card .post-footer div {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -66,7 +66,7 @@
   cursor: pointer;
 }
 
-.article-card .article-footer .divider {
+.post-card .post-footer .divider {
   width: 1px;
   background-color: var(--primary-color);
 }

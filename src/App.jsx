@@ -9,7 +9,7 @@ import ProfileSetup from "./pages/ProfileSetup/ProfileSetup";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute ";
 import MainPage from "./pages/MainPage/MainPage";
 import Dashboard from "./pages/Dashboard/Dashboard";
-import Articles from "./pages/Articles/Articles";
+import Posts from "./pages/Posts/Posts";
 import Courses from "./pages/Courses/Courses";
 import Profile from "./pages/Profile/Profile";
 import CourseStatistics from "./pages/CourseStatistics/CourseStatistics";
@@ -48,7 +48,7 @@ function App() {
         <Route element={<PrivateRoute />}>
           <Route path="/" element={<MainPage />}>
             <Route index element={<Dashboard />} />
-            <Route path="/articles" element={<Articles />} />
+            <Route path="/posts" element={<Posts />} />
             <Route path="/courses">
               <Route index element={<Courses />} />
               <Route path="create" element={<CreateCourse />} />
