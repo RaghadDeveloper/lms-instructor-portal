@@ -11,6 +11,7 @@ import {
   getProfile,
 } from "../../features/profile/profileThunks";
 import Loader from "../../components/Loader/Loader";
+import SquareLoader from "../../components/SquareLoader/SquareLoader";
 
 function MainPage() {
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ function MainPage() {
     dispatch(getMyFollowers());
   }, [dispatch]);
 
-  if (loading || status != "succeeded") return <Loader />;
+  if (loading || status != "succeeded") return <SquareLoader />;
 
   return (
     <div className={`main-page ${theme}`}>
