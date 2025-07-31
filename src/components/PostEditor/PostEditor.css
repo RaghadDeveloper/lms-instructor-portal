@@ -1,34 +1,35 @@
-.create-post {
+.post-editor {
   width: 40%;
   height: 100%;
   position: sticky;
-  top: 1rem;
+  top: 0rem;
   right: 0;
   z-index: 2;
   color: var(--very-dark);
+  padding-top: 2rem;
 }
 
-.create-post.disabled {
-  opacity: 0.7;
+.post-editor.disabled {
+  display: none;
 }
 
-.create-post h2 {
+.post-editor h2 {
   margin-bottom: 2rem;
   font-weight: 500;
   color: var(--primary-light);
 }
 
-.create-post .card {
+.post-editor .card {
   background-color: white;
   padding: 1rem;
   border-radius: 4px;
 }
 
-.dark .create-post .card {
+.dark .post-editor .card {
   background-color: var(--dark-bg);
 }
 
-.create-post .card input {
+.post-editor .card input {
   width: 100%;
   padding: 0.5rem;
   font-size: 1rem;
@@ -39,7 +40,7 @@
   color: var(--very-dark);
 }
 
-.create-post .card textarea {
+.post-editor .card textarea {
   width: 100%;
   padding: 0.5rem;
   font-size: 1rem;
@@ -52,30 +53,30 @@
   color: var(--very-dark);
 }
 
-.create-post .card input:focus,
-.create-post .card textarea:focus {
+.post-editor .card input:focus,
+.post-editor .card textarea:focus {
   outline: none;
   border: 1px solid var(--primary-color);
 }
 
-.create-post .card input:focus::placeholder,
-.create-post .card textarea:focus::placeholder {
+.post-editor .card input:focus::placeholder,
+.post-editor .card textarea:focus::placeholder {
   color: var(--primary-color);
 }
 
-.dark .create-post .card input,
-.dark .create-post .card textarea {
+.dark .post-editor .card input,
+.dark .post-editor .card textarea {
   color: var(--very-light);
 }
 
-.create-post .card img,
-.create-post .card video {
+.post-editor .card img,
+.post-editor .card video {
   width: 100%;
   max-height: 300px;
   object-fit: cover;
   border-radius: 4px;
 }
 
-.create-post .card .btn {
+.post-editor .card .btn {
   max-width: none;
 }

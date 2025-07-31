@@ -6,12 +6,17 @@ import { useTheme } from "../../context/ThemeContext";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCategories } from "../../features/categories/categoriesThunk";
-import { getProfile } from "../../features/profile/profileThunks";
+import {
+  getMyFollowers,
+  getProfile,
+} from "../../features/profile/profileThunks";
+import Loader from "../../components/Loader/Loader";
 
 function MainPage() {
   const dispatch = useDispatch();
   const { theme } = useTheme();
   const status = useSelector((state) => state.categories.status);
+  const { loading } = useSelector((state) => state.profile);
 
   useEffect(() => {
     if (status === "idle") dispatch(fetchCategories());
@@ -19,7 +24,10 @@ function MainPage() {
 
   useEffect(() => {
     dispatch(getProfile());
+    dispatch(getMyFollowers());
   }, [dispatch]);
+
+  if (loading || status != "succeeded") return <Loader />;
 
   return (
     <div className={`main-page ${theme}`}>

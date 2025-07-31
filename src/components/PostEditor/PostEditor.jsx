@@ -1,22 +1,42 @@
-import "./CreatePost.css";
+import "./PostEditor.css";
 import { useEffect, useRef, useState } from "react";
 import Button from "../Button/Button";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading } from "../../features/posts/postsSlice";
-import { createPost } from "../../features/posts/postsThunk";
+import {
+  createPost,
+  getAllPosts,
+  updatePost,
+} from "../../features/posts/postsThunk";
 
-function CreatePost() {
+function PostEditor({ editPost, setEditPost }) {
   const dispatch = useDispatch();
   const fileInputRef = useRef(null);
   const [preview, setPreview] = useState("");
   const { loading, error } = useSelector((state) => state.posts);
+  const { profile } = useSelector((state) => state.profile);
   const [postData, setPostData] = useState({
     title: "",
     content: "",
     media_types: "",
     media_url: "",
   });
+
+  useEffect(() => {
+    if (editPost) {
+      setPostData({
+        ...editPost,
+        media_types: editPost["App\\Enums\\media_types"],
+        media_url: "",
+      });
+      setPreview(editPost.media_url);
+    }
+
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  }, [editPost]);
 
   const handleChange = (e) => {
     setPostData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -84,9 +104,18 @@ function CreatePost() {
       finalPostData.media_url = mediaUrl;
     }
 
-    const resultAction = await dispatch(createPost(finalPostData));
+    let resultAction;
 
-    if (createPost.fulfilled.match(resultAction)) {
+    if (editPost) {
+      resultAction = await dispatch(
+        updatePost({ ...finalPostData, post_id: editPost.id })
+      );
+    } else resultAction = await dispatch(createPost(finalPostData));
+
+    if (
+      createPost.fulfilled.match(resultAction) ||
+      updatePost.fulfilled.match(resultAction)
+    ) {
       setPostData({
         title: "",
         content: "",
@@ -94,10 +123,13 @@ function CreatePost() {
         media_url: "",
       });
       setPreview("");
+      setEditPost(null);
 
       if (fileInputRef.current) {
         fileInputRef.current.value = "";
       }
+
+      dispatch(getAllPosts({ userId: profile.user_id, page: 1 }));
     }
   }
 
@@ -107,10 +139,10 @@ function CreatePost() {
 
   return (
     <form
-      className={`create-post ${loading ? "disabled" : ""}`}
+      className={`post-editor ${loading ? "disabled" : ""}`}
       onSubmit={handleSubmit}
     >
-      <h2>CreatePost</h2>
+      <h2>{editPost ? "Update Post" : "Create Post"}</h2>
       <div className="card">
         <input
           type="text"
@@ -143,11 +175,11 @@ function CreatePost() {
           ref={fileInputRef}
         />
         <Button type={"submit"} className={"primary"} disabled={loading}>
-          Post
+          {editPost ? "Update" : "Post"}
         </Button>
       </div>
     </form>
   );
 }
 
-export default CreatePost;
+export default PostEditor;

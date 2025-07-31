@@ -7,7 +7,7 @@
   color: #fff;
   top: 50%;
   left: 50%;
-  transform: translate(151%, 0%) rotateZ(45deg);
+  transform: translate(-50%, 50%) rotateZ(45deg);
 }
 .loader:before,
 .loader:after {

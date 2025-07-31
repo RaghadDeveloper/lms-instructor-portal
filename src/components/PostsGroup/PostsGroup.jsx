@@ -8,7 +8,7 @@ import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import NoPosts from "../NoPosts/NoPosts";
 
-function PostsGroup() {
+function PostsGroup({ setEditPost }) {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const { loading, error, posts, pagination } = useSelector(
@@ -21,7 +21,12 @@ function PostsGroup() {
   }, [dispatch, profile.user_id, page]);
 
   if (loading) return <Loader />;
-  if (error) return <ErrorMessage error={error} />;
+  if (error)
+    return (
+      <div className="posts-group">
+        <ErrorMessage error={error} />
+      </div>
+    );
 
   if (!posts.length) return <NoPosts />;
 
@@ -49,7 +54,7 @@ function PostsGroup() {
       </header>
       <div>
         {posts.map((post) => (
-          <PostCard key={post.id} post={post} />
+          <PostCard key={post.id} post={post} setEditPost={setEditPost} />
         ))}
       </div>
     </div>

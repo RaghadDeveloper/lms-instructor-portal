@@ -11,6 +11,7 @@
 
 .main-page main {
   width: 100%;
+  position: relative;
 }
 
 .main-page .content {

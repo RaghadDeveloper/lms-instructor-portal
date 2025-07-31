@@ -4,8 +4,8 @@ import img from "./../../assets/images/profileImg.jpg";
 function UserItem({ user }) {
   return (
     <li className="user-item">
-      <img src={user.avatar_url || img} className="user-img" />
-      <p className="user-name">{user.user.username || "User Name"}</p>
+      <img src={user?.avatar_url || img} className="user-img" />
+      <p className="user-name">{user?.user.username || "User Name"}</p>
     </li>
   );
 }

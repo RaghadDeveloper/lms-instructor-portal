@@ -3,3 +3,7 @@
   gap: 1rem;
   justify-content: flex-end;
 }
+
+.main-page .content:has(> .posts) {
+  padding-top: 0;
+}
