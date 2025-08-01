@@ -1,0 +1,42 @@
+.notification-header {
+  display: flex;
+  border-bottom: 1px solid var(--secondary-gray\36);
+}
+
+.notification-header:last-child {
+  border-bottom: none;
+}
+
+.notification-header h5 {
+  border-left: 1px solid var(--secondary-gray\36);
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  color: var(--primary-color);
+}
+
+.notification-header h5:first-child {
+  border-left: none !important;
+}
+
+.notification-header .id {
+  width: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.notification-header .not-content {
+  padding: 0.5rem 1rem;
+  flex: 1;
+}
+
+.notification-header .created-at {
+  width: 8rem;
+}
+
+.notification-header .details {
+  width: 7rem;
+}
+.notification-header .delete {
+  width: 5rem;
+}

@@ -6,6 +6,7 @@ import courseDraftReducer from "../features/courses/courseDraftSlice";
 import lessonsReducer from "../features/lessons/lessonsSlice";
 import profileReducer from "../features/profile/profileSlice";
 import postsReducer from "../features/posts/postsSlice";
+import notificationsReducer from "../features/notifications/notificationsSlice";
 
 const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
     lessons: lessonsReducer,
     profile: profileReducer,
     posts: postsReducer,
+    notifications: notificationsReducer,
   },
 });
 

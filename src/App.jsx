@@ -20,7 +20,7 @@ import CourseInfo from "./components/CourseInfo/CourseInfo";
 import LessonInfo from "./components/LessonInfo/LessonInfo";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { setAuthFromToken } from "./features/auth/authSlice";
+import { setAuthFromToken, setUserFromToken } from "./features/auth/authSlice";
 import LessonEditor from "./pages/LessonEditor/LessonEditor";
 import CreateLesson from "./pages/CreateLesson/CreateLesson";
 import UpdateCourse from "./pages/UpdateCourse/UpdateCourse";
@@ -31,8 +31,12 @@ function App() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    const user = JSON.parse(localStorage.getItem("user"));
     if (token) {
       dispatch(setAuthFromToken(token));
+    }
+    if (user) {
+      dispatch(setUserFromToken(user));
     }
   }, [dispatch]);
 

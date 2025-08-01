@@ -1,0 +1,51 @@
+.notification-row {
+  display: flex;
+  border-bottom: 1px solid var(--primay-gray\24);
+}
+
+.notification-row p,
+.notification-row button {
+  border-left: 1px solid var(--secondary-gray\36) !important;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  color: var(--very-dark);
+}
+
+.dark .notification-row p,
+.dark .notification-row button {
+  color: var(--very-light);
+}
+
+.notification-row p:first-child,
+.notification-row button:first-child {
+  border-left: none !important;
+}
+
+.notification-row .id {
+  width: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.notification-row .not-content {
+  padding: 0.5rem 1rem;
+  flex: 1;
+}
+
+.notification-row .created-at {
+  width: 8rem;
+}
+
+.notification-row .details {
+  width: 7rem;
+}
+.notification-row .delete {
+  width: 5rem;
+}
+
+.notification-row button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}

@@ -1,0 +1,30 @@
+.notification-table {
+  background-color: white;
+  box-shadow: 0px 3px 8px 5px var(--primay-gray\24);
+  border-radius: 4px;
+  color: var(--very-dark);
+}
+
+.dark .notification-table {
+  background-color: var(--dark-bg);
+  color: var(--very-light);
+  box-shadow: 0px 0px 8px 1px var(--secondary-gray\36);
+}
+
+.notifications h1 {
+  font-size: 2rem;
+  font-weight: 600;
+
+  margin-bottom: 2rem;
+}
+
+.notifications .read-all {
+  margin-bottom: 1rem;
+  padding-right: 1rem;
+  cursor: pointer;
+  justify-self: end;
+}
+
+.notifications .read-all:hover {
+  text-decoration: underline;
+}
