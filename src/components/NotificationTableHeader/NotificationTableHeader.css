@@ -31,12 +31,14 @@
 }
 
 .notification-header .created-at {
-  width: 8rem;
+  width: 10rem;
 }
 
 .notification-header .details {
   width: 7rem;
 }
+
+.notification-header .mark-as-read,
 .notification-header .delete {
   width: 5rem;
 }

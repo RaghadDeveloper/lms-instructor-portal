@@ -23,6 +23,7 @@
   padding-right: 1rem;
   cursor: pointer;
   justify-self: end;
+  color: var(--primary-color);
 }
 
 .notifications .read-all:hover {

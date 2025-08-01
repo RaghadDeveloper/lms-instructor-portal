@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllNotifications } from "./notificationsThunk";
+import {
+  deleteNotification,
+  getAllNotifications,
+  readAllNotifications,
+  readNotification,
+} from "./notificationsThunk";
 
 const initialState = {
   loading: false,
@@ -37,7 +42,40 @@ const notificationsSlice = createSlice({
         state.loading = false;
         state.notifications = action.payload.data;
       })
-      .addCase(getAllNotifications.rejected, handleRejected);
+      .addCase(getAllNotifications.rejected, handleRejected)
+
+      // readNotification
+      .addCase(readNotification.pending, handlePending)
+      .addCase(readNotification.fulfilled, (state, action) => {
+        state.loading = false;
+        state.notifications = state.notifications.map((notification) =>
+          notification.id === action.payload.id
+            ? { ...notification, read_at: Date() }
+            : notification
+        );
+      })
+      .addCase(readNotification.rejected, handleRejected)
+
+      // deleteNotification
+      .addCase(deleteNotification.pending, handlePending)
+      .addCase(deleteNotification.fulfilled, (state, action) => {
+        state.loading = false;
+        state.notifications = state.notifications.filter(
+          (n) => n.id !== action.payload.id
+        );
+      })
+      .addCase(deleteNotification.rejected, handleRejected)
+
+      // readAllNotifications
+      .addCase(readAllNotifications.pending, handlePending)
+      .addCase(readAllNotifications.fulfilled, (state) => {
+        state.loading = false;
+        state.notifications = state.notifications.map((notification) => ({
+          ...notification,
+          read_at: Date(),
+        }));
+      })
+      .addCase(readAllNotifications.rejected, handleRejected);
   },
 });
 

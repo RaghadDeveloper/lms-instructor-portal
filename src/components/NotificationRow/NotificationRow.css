@@ -3,6 +3,14 @@
   border-bottom: 1px solid var(--primay-gray\24);
 }
 
+.notification-row.not-read {
+  background-color: var(--secondary-gray\36);
+}
+
+.dark .notification-row.not-read {
+  background-color: var(--primay-gray\40);
+}
+
 .notification-row p,
 .notification-row button {
   border-left: 1px solid var(--secondary-gray\36) !important;
@@ -34,12 +42,13 @@
 }
 
 .notification-row .created-at {
-  width: 8rem;
+  width: 10rem;
 }
 
 .notification-row .details {
   width: 7rem;
 }
+.notification-row .mark-as-read,
 .notification-row .delete {
   width: 5rem;
 }
@@ -48,4 +57,8 @@
   border: none;
   background: none;
   cursor: pointer;
+}
+
+.notification-row button:hover {
+  color: var(--primary-color);
 }
