@@ -23,6 +23,8 @@ function CourseInfo() {
     rating,
     subscribers_count,
     tags,
+    approval_status,
+    rejection_notes,
   } = course;
 
   return (
@@ -47,6 +49,12 @@ function CourseInfo() {
               <p key={index}>{tag}</p>
             ))}
           </div>
+        </div>
+      )}
+      {approval_status === "rejected" && (
+        <div className="about">
+          <h4>Rejection notes</h4>
+          <p>{rejection_notes}</p>
         </div>
       )}
 

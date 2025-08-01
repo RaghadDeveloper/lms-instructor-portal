@@ -6,9 +6,11 @@ import {
   deleteNotification,
   readNotification,
 } from "../../features/notifications/notificationsThunk";
+import { useNavigate } from "react-router-dom";
 
 function NotificationRow({ num, notification }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handlReadNotification = () => {
     dispatch(readNotification(notification.id));
@@ -16,6 +18,14 @@ function NotificationRow({ num, notification }) {
 
   const handldeleteNotification = () => {
     dispatch(deleteNotification(notification.id));
+  };
+
+  const handleSeeNotificationDetails = async () => {
+    const resultAction = await dispatch(readNotification(notification.id));
+    if (readNotification.fulfilled.match(resultAction)) {
+      const notification = resultAction.payload.response.data.data;
+      navigate(`/courses/${notification.id}`);
+    }
   };
 
   return (
@@ -31,7 +41,9 @@ function NotificationRow({ num, notification }) {
       <button className="delete" onClick={handldeleteNotification}>
         <TbTrash />
       </button>
-      <button className="details">See more</button>
+      <button className="details" onClick={handleSeeNotificationDetails}>
+        See more
+      </button>
     </div>
   );
 }

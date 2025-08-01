@@ -10,6 +10,7 @@ const initialState = {
   loading: false,
   error: null,
   notifications: [],
+  notification: null,
 };
 
 const handlePending = (state) => {
@@ -53,6 +54,7 @@ const notificationsSlice = createSlice({
             ? { ...notification, read_at: Date() }
             : notification
         );
+        state.notification = action.payload.response.data.data;
       })
       .addCase(readNotification.rejected, handleRejected)
 

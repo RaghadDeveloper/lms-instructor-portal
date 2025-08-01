@@ -23,103 +23,43 @@ function PostCard({ post, setEditPost }) {
   };
 
   return (
-    <>
-      {post["App\\Enums\\media_types"] === "image" ? (
-        <div className="post-card">
-          <header className="post-card-header">
-            <div>
-              <img src={profile.avatar_url} className="user-img" />
-              <div>
-                <h4 className="user-name">{post?.author?.username}</h4>
-                <p className="post-date">{date}</p>
-              </div>
-            </div>
-            <span onClick={handleEdit}>
-              <CiEdit />
-            </span>
-          </header>
-          <div className="post-body">
-            <h5 className="title">{post?.title}</h5>
-            <pre className="text">{post?.content}</pre>
-            <img src={post.media_url} className="img" />
-          </div>
-          <div className="post-footer">
-            <div>
-              <AiOutlineLike />
-              <span>X</span>
-            </div>
-            <div className="divider"></div>
-            <div>
-              <FaRegComment />
-              <span>X</span>
-            </div>
+    <div className="post-card">
+      <header className="post-card-header">
+        <div>
+          <img src={profile.avatar_url} className="user-img" />
+          <div>
+            <h4 className="user-name">{post?.author?.username}</h4>
+            <p className="post-date">{date}</p>
           </div>
         </div>
-      ) : post["App\\Enums\\media_types"] === "video" ? (
-        <div className="post-card">
-          <header className="post-card-header">
-            <div>
-              <img src={profile.avatar_url} className="user-img" />
-              <div>
-                <h4 className="user-name">{post?.author?.username}</h4>
-                <p className="post-date">{date}</p>
-              </div>
-            </div>
-            <span onClick={handleEdit}>
-              <CiEdit />
-            </span>
-          </header>
-          <div className="post-body">
-            <h5 className="title">{post?.title}</h5>
-            <pre className="text">{post?.content}</pre>
-            <video className="video" controls>
-              <source src={post.media_url} type="video/mp4" />
-            </video>
-          </div>
-          <div className="post-footer">
-            <div>
-              <AiOutlineLike />
-              <span>X</span>
-            </div>
-            <div className="divider"></div>
-            <div>
-              <FaRegComment />
-              <span>X</span>
-            </div>
-          </div>
+        <span className="edit-btn" onClick={handleEdit}>
+          <CiEdit />
+        </span>
+      </header>
+      <div className="post-body">
+        <h5 className="title">{post?.title}</h5>
+        <pre className="text">{post?.content}</pre>
+        {post["App\\Enums\\media_types"] === "image" && (
+          <img src={post.media_url} className="img" />
+        )}
+        {post["App\\Enums\\media_types"] === "video" && (
+          <video className="video" controls>
+            <source src={post.media_url} type="video/mp4" />
+          </video>
+        )}
+      </div>
+      <div className="post-footer">
+        <div>
+          <AiOutlineLike />
+          <span>X</span>
         </div>
-      ) : (
-        <div className="post-card">
-          <header className="post-card-header">
-            <div>
-              <img src={profile.avatar_url} className="user-img" />
-              <div>
-                <h4 className="user-name">{post?.author?.username}</h4>
-                <p className="post-date">{date}</p>
-              </div>
-            </div>
-            <span onClick={handleEdit}>
-              <CiEdit />
-            </span>
-          </header>
-          <div className="post-body">
-            <h5 className="title">{post?.title}</h5>
-            <pre className="text">{post?.content}</pre>
-          </div>
-          <div className="post-footer">
-            <div>
-              <AiOutlineLike />
-              <span>X</span>
-            </div>
-            <div className="divider"></div>
-            <div>
-              <FaRegComment />
-              <span>X</span>
-            </div>
-          </div>
+        <div className="divider"></div>
+        <div>
+          <FaRegComment />
+          <span>X</span>
         </div>
-      )}
-    </>
+      </div>
+    </div>
   );
 }
 

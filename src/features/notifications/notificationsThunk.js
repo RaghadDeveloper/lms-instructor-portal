@@ -30,9 +30,8 @@ export const readNotification = createAsyncThunk(
   "notifications/readNotifications",
   async (notificationId, thunkAPI) => {
     try {
-      await readNotificationApi(notificationId);
-      // return response.data;
-      return { id: notificationId };
+      const response = await readNotificationApi(notificationId);
+      return { response, id: notificationId };
     } catch (error) {
       return thunkAPI.rejectWithValue(extractError(error));
     }

@@ -41,6 +41,10 @@
   font-weight: 400;
 }
 
+.dark .post-card-header .edit-btn {
+  color: var(--very-light);
+}
+
 .post-card-header .post-date {
   font-size: 0.8rem;
   font-weight: 300;
