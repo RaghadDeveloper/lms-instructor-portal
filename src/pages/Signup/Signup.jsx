@@ -13,6 +13,10 @@ import FormHeader from "../../components/FormHeader/FormHeader";
 import FormBody from "../../components/FormBody/FormBody";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import AuthErrorReset from "../../components/AuthErrorReset/AuthErrorReset";
+import {
+  messaging,
+  getToken,
+} from "./../../features/notifications/firebase-config";
 
 function Signup() {
   const navigate = useNavigate();
@@ -30,6 +34,40 @@ function Signup() {
 
   const [formErrors, setFormErrors] = useState({});
   const [hasSubmitted, setHasSubmitted] = useState(false);
+
+  const requestPermissionAndGetToken = async () => {
+    try {
+      const permission = await Notification.requestPermission();
+      if (permission === "granted") {
+        const registration = await navigator.serviceWorker.register(
+          "/lms-instructor-portal/firebase-messaging-sw.js"
+        );
+
+        const currentToken = await getToken(messaging, {
+          vapidKey:
+            "BL4seloY_pB8k4DxPJQibdZsnTJaOy-3CiLD0tH7qh3G06348yfycoRG6Talhwlc8CvYZugQiRvuk-Z0FLxmfJI",
+          serviceWorkerRegistration: registration,
+        });
+
+        if (currentToken) {
+          console.log("FCM Token:", currentToken);
+          setFormData((prev) => ({ ...prev, fcm_token: currentToken }));
+        } else {
+          console.warn(
+            "No registration token available. Request permission to generate one."
+          );
+        }
+      } else {
+        console.warn("Notification permission not granted.");
+      }
+    } catch (error) {
+      console.error("Error getting FCM token:", error);
+    }
+  };
+
+  useEffect(() => {
+    requestPermissionAndGetToken();
+  }, []);
 
   const isValidEmail = (email) => /\S+@\S+\.\S+/.test(email);
 
