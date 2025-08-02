@@ -111,7 +111,7 @@ function ProfileSetup() {
       setIsLoading(false);
     }
   };
-  console.log(loading, status, isLoading);
+
   if (loading || status === "loading" || isLoading) return <SquareLoader />;
 
   return (
@@ -139,8 +139,13 @@ function ProfileSetup() {
                 disabled={isLoading}
               />
               <div className="date-field">
-                <label>Birth date</label>
-                <input type="date" />
+                <label htmlFor="birth_date">Birth date</label>
+                <input
+                  id="birth_date"
+                  type="date"
+                  name="birth_date"
+                  onChange={handleChange}
+                />
               </div>
             </div>
           </div>

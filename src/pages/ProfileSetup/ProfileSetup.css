@@ -53,7 +53,7 @@
   max-width: 450px;
   gap: 1rem;
   color: var(--very-dark);
-  align-items: center;
+  align-items: start;
 }
 
 .date-field label {
@@ -70,4 +70,12 @@
   margin-bottom: 0.75rem;
   font-size: 1rem;
   color: var(--very-dark);
+}
+
+.date-field input:focus {
+  outline: none;
+}
+
+.date-field:has(> input:focus) label {
+  color: var(--primary-color);
 }

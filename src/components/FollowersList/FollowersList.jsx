@@ -8,7 +8,9 @@ function FollowersList() {
   return (
     <div className="followers-list">
       <h2>Followers</h2>
-      {!followers && <p>You don't have followers :( </p>}
+      {!followers.length && (
+        <p className="no-followers">You don't have any follower yet :( </p>
+      )}
       {followers?.map((follower) => (
         <UserItem key={follower.id} user={follower} />
       ))}

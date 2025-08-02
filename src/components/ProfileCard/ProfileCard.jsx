@@ -3,15 +3,16 @@ import InfoBlock from "../InfoBlock/InfoBlock";
 import { FaRegEdit } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import profileImg from "./../../assets/images/profileImg.jpg";
 
 function ProfileCard() {
   const navigate = useNavigate();
-  const { profile } = useSelector((state) => state.profile);
+  const { categories, profile } = useSelector((state) => state.profile);
 
   return (
     <div className="profile-card">
       <header className="profile-header">
-        <img src={profile?.avatar_url} className="profile-img" />
+        <img src={profile?.avatar_url || profileImg} className="profile-img" />
         <h2 className="user-name">{profile?.user.username}</h2>
         <h4 className="headline">{profile?.bio}</h4>
         <div className="info-group">
@@ -31,10 +32,9 @@ function ProfileCard() {
       <div className="user-info">
         <h5>Specializations:</h5>
         <ul className="specializations">
-          <li>XXX</li>
-          <li>XXX</li>
-          <li>XXX</li>
-          <li>XXX</li>
+          {categories?.map((category) => (
+            <li key={category.id}>{category.name}</li>
+          ))}
         </ul>
       </div>
       <div className="user-info">

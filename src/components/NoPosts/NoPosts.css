@@ -6,8 +6,9 @@
   align-items: center;
   margin-top: 2rem;
   background-color: white;
-  margin-top: 4rem;
+  margin-top: 6rem;
   border-radius: 4px;
+  padding: 2rem 1rem;
 }
 
 .no-posts img {
@@ -20,4 +21,8 @@
   margin-bottom: 1rem;
   max-width: 500px;
   text-align: center;
+}
+
+.dark .no-posts {
+  background-color: var(--dark-bg);
 }
