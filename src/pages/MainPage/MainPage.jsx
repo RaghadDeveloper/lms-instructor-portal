@@ -10,14 +10,15 @@ import {
   getMyFollowers,
   getProfile,
 } from "../../features/profile/profileThunks";
-import Loader from "../../components/Loader/Loader";
 import SquareLoader from "../../components/SquareLoader/SquareLoader";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+import Forbidden from "../../components/Forbidden/Forbidden";
 
 function MainPage() {
   const dispatch = useDispatch();
   const { theme } = useTheme();
-  const status = useSelector((state) => state.categories.status);
-  const { loading } = useSelector((state) => state.profile);
+  const { status, error: catError } = useSelector((state) => state.categories);
+  const { loading, error } = useSelector((state) => state.profile);
 
   useEffect(() => {
     if (status === "idle") dispatch(fetchCategories());
@@ -28,7 +29,10 @@ function MainPage() {
     dispatch(getMyFollowers());
   }, [dispatch]);
 
-  if (loading || status != "succeeded") return <SquareLoader />;
+  if (loading || status === "loading") return <SquareLoader />;
+
+  if (catError?.status === 403) return <Forbidden />;
+  if (error) return <ErrorMessage error={error} />;
 
   return (
     <div className={`main-page ${theme}`}>

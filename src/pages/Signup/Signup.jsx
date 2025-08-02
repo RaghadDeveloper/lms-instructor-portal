@@ -29,7 +29,7 @@ function Signup() {
     email: "",
     password: "",
     password_confirmation: "",
-    fcm_token: "ll",
+    fcm_token: "",
   });
 
   const [formErrors, setFormErrors] = useState({});
@@ -50,7 +50,6 @@ function Signup() {
         });
 
         if (currentToken) {
-          console.log("FCM Token:", currentToken);
           setFormData((prev) => ({ ...prev, fcm_token: currentToken }));
         } else {
           console.warn(

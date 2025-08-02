@@ -1,15 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Option.css";
 
-function Option({ text }) {
+function Option({ option, onSelect }) {
   const [isSelected, setIsSelected] = useState(false);
+
+  useEffect(() => {
+    if (isSelected) onSelect(option.id);
+  }, [isSelected]);
 
   return (
     <div
       className={`option ${isSelected ? "selected" : ""} `}
       onClick={() => setIsSelected(!isSelected)}
     >
-      {text}
+      {option.name}
     </div>
   );
 }

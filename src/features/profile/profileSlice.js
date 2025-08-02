@@ -1,10 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getMyFollowers, getProfile } from "./profileThunks";
+import {
+  createProfile,
+  getMyFollowers,
+  getProfile,
+  storeUserCategories,
+} from "./profileThunks";
 
 const initialState = {
   loading: false,
   error: null,
   profile: null,
+  categories: null,
   followers: null,
 };
 
@@ -31,23 +37,43 @@ const profileSlice = createSlice({
   name: "profile",
   initialState,
   extraReducers: (builder) => {
-    // getProfile
-    builder.addCase(getProfile.pending, handlePending);
-    builder.addCase(getProfile.fulfilled, (state, action) => {
-      state.loading = false;
-      state.error = null;
-      state.profile = action.payload.profile;
-    });
-    builder.addCase(getProfile.rejected, handleRejected);
+    builder
 
-    // getFollowers
-    builder.addCase(getMyFollowers.pending, handlePending);
-    builder.addCase(getMyFollowers.fulfilled, (state, action) => {
-      state.loading = false;
-      state.error = null;
-      state.followers = action.payload.data;
-    });
-    builder.addCase(getMyFollowers.rejected, handleRejected);
+      // getProfile
+      .addCase(getProfile.pending, handlePending)
+      .addCase(getProfile.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.profile = action.payload.profile;
+      })
+      .addCase(getProfile.rejected, handleRejected)
+
+      // getFollowers
+      .addCase(getMyFollowers.pending, handlePending)
+      .addCase(getMyFollowers.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.followers = action.payload.data;
+      })
+      .addCase(getMyFollowers.rejected, handleRejected)
+
+      // createProfile
+      .addCase(createProfile.pending, handlePending)
+      .addCase(createProfile.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.profile = action.payload.data;
+      })
+      .addCase(createProfile.rejected, handleRejected)
+
+      // storeCategories
+      .addCase(storeUserCategories.pending, handlePending)
+      .addCase(storeUserCategories.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.categories = action.payload.categories;
+      })
+      .addCase(storeUserCategories.rejected, handleRejected);
   },
 });
 

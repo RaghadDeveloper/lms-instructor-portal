@@ -1,5 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getMyFollowersApi, getProfileApi } from "./profileApi";
+import {
+  createProfileApi,
+  getMyFollowersApi,
+  getProfileApi,
+  storeUserCategoriesApi,
+} from "./profileApi";
 
 const extractError = (error) => {
   return (
@@ -26,6 +31,30 @@ export const getMyFollowers = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await getMyFollowersApi();
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(extractError(error));
+    }
+  }
+);
+
+export const createProfile = createAsyncThunk(
+  "profile/createProfile",
+  async (profileData, thunkAPI) => {
+    try {
+      const response = await createProfileApi(profileData);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(extractError(error));
+    }
+  }
+);
+
+export const storeUserCategories = createAsyncThunk(
+  "profile/storeUserCategory",
+  async (categoryData, thunkAPI) => {
+    try {
+      const response = await storeUserCategoriesApi(categoryData);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(extractError(error));
