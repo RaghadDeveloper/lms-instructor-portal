@@ -1,14 +1,18 @@
 import { PiHandWaving } from "react-icons/pi";
 import "./Welcome.css";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
-function Welcome({ name }) {
+function Welcome() {
   const [hide, setHide] = useState(false);
+  const { user } = useSelector((state) => state.auth);
+
   return (
     <div className={`welcome ${hide ? "hide" : ""}`}>
       <div>
         <p>
-          Welcome back, <span className="name">{name}</span> <PiHandWaving />
+          Welcome back, <span className="name">{user.username}</span>{" "}
+          <PiHandWaving />
         </p>
         <p>See what happend with your courses and students!</p>
       </div>

@@ -13,7 +13,7 @@ function ProfileCard() {
     <div className="profile-card">
       <header className="profile-header">
         <img src={profile?.avatar_url || profileImg} className="profile-img" />
-        <h2 className="user-name">{profile?.user.username}</h2>
+        <h2 className="user-name">{profile?.user_name}</h2>
         <h4 className="headline">{profile?.bio}</h4>
         <div className="info-group">
           <InfoBlock label={"Articles"} value={"X"} />
@@ -23,7 +23,7 @@ function ProfileCard() {
       </header>
       <div className="user-info">
         <h5>Email:</h5>
-        <p>{profile?.user.email}</p>
+        <p>{profile?.email}</p>
       </div>
       <div className="user-info">
         <h5>Birth date:</h5>

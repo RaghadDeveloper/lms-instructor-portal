@@ -67,6 +67,7 @@
 .post-card .post-body .text {
   line-height: 1.5rem;
   font-size: 1rem;
+  text-wrap: wrap;
 }
 .post-card .post-body .img,
 .post-card .post-body .video {
