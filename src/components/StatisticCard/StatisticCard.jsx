@@ -1,5 +1,5 @@
 import "./StatisticCard.css";
-import { GoArrowDownRight, GoArrowUpRight } from "react-icons/go";
+import { GoArrowDownRight, GoArrowUpRight, GoBook } from "react-icons/go";
 
 function StatisticCard({ data }) {
   return (
@@ -7,13 +7,19 @@ function StatisticCard({ data }) {
       {data.icon && <data.icon className="icon" />}
       <div className="info">
         <h3>{data.title}</h3>
-        <span>{data.value}</span>
+        <span>{data.total_value}</span>
         <div className="percentage">
           <span
-            className={data.percentage > 0 ? "text-success" : "text-danger"}
+            className={
+              data.change_percentage >= 0 ? "text-success" : "text-danger"
+            }
           >
-            {data.percentage >= 0 ? <GoArrowUpRight /> : <GoArrowDownRight />}
-            {Math.abs(data.percentage)}%
+            {data.change_percentage >= 0 ? (
+              <GoArrowUpRight />
+            ) : (
+              <GoArrowDownRight />
+            )}
+            {Math.abs(data.change_percentage)}%
           </span>
           <span>vs last month</span>
         </div>

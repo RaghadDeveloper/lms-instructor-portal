@@ -7,7 +7,7 @@ export const lessonsStatisticsApi = (year) =>
   axiosInstance.get(`/teacher/lesson/statistics?year=${year}`);
 
 export const followsStatisticsApi = (year) =>
-  axiosInstance.get(`/teacher/lesson/statistics?year=${year}`);
+  axiosInstance.get(`/teacher/follow/statistics?year=${year}`);
 
 export const earningsStatisticsApi = (year) =>
-  axiosInstance.get(`/teacher/lesson/statistics?year=${year}`);
+  axiosInstance.get(`/teacher/earning/statistics?year=${year}`);

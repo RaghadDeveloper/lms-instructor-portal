@@ -8,6 +8,10 @@
   border-radius: 4px;
 }
 
+.dark .statistic-card {
+  box-shadow: 2px 3px 5px var(--secondary-gray\36);
+}
+
 .statistic-card .icon {
   font-size: 2rem;
   color: var(--primary-color);
@@ -33,6 +37,7 @@
   background-color: var(--dark-bg);
   color: var(--very-light);
 }
+
 .percentage,
 .text-success,
 .text-danger {
@@ -42,8 +47,8 @@
 }
 
 .text-success {
-  color: green;
+  color: #198754;
 }
 .text-danger {
-  color: rgb(219, 0, 0);
+  color: #dc3545;
 }

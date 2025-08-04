@@ -1,41 +1,65 @@
-import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis } from "recharts";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Legend,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
 import "./ReBarChart.css";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import {
+  coursesStatistics,
+  followsStatistics,
+} from "../../features/statistics/statisticsThunk";
+
+const formatter = new Intl.DateTimeFormat("en", { month: "short" });
 
 function ReBarChart() {
-  const data = [
-    {
-      name: "Sept",
-      Courses: 15,
-      Earnings: 40,
-    },
-    {
-      name: "Oct",
-      Courses: 12,
-      Earnings: 30,
-    },
-    {
-      name: "Nov",
-      Courses: 16,
-      Earnings: 20,
-    },
-    {
-      name: "Dec",
-      Courses: 11,
-      Earnings: 27,
-    },
-  ];
+  const dispatch = useDispatch();
+  const [year, setYear] = useState(2025);
+  const { courses, follows } = useSelector((state) => state.statistics);
+
+  useEffect(() => {
+    dispatch(coursesStatistics(Number(year)));
+    dispatch(followsStatistics(Number(year)));
+  }, [dispatch, year]);
+
+  const coursesStatisticsData = courses?.statistics;
+  const followsStatisticsData = follows?.statistics;
+
+  const mergedData = coursesStatisticsData?.map((item1) => {
+    const match = followsStatisticsData?.find(
+      (item2) => item2.month === item1.month
+    );
+    return {
+      month: formatter.format(new Date(2025, item1.month - 1)),
+      Courses: item1.total_courses,
+      Followers: match ? match.total_followers : 0,
+    };
+  });
 
   return (
-    <div className="statistic-card">
-      <h4>Earning</h4>
+    <div className="statistic-card card6">
+      <div className="header">
+        <h4>Courses and Followers</h4>
+        <select value={year} onChange={(e) => setYear(e.target.value)}>
+          <option value="2025">2025</option>
+          <option value="2024">2024</option>
+          <option value="2023">2023</option>
+        </select>
+      </div>
 
-      <BarChart width={600} height={410} data={data}>
+      <BarChart width={530} height={410} data={mergedData}>
         <CartesianGrid strokeDasharray="100 10" />
-        <XAxis dataKey="name" />
+        <XAxis dataKey="month" />
+        <YAxis tickCount={10} />
         <Tooltip />
         <Legend />
-        <Bar dataKey="Earnings" fill="#2c7da0" />
-        <Bar dataKey="Courses" fill="#3caddd" />
+        <Bar dataKey="Courses" fill="#2c7da0" />
+        <Bar dataKey="Followers" fill="#3caddd" />
       </BarChart>
     </div>
   );

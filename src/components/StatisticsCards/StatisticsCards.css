@@ -1,6 +1,6 @@
 .statistics-cards {
   display: grid;
-  grid-template-columns: repeat(4, 24%);
+  grid-template-columns: repeat(auto-fill, minmax(268px, 1fr));
   justify-content: space-between;
   margin-bottom: 2rem;
   grid-gap: 1rem;

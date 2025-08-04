@@ -1,19 +1,23 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import StatisticsCards from "../../components/StatisticsCards/StatisticsCards";
 import Welcome from "../../components/Welcome/Welcome";
 import "./Dashboard.css";
 import { useEffect } from "react";
-import { coursesStatistics } from "../../features/statistics/statisticsThunk";
+import {
+  coursesStatistics,
+  earningsStatistics,
+  followsStatistics,
+  lessonsStatistics,
+} from "../../features/statistics/statisticsThunk";
 
 function Dashboard() {
   const dispatch = useDispatch();
-  const { courseStatistics } = useSelector((state) => state.statistics);
 
   useEffect(() => {
-    console.log(courseStatistics);
-  }, [courseStatistics]);
-  useEffect(() => {
-    dispatch(coursesStatistics());
+    dispatch(coursesStatistics(2025));
+    dispatch(lessonsStatistics(2025));
+    dispatch(followsStatistics(2025));
+    dispatch(earningsStatistics(2025));
   }, [dispatch]);
 
   return (
