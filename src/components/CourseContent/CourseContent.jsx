@@ -4,10 +4,12 @@ import Button from "../Button/Button";
 import { useNavigate, useParams } from "react-router-dom";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import Loader from "../Loader/Loader";
+import { useSelector } from "react-redux";
 
 function CourseContent({ lessons }) {
   const navigate = useNavigate();
   const { courseId } = useParams();
+  const { course } = useSelector((state) => state.courses);
 
   return (
     <div className="course-content">
@@ -18,6 +20,21 @@ function CourseContent({ lessons }) {
       ))}
 
       {!lessons && <p>This course doesn't have any lesson.</p>}
+
+      {course.quiz && (
+        <h4
+          className="quiz"
+          onClick={() =>
+            navigate(`/courses/${courseId}/quiz/${course.quiz.id}`)
+          }
+        >
+          Quiz details
+        </h4>
+      )}
+
+      {lessons && !course.quiz && (
+        <Button className={"border"}>&#43; Add Quiz</Button>
+      )}
 
       <Button className={"border"} onClick={() => navigate("lesson/create")}>
         &#43; Add Video

@@ -25,6 +25,7 @@ import LessonEditor from "./pages/LessonEditor/LessonEditor";
 import CreateLesson from "./pages/CreateLesson/CreateLesson";
 import UpdateCourse from "./pages/UpdateCourse/UpdateCourse";
 import CreateCourse from "./pages/CreateCourse/CreateCourse";
+import QuizDetails from "./pages/QuizDetails/QuizDetails";
 
 function App() {
   const dispatch = useDispatch();
@@ -62,6 +63,7 @@ function App() {
                 <Route path="lesson/:lessonId" element={<LessonInfo />} />
               </Route>
               <Route path="lesson/create" element={<CreateLesson />} />
+              <Route path=":courseId/quiz/:quizId" element={<QuizDetails />} />
               <Route
                 path=":courseId/lesson/create"
                 element={<LessonEditor />}

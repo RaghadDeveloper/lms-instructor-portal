@@ -1,0 +1,52 @@
+.question-card {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 4px;
+  margin-bottom: 2rem;
+}
+
+.dark .question-card {
+  background-color: var(--dark-bg);
+}
+
+.question-card .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.question-card .header .question {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: var(--primary-light);
+}
+
+.question-card .header .question span {
+  margin-right: 0.5rem;
+}
+
+.question-card .header .actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.question-card .header .actions button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--primary-light);
+  cursor: pointer;
+}
+
+.question-card .options {
+  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(268px, 1fr));
+  row-gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.question-card .options .answer {
+  list-style: auto;
+  margin-left: 2.5rem;
+}

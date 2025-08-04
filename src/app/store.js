@@ -8,6 +8,7 @@ import profileReducer from "../features/profile/profileSlice";
 import postsReducer from "../features/posts/postsSlice";
 import notificationsReducer from "../features/notifications/notificationsSlice";
 import statisticsReducer from "../features/statistics/statisticsSlice";
+import quizReducer from "../features/quiz/quizSlice";
 
 const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ const store = configureStore({
     posts: postsReducer,
     notifications: notificationsReducer,
     statistics: statisticsReducer,
+    quiz: quizReducer,
   },
 });
 

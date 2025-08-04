@@ -12,6 +12,19 @@
   margin-bottom: 0.5rem;
 }
 
+.course-content .quiz {
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  padding: 1.5rem 1rem;
+  border-bottom: 1px solid gray;
+  cursor: pointer;
+}
+
+.quiz:hover {
+  background-color: var(--secondary-gray\36);
+}
+
 .course-content .btn {
   min-width: 100%;
   font-size: 1.2rem;
