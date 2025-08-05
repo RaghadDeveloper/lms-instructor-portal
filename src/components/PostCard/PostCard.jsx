@@ -1,8 +1,9 @@
 import "./PostCard.css";
 import { AiOutlineLike } from "react-icons/ai";
 import { FaRegComment } from "react-icons/fa";
-import { useSelector } from "react-redux";
-import { CiEdit } from "react-icons/ci";
+import { useDispatch, useSelector } from "react-redux";
+import { HiOutlineDotsVertical } from "react-icons/hi";
+import { deletePost } from "../../features/posts/postsThunk";
 
 function formatDate(dateString, label = "Created at") {
   const date = new Date(dateString);
@@ -11,30 +12,51 @@ function formatDate(dateString, label = "Created at") {
   return `${label} ${day} ${month}`;
 }
 
-function PostCard({ post, setEditPost }) {
+function PostCard({ post, setEditPost, menuOpenPostId, setMenuOpenPostId }) {
+  const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.profile);
   const date =
     post?.created_at === post?.updated_at
       ? formatDate(post?.created_at, "Created at ")
       : formatDate(post?.updated_at, "Updated at ");
+  const isMenuOpen = menuOpenPostId === post.id;
+
+  const toggleMenu = () => {
+    if (isMenuOpen) {
+      setMenuOpenPostId(null);
+    } else {
+      setMenuOpenPostId(post.id);
+    }
+  };
 
   const handleEdit = () => {
     setEditPost(post);
+    setMenuOpenPostId(null);
+  };
+
+  const handleDelete = () => {
+    dispatch(deletePost(post.id));
   };
 
   return (
     <div className="post-card">
       <header className="post-card-header">
-        <div>
+        <div className="head">
           <img src={profile.avatar_url} className="user-img" />
           <div>
             <h4 className="user-name">{post?.author?.username}</h4>
             <p className="post-date">{date}</p>
           </div>
         </div>
-        <span className="edit-btn" onClick={handleEdit}>
-          <CiEdit />
+        <span className="action-btn" onClick={toggleMenu}>
+          <HiOutlineDotsVertical />
         </span>
+        {isMenuOpen && (
+          <div className="action-menu">
+            <p onClick={handleEdit}>Edit post</p>
+            <p onClick={handleDelete}>Delete post</p>
+          </div>
+        )}
       </header>
       <div className="post-body">
         <h5 className="title">{post?.title}</h5>

@@ -1,5 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { createPostApi, getAllPostsApi, updatePostApi } from "./postsApi";
+import {
+  createPostApi,
+  deletePostApi,
+  getAllPostsApi,
+  updatePostApi,
+} from "./postsApi";
 
 const extractError = (error) => {
   return (
@@ -38,6 +43,18 @@ export const updatePost = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const response = await updatePostApi(data);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(extractError(error));
+    }
+  }
+);
+
+export const deletePost = createAsyncThunk(
+  "post/delete",
+  async (post_id, thunkAPI) => {
+    try {
+      const response = await deletePostApi(post_id);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(extractError(error));

@@ -3,6 +3,7 @@
   color: var(--very-dark);
   border-radius: 4px;
   margin-bottom: 2rem;
+  position: relative;
 }
 
 .dark .post-card {
@@ -17,7 +18,30 @@
   padding: 1.2rem;
 }
 
-.post-card-header > div {
+.post-card .action-menu {
+  position: absolute;
+  top: 2.2rem;
+  right: 2.2rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 1px 4px 12px 5px var(--primay-gray\24);
+  z-index: 100;
+}
+
+.dark .post-card .action-menu {
+  box-shadow: 1px 2px 10px 2px var(--secondary-gray\36);
+}
+
+.post-card .action-menu > p {
+  padding: 1rem 2rem;
+  cursor: pointer;
+}
+
+.post-card .action-menu p:hover {
+  background-color: var(--secondary-gray\36);
+}
+
+.post-card-header .head {
   display: flex;
   gap: 1rem;
 }
@@ -41,6 +65,7 @@
   font-weight: 400;
 }
 
+.dark .post-card-header .action-btn,
 .dark .post-card-header .edit-btn {
   color: var(--very-light);
 }

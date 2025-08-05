@@ -10,6 +10,7 @@ import NoPosts from "../NoPosts/NoPosts";
 
 function PostsGroup({ setEditPost }) {
   const dispatch = useDispatch();
+  const [menuOpenPostId, setMenuOpenPostId] = useState(null);
   const [page, setPage] = useState(1);
   const { loading, error, posts, pagination } = useSelector(
     (state) => state.posts
@@ -54,7 +55,13 @@ function PostsGroup({ setEditPost }) {
       </header>
       <div>
         {posts.map((post) => (
-          <PostCard key={post.id} post={post} setEditPost={setEditPost} />
+          <PostCard
+            key={post.id}
+            post={post}
+            setEditPost={setEditPost}
+            menuOpenPostId={menuOpenPostId}
+            setMenuOpenPostId={setMenuOpenPostId}
+          />
         ))}
       </div>
     </div>

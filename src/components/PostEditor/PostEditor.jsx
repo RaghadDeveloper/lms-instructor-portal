@@ -9,6 +9,7 @@ import {
   getAllPosts,
   updatePost,
 } from "../../features/posts/postsThunk";
+import { MdOutlineDeleteSweep } from "react-icons/md";
 
 function PostEditor({ editPost, setEditPost }) {
   const dispatch = useDispatch();
@@ -63,6 +64,16 @@ function PostEditor({ editPost, setEditPost }) {
     }));
   };
 
+  const handleMediaDelete = () => {
+    setPreview("");
+    setPostData((prev) => ({
+      ...prev,
+      media_types: "",
+      media_url: "",
+    }));
+    fileInputRef.current.value = "";
+  };
+
   async function handleSubmit(e) {
     e.preventDefault();
     let mediaUrl = postData.media_url;
@@ -102,6 +113,8 @@ function PostEditor({ editPost, setEditPost }) {
     if (postData.media_types && mediaUrl) {
       finalPostData.media_types = postData.media_types;
       finalPostData.media_url = mediaUrl;
+    } else {
+      finalPostData.media_types = "text";
     }
 
     let resultAction;
@@ -167,13 +180,18 @@ function PostEditor({ editPost, setEditPost }) {
         )}
         {postData.media_types === "video" && <video src={preview} controls />}
 
-        <input
-          type="file"
-          accept="video/*, image/*"
-          onChange={handleMediaChange}
-          disabled={loading}
-          ref={fileInputRef}
-        />
+        <div className="media-input">
+          <input
+            type="file"
+            accept="video/*, image/*"
+            onChange={handleMediaChange}
+            disabled={loading}
+            ref={fileInputRef}
+          />
+          <span className="delete-media" onClick={handleMediaDelete}>
+            <MdOutlineDeleteSweep />
+          </span>
+        </div>
         <Button type={"submit"} className={"primary"} disabled={loading}>
           {editPost ? "Update" : "Post"}
         </Button>

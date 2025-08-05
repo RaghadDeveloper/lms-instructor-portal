@@ -6,3 +6,6 @@ export const getAllPostsApi = (user_id, page = 1) =>
 export const createPostApi = (data) => axiosInstance.post("/posts", data);
 
 export const updatePostApi = (data) => axiosInstance.patch("/posts", data);
+
+export const deletePostApi = (post_id) =>
+  axiosInstance.delete(`/posts?post_id=${post_id}`);
