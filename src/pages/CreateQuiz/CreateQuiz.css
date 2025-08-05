@@ -1,0 +1,27 @@
+.create-quiz h1 {
+  margin-bottom: 2rem;
+  font-weight: 500;
+}
+
+.create-quiz .add-questions {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 1rem;
+}
+
+.create-quiz .add-questions .btn.border {
+  max-width: none;
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.btn-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-container .btn.primary {
+  font-size: 1.5rem;
+  margin: 3rem;
+}

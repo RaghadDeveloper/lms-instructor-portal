@@ -1,0 +1,35 @@
+.add-question-card {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  position: relative;
+}
+
+.dark .add-question-card {
+  background-color: var(--dark-bg);
+}
+
+.add-question-card h5 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.add-question-card span {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.add-question-card .field {
+  max-width: none;
+  margin: 0 1rem;
+}
+
+.add-question-card select {
+  max-width: none;
+  margin: 0 1rem 1rem;
+  padding: 0.5rem;
+  width: -webkit-fill-available;
+}

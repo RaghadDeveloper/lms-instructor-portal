@@ -2,8 +2,6 @@ import VideoCard from "../VideoCard/VideoCard";
 import "./CourseContent.css";
 import Button from "../Button/Button";
 import { useNavigate, useParams } from "react-router-dom";
-import ErrorMessage from "../ErrorMessage/ErrorMessage";
-import Loader from "../Loader/Loader";
 import { useSelector } from "react-redux";
 
 function CourseContent({ lessons }) {
@@ -33,7 +31,12 @@ function CourseContent({ lessons }) {
       )}
 
       {lessons && !course.quiz && (
-        <Button className={"border"}>&#43; Add Quiz</Button>
+        <Button
+          className={"border"}
+          onClick={() => navigate(`/courses/${courseId}/quiz/create`)}
+        >
+          &#43; Add Quiz
+        </Button>
       )}
 
       <Button className={"border"} onClick={() => navigate("lesson/create")}>

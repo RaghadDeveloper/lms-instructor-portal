@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getQuiz } from "./quizThunk";
+import { createQuiz, getQuiz } from "./quizThunk";
 
 const initialState = {
   loading: false,
@@ -39,7 +39,16 @@ const quizSlice = createSlice({
         state.error = null;
         state.quiz = action.payload.data;
       })
-      .addCase(getQuiz.rejected, handleRejected);
+      .addCase(getQuiz.rejected, handleRejected)
+
+      // getQuiz
+      .addCase(createQuiz.pending, handlePending)
+      .addCase(createQuiz.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.quiz = action.payload.data;
+      })
+      .addCase(createQuiz.rejected, handleRejected);
   },
 });
 
