@@ -11,7 +11,7 @@ function Welcome() {
     <div className={`welcome ${hide ? "hide" : ""}`}>
       <div>
         <p>
-          Welcome back, <span className="name">{user.username}</span>{" "}
+          Welcome back, <span className="name">{user?.username}</span>{" "}
           <PiHandWaving />
         </p>
         <p>See what happend with your courses and students!</p>

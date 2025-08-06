@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createQuiz, getQuiz } from "./quizThunk";
+import { createQuiz, deleteQuestion, getQuiz } from "./quizThunk";
 
 const initialState = {
   loading: false,
@@ -48,7 +48,18 @@ const quizSlice = createSlice({
         state.error = null;
         state.quiz = action.payload.data;
       })
-      .addCase(createQuiz.rejected, handleRejected);
+      .addCase(createQuiz.rejected, handleRejected)
+
+      // deleteQuestion
+      .addCase(deleteQuestion.pending, handlePending)
+      .addCase(deleteQuestion.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.quiz.questions = state.quiz.questions.filter(
+          (question) => question.question_id !== action.meta.arg
+        );
+      })
+      .addCase(deleteQuestion.rejected, handleRejected);
   },
 });
 

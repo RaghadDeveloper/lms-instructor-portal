@@ -1,10 +1,17 @@
 import { CiEdit } from "react-icons/ci";
 import "./QuizQuestionCard.css";
 import { AiOutlineDelete } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import { deleteQuestion } from "../../features/quiz/quizThunk";
 
 function QuizQuestionCard({ num, question }) {
+  const dispatch = useDispatch();
   const correctOptionNumber =
     question.options.findIndex((group) => group[0].color === "green") + 1;
+
+  const handleDelete = () => {
+    dispatch(deleteQuestion(question.question_id));
+  };
 
   return (
     <div className="question-card">
@@ -17,7 +24,7 @@ function QuizQuestionCard({ num, question }) {
           <button>
             <CiEdit />
           </button>
-          <button>
+          <button onClick={handleDelete}>
             <AiOutlineDelete />
           </button>
         </div>
