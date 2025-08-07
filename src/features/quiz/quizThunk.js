@@ -1,5 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { createQuizApi, deleteQuestionApi, getQuizApi } from "./quizApi";
+import {
+  createQuizApi,
+  deleteQuestionApi,
+  getQuizApi,
+  updateQuestionApi,
+} from "./quizApi";
 
 const extractError = (error) => {
   return (
@@ -25,6 +30,18 @@ export const createQuiz = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const response = await createQuizApi(data);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(extractError(error));
+    }
+  }
+);
+
+export const updateQuestion = createAsyncThunk(
+  "quiz/updateQuestion",
+  async ({ questionId, question }, thunkAPI) => {
+    try {
+      const response = await updateQuestionApi({ questionId, question });
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(extractError(error));

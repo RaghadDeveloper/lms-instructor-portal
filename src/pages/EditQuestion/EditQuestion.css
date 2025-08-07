@@ -1,0 +1,9 @@
+.edit-question {
+  text-align: -webkit-center;
+}
+
+.edit-question h2 {
+  margin-bottom: 2rem;
+  font-weight: 500;
+  color: var(--primary-light);
+}

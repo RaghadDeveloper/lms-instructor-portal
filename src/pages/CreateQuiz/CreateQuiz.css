@@ -9,8 +9,8 @@
   gap: 1rem;
 }
 
-.create-quiz .add-questions .btn.border {
-  max-width: none;
+.create-quiz .add-questions > .btn.border {
+  max-width: 750px;
   margin: 0;
   font-size: 1.5rem;
 }

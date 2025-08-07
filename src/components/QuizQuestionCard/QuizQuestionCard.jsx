@@ -3,11 +3,14 @@ import "./QuizQuestionCard.css";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { deleteQuestion } from "../../features/quiz/quizThunk";
+import { useNavigate, useParams } from "react-router-dom";
 
 function QuizQuestionCard({ num, question }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { courseId } = useParams();
   const correctOptionNumber =
-    question.options.findIndex((group) => group[0].color === "green") + 1;
+    question.options.findIndex((group) => group.color === "green") + 1;
 
   const handleDelete = () => {
     dispatch(deleteQuestion(question.question_id));
@@ -21,7 +24,14 @@ function QuizQuestionCard({ num, question }) {
           {question.question_text}
         </p>
         <div className="actions">
-          <button>
+          <button
+            onClick={() =>
+              navigate(
+                `/courses/${courseId}/quiz/edit-question/${question.question_id}`,
+                { state: { question } }
+              )
+            }
+          >
             <CiEdit />
           </button>
           <button onClick={handleDelete}>
@@ -30,9 +40,9 @@ function QuizQuestionCard({ num, question }) {
         </div>
       </div>
       <ul className="options">
-        {question.options.map((option) => (
-          <li key={option.at(0).id} className="answer">
-            {option.at(0).option_text}
+        {question.options.map((option, index) => (
+          <li key={index} className="answer">
+            {option.option_text}
           </li>
         ))}
       </ul>

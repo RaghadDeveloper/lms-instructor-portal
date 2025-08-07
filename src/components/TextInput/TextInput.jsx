@@ -28,7 +28,7 @@ function TextInput({
       <label htmlFor={id} className="label">
         {label}
       </label>
-      {name === "tags" && (
+      {(name === "tags" || onClick) && (
         <button
           type="button"
           className={`remove-tag ${disabled ? "disabled" : ""}`}

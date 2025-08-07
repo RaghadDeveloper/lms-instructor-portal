@@ -12,7 +12,7 @@ function CreateQuiz() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { loading, error } = useSelector((state) => state.quiz);
+  const { loading, error, quiz } = useSelector((state) => state.quiz);
   const { courseId } = useParams();
   const [questions, setQuestions] = useState([
     {
@@ -51,14 +51,14 @@ function CreateQuiz() {
   };
 
   const handleSubmit = async () => {
-    const quiz = {
+    const quizInfo = {
       course_id: Number(courseId),
       questions: questions,
     };
 
-    const resultAction = await dispatch(createQuiz(quiz));
+    const resultAction = await dispatch(createQuiz(quizInfo));
     if (createQuiz.fulfilled.match(resultAction))
-      navigate(`/courses/${courseId}`);
+      navigate(`/courses/${courseId}/quiz/${quiz.quiz_id}`);
   };
 
   if (loading) return <Loader />;

@@ -3,6 +3,7 @@
   padding: 2rem;
   border-radius: 8px;
   position: relative;
+  max-width: 750px;
 }
 
 .dark .add-question-card {
@@ -32,4 +33,17 @@
   margin: 0 1rem 1rem;
   padding: 0.5rem;
   width: -webkit-fill-available;
+}
+
+.add-question-card .btn.border {
+  max-width: none;
+}
+
+.add-question-card .update-btn {
+  width: 100%;
+  text-align: end;
+}
+
+.add-question-card .update-btn .btn.primary {
+  width: fit-content;
 }
