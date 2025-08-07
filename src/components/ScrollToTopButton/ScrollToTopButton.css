@@ -1,0 +1,17 @@
+.scroll-to-top-btn {
+  position: fixed;
+  right: 1.4rem;
+  bottom: 1.4rem;
+  z-index: 100;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  box-shadow: 2px 4px 13px 5px var(--primay-gray\24);
+  cursor: pointer;
+  color: var(--very-dark);
+  background-color: var(--very-light);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+}

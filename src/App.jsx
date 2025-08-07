@@ -28,6 +28,7 @@ import CreateCourse from "./pages/CreateCourse/CreateCourse";
 import QuizDetails from "./pages/QuizDetails/QuizDetails";
 import CreateQuiz from "./pages/CreateQuiz/CreateQuiz";
 import EditQuestion from "./pages/EditQuestion/EditQuestion";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 
 function App() {
   const dispatch = useDispatch();
@@ -45,6 +46,7 @@ function App() {
 
   return (
     <BrowserRouter basename="/lms-instructor-portal/">
+      <ScrollToTop />
       <Routes>
         <Route path="signup" element={<Signup />} />
         <Route path="login" element={<Login />} />

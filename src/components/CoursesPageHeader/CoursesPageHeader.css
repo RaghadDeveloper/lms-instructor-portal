@@ -1,6 +1,7 @@
 .courses-page-header {
   display: flex;
   flex-direction: column;
+  margin-bottom: 1.2rem;
 }
 
 .courses-page-header > div {
@@ -8,11 +9,14 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1.5rem;
 }
 
 .courses-page-header h1 {
   font-size: 2rem;
   font-weight: 600;
+  margin-bottom: 1.5rem;
 }
 
 .courses-page-header button {
@@ -38,10 +42,7 @@
   border: 1px solid var(--primay-gray);
   font-size: 1rem;
   color: var(--very-dark);
-}
-
-.courses-page-header div input {
-  width: 300px;
+  width: 370px;
 }
 
 .dark .courses-page-header div input {
@@ -59,6 +60,14 @@
   color: var(--primary-color);
 }
 
-.courses-page-header div select {
-  min-width: 155px;
+.courses-page-header .filter {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: end;
+}
+
+.courses-page-header .filter select {
+  width: 200px;
 }

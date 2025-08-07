@@ -13,6 +13,7 @@ import {
 import SquareLoader from "../../components/SquareLoader/SquareLoader";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Forbidden from "../../components/Forbidden/Forbidden";
+import ScrollToTopButton from "../../components/ScrollToTopButton/ScrollToTopButton";
 
 function MainPage() {
   const dispatch = useDispatch();
@@ -41,6 +42,7 @@ function MainPage() {
         <Header />
         <div className="content">
           <Outlet />
+          <ScrollToTopButton />
         </div>
       </main>
     </div>
