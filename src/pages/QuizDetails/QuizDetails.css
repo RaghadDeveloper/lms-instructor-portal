@@ -1,4 +1,14 @@
-.quiz-details .title {
+.quiz-details header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 2rem;
+}
+
+.quiz-details header .btn.primary {
+  width: fit-content;
+}
+
+.quiz-details .title {
   font-weight: 500;
 }

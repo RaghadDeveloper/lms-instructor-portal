@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  addQuestion,
   createQuiz,
   deleteQuestion,
   getQuiz,
@@ -54,6 +55,15 @@ const quizSlice = createSlice({
         state.quiz = action.payload.data;
       })
       .addCase(createQuiz.rejected, handleRejected)
+
+      // addQuestion
+      .addCase(addQuestion.pending, handlePending)
+      .addCase(addQuestion.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.quiz.questions.push(action.payload.data);
+      })
+      .addCase(addQuestion.rejected, handleRejected)
 
       // updateQuestion
       .addCase(updateQuestion.pending, handlePending)

@@ -68,6 +68,10 @@ function App() {
               <Route path=":courseId/quiz/:quizId" element={<QuizDetails />} />
               <Route path=":courseId/quiz/create" element={<CreateQuiz />} />
               <Route
+                path=":courseId/quiz/:quizId/create-question"
+                element={<EditQuestion />}
+              />
+              <Route
                 path=":courseId/quiz/edit-question/:questionId"
                 element={<EditQuestion />}
               />

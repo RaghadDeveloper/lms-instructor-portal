@@ -59,7 +59,7 @@ function AddQuestion({ index, questionData, onChange, removeQuestion, mode }) {
 
   return (
     <div className="add-question-card">
-      {mode !== "edit" && (
+      {!mode && (
         <>
           <h5>Question {index + 1}</h5>
           <span onClick={() => removeQuestion(index)}>&times;</span>
@@ -94,12 +94,20 @@ function AddQuestion({ index, questionData, onChange, removeQuestion, mode }) {
       <Button type="button" className="border" onClick={addOption}>
         + Add Option
       </Button>
-      {mode === "edit" && (
+      {mode === "edit" ? (
         <div className="update-btn">
           <Button type={"submit"} className={"primary"}>
             Save changes
           </Button>
         </div>
+      ) : mode === "add" ? (
+        <div className="update-btn">
+          <Button type={"submit"} className={"primary"}>
+            Submit Question
+          </Button>
+        </div>
+      ) : (
+        ""
       )}
     </div>
   );
