@@ -6,6 +6,7 @@ import { getLessonDetails } from "../../features/lessons/lessonsThunk";
 import VideoInfo from "../VideoInfo/VideoInfo";
 import LessonFiles from "../LessonFiles/LessonFiles";
 import LessonComments from "../LessonComments/LessonComments";
+import { getLessonFile } from "../../features/lessonsFiles/lessonsFilesThunk";
 
 function LessonInfo() {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ function LessonInfo() {
 
   useEffect(() => {
     dispatch(getLessonDetails(lessonId));
+    dispatch(getLessonFile(lessonId));
   }, [lessonId, dispatch]);
 
   const handleScrollToComments = () => {

@@ -1,12 +1,22 @@
 import "./FileCard.css";
-import courseImg from "../../assets/images/courseImg.png";
+import { useNavigate, useParams } from "react-router-dom";
 
-function FileCard() {
+function FileCard({ file }) {
+  const navigate = useNavigate();
+  const { courseId, lessonId } = useParams();
+
   return (
-    <div className="file-card">
-      <img src={courseImg} />
+    <div
+      className="file-card"
+      onClick={() =>
+        navigate(`/courses/${courseId}/lesson/${lessonId}/pdf/${file.id}`, {
+          state: { file },
+        })
+      }
+    >
+      <img src={file.image_pdf_url} alt="PDF preview" />
       <div className="file-details">
-        <h4>Lesson Tilte</h4>
+        <h4>{file.title}</h4>
         <p>20 pages</p>
       </div>
     </div>

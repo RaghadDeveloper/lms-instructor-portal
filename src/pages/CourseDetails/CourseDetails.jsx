@@ -8,10 +8,11 @@ import DetailsLayout from "../../components/DetailsLayout/DetailsLayout";
 import Loader from "../../components/Loader/Loader";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import { getAllLessons } from "../../features/lessons/lessonsThunk";
+import Pdf from "../../components/Pdf/Pdf";
 
 function CourseDetails() {
   const dispatch = useDispatch();
-  const { courseId } = useParams();
+  const { courseId, pdfId } = useParams();
   const { course, loading, error } = useSelector((state) => state.courses);
   const { lessons } = useSelector((state) => state.lessons);
 
@@ -27,7 +28,8 @@ function CourseDetails() {
   return (
     <div className="course-details">
       <DetailsLayout course={course} />
-      <CourseContent lessons={lessons} />
+
+      {pdfId ? <Pdf /> : <CourseContent lessons={lessons} />}
     </div>
   );
 }
