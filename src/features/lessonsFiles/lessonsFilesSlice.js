@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { deleteFile, getLessonFile } from "./lessonsFilesThunk";
+import { deleteFile, getLessonFile, uploadFile } from "./lessonsFilesThunk";
 
 const initialState = {
   loading: false,
@@ -40,6 +40,15 @@ const lessonFilesSlice = createSlice({
         state.files = action.payload.data;
       })
       .addCase(getLessonFile.rejected, handleRejected)
+
+      // uploadFile
+      .addCase(uploadFile.pending, handlePending)
+      .addCase(uploadFile.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.files.push(action.payload.data);
+      })
+      .addCase(uploadFile.rejected, handleRejected)
 
       // deleteFile
       .addCase(deleteFile.pending, handlePending)

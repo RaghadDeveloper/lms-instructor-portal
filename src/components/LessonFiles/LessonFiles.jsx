@@ -2,6 +2,7 @@ import "./LessonFiles.css";
 import Grid from "../Grid/Grid";
 import FileCard from "../FileCard/FileCard";
 import { useSelector } from "react-redux";
+import PdfFileInput from "../PdfFileInput/PdfFileInput";
 
 function LessonFiles() {
   const { files } = useSelector((state) => state.lessonFiles);
@@ -13,6 +14,7 @@ function LessonFiles() {
         {files?.map((file) => (
           <FileCard key={file.id} file={file} />
         ))}
+        <PdfFileInput />
       </Grid>
     </div>
   );

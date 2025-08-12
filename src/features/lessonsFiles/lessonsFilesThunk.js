@@ -1,5 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { deleteFileApi, getLessonFilesApi } from "./lessonsFilesApi";
+import {
+  deleteFileApi,
+  getLessonFilesApi,
+  uploadFileApi,
+} from "./lessonsFilesApi";
 
 const extractError = (error) => {
   return (
@@ -14,6 +18,18 @@ export const getLessonFile = createAsyncThunk(
   async (lessonId, thunkAPI) => {
     try {
       const response = await getLessonFilesApi(lessonId);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(extractError(error));
+    }
+  }
+);
+
+export const uploadFile = createAsyncThunk(
+  "lessons/uploadFile",
+  async (file, thunkAPI) => {
+    try {
+      const response = await uploadFileApi(file);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(extractError(error));
