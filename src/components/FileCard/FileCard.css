@@ -5,6 +5,7 @@
   border: 1px solid var(--primary-color);
   border-radius: 4px;
   cursor: pointer;
+  height: 100%;
 }
 
 .file-card:hover {
@@ -22,4 +23,72 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+}
+
+.file-card .actions {
+  flex: 1;
+  text-align: end;
+}
+
+.file-card .actions button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  color: var(--very-dark);
+  cursor: pointer;
+}
+
+.dark .file-card .actions button {
+  color: var(--very-light);
+}
+
+.file-card .actions button:hover {
+  color: var(--primary-color);
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.delete-modal {
+  position: fixed;
+  background-color: white;
+  padding: 3rem;
+  padding-top: 3rem;
+  box-shadow: 0px 0px 10px 10px var(--primay-gray\24);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.2rem;
+  z-index: 1000;
+  border-radius: 4px;
+}
+
+.delete-modal p {
+  margin-bottom: 3rem !important;
+  margin-right: 2rem;
+}
+
+.delete-modal span {
+  position: absolute;
+  top: 1rem;
+  right: 2rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.delete-modal .btn.danger {
+  width: fit-content;
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  padding: 0.5rem 1rem;
+  z-index: 100;
 }

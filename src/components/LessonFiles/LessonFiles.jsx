@@ -10,7 +10,7 @@ function LessonFiles() {
     <div className="lesson-files card">
       <h2>Lesson fils:</h2>
       <Grid>
-        {files.map((file) => (
+        {files?.map((file) => (
           <FileCard key={file.id} file={file} />
         ))}
       </Grid>

@@ -20,6 +20,12 @@
   border: 2px solid var(--primary-color);
 }
 
+.btn.danger {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+}
+
 .btn.icon {
   border: none;
   background-color: transparent;

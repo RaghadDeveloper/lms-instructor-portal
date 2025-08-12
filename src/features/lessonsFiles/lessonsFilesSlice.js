@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getLessonFile } from "./lessonsFilesThunk";
+import { deleteFile, getLessonFile } from "./lessonsFilesThunk";
 
 const initialState = {
   loading: false,
@@ -31,13 +31,24 @@ const lessonFilesSlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder
+
+      // getLessonFile
       .addCase(getLessonFile.pending, handlePending)
       .addCase(getLessonFile.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
         state.files = action.payload.data;
       })
-      .addCase(getLessonFile.rejected, handleRejected);
+      .addCase(getLessonFile.rejected, handleRejected)
+
+      // deleteFile
+      .addCase(deleteFile.pending, handlePending)
+      .addCase(deleteFile.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.files = state.files.filter((file) => file.id !== action.meta.arg);
+      })
+      .addCase(deleteFile.rejected, handleRejected);
   },
 });
 
