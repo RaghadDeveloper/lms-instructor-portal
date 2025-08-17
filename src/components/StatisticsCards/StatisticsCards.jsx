@@ -1,7 +1,7 @@
 import StatisticCard from "../StatisticCard/StatisticCard";
 import "./StatisticsCards.css";
-import ReLineChart from "../ReLineChart/ReLineChart.jsx";
-import ReBarChart from "../ReBarChart/ReBarChart.jsx";
+import EarningsLineChart from "../EarningsLineChart/EarningsLineChart.jsx";
+import CoursesAndFollowersBarChart from "../CoursesAndFollowersBarChart/CoursesAndFollowersBarChart.jsx";
 import { useSelector } from "react-redux";
 import { GoBook } from "react-icons/go";
 import { MdOndemandVideo } from "react-icons/md";
@@ -27,8 +27,8 @@ function StatisticsCards() {
         ))}
       </div>
       <div className="statistics-cards">
-        <ReLineChart />
-        <ReBarChart />
+        <EarningsLineChart />
+        <CoursesAndFollowersBarChart />
       </div>
     </>
   );

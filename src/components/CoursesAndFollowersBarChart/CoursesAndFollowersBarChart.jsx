@@ -7,7 +7,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import "./ReBarChart.css";
+import "./CoursesAndFollowersBarChart.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import {
@@ -17,7 +17,7 @@ import {
 
 const formatter = new Intl.DateTimeFormat("en", { month: "short" });
 
-function ReBarChart() {
+function CoursesAndFollowersBarChart() {
   const dispatch = useDispatch();
   const [year, setYear] = useState(2025);
   const { courses, follows } = useSelector((state) => state.statistics);
@@ -65,4 +65,4 @@ function ReBarChart() {
   );
 }
 
-export default ReBarChart;
+export default CoursesAndFollowersBarChart;

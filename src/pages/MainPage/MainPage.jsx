@@ -14,6 +14,12 @@ import SquareLoader from "../../components/SquareLoader/SquareLoader";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Forbidden from "../../components/Forbidden/Forbidden";
 import ScrollToTopButton from "../../components/ScrollToTopButton/ScrollToTopButton";
+import {
+  coursesStatistics,
+  earningsStatistics,
+  followsStatistics,
+  lessonsStatistics,
+} from "../../features/statistics/statisticsThunk";
 
 function MainPage() {
   const dispatch = useDispatch();
@@ -28,6 +34,11 @@ function MainPage() {
   useEffect(() => {
     dispatch(getProfile());
     dispatch(getMyFollowers());
+
+    dispatch(coursesStatistics(2025));
+    dispatch(lessonsStatistics(2025));
+    dispatch(followsStatistics(2025));
+    dispatch(earningsStatistics(2025));
   }, [dispatch]);
 
   if (loading || status === "loading") return <SquareLoader />;

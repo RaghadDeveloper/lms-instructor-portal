@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import "./ReLineChart.css";
+import "./EarningsLineChart.css";
 import {
   CartesianGrid,
   XAxis,
@@ -14,7 +14,7 @@ import { earningsStatistics } from "../../features/statistics/statisticsThunk";
 
 const formatter = new Intl.DateTimeFormat("en", { month: "short" });
 
-function ReLineChart() {
+function EarningsLineChart() {
   const dispatch = useDispatch();
   const [year, setYear] = useState(2025);
   const { earnings } = useSelector((state) => state.statistics);
@@ -56,4 +56,4 @@ function ReLineChart() {
   );
 }
 
-export default ReLineChart;
+export default EarningsLineChart;
