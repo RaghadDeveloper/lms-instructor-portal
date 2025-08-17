@@ -4,6 +4,7 @@ import {
   getMyFollowers,
   getProfile,
   storeUserCategories,
+  // updateAvatar,
 } from "./profileThunks";
 
 const initialState = {
@@ -44,7 +45,8 @@ const profileSlice = createSlice({
       .addCase(getProfile.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.profile = action.payload.profile;
+        state.profile = action.payload.data.profile;
+        state.categories = action.payload.data.profile.categories;
       })
       .addCase(getProfile.rejected, handleRejected)
 
@@ -74,6 +76,14 @@ const profileSlice = createSlice({
         state.categories = action.payload.categories;
       })
       .addCase(storeUserCategories.rejected, handleRejected);
+
+    // updateAvatar
+    // .addCase(updateAvatar.pending, handlePending)
+    // .addCase(updateAvatar.fulfilled, (state, action) => {
+    //   state.loading = false;
+    //   state.error = null;
+    // })
+    // .addCase(updateAvatar.rejected, handleRejected);
   },
 });
 

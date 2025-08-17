@@ -20,7 +20,7 @@
   padding-bottom: 2rem;
 }
 
-.profile-card .profile-header .profile-img {
+.profile-card .profile-header .profile-img img {
   width: 150px;
   height: 150px;
   border-radius: 50%;

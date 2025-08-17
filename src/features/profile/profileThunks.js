@@ -4,6 +4,7 @@ import {
   getMyFollowersApi,
   getProfileApi,
   storeUserCategoriesApi,
+  // updateAvatarApi,
 } from "./profileApi";
 
 const extractError = (error) => {
@@ -61,3 +62,15 @@ export const storeUserCategories = createAsyncThunk(
     }
   }
 );
+
+// export const updateAvatar = createAsyncThunk(
+//   "profile/updateAvatar",
+//   async (avatar_url, thunkAPI) => {
+//     try {
+//       const response = await updateAvatarApi(avatar_url);
+//       return response.data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(extractError(error));
+//     }
+//   }
+// );
