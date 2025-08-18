@@ -21,6 +21,12 @@ function PostCard({ post, setEditPost, menuOpenPostId, setMenuOpenPostId }) {
   const [showComments, setShowComments] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [likes, setLikes] = useState(post.likes_count);
+  const [commentsCount, setCommentsCount] = useState(post.comments_count);
+  const [comment, setComment] = useState({
+    commentable_id: post.id,
+    commentable_type: "post",
+    content: "",
+  });
 
   const date =
     post?.created_at === post?.updated_at
@@ -104,7 +110,7 @@ function PostCard({ post, setEditPost, menuOpenPostId, setMenuOpenPostId }) {
           <div className="divider"></div>
           <div onClick={() => setShowComments(true)}>
             <FaRegComment />
-            <span>{post.comments_count}</span>
+            <span>{commentsCount}</span>
           </div>
         </div>
       </div>
@@ -113,6 +119,9 @@ function PostCard({ post, setEditPost, menuOpenPostId, setMenuOpenPostId }) {
           showComments={showComments}
           setShowComments={setShowComments}
           post={post}
+          comment={comment}
+          setComment={setComment}
+          setCommentsCount={setCommentsCount}
         />
       )}
     </>

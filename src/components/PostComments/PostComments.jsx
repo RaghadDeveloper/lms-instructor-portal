@@ -3,7 +3,13 @@ import NoComments from "../NoComments/NoComments";
 import CommentInput from "../CommentInput/CommentInput";
 import Comment from "../Comment/Comment";
 
-function PostComments({ setShowComments, post }) {
+function PostComments({
+  setShowComments,
+  post,
+  comment,
+  setComment,
+  setCommentsCount,
+}) {
   return (
     <>
       <div className="overlay" onClick={() => setShowComments(false)} />
@@ -22,7 +28,11 @@ function PostComments({ setShowComments, post }) {
         ) : (
           <NoComments />
         )}
-        <CommentInput />
+        <CommentInput
+          comment={comment}
+          setComment={setComment}
+          setCommentsCount={setCommentsCount}
+        />
       </div>
     </>
   );

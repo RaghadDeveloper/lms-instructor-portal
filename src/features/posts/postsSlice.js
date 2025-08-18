@@ -1,5 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createPost, deletePost, getAllPosts, updatePost } from "./postsThunk";
+import {
+  createComment,
+  createPost,
+  deletePost,
+  getAllPosts,
+  updatePost,
+} from "./postsThunk";
 
 const initialState = {
   loading: false,
@@ -83,7 +89,20 @@ const postsSlice = createSlice({
         state.loading = false;
         state.posts = state.posts.filter((post) => post.id !== action.meta.arg);
       })
-      .addCase(deletePost.rejected, handleRejected);
+      .addCase(deletePost.rejected, handleRejected)
+
+      // createComment
+      .addCase(createComment.fulfilled, (state, action) => {
+        state.loading = false;
+        const postId = action.meta.arg.commentable_id;
+        const comment = action.payload.data;
+        state.posts = state.posts.map((post) =>
+          post.id === postId
+            ? { ...post, comments: [...post.comments, comment] }
+            : post
+        );
+      })
+      .addCase(createComment.rejected, handleRejected);
   },
 });
 

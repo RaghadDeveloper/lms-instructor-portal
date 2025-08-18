@@ -15,6 +15,10 @@
   object-fit: cover;
 }
 
+.comment > div {
+  min-width: 150px;
+}
+
 .comment .comment-content {
   display: flex;
   flex-direction: column;
