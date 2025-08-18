@@ -1,0 +1,45 @@
+.comment-input {
+  position: fixed;
+  background-color: var(--secondary-gray);
+  bottom: 0;
+  width: 100%;
+}
+
+.dark .comment-input {
+  background-color: var(--primay-gray);
+}
+
+.comment-input textarea {
+  bottom: 0;
+  width: 95%;
+  height: 100%;
+  resize: none;
+  background-color: transparent;
+  border: none;
+  scrollbar-width: none;
+  padding: 0.5rem;
+  padding-right: 1.2rem;
+  font-size: 1rem;
+}
+
+.comment-input textarea:focus {
+  outline: none;
+}
+
+.dark .comment-input textarea,
+.dark .comment-input textarea::placeholder {
+  color: var(--very-light);
+}
+
+.comment-input .send-icon {
+  height: 100%;
+  position: absolute;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  cursor: pointer;
+}
+.dark .comment-input .send-icon {
+  color: var(--very-light);
+}

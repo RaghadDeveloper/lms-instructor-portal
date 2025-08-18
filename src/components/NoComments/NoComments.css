@@ -1,0 +1,18 @@
+.no-comments {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5rem;
+  color: var(--primay-gray);
+}
+
+.dark .no-comments {
+  color: white;
+}
+
+.no-comments .icon {
+  font-size: 8rem;
+  margin-bottom: 2rem;
+  color: var(--secondary-gray);
+}
