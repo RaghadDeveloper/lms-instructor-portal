@@ -15,7 +15,7 @@ function PostEditor({ editPost, setEditPost }) {
   const dispatch = useDispatch();
   const fileInputRef = useRef(null);
   const [preview, setPreview] = useState("");
-  const { loading, error } = useSelector((state) => state.posts);
+  const { loading } = useSelector((state) => state.posts);
   const { profile } = useSelector((state) => state.profile);
   const [postData, setPostData] = useState({
     title: "",
@@ -146,9 +146,9 @@ function PostEditor({ editPost, setEditPost }) {
     }
   }
 
-  useEffect(() => {
-    if (error) alert(error);
-  }, [error]);
+  // useEffect(() => {
+  //   if (error) alert(error);
+  // }, [error]);
 
   return (
     <form

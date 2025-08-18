@@ -1,14 +1,12 @@
 import "./PostCard.css";
-import { AiOutlineLike } from "react-icons/ai";
 import { FaRegComment } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import { deletePost } from "../../features/posts/postsThunk";
 import { useEffect, useState } from "react";
-import CommentInput from "../CommentInput/CommentInput";
-import Comment from "../Comment/Comment";
-import NoComments from "../NoComments/NoComments";
 import PostComments from "../PostComments/PostComments";
+import { BiLike, BiSolidLike } from "react-icons/bi";
+import { like } from "../../features/like/likeThunk";
 
 function formatDate(dateString, label = "Created at") {
   const date = new Date(dateString);
@@ -21,6 +19,8 @@ function PostCard({ post, setEditPost, menuOpenPostId, setMenuOpenPostId }) {
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.profile);
   const [showComments, setShowComments] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
+  const [likes, setLikes] = useState(post.likes_count);
 
   const date =
     post?.created_at === post?.updated_at
@@ -43,6 +43,12 @@ function PostCard({ post, setEditPost, menuOpenPostId, setMenuOpenPostId }) {
 
   const handleDelete = () => {
     dispatch(deletePost(post.id));
+  };
+
+  const handlePostLike = () => {
+    dispatch(like({ likeable_id: post.id, likeable_type: "post" }));
+    setIsLiked(true);
+    setLikes(likes + 1);
   };
 
   useEffect(() => {
@@ -91,9 +97,9 @@ function PostCard({ post, setEditPost, menuOpenPostId, setMenuOpenPostId }) {
           )}
         </div>
         <div className="post-footer">
-          <div>
-            <AiOutlineLike />
-            <span>{post.likes_count}</span>
+          <div onClick={handlePostLike}>
+            {isLiked ? <BiSolidLike className="liked" /> : <BiLike />}
+            <span>{likes}</span>
           </div>
           <div className="divider"></div>
           <div onClick={() => setShowComments(true)}>

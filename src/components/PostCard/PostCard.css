@@ -122,3 +122,7 @@
   width: 1px;
   background-color: var(--primary-color);
 }
+
+.post-card .liked {
+  color: var(--primary-color);
+}

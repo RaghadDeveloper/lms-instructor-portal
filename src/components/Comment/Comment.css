@@ -30,6 +30,10 @@
   margin-right: 0.8rem;
 }
 
+.comment .actions .liked {
+  color: var(--primary-color);
+}
+
 .comment .actions div {
   display: flex;
   gap: 0.5rem;
