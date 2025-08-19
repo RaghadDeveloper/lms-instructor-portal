@@ -4,6 +4,7 @@ import {
   createPostApi,
   deletePostApi,
   getAllPostsApi,
+  getPostCommentsApi,
   updatePostApi,
 } from "./postsApi";
 
@@ -56,6 +57,18 @@ export const deletePost = createAsyncThunk(
   async (post_id, thunkAPI) => {
     try {
       const response = await deletePostApi(post_id);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(extractError(error));
+    }
+  }
+);
+
+export const getPostComments = createAsyncThunk(
+  "post/getComments",
+  async (postId, thunkAPI) => {
+    try {
+      const response = await getPostCommentsApi(postId);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(extractError(error));

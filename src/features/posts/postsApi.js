@@ -10,4 +10,9 @@ export const updatePostApi = (data) => axiosInstance.patch("/posts", data);
 export const deletePostApi = (post_id) =>
   axiosInstance.delete(`/posts?post_id=${post_id}`);
 
+export const getPostCommentsApi = (postId) =>
+  axiosInstance.get(
+    `/all-comments?commentable_id=${postId}&commentable_type=post`
+  );
+
 export const createCommentApi = (data) => axiosInstance.post("/comments", data);

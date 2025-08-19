@@ -2,7 +2,7 @@ import "./PostCard.css";
 import { FaRegComment } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { HiOutlineDotsVertical } from "react-icons/hi";
-import { deletePost } from "../../features/posts/postsThunk";
+import { deletePost, getPostComments } from "../../features/posts/postsThunk";
 import { useEffect, useState } from "react";
 import PostComments from "../PostComments/PostComments";
 import { BiLike, BiSolidLike } from "react-icons/bi";
@@ -108,7 +108,12 @@ function PostCard({ post, setEditPost, menuOpenPostId, setMenuOpenPostId }) {
             <span>{likes}</span>
           </div>
           <div className="divider"></div>
-          <div onClick={() => setShowComments(true)}>
+          <div
+            onClick={() => {
+              setShowComments(true);
+              dispatch(getPostComments(post.id));
+            }}
+          >
             <FaRegComment />
             <span>{commentsCount}</span>
           </div>
@@ -118,7 +123,6 @@ function PostCard({ post, setEditPost, menuOpenPostId, setMenuOpenPostId }) {
         <PostComments
           showComments={showComments}
           setShowComments={setShowComments}
-          post={post}
           comment={comment}
           setComment={setComment}
           setCommentsCount={setCommentsCount}

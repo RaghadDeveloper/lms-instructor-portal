@@ -9,7 +9,7 @@ function CommentInput({ comment, setComment, setCommentsCount }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (comment.commentable_type === "App\\Models\\Post") {
+    if (comment.commentable_type === "post") {
       const result = await dispatch(createComment(comment));
       if (createComment.fulfilled.match(result)) {
         setCommentsCount((prev) => prev + 1);

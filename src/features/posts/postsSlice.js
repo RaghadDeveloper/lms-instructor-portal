@@ -4,6 +4,7 @@ import {
   createPost,
   deletePost,
   getAllPosts,
+  getPostComments,
   updatePost,
 } from "./postsThunk";
 
@@ -12,6 +13,8 @@ const initialState = {
   error: null,
   posts: [],
   post: null,
+  commentsLoading: false,
+  comments: [],
   pagination: {
     currentPage: 1,
     lastPage: 1,
@@ -91,20 +94,28 @@ const postsSlice = createSlice({
       })
       .addCase(deletePost.rejected, handleRejected)
 
+      // getPostComments
+      .addCase(getPostComments.pending, (state) => {
+        state.commentsLoading = true;
+        state.comments = [];
+        state.error = null;
+      })
+      .addCase(getPostComments.fulfilled, (state, action) => {
+        state.commentsLoading = false;
+        state.comments = action.payload.data;
+      })
+      .addCase(getPostComments.rejected, handleRejected)
+
       // createComment
       .addCase(createComment.fulfilled, (state, action) => {
         state.loading = false;
 
         const commentData = action.payload.data;
-        const postId = commentData.commentable_id;
-
-        const post = state.posts.find((post) => post.id === postId);
-        if (!post) return;
 
         if (action.payload.data.comment_parent_id) {
           const parentCommentId = commentData.comment_parent_id;
 
-          const parentComment = post.comments.find(
+          const parentComment = state.comments.find(
             (comment) => comment.id === parentCommentId
           );
 
@@ -116,7 +127,7 @@ const postsSlice = createSlice({
             parentComment.replies.push(commentData);
           }
         } else {
-          post.comments.push(commentData);
+          state.comments.unshift(commentData);
         }
       })
       .addCase(createComment.rejected, handleRejected);

@@ -2,26 +2,34 @@ import "./PostComments.css";
 import NoComments from "../NoComments/NoComments";
 import CommentInput from "../CommentInput/CommentInput";
 import Comment from "../Comment/Comment";
+import { useSelector } from "react-redux";
 
 function PostComments({
   setShowComments,
-  post,
   comment,
   setComment,
   setCommentsCount,
 }) {
+  const { commentsLoading, comments } = useSelector((state) => state.posts);
+
   return (
     <>
       <div className="overlay" onClick={() => setShowComments(false)} />
       <div className="post-comments">
-        {post.comments.length ? (
-          <div className="e">
-            {post.comments.map((comment) => (
-              <Comment key={comment.id} comment={comment} />
-            ))}
-          </div>
+        {commentsLoading ? (
+          <p className="comments-loading">Loading comment...</p>
         ) : (
-          <NoComments />
+          <>
+            {comments.length ? (
+              <div className="e">
+                {comments.map((comment) => (
+                  <Comment key={comment.id} comment={comment} />
+                ))}
+              </div>
+            ) : (
+              <NoComments />
+            )}
+          </>
         )}
         <CommentInput
           comment={comment}

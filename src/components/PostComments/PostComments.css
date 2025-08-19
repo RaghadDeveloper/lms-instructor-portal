@@ -37,3 +37,7 @@
   background: rgba(0, 0, 0, 0.5);
   z-index: 99;
 }
+
+.comments-loading {
+  margin: 2rem;
+}
