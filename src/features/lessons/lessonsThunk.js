@@ -1,7 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   createLessonApi,
+  createLessonCommentApi,
   getAllLessonsApi,
+  getLessonCommentsApi,
   getLessonDetailsApi,
   updateLessonApi,
 } from "./lessonsApi";
@@ -55,6 +57,30 @@ export const updateLesson = createAsyncThunk(
   async ({ lessonId, lessonInfo }, thunkAPI) => {
     try {
       const response = await updateLessonApi({ lessonId, lessonInfo });
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(extractError(error));
+    }
+  }
+);
+
+export const getLessonComments = createAsyncThunk(
+  "lesson/getComments",
+  async (lessonId, thunkAPI) => {
+    try {
+      const response = await getLessonCommentsApi(lessonId);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(extractError(error));
+    }
+  }
+);
+
+export const createLessonComment = createAsyncThunk(
+  "lessonComment/create",
+  async (data, thunkAPI) => {
+    try {
+      const response = await createLessonCommentApi(data);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(extractError(error));

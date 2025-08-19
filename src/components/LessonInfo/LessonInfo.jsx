@@ -2,7 +2,10 @@ import "./LessonInfo.css";
 import { useParams } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getLessonDetails } from "../../features/lessons/lessonsThunk";
+import {
+  getLessonComments,
+  getLessonDetails,
+} from "../../features/lessons/lessonsThunk";
 import VideoInfo from "../VideoInfo/VideoInfo";
 import LessonFiles from "../LessonFiles/LessonFiles";
 import LessonComments from "../LessonComments/LessonComments";
@@ -17,6 +20,7 @@ function LessonInfo() {
   useEffect(() => {
     dispatch(getLessonDetails(lessonId));
     dispatch(getLessonFile(lessonId));
+    dispatch(getLessonComments(lessonId));
   }, [lessonId, dispatch]);
 
   const handleScrollToComments = () => {

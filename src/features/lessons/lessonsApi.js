@@ -19,3 +19,11 @@ export const updateLessonApi = ({ lessonId, lessonInfo }) =>
       "Content-Type": "multipart/form-data",
     },
   });
+
+export const getLessonCommentsApi = (lessonId) =>
+  axiosInstance.get(
+    `/all-comments?commentable_id=${lessonId}&commentable_type=lesson`
+  );
+
+export const createLessonCommentApi = (data) =>
+  axiosInstance.post("/comments", data);

@@ -21,10 +21,19 @@
   outline: none;
 }
 
-.reply-input .icon {
+.reply-input .submit-icon {
+  background: none;
+  border: none;
   position: absolute;
   right: 0.5rem;
   bottom: 0.5rem;
   color: var(--primary-color);
   cursor: pointer;
+}
+
+.dark .reply-input .icon,
+.dark .reply-input textarea,
+.dark .reply-input textarea::placeholder {
+  color: var(--very-light);
+  color: white;
 }

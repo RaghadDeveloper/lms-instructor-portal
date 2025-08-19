@@ -4,6 +4,7 @@ import { createComment } from "../../features/posts/postsThunk";
 import { useState } from "react";
 import Comment from "../Comment/Comment";
 import { LuSend } from "react-icons/lu";
+import { createLessonComment } from "../../features/lessons/lessonsThunk";
 
 function CommentReplies({ comment }) {
   const dispatch = useDispatch();
@@ -15,9 +16,16 @@ function CommentReplies({ comment }) {
   });
 
   const handleCreateReply = async () => {
-    const result = await dispatch(createComment(reply));
-    if (createComment.fulfilled.match(result)) {
-      setReply({ ...reply, content: "" });
+    if (reply.commentable_type === "App\\Models\\Post") {
+      const result = await dispatch(createComment(reply));
+      if (createComment.fulfilled.match(result)) {
+        setReply({ ...reply, content: "" });
+      }
+    } else if (reply.commentable_type === "App\\Models\\Lesson") {
+      const result = await dispatch(createLessonComment(reply));
+      if (createLessonComment.fulfilled.match(result)) {
+        setReply({ ...reply, content: "" });
+      }
     }
   };
 
@@ -33,7 +41,7 @@ function CommentReplies({ comment }) {
           onChange={(e) => setReply({ ...reply, content: e.target.value })}
         />
 
-        <button disabled={!reply.content.length}>
+        <button className="submit-icon" disabled={!reply.content.length}>
           <LuSend className="icon" onClick={handleCreateReply} />
         </button>
       </div>

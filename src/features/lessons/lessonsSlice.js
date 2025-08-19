@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  createLessonComment,
   createLesson,
   getAllLessons,
+  getLessonComments,
   getLessonDetails,
   updateLesson,
 } from "./lessonsThunk";
@@ -11,6 +13,7 @@ const initialState = {
   error: null,
   lessons: [],
   lesson: null,
+  comments: [],
 };
 
 const handlePending = (state) => {
@@ -77,7 +80,42 @@ const lessonsSlice = createSlice({
           lesson.id === action.payload.data.id ? action.payload.data : lesson
         );
       })
-      .addCase(updateLesson.rejected, handleRejected);
+      .addCase(updateLesson.rejected, handleRejected)
+
+      // getLessonComments
+      .addCase(getLessonComments.pending, handlePending)
+      .addCase(getLessonComments.fulfilled, (state, action) => {
+        state.loading = false;
+        state.comments = action.payload.data;
+      })
+      .addCase(getLessonComments.rejected, handleRejected)
+
+      // createComment
+      .addCase(createLessonComment.fulfilled, (state, action) => {
+        state.loading = false;
+
+        const commentData = action.payload.data;
+
+        if (action.payload.data.comment_parent_id) {
+          const parentCommentId = commentData.comment_parent_id;
+
+          const parentComment = state.comments.find(
+            (comment) => comment.id === parentCommentId
+          );
+
+          if (parentComment) {
+            if (!Array.isArray(parentComment.replies)) {
+              parentComment.replies = [];
+            }
+
+            parentComment.replies.push(commentData);
+          }
+        } else {
+          state.comments.unshift(commentData);
+          state.lesson.comment_count++;
+        }
+      })
+      .addCase(createLessonComment.rejected, handleRejected);
   },
 });
 
