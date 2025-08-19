@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   createCourse,
-  filterCourses,
-  getAllCourses,
+  getCourses,
   getCourseDetails,
   searchCourses,
   updateCourse,
@@ -15,6 +14,12 @@ const initialState = {
   courses: [],
   course: null,
   titles: [],
+  pagination: {
+    currentPage: 1,
+    prev: null,
+    next: null,
+    pages: [],
+  },
 };
 
 const handlePending = (state) => {
@@ -49,21 +54,20 @@ const courseSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // getAllCourses
-      .addCase(getAllCourses.pending, handlePending)
-      .addCase(getAllCourses.fulfilled, (state, action) => {
-        state.loading = false;
-        state.courses = action.payload.data;
-      })
-      .addCase(getAllCourses.rejected, handleRejected)
 
       // filterCourses
-      .addCase(filterCourses.pending, handlePending)
-      .addCase(filterCourses.fulfilled, (state, action) => {
+      .addCase(getCourses.pending, handlePending)
+      .addCase(getCourses.fulfilled, (state, action) => {
         state.loading = false;
-        state.courses = action.payload.data;
+        state.courses = action.payload.data?.courses;
+        state.pagination = {
+          currentPage: action.payload.data?.pagination.current_page,
+          prev: action.payload.data?.pagination.prev_page,
+          next: action.payload.data?.pagination.next_page,
+          pages: action.payload.data?.pagination.pages,
+        };
       })
-      .addCase(filterCourses.rejected, handleRejected)
+      .addCase(getCourses.rejected, handleRejected)
 
       // searchCoursesTitle
       .addCase(searchCourseTitle.fulfilled, (state, action) => {

@@ -1,19 +1,18 @@
 import "./CoursesPageHeader.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { approval_status, price, sortBy } from "../../data/courseFilter";
+import { useEffect, useRef, useState } from "react";
+import { FaSearch } from "react-icons/fa";
 import Button from "../Button/Button";
 import Select from "../Select/Select";
-import { useEffect, useRef, useState } from "react";
 import {
-  filterCourses,
-  getAllCourses,
+  getCourses,
   searchCourseTitle,
 } from "../../features/courses/coursesThunk";
-import { FaSearch } from "react-icons/fa";
 import { clearTitles } from "../../features/courses/coursesSlice";
+import { approval_status, price, sortBy } from "../../data/courseFilter";
 
-function CoursesPageHeader({ setIsFiltering }) {
+function CoursesPageHeader({ setIsFiltering, page }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { categories } = useSelector((state) => state.categories);
@@ -25,6 +24,7 @@ function CoursesPageHeader({ setIsFiltering }) {
     isFree: "",
     selectedSort: "",
     selectedStatus: "",
+    page,
   });
   const [selectedTitle, setSelectedTitle] = useState(-1);
 
@@ -32,11 +32,11 @@ function CoursesPageHeader({ setIsFiltering }) {
   const searchRef = useRef(null);
 
   const {
-    searchKey,
     selectedCategoryId,
     isFree,
     selectedSort,
     selectedStatus,
+    searchKey,
   } = filters;
 
   const handleKeyDown = (e) => {
@@ -61,150 +61,88 @@ function CoursesPageHeader({ setIsFiltering }) {
     }
   };
 
+  const buildRequestFilters = () => {
+    const req = { page };
+
+    if (searchKey) req.search_key = searchKey;
+    if (selectedCategoryId) req.category_id = selectedCategoryId;
+    if (isFree === "1") req.only_free = 1;
+    if (isFree === "0") req.order_by_price = "desc";
+
+    switch (selectedSort) {
+      case "1":
+        req.order_by_oldest = 0;
+        break;
+      case "2":
+        req.order_by_oldest = 1;
+        break;
+      case "3":
+        req.order_by_rating = "desc";
+        break;
+      case "4":
+        req.order_by_price = "asc";
+        break;
+      case "5":
+        req.order_by_price = "desc";
+        break;
+      case "6":
+        req.order_by_subscribers = "desc";
+        break;
+    }
+
+    if (selectedStatus) req.approval_status = selectedStatus;
+
+    return req;
+  };
+
   const handleSearch = async (e, customSearchKey = null) => {
     if (e) e.preventDefault();
 
     skipNextSearchTitleFetch.current = true;
 
-    const finalSearchKey = customSearchKey ?? searchKey;
-
-    const requestFilters = {};
-
-    if (finalSearchKey) requestFilters.search_key = finalSearchKey;
-    if (selectedCategoryId) requestFilters.category_id = selectedCategoryId;
-    if (isFree === "1") requestFilters.only_free = 1;
-    if (isFree === "0") requestFilters.order_by_price = "desc";
-
-    if (selectedSort) {
-      switch (selectedSort) {
-        case "1":
-          requestFilters.order_by_oldest = 0;
-          break;
-        case "2":
-          requestFilters.order_by_oldest = 1;
-          break;
-        case "3":
-          requestFilters.order_by_rating = "desc";
-          break;
-        case "4":
-          requestFilters.order_by_price = "asc";
-          break;
-        case "5":
-          requestFilters.order_by_subscribers = "desc";
-          break;
-        default:
-          break;
-      }
-    }
-
-    if (selectedStatus) {
-      requestFilters.approval_status = selectedStatus;
-    }
+    const updatedKey = customSearchKey ?? searchKey;
+    setFilters((prev) => ({ ...prev, searchKey: updatedKey }));
 
     await dispatch(clearTitles());
-    await dispatch(filterCourses(requestFilters));
+    await dispatch(
+      getCourses({
+        ...buildRequestFilters(),
+        search_key: updatedKey,
+        page: 1,
+      })
+    );
     setSelectedTitle(-1);
   };
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (searchRef.current && !searchRef.current.contains(event.target)) {
+    dispatch(getCourses({ ...buildRequestFilters(), page: 1 }));
+  }, [selectedCategoryId, isFree, selectedSort, selectedStatus, dispatch]);
+
+  useEffect(() => {
+    dispatch(getCourses({ ...buildRequestFilters(), page }));
+  }, [page, dispatch]);
+
+  useEffect(() => {
+    if (!searchKey) dispatch(getCourses({ ...buildRequestFilters(), page: 1 }));
+  }, [searchKey, dispatch]);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (searchRef.current && !searchRef.current.contains(e.target)) {
         dispatch(clearTitles());
         setSelectedTitle(-1);
       }
     };
-
     document.addEventListener("click", handleClickOutside);
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
+    return () => document.removeEventListener("click", handleClickOutside);
   }, [dispatch]);
 
   useEffect(() => {
-    const noActiveFilters =
-      !searchKey &&
-      !selectedCategoryId &&
-      isFree === "" &&
-      !selectedSort &&
-      !selectedStatus;
-
-    if (noActiveFilters) {
-      dispatch(getAllCourses());
-    }
-  }, [
-    searchKey,
-    selectedCategoryId,
-    isFree,
-    selectedSort,
-    selectedStatus,
-    dispatch,
-  ]);
-
-  useEffect(() => {
-    const requestFilters = {};
-
-    if (searchKey) requestFilters.search_key = searchKey;
-    if (selectedCategoryId) requestFilters.category_id = selectedCategoryId;
-    if (isFree === "1") requestFilters.only_free = 1;
-    if (isFree === "0") requestFilters.order_by_price = "desc";
-
-    if (selectedSort) {
-      switch (selectedSort) {
-        case "1":
-          requestFilters.order_by_oldest = 0;
-          break;
-        case "2":
-          requestFilters.order_by_oldest = 1;
-          break;
-        case "3":
-          requestFilters.order_by_rating = "desc";
-          break;
-        case "4":
-          requestFilters.order_by_price = "asc";
-          break;
-        case "5":
-          requestFilters.order_by_price = "desc";
-          break;
-        case "6":
-          requestFilters.order_by_subscribers = "desc";
-          break;
-        default:
-          break;
-      }
-    }
-
-    if (selectedStatus) {
-      requestFilters.approval_status = selectedStatus;
-    }
-
-    dispatch(filterCourses(requestFilters));
-  }, [selectedCategoryId, isFree, selectedSort, selectedStatus, dispatch]);
-
-  useEffect(() => {
-    const activeFilter =
-      searchKey ||
-      selectedCategoryId ||
-      isFree !== "" ||
-      selectedSort ||
-      selectedStatus;
-
-    setIsFiltering(!!activeFilter);
-  }, [
-    searchKey,
-    selectedCategoryId,
-    isFree,
-    selectedSort,
-    selectedStatus,
-    setIsFiltering,
-  ]);
-
-  useEffect(() => {
-    const delayDebounce = setTimeout(() => {
+    const delay = setTimeout(() => {
       if (skipNextSearchTitleFetch.current) {
         skipNextSearchTitleFetch.current = false;
         return;
       }
-
       if (searchKey.trim()) {
         dispatch(searchCourseTitle(searchKey.trim()));
       } else {
@@ -212,14 +150,19 @@ function CoursesPageHeader({ setIsFiltering }) {
       }
     }, 300);
 
-    return () => clearTimeout(delayDebounce);
+    return () => clearTimeout(delay);
   }, [searchKey, dispatch]);
+
+  useEffect(() => {
+    const active = Object.values(filters).some((val) => val);
+    setIsFiltering(active);
+  }, [filters, setIsFiltering]);
 
   return (
     <header className="courses-page-header">
       <div>
         <h1>Courses</h1>
-        <Button className={"primary"} onClick={() => navigate("create")}>
+        <Button className="primary" onClick={() => navigate("create")}>
           &#43; Add Course
         </Button>
       </div>
@@ -230,31 +173,24 @@ function CoursesPageHeader({ setIsFiltering }) {
             <input
               type="text"
               placeholder="Search in your courses..."
-              value={searchKey}
+              value={filters.searchKey}
               onChange={(e) =>
                 setFilters((prev) => ({ ...prev, searchKey: e.target.value }))
               }
               onKeyDown={handleKeyDown}
             />
-            <Button className={"primary"} type={"submit"}>
+            <Button className="primary" type="submit">
               <FaSearch />
             </Button>
           </form>
-          {titles?.length > 0 && searchKey && (
+
+          {titles?.length > 0 && filters.searchKey && (
             <div className="search-options">
-              {titles?.map((title, index) => (
+              {titles.map((title, idx) => (
                 <p
-                  key={index}
-                  className={`title ${selectedTitle === index ? "active" : ""}`}
-                  onClick={async () => {
-                    setFilters((prev) => ({
-                      ...prev,
-                      searchKey: title.title,
-                    }));
-                    await dispatch(clearTitles());
-                    setSelectedTitle(-1);
-                    handleSearch(null, title.title);
-                  }}
+                  key={idx}
+                  className={`title ${selectedTitle === idx ? "active" : ""}`}
+                  onClick={() => handleSearch(null, title.title)}
                 >
                   {title.title}
                 </p>
@@ -265,9 +201,9 @@ function CoursesPageHeader({ setIsFiltering }) {
 
         <div className="filter">
           <Select
-            text={"All status"}
+            text="All status"
             options={approval_status}
-            value={selectedStatus}
+            value={filters.selectedStatus}
             onChange={(e) =>
               setFilters((prev) => ({
                 ...prev,
@@ -275,30 +211,26 @@ function CoursesPageHeader({ setIsFiltering }) {
               }))
             }
           />
-
           <Select
-            text={"Paid and Free"}
+            text="Paid and Free"
             options={price}
-            value={isFree}
+            value={filters.isFree}
             onChange={(e) =>
               setFilters((prev) => ({ ...prev, isFree: e.target.value }))
             }
           />
-
           <Select
-            text={"Sort by Latest"}
+            text="Sort by Latest"
             options={sortBy}
-            name={"sortBy"}
-            value={selectedSort}
+            value={filters.selectedSort}
             onChange={(e) =>
               setFilters((prev) => ({ ...prev, selectedSort: e.target.value }))
             }
           />
-
           <Select
-            text={"All Categories"}
+            text="All Categories"
             options={[{ id: "", name: "All Categories" }, ...categories]}
-            value={selectedCategoryId}
+            value={filters.selectedCategoryId}
             onChange={(e) =>
               setFilters((prev) => ({
                 ...prev,
