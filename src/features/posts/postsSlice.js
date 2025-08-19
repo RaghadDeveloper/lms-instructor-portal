@@ -94,13 +94,30 @@ const postsSlice = createSlice({
       // createComment
       .addCase(createComment.fulfilled, (state, action) => {
         state.loading = false;
-        const postId = action.meta.arg.commentable_id;
-        const comment = action.payload.data;
-        state.posts = state.posts.map((post) =>
-          post.id === postId
-            ? { ...post, comments: [...post.comments, comment] }
-            : post
-        );
+
+        const commentData = action.payload.data;
+        const postId = commentData.commentable_id;
+
+        const post = state.posts.find((post) => post.id === postId);
+        if (!post) return;
+
+        if (action.payload.data.comment_parent_id) {
+          const parentCommentId = commentData.comment_parent_id;
+
+          const parentComment = post.comments.find(
+            (comment) => comment.id === parentCommentId
+          );
+
+          if (parentComment) {
+            if (!Array.isArray(parentComment.replies)) {
+              parentComment.replies = [];
+            }
+
+            parentComment.replies.push(commentData);
+          }
+        } else {
+          post.comments.push(commentData);
+        }
       })
       .addCase(createComment.rejected, handleRejected);
   },

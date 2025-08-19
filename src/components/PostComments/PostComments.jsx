@@ -17,12 +17,7 @@ function PostComments({
         {post.comments.length ? (
           <div className="e">
             {post.comments.map((comment) => (
-              <>
-                <Comment key={comment.id} comment={comment} />
-                {comment?.replies?.map((reply) => (
-                  <Comment key={reply.id} comment={reply} type={"reply"} />
-                ))}
-              </>
+              <Comment key={comment.id} comment={comment} />
             ))}
           </div>
         ) : (

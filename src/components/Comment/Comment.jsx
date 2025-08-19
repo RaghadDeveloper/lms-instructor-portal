@@ -1,14 +1,15 @@
 import { useDispatch } from "react-redux";
 import "./Comment.css";
-import { AiOutlineLike } from "react-icons/ai";
 import { useState } from "react";
 import { like } from "../../features/like/likeThunk";
 import { BiSolidLike } from "react-icons/bi";
+import CommentReplies from "../CommentReplies/CommentReplies";
 
 function Comment({ comment, type }) {
   const dispatch = useDispatch();
   const [isLiked, setIsLiked] = useState(false);
   const [likes, setLikes] = useState(comment.likes_count);
+  const [isReply, setIsReply] = useState(false);
 
   const handleCommentLike = () => {
     dispatch(like({ likeable_id: comment.id, likeable_type: "comment" }));
@@ -17,32 +18,35 @@ function Comment({ comment, type }) {
   };
 
   return (
-    <div className={`comment ${type && "reply"}`}>
-      <img className="user-img" src={comment?.author?.avatar_url} />
-      <div>
-        <div className="comment-content">
-          <h4>{comment?.author?.username}</h4>
-          <p>{comment.content}</p>
-        </div>
-        <div className="actions">
-          <div>
-            <span
-              onClick={handleCommentLike}
-              className={`${isLiked && "liked"}`}
-            >
-              Like
-            </span>
-            {!type && <span>Reply</span>}
+    <>
+      <div className={`comment ${type && "reply"}`}>
+        <img className="user-img" src={comment?.author?.avatar_url} />
+        <div>
+          <div className="comment-content">
+            <h4>{comment?.author?.username}</h4>
+            <p>{comment.content}</p>
           </div>
-          {likes > 0 && (
+          <div className="actions">
             <div>
-              {likes}
-              <BiSolidLike className="liked" />
+              <span
+                onClick={handleCommentLike}
+                className={`${isLiked && "liked"}`}
+              >
+                Like
+              </span>
+              {!type && <span onClick={() => setIsReply(true)}>Reply</span>}
             </div>
-          )}
+            {likes > 0 && (
+              <div>
+                {likes}
+                <BiSolidLike className="liked" />
+              </div>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+      {isReply && <CommentReplies comment={comment} />}
+    </>
   );
 }
 

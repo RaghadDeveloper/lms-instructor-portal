@@ -22,7 +22,11 @@ function CommentInput({ comment, setComment, setCommentsCount }) {
         value={comment.content}
         onChange={(e) => setComment({ ...comment, content: e.target.value })}
       />
-      <button className="send-icon" onClick={handleSubmit}>
+      <button
+        className="send-icon"
+        onClick={handleSubmit}
+        disabled={!comment.content}
+      >
         <LuSend />
       </button>
     </div>
