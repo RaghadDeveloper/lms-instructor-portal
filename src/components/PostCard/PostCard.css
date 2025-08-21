@@ -106,7 +106,7 @@
 .post-card .post-footer {
   display: flex;
   gap: 2rem;
-  background-color: var(--secondary-gray\36);
+  border-top: 1px solid var(--secondary-gray);
   padding: 1rem 2rem;
 }
 

@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
-  createComment,
+  createPostComment,
   createPost,
   deletePost,
+  deletePostComment,
   getAllPosts,
   getPostComments,
   updatePost,
@@ -107,7 +108,7 @@ const postsSlice = createSlice({
       .addCase(getPostComments.rejected, handleRejected)
 
       // createComment
-      .addCase(createComment.fulfilled, (state, action) => {
+      .addCase(createPostComment.fulfilled, (state, action) => {
         state.loading = false;
 
         const commentData = action.payload.data;
@@ -130,7 +131,20 @@ const postsSlice = createSlice({
           state.comments.unshift(commentData);
         }
       })
-      .addCase(createComment.rejected, handleRejected);
+      .addCase(createPostComment.rejected, handleRejected)
+
+      // deletePostComments
+      .addCase(deletePostComment.pending, (state) => {
+        state.commentsLoading = true;
+        state.error = null;
+      })
+      .addCase(deletePostComment.fulfilled, (state, action) => {
+        state.commentsLoading = false;
+        state.comments = state.comments.filter(
+          (comment) => comment.id !== action.meta.arg
+        );
+      })
+      .addCase(deletePostComment.rejected, handleRejected);
   },
 });
 

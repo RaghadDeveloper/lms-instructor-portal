@@ -34,7 +34,8 @@ function PostCard({ post, setEditPost, menuOpenPostId, setMenuOpenPostId }) {
       : formatDate(post?.updated_at, "Updated at ");
   const isMenuOpen = menuOpenPostId === post.id;
 
-  const toggleMenu = () => {
+  const toggleMenu = (e) => {
+    e.stopPropagation();
     if (isMenuOpen) {
       setMenuOpenPostId(null);
     } else {
@@ -84,7 +85,7 @@ function PostCard({ post, setEditPost, menuOpenPostId, setMenuOpenPostId }) {
             <HiOutlineDotsVertical />
           </span>
           {isMenuOpen && (
-            <div className="action-menu">
+            <div className="action-menu" onClick={(e) => e.stopPropagation()}>
               <p onClick={handleEdit}>Edit post</p>
               <p onClick={handleDelete}>Delete post</p>
             </div>

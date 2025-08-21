@@ -1,8 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
-  createCommentApi,
+  createPostCommentApi,
   createPostApi,
   deletePostApi,
+  deletePostCommentApi,
   getAllPostsApi,
   getPostCommentsApi,
   updatePostApi,
@@ -76,11 +77,23 @@ export const getPostComments = createAsyncThunk(
   }
 );
 
-export const createComment = createAsyncThunk(
-  "postcomment/create",
+export const createPostComment = createAsyncThunk(
+  "postComment/create",
   async (data, thunkAPI) => {
     try {
-      const response = await createCommentApi(data);
+      const response = await createPostCommentApi(data);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(extractError(error));
+    }
+  }
+);
+
+export const deletePostComment = createAsyncThunk(
+  "postComment/delete",
+  async (commentId, thunkAPI) => {
+    try {
+      const response = await deletePostCommentApi(commentId);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(extractError(error));

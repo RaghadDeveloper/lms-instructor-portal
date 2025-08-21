@@ -15,4 +15,7 @@ export const getPostCommentsApi = (postId) =>
     `/all-comments?commentable_id=${postId}&commentable_type=post`
   );
 
-export const createCommentApi = (data) => axiosInstance.post("/comments", data);
+export const createPostCommentApi = (data) => axiosInstance.post("/comments", data);
+
+export const deletePostCommentApi = (commentId) =>
+  axiosInstance.delete(`/comments/delete?comment_id=${commentId}`);

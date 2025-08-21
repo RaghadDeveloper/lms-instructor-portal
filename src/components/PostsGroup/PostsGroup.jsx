@@ -8,9 +8,8 @@ import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 import NoPosts from "../NoPosts/NoPosts";
 
-function PostsGroup({ setEditPost }) {
+function PostsGroup({ setEditPost, menuOpenPostId, setMenuOpenPostId }) {
   const dispatch = useDispatch();
-  const [menuOpenPostId, setMenuOpenPostId] = useState(null);
   const [page, setPage] = useState(1);
   const { loading, error, posts, pagination } = useSelector(
     (state) => state.posts
@@ -18,8 +17,8 @@ function PostsGroup({ setEditPost }) {
   const { profile } = useSelector((state) => state.profile);
 
   useEffect(() => {
-    dispatch(getAllPosts({ userId: profile.user_id, page }));
-  }, [dispatch, profile.user_id, page]);
+    dispatch(getAllPosts({ userId: profile?.user_id, page }));
+  }, [dispatch, profile?.user_id, page]);
 
   if (loading) return <Loader />;
   if (error)

@@ -5,9 +5,15 @@ import { useState } from "react";
 
 function Posts() {
   const [editPost, setEditPost] = useState(null);
+  const [menuOpenPostId, setMenuOpenPostId] = useState(null);
+
   return (
-    <div className="posts">
-      <PostsGroup setEditPost={setEditPost} />
+    <div className="posts" onClick={() => setMenuOpenPostId(null)}>
+      <PostsGroup
+        setEditPost={setEditPost}
+        menuOpenPostId={menuOpenPostId}
+        setMenuOpenPostId={setMenuOpenPostId}
+      />
       <PostEditor editPost={editPost} setEditPost={setEditPost} />
     </div>
   );

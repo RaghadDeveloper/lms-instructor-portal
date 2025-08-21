@@ -26,33 +26,61 @@
   border-radius: 8px;
   padding: 1rem;
   margin-bottom: 0.2rem;
+  position: relative;
 }
 
-.comment .actions {
+.comment .reactions {
   display: flex;
   justify-content: space-between;
   margin-right: 0.8rem;
 }
 
-.comment .actions .liked {
+.comment .reactions .liked {
   color: var(--primary-color);
 }
 
-.comment .actions div {
+.comment .reactions div {
   display: flex;
   gap: 0.5rem;
   align-items: center;
 }
 
-.comment .actions span {
+.comment .reactions span {
   margin-left: 0.6rem;
   cursor: pointer;
 }
 
-.comment .actions span:hover {
+.comment .reactions span:hover {
   text-decoration: underline;
 }
 
 .comment h4 {
   margin-bottom: 0.6rem;
+}
+
+.comment .action-btn {
+  position: absolute;
+  right: 0.5rem;
+  cursor: pointer;
+}
+
+.comment .action-menu {
+  background-color: white;
+  position: absolute;
+  top: 2.2rem;
+  right: -44px;
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 1px 4px 12px 5px var(--primay-gray\24);
+  border-radius: 4px;
+}
+
+.comment .action-menu > p {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.comment .action-menu p:hover {
+  background-color: var(--secondary-gray\36);
 }

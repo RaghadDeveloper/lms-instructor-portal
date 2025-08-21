@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import "./CommentInput.css";
 import { LuSend } from "react-icons/lu";
-import { createComment } from "../../features/posts/postsThunk";
+import { createPostComment } from "../../features/posts/postsThunk";
 import { createLessonComment } from "../../features/lessons/lessonsThunk";
 
 function CommentInput({ comment, setComment, setCommentsCount }) {
@@ -10,8 +10,8 @@ function CommentInput({ comment, setComment, setCommentsCount }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (comment.commentable_type === "post") {
-      const result = await dispatch(createComment(comment));
-      if (createComment.fulfilled.match(result)) {
+      const result = await dispatch(createPostComment(comment));
+      if (createPostComment.fulfilled.match(result)) {
         setCommentsCount((prev) => prev + 1);
         setComment({ ...comment, content: "" });
       }
