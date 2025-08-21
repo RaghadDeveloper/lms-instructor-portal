@@ -58,7 +58,6 @@ const notificationsSlice = createSlice({
       .addCase(readNotification.rejected, handleRejected)
 
       // deleteNotification
-      .addCase(deleteNotification.pending, handlePending)
       .addCase(deleteNotification.fulfilled, (state, action) => {
         state.loading = false;
         state.notifications = state.notifications.filter(

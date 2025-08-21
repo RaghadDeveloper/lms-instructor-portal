@@ -41,7 +41,7 @@ function Login() {
 
         const currentToken = await getToken(messaging, {
           vapidKey:
-            "BL4seloY_pB8k4DxPJQibdZsnTJaOy-3CiLD0tH7qh3G06348yfycoRG6Talhwlc8CvYZugQiRvuk-Z0FLxmfJI",
+            "BNRs-YARm0VDBWztIXD7Kc58hMgtjGjyxGFxfjIkWLb_0NS5OLTSrfbQ3YMu8bxpoAUfC_gPD3QZGxeUUdu10t0",
           serviceWorkerRegistration: registration,
         });
 
