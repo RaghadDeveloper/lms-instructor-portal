@@ -16,6 +16,7 @@ function Comment({
   menuOpenCommentId,
   setMenuOpenCommentId,
   setCommentsCount,
+  setComment,
 }) {
   const dispatch = useDispatch();
   const [isLiked, setIsLiked] = useState(false);
@@ -39,10 +40,15 @@ function Comment({
     setLikes(likes + 1);
   };
 
+  const handleEditComment = () => {
+    setComment({ ...comment, content: comment.content });
+    setMenuOpenCommentId(null);
+  };
+
   const handleDeleteComment = async () => {
     const resultAction = await dispatch(deletePostComment(comment.id));
     if (deletePostComment.fulfilled.match(resultAction)) {
-      if (comment.replies.length > 0)
+      if (comment?.replies?.length > 0)
         setCommentsCount((prev) => prev - comment.replies.length);
       setCommentsCount((prev) => prev - 1);
       dispatch(getPostComments(comment.commentable_id));
@@ -62,7 +68,7 @@ function Comment({
             </span>
             {isMenuOpen && (
               <div className="action-menu" onClick={(e) => e.stopPropagation()}>
-                <p>Edit </p>
+                <p onClick={handleEditComment}>Edit </p>
                 <p onClick={handleDeleteComment}>Delete </p>
               </div>
             )}

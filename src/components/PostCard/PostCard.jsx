@@ -22,11 +22,6 @@ function PostCard({ post, setEditPost, menuOpenPostId, setMenuOpenPostId }) {
   const [isLiked, setIsLiked] = useState(false);
   const [likes, setLikes] = useState(post.likes_count);
   const [commentsCount, setCommentsCount] = useState(post.comments_count);
-  const [comment, setComment] = useState({
-    commentable_id: post.id,
-    commentable_type: "post",
-    content: "",
-  });
 
   const date =
     post?.created_at === post?.updated_at
@@ -124,8 +119,7 @@ function PostCard({ post, setEditPost, menuOpenPostId, setMenuOpenPostId }) {
         <PostComments
           showComments={showComments}
           setShowComments={setShowComments}
-          comment={comment}
-          setComment={setComment}
+          postId={post.id}
           setCommentsCount={setCommentsCount}
         />
       )}

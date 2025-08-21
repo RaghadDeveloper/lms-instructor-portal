@@ -1,6 +1,9 @@
 import { useDispatch } from "react-redux";
 import "./CommentReplies.css";
-import { createPostComment } from "../../features/posts/postsThunk";
+import {
+  createPostComment,
+  updatePostComment,
+} from "../../features/posts/postsThunk";
 import { useState } from "react";
 import Comment from "../Comment/Comment";
 import { LuSend } from "react-icons/lu";
@@ -20,8 +23,14 @@ function CommentReplies({
     comment_parent_id: comment.id,
   });
 
-  const handleCreateReply = async () => {
-    if (reply.commentable_type === "App\\Models\\Post") {
+  const handleSubmit = async () => {
+    if (reply.id) {
+      const result = await dispatch(
+        updatePostComment({ ...reply, comment_id: reply.id })
+      );
+      if (updatePostComment.fulfilled.match(result))
+        setReply({ ...comment, content: "" });
+    } else if (reply.commentable_type === "App\\Models\\Post") {
       const result = await dispatch(createPostComment(reply));
       if (createPostComment.fulfilled.match(result)) {
         setCommentsCount((prev) => prev + 1);
@@ -45,6 +54,7 @@ function CommentReplies({
           menuOpenCommentId={menuOpenCommentId}
           setMenuOpenCommentId={setMenuOpenCommentId}
           setCommentsCount={setCommentsCount}
+          setComment={setReply}
         />
       ))}
       <div className="reply-input">
@@ -55,7 +65,7 @@ function CommentReplies({
         />
 
         <button className="submit-icon" disabled={!reply.content.length}>
-          <LuSend className="icon" onClick={handleCreateReply} />
+          <LuSend className="icon" onClick={handleSubmit} />
         </button>
       </div>
     </>

@@ -5,14 +5,14 @@ import Comment from "../Comment/Comment";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 
-function PostComments({
-  setShowComments,
-  comment,
-  setComment,
-  setCommentsCount,
-}) {
+function PostComments({ setShowComments, setCommentsCount, postId }) {
   const [menuOpenCommentId, setMenuOpenCommentId] = useState(null);
   const { commentsLoading, comments } = useSelector((state) => state.posts);
+  const [comment, setComment] = useState({
+    commentable_id: postId,
+    commentable_type: "post",
+    content: "",
+  });
 
   return (
     <>
@@ -31,6 +31,7 @@ function PostComments({
                     menuOpenCommentId={menuOpenCommentId}
                     setMenuOpenCommentId={setMenuOpenCommentId}
                     setCommentsCount={setCommentsCount}
+                    setComment={setComment}
                   />
                 ))}
               </div>

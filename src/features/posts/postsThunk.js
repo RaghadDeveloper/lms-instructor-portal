@@ -7,6 +7,7 @@ import {
   getAllPostsApi,
   getPostCommentsApi,
   updatePostApi,
+  updatePostCommentApi,
 } from "./postsApi";
 
 const extractError = (error) => {
@@ -82,6 +83,20 @@ export const createPostComment = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const response = await createPostCommentApi(data);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(extractError(error));
+    }
+  }
+);
+
+export const updatePostComment = createAsyncThunk(
+  "postComment/update",
+  async (data, thunkAPI) => {
+    console.log(data);
+    try {
+      const response = await updatePostCommentApi(data);
+      console.log(response);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(extractError(error));

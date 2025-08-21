@@ -7,6 +7,7 @@ import {
   getAllPosts,
   getPostComments,
   updatePost,
+  updatePostComment,
 } from "./postsThunk";
 
 const initialState = {
@@ -109,7 +110,7 @@ const postsSlice = createSlice({
 
       // createComment
       .addCase(createPostComment.fulfilled, (state, action) => {
-        state.loading = false;
+        state.commentsLoading = false;
 
         const commentData = action.payload.data;
 
@@ -132,6 +133,36 @@ const postsSlice = createSlice({
         }
       })
       .addCase(createPostComment.rejected, handleRejected)
+
+      // upatePostComments
+      .addCase(updatePostComment.fulfilled, (state, action) => {
+        state.commentsLoading = false;
+
+        const commentData = action.payload.data;
+
+        if (action.payload.data.comment_parent_id) {
+          const parentCommentId = commentData.comment_parent_id;
+
+          const parentComment = state.comments.find(
+            (comment) => comment.id === parentCommentId
+          );
+
+          if (parentComment) {
+            if (!Array.isArray(parentComment.replies)) {
+              parentComment.replies = [];
+            }
+
+            parentComment.replies = parentComment.replies.map((reply) =>
+              reply.id === action.payload.data.id ? commentData : reply
+            );
+          }
+        } else {
+          state.comments = state.comments.map((comment) =>
+            comment.id === action.payload.data.id ? commentData : comment
+          );
+        }
+      })
+      .addCase(updatePostComment.rejected, handleRejected)
 
       // deletePostComments
       .addCase(deletePostComment.pending, (state) => {
