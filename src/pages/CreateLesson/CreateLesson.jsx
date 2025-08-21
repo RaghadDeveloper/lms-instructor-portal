@@ -132,6 +132,7 @@ function CreateLesson() {
         uploading={uploading}
         setUploading={setUploading}
         cancelTokenSource={cancelTokenSource}
+        coursePrice={courseData.price}
       />
     </div>
   );

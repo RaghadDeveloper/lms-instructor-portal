@@ -1,7 +1,10 @@
+import { useSelector } from "react-redux";
 import CourseCard from "../CourseCard/CourseCard";
 import "./CoursesGroup.css";
 
-function CoursesGroup({ courses }) {
+function CoursesGroup() {
+  const { courses } = useSelector((state) => state.courses);
+
   return (
     <div className="courses">
       {courses?.map((course) => (

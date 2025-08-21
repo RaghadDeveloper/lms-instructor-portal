@@ -1,7 +1,7 @@
 import { TbTrash } from "react-icons/tb";
 import "./NotificationRow.css";
 import { MdOutlineMarkEmailUnread } from "react-icons/md";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   deleteNotification,
   readNotification,
@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 function NotificationRow({ num, notification }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { notification: not } = useSelector((state) => state.notifications);
 
   const handlReadNotification = () => {
     dispatch(readNotification(notification.id));
@@ -23,8 +24,20 @@ function NotificationRow({ num, notification }) {
   const handleSeeNotificationDetails = async () => {
     const resultAction = await dispatch(readNotification(notification.id));
     if (readNotification.fulfilled.match(resultAction)) {
-      const notification = resultAction.payload.response.data.data;
-      navigate(`/courses/${notification.id}`);
+      switch (notification.type) {
+        case "course_review":
+        case "new_subscriber": {
+          navigate(`/courses/${not.id}`);
+          break;
+        }
+
+        case "new_follower":
+          navigate(`/profile`);
+          break;
+
+        default:
+          navigate("/notifications");
+      }
     }
   };
 

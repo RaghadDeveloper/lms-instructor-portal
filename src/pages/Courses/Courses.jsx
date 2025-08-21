@@ -31,7 +31,7 @@ function Courses() {
 
       {!loading && !error && courses?.length > 0 && (
         <>
-          <CoursesGroup courses={courses} />
+          <CoursesGroup />
           <div className="courses-pagination-controls">
             <button
               disabled={!pagination.prev}

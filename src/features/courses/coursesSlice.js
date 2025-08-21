@@ -55,7 +55,7 @@ const courseSlice = createSlice({
   extraReducers: (builder) => {
     builder
 
-      // filterCourses
+      // getCourses
       .addCase(getCourses.pending, handlePending)
       .addCase(getCourses.fulfilled, (state, action) => {
         state.loading = false;
@@ -96,8 +96,8 @@ const courseSlice = createSlice({
       .addCase(createCourse.pending, handlePending)
       .addCase(createCourse.fulfilled, (state, action) => {
         state.loading = false;
-        state.course = action.payload.data;
-        state.courses.unshift(action.payload.data);
+        state.course = action.payload.data.course;
+        state.courses.unshift(action.payload.data.course);
       })
       .addCase(createCourse.rejected, handleRejected)
 

@@ -15,6 +15,11 @@
   font-size: 1.2rem;
   font-weight: 400;
   margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+.details-layout .title:hover {
+  color: var(--primary-color);
 }
 
 .dark .details-layout {

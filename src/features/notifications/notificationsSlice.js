@@ -46,7 +46,6 @@ const notificationsSlice = createSlice({
       .addCase(getAllNotifications.rejected, handleRejected)
 
       // readNotification
-      .addCase(readNotification.pending, handlePending)
       .addCase(readNotification.fulfilled, (state, action) => {
         state.loading = false;
         state.notifications = state.notifications.map((notification) =>
@@ -69,7 +68,6 @@ const notificationsSlice = createSlice({
       .addCase(deleteNotification.rejected, handleRejected)
 
       // readAllNotifications
-      .addCase(readAllNotifications.pending, handlePending)
       .addCase(readAllNotifications.fulfilled, (state) => {
         state.loading = false;
         state.notifications = state.notifications.map((notification) => ({

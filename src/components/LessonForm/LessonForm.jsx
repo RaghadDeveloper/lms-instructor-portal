@@ -22,6 +22,7 @@ function LessonForm({
   setUploadProgress,
   uploading,
   setUploading,
+  coursePrice,
 }) {
   const [lessonInfo, setLessonInfo] = useState(initialData);
   const [fileSize, setFileSize] = useState(0);
@@ -155,14 +156,16 @@ function LessonForm({
           disabled={loading || isSubmit}
         />
 
-        <CheckBox
-          id={"is_free"}
-          name={"is_free"}
-          label={"Free"}
-          value={lessonInfo.is_free}
-          onChange={handleChange}
-          disabled={loading || isSubmit}
-        />
+        {coursePrice > 0 && (
+          <CheckBox
+            id={"is_free"}
+            name={"is_free"}
+            label={"Free"}
+            value={lessonInfo.is_free}
+            onChange={handleChange}
+            disabled={loading || isSubmit}
+          />
+        )}
       </Grid>
       <Button
         type={"submit"}

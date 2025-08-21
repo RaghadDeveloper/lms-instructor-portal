@@ -17,6 +17,7 @@ const formatter = new Intl.DateTimeFormat("en", { month: "short" });
 function EarningsLineChart() {
   const dispatch = useDispatch();
   const [year, setYear] = useState(2025);
+  const [maxEarning, setMaxEarning] = useState(2025);
   const { earnings } = useSelector((state) => state.statistics);
 
   const earningsStatisticsData = earnings?.statistics?.map((item) => ({
@@ -28,6 +29,14 @@ function EarningsLineChart() {
   useEffect(() => {
     dispatch(earningsStatistics(Number(year)));
   }, [dispatch, year]);
+
+  useEffect(() => {
+    setMaxEarning(
+      Math.max(
+        ...(earnings?.statistics?.map((item) => item.total_earning) || [0])
+      )
+    );
+  }, [earnings]);
 
   return (
     <div className="statistic-card card5">
@@ -47,10 +56,19 @@ function EarningsLineChart() {
       >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="month" />
-        <YAxis tickCount={10} />
+        <YAxis
+          tickCount={12}
+          domain={[0, Math.ceil(maxEarning) + 100]}
+          allowDataOverflow={false}
+        />
         <Tooltip />
         <Legend />
-        <Line type="monotone" dataKey="Earnings" stroke="#2c7da0" />
+        <Line
+          type="monotone"
+          dataKey="Earnings"
+          stroke="#2c7da0"
+          activeDot={{ r: 6 }}
+        />
       </LineChart>
     </div>
   );

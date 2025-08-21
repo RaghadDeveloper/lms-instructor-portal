@@ -7,7 +7,7 @@ function StatisticCard({ data }) {
       {data.icon && <data.icon className="icon" />}
       <div className="info">
         <h3>{data.title}</h3>
-        <span>{data.total_value}</span>
+        <span>{data.total_value || 0}</span>
         <div className="percentage">
           <span
             className={
@@ -19,7 +19,7 @@ function StatisticCard({ data }) {
             ) : (
               <GoArrowDownRight />
             )}
-            {Math.abs(data.change_percentage)}%
+            {Math.abs(data.change_percentage) || 0}%
           </span>
           <span>vs last month</span>
         </div>

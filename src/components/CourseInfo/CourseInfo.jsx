@@ -41,7 +41,7 @@ function CourseInfo() {
         <p>{description}</p>
       </div>
 
-      {tags.length > 0 && (
+      {tags?.length > 0 && (
         <div className="about">
           <h4>Tags</h4>
           <div className="tags">

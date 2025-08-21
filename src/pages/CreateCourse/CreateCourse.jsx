@@ -21,7 +21,7 @@ function CreateCourse() {
         category_id: "",
         requirements_to_start: "",
         description: "",
-        price: "",
+        price: 0,
         tags: [],
         lessons: [],
       },
