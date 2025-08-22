@@ -7,6 +7,7 @@ import {
   getLessonCommentsApi,
   getLessonDetailsApi,
   updateLessonApi,
+  updateLessonCommentApi,
 } from "./lessonsApi";
 
 const extractError = (error) => {
@@ -82,6 +83,18 @@ export const createLessonComment = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const response = await createLessonCommentApi(data);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(extractError(error));
+    }
+  }
+);
+
+export const updateLessonComment = createAsyncThunk(
+  "lessonComment/update",
+  async (data, thunkAPI) => {
+    try {
+      const response = await updateLessonCommentApi(data);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(extractError(error));

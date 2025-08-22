@@ -7,6 +7,7 @@ import {
   getLessonDetails,
   updateLesson,
   deleteLessonComment,
+  updateLessonComment,
 } from "./lessonsThunk";
 
 const initialState = {
@@ -122,6 +123,36 @@ const lessonsSlice = createSlice({
         }
       })
       .addCase(createLessonComment.rejected, handleRejected)
+
+      // updateComment
+      .addCase(updateLessonComment.fulfilled, (state, action) => {
+        state.commentsLoading = false;
+
+        const commentData = action.payload.data;
+
+        if (action.payload.data.comment_parent_id) {
+          const parentCommentId = commentData.comment_parent_id;
+
+          const parentComment = state.comments.find(
+            (comment) => comment.id === parentCommentId
+          );
+
+          if (parentComment) {
+            if (!Array.isArray(parentComment.replies)) {
+              parentComment.replies = [];
+            }
+
+            parentComment.replies = parentComment.replies.map((reply) =>
+              reply.id === action.payload.data.id ? commentData : reply
+            );
+          }
+        } else {
+          state.comments = state.comments.map((comment) =>
+            comment.id === action.payload.data.id ? commentData : comment
+          );
+        }
+      })
+      .addCase(updateLessonComment.rejected, handleRejected)
 
       // deleteLessonComments
       .addCase(deleteLessonComment.pending, (state) => {

@@ -7,7 +7,10 @@ import {
 import { useState } from "react";
 import Comment from "../Comment/Comment";
 import { LuSend } from "react-icons/lu";
-import { createLessonComment } from "../../features/lessons/lessonsThunk";
+import {
+  createLessonComment,
+  updateLessonComment,
+} from "../../features/lessons/lessonsThunk";
 
 function CommentReplies({
   comment,
@@ -25,11 +28,19 @@ function CommentReplies({
 
   const handleSubmit = async () => {
     if (reply.id) {
-      const result = await dispatch(
-        updatePostComment({ ...reply, comment_id: reply.id })
-      );
-      if (updatePostComment.fulfilled.match(result))
-        setReply({ ...comment, content: "" });
+      if (comment.commentable_type === "App\\Models\\Post") {
+        const result = await dispatch(
+          updatePostComment({ ...reply, comment_id: reply.id })
+        );
+        if (updatePostComment.fulfilled.match(result))
+          setReply({ ...comment, content: "" });
+      } else if (comment.commentable_type === "App\\Models\\Lesson") {
+        const result = await dispatch(
+          updateLessonComment({ ...reply, comment_id: reply.id })
+        );
+        if (updateLessonComment.fulfilled.match(result))
+          setReply({ ...comment, content: "" });
+      }
     } else if (reply.commentable_type === "App\\Models\\Post") {
       const result = await dispatch(createPostComment(reply));
       if (createPostComment.fulfilled.match(result)) {

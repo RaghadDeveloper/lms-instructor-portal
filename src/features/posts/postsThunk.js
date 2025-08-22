@@ -95,7 +95,6 @@ export const updatePostComment = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const response = await updatePostCommentApi(data);
-      console.log(response);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(extractError(error));

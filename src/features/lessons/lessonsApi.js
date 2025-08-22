@@ -28,5 +28,8 @@ export const getLessonCommentsApi = (lessonId) =>
 export const createLessonCommentApi = (data) =>
   axiosInstance.post("/comments", data);
 
+export const updateLessonCommentApi = (data) =>
+  axiosInstance.patch("/comments/update", data);
+
 export const deleteLessonCommentApi = (commentId) =>
   axiosInstance.delete(`/comments/delete?comment_id=${commentId}`);

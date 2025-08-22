@@ -5,7 +5,10 @@ import {
   createPostComment,
   updatePostComment,
 } from "../../features/posts/postsThunk";
-import { createLessonComment } from "../../features/lessons/lessonsThunk";
+import {
+  createLessonComment,
+  updateLessonComment,
+} from "../../features/lessons/lessonsThunk";
 
 function CommentInput({ comment, setComment, setCommentsCount }) {
   const dispatch = useDispatch();
@@ -13,11 +16,19 @@ function CommentInput({ comment, setComment, setCommentsCount }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (comment.id) {
-      const result = await dispatch(
-        updatePostComment({ ...comment, comment_id: comment.id })
-      );
-      if (updatePostComment.fulfilled.match(result))
-        setComment({ ...comment, content: "" });
+      if (comment.commentable_type === "App\\Models\\Post") {
+        const result = await dispatch(
+          updatePostComment({ ...comment, comment_id: comment.id })
+        );
+        if (updatePostComment.fulfilled.match(result))
+          setComment({ ...comment, content: "" });
+      } else if (comment.commentable_type === "App\\Models\\Lesson") {
+        const result = await dispatch(
+          updateLessonComment({ ...comment, comment_id: comment.id })
+        );
+        if (updateLessonComment.fulfilled.match(result))
+          setComment({ ...comment, content: "" });
+      }
     } else if (comment.commentable_type === "post") {
       const result = await dispatch(createPostComment(comment));
       if (createPostComment.fulfilled.match(result)) {
