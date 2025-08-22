@@ -4,7 +4,7 @@ import {
   getMyFollowers,
   getProfile,
   storeUserCategories,
-  // updateAvatar,
+  updateAvatar,
 } from "./profileThunks";
 
 const initialState = {
@@ -75,15 +75,15 @@ const profileSlice = createSlice({
         state.error = null;
         state.categories = action.payload.categories;
       })
-      .addCase(storeUserCategories.rejected, handleRejected);
+      .addCase(storeUserCategories.rejected, handleRejected)
 
-    // updateAvatar
-    // .addCase(updateAvatar.pending, handlePending)
-    // .addCase(updateAvatar.fulfilled, (state, action) => {
-    //   state.loading = false;
-    //   state.error = null;
-    // })
-    // .addCase(updateAvatar.rejected, handleRejected);
+      // updateAvatar
+      .addCase(updateAvatar.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.profile.avatar_url = action.payload.data.avatar_url;
+      })
+      .addCase(updateAvatar.rejected, handleRejected);
   },
 });
 

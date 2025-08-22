@@ -9,5 +9,5 @@ export const createProfileApi = (data) => axiosInstance.post("/profile", data);
 export const storeUserCategoriesApi = (data) =>
   axiosInstance.post("/store", data);
 
-// export const updateAvatarApi = (avatar_url) =>
-//   axiosInstance.patch("/profile/update_profile", avatar_url);
+export const updateAvatarApi = (avatar_url) =>
+  axiosInstance.patch("/profile/update_profile", avatar_url);

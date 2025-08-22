@@ -2,19 +2,19 @@ import "./ProfileCard.css";
 import InfoBlock from "../InfoBlock/InfoBlock";
 import { FaRegEdit } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import profileImg from "./../../assets/images/profileImg.jpg";
 import UploadImage from "../UploadImage/UploadImage";
-// import { updateAvatar } from "../../features/profile/profileThunks";
+import { updateAvatar } from "../../features/profile/profileThunks";
 import { MdOutlineModeEdit } from "react-icons/md";
-// import { useState } from "react";
-// import axios from "axios";
+import { useState } from "react";
+import axios from "axios";
 
 function ProfileCard() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const [preview, setPreview] = useState(null);
-  // const [avatarUrl, setAvatarUrl] = useState(null);
+  const [preview, setPreview] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const { categories, profile } = useSelector((state) => state.profile);
 
   const formatDate = (dateStr) => {
@@ -22,57 +22,63 @@ function ProfileCard() {
     return `${day}/${month}/${year}`;
   };
 
-  // const handleImageChange = async (e) => {
-  //   const file = e.target.files[0];
-  //   if (file) {
-  //     // setPreview(URL.createObjectURL(file));
-  //     setAvatarUrl(file);
-  //   }
+  const handleImageChange = async (e) => {
+    e.preventDefault();
+    const file = e.target.files[0];
+    if (!file) return;
+    if (file) {
+      setPreview(URL.createObjectURL(file));
+    }
 
-  //   const data = new FormData();
-  //   data.append("file", file);
-  //   data.append("upload_preset", "Learning_management_system");
-  //   data.append("cloud_name", "dqtqpsg2m");
+    const data = new FormData();
+    data.append("file", file);
+    data.append("upload_preset", "Learning_management_system");
+    data.append("cloud_name", "dqtqpsg2m");
 
-  //   try {
-  //     const response = await axios.post(
-  //       "https://api.cloudinary.com/v1_1/dqtqpsg2m/image/upload",
-  //       data
-  //     );
+    try {
+      setIsLoading(true);
+      const response = await axios.post(
+        "https://api.cloudinary.com/v1_1/dqtqpsg2m/image/upload",
+        data
+      );
 
-  //     if (!response.data.secure_url) {
-  //       alert("Image upload failed");
-  //       return;
-  //     }
+      const secureUrl = response.data.secure_url;
 
-  //     setAvatarUrl(response.data.secure_url);
-  //     setPreview(URL.createObjectURL(file));
-  //   } catch (error) {
-  //     console.error("Image upload error:", error);
-  //     alert("Image upload failed");
-  //     return;
-  //   }
+      if (!secureUrl) {
+        alert("Image upload failed");
+        return;
+      }
 
-  //   await dispatch(updateAvatar({ avatar_url: avatarUrl }));
-  // };
+      setPreview(URL.createObjectURL(file));
+      await dispatch(updateAvatar({ avatar_url: secureUrl }));
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      console.error("Image upload error:", error);
+      setPreview(null);
+      alert("Image upload failed");
+      return;
+    }
+  };
 
   return (
     <div className="profile-card">
       <header className="profile-header">
-        <div className="profile-img">
+        <div className={`profile-img ${isLoading ? "disable" : ""}`}>
           <UploadImage
             image={profile?.avatar_url || profileImg}
             Icon={MdOutlineModeEdit}
-            // preview={preview}
-            // handleImageChange={handleImageChange}
+            preview={preview}
+            handleImageChange={handleImageChange}
+            disabled={isLoading}
           />
         </div>
 
         <h2 className="user-name">{profile?.user_name}</h2>
         <h4 className="headline">{profile?.bio}</h4>
         <div className="info-group">
-          <InfoBlock label={"Posts"} value={profile.posts_count} />
-          <InfoBlock label={"Courses"} value={profile.courses_count} />
+          <InfoBlock label={"Posts"} value={profile?.posts_count} />
+          <InfoBlock label={"Courses"} value={profile?.courses_count} />
           <InfoBlock label={"Followers"} value={profile?.followers_counter} />
         </div>
       </header>
@@ -82,7 +88,7 @@ function ProfileCard() {
       </div>
       <div className="user-info">
         <h5>Birth date:</h5>
-        <p>{formatDate(profile?.birth_date)}</p>
+        <p>{formatDate(profile?.birth_date || "")}</p>
       </div>
       <div className="user-info">
         <h5>Specializations:</h5>
