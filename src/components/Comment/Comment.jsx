@@ -9,6 +9,10 @@ import {
   deletePostComment,
   getPostComments,
 } from "../../features/posts/postsThunk";
+import {
+  deleteLessonComment,
+  getLessonComments,
+} from "../../features/lessons/lessonsThunk";
 
 function Comment({
   comment,
@@ -46,12 +50,19 @@ function Comment({
   };
 
   const handleDeleteComment = async () => {
-    const resultAction = await dispatch(deletePostComment(comment.id));
-    if (deletePostComment.fulfilled.match(resultAction)) {
-      if (comment?.replies?.length > 0)
-        setCommentsCount((prev) => prev - comment.replies.length);
-      setCommentsCount((prev) => prev - 1);
-      dispatch(getPostComments(comment.commentable_id));
+    if (comment.commentable_type === "App\\Models\\Post") {
+      const resultAction = await dispatch(deletePostComment(comment.id));
+      if (deletePostComment.fulfilled.match(resultAction)) {
+        if (comment?.replies?.length > 0)
+          setCommentsCount((prev) => prev - comment.replies.length);
+        setCommentsCount((prev) => prev - 1);
+        dispatch(getPostComments(comment.commentable_id));
+      }
+    } else if (comment.commentable_type === "App\\Models\\Lesson") {
+      const resultAction = await dispatch(deleteLessonComment(comment.id));
+      if (deleteLessonComment.fulfilled.match(resultAction)) {
+        dispatch(getLessonComments(comment.commentable_id));
+      }
     }
   };
 

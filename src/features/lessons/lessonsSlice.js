@@ -6,6 +6,7 @@ import {
   getLessonComments,
   getLessonDetails,
   updateLesson,
+  deleteLessonComment,
 } from "./lessonsThunk";
 
 const initialState = {
@@ -13,6 +14,7 @@ const initialState = {
   error: null,
   lessons: [],
   lesson: null,
+  commentsLoading: false,
   comments: [],
 };
 
@@ -83,16 +85,19 @@ const lessonsSlice = createSlice({
       .addCase(updateLesson.rejected, handleRejected)
 
       // getLessonComments
-      .addCase(getLessonComments.pending, handlePending)
+      .addCase(getLessonComments.pending, (state) => {
+        state.commentsLoading = true;
+        state.error = null;
+      })
       .addCase(getLessonComments.fulfilled, (state, action) => {
-        state.loading = false;
+        state.commentsLoading = false;
         state.comments = action.payload.data;
       })
       .addCase(getLessonComments.rejected, handleRejected)
 
       // createComment
       .addCase(createLessonComment.fulfilled, (state, action) => {
-        state.loading = false;
+        state.commentsLoading = false;
 
         const commentData = action.payload.data;
 
@@ -109,13 +114,30 @@ const lessonsSlice = createSlice({
             }
 
             parentComment.replies.push(commentData);
+            state.lesson.comment_count++;
           }
         } else {
           state.comments.unshift(commentData);
           state.lesson.comment_count++;
         }
       })
-      .addCase(createLessonComment.rejected, handleRejected);
+      .addCase(createLessonComment.rejected, handleRejected)
+
+      // deleteLessonComments
+      .addCase(deleteLessonComment.pending, (state) => {
+        state.commentsLoading = true;
+        state.error = null;
+      })
+      .addCase(deleteLessonComment.fulfilled, (state, action) => {
+        state.commentsLoading = false;
+        const comment = state.comments.find(
+          (com) => com.id === action.meta.arg
+        );
+        if (comment?.replies?.length)
+          state.lesson.comment_count -= comment?.replies?.length;
+        state.lesson.comment_count--;
+      })
+      .addCase(deleteLessonComment.rejected, handleRejected);
   },
 });
 

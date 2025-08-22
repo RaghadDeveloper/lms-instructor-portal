@@ -79,6 +79,7 @@
 .comment .action-menu > p {
   padding: 0.5rem 1rem;
   cursor: pointer;
+  margin-bottom: 0 !important;
 }
 
 .comment .action-menu p:hover {

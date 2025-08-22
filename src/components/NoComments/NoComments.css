@@ -16,3 +16,7 @@
   margin-bottom: 2rem;
   color: var(--secondary-gray);
 }
+
+.no-comments p {
+  margin-bottom: 0 !important;
+}

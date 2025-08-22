@@ -93,7 +93,6 @@ export const createPostComment = createAsyncThunk(
 export const updatePostComment = createAsyncThunk(
   "postComment/update",
   async (data, thunkAPI) => {
-    console.log(data);
     try {
       const response = await updatePostCommentApi(data);
       console.log(response);

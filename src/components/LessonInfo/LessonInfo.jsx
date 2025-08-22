@@ -1,6 +1,6 @@
 import "./LessonInfo.css";
 import { useParams } from "react-router-dom";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getLessonComments,
@@ -15,6 +15,8 @@ function LessonInfo() {
   const dispatch = useDispatch();
   const { lessonId } = useParams();
   const { loading, error, lesson } = useSelector((state) => state.lessons);
+  const [menuOpenCommentId, setMenuOpenCommentId] = useState(null);
+
   const commentsRef = useRef(null);
 
   useEffect(() => {
@@ -31,13 +33,16 @@ function LessonInfo() {
   if (error) return <p className="card">{error}</p>;
 
   return (
-    <div className="lesson-info">
+    <div className="lesson-info" onClick={() => setMenuOpenCommentId(null)}>
       <VideoInfo lesson={lesson} onCommentsClick={handleScrollToComments} />
 
       <LessonFiles />
 
       <div ref={commentsRef}>
-        <LessonComments />
+        <LessonComments
+          menuOpenCommentId={menuOpenCommentId}
+          setMenuOpenCommentId={setMenuOpenCommentId}
+        />
       </div>
     </div>
   );

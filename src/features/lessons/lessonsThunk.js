@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   createLessonApi,
   createLessonCommentApi,
+  deleteLessonCommentApi,
   getAllLessonsApi,
   getLessonCommentsApi,
   getLessonDetailsApi,
@@ -81,6 +82,18 @@ export const createLessonComment = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const response = await createLessonCommentApi(data);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(extractError(error));
+    }
+  }
+);
+
+export const deleteLessonComment = createAsyncThunk(
+  "lessonComment/delete",
+  async (commentId, thunkAPI) => {
+    try {
+      const response = await deleteLessonCommentApi(commentId);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(extractError(error));

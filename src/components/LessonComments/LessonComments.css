@@ -9,3 +9,12 @@
   bottom: 0;
   left: 0;
 }
+
+.lesson-comments .no-comments {
+  margin: 0;
+  margin-bottom: 2rem;
+}
+
+.lesson-comments .no-comments .icon {
+  margin-bottom: 1rem;
+}
