@@ -19,7 +19,7 @@ select:focus {
 }
 
 .dark select {
-  color: var(--primary-light);
+  color: var(--very-light);
 }
 
 .dark select option {

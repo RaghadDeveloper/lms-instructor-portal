@@ -97,6 +97,7 @@ function CoursesPageHeader({ setIsFiltering, page }) {
 
   const handleSearch = async (e, customSearchKey = null) => {
     if (e) e.preventDefault();
+    if (!searchKey) return;
 
     skipNextSearchTitleFetch.current = true;
 
