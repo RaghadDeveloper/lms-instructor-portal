@@ -29,6 +29,7 @@ import QuizDetails from "./pages/QuizDetails/QuizDetails";
 import CreateQuiz from "./pages/CreateQuiz/CreateQuiz";
 import EditQuestion from "./pages/EditQuestion/EditQuestion";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
+import FeedBack from "./pages/FeedBack/FeedBack";
 
 function App() {
   const dispatch = useDispatch();
@@ -93,6 +94,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/course-statistics" element={<CourseStatistics />} />
             <Route path="/messages" element={<Messages />} />
+            <Route path="/feedback" element={<FeedBack />} />
             <Route path="/notifications" element={<Notifications />} />
           </Route>
         </Route>
