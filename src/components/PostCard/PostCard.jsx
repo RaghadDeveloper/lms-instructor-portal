@@ -95,10 +95,10 @@ function PostCard({ post, setEditPost, menuOpenPostId, setMenuOpenPostId }) {
         <div className="post-body">
           <h5 className="title">{post?.title}</h5>
           <pre className="text">{post?.content}</pre>
-          {post["App\\Enums\\media_types"] === "image" && (
+          {post.media_type === "image" && (
             <img src={post.media_url} className="img" />
           )}
-          {post["App\\Enums\\media_types"] === "video" && (
+          {post.media_type === "video" && (
             <video className="video" controls>
               <source src={post.media_url} type="video/mp4" />
             </video>

@@ -93,3 +93,8 @@
 .post-editor .card .btn {
   max-width: none;
 }
+
+.post-editor .btns-container {
+  display: flex;
+  gap: 1rem;
+}

@@ -71,6 +71,21 @@
   color: var(--very-light);
 }
 
+.post-card-header .action-btn {
+  padding: 4px;
+  border-radius: 50%;
+  aspect-ratio: 1;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.post-card-header .action-btn:hover {
+  background-color: var(--secondary-gray\36);
+}
+
 .post-card-header .post-date {
   font-size: 0.8rem;
   font-weight: 300;

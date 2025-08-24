@@ -28,7 +28,7 @@ function PostEditor({ editPost, setEditPost }) {
     if (editPost) {
       setPostData({
         ...editPost,
-        media_types: editPost["App\\Enums\\media_types"],
+        media_types: editPost.media_type,
         media_url: "",
       });
       setPreview(editPost.media_url);
@@ -192,9 +192,33 @@ function PostEditor({ editPost, setEditPost }) {
             <MdOutlineDeleteSweep />
           </span>
         </div>
-        <Button type={"submit"} className={"primary"} disabled={loading}>
-          {editPost ? "Update" : "Post"}
-        </Button>
+        {editPost ? (
+          <div className="btns-container">
+            <Button
+              type={"button"}
+              className={"border"}
+              disabled={loading}
+              onClick={() => {
+                setEditPost(null);
+                setPostData({
+                  title: "",
+                  content: "",
+                  media_types: "",
+                  media_url: "",
+                });
+              }}
+            >
+              Cancel
+            </Button>
+            <Button type={"submit"} className={"primary"} disabled={loading}>
+              Update
+            </Button>
+          </div>
+        ) : (
+          <Button type={"submit"} className={"primary"} disabled={loading}>
+            Post
+          </Button>
+        )}
       </div>
     </form>
   );
