@@ -6,7 +6,7 @@ import { deletePost, getPostComments } from "../../features/posts/postsThunk";
 import { useEffect, useState } from "react";
 import PostComments from "../PostComments/PostComments";
 import { BiLike, BiSolidLike } from "react-icons/bi";
-import { like } from "../../features/like/likeThunk";
+import { like, unLike } from "../../features/like/likeThunk";
 
 function formatDate(dateString, label = "Created at") {
   const date = new Date(dateString);
@@ -19,7 +19,7 @@ function PostCard({ post, setEditPost, menuOpenPostId, setMenuOpenPostId }) {
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.profile);
   const [showComments, setShowComments] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
+  const [isLiked, setIsLiked] = useState(post.is_liked);
   const [likes, setLikes] = useState(post.likes_count);
   const [commentsCount, setCommentsCount] = useState(post.comments_count);
 
@@ -48,9 +48,15 @@ function PostCard({ post, setEditPost, menuOpenPostId, setMenuOpenPostId }) {
   };
 
   const handlePostLike = () => {
-    dispatch(like({ likeable_id: post.id, likeable_type: "post" }));
-    setIsLiked(true);
-    setLikes(likes + 1);
+    if (isLiked) {
+      dispatch(unLike({ likeable_id: post.id, likeable_type: "post" }));
+      setIsLiked(false);
+      setLikes(likes - 1);
+    } else {
+      dispatch(like({ likeable_id: post.id, likeable_type: "post" }));
+      setIsLiked(true);
+      setLikes(likes + 1);
+    }
   };
 
   useEffect(() => {

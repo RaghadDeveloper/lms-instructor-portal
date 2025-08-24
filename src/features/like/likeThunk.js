@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { likeApi } from "./likeApi";
+import { likeApi, unLikeApi } from "./likeApi";
 
 const extractError = (error) => {
   return (
@@ -10,10 +10,22 @@ const extractError = (error) => {
 };
 
 export const like = createAsyncThunk(
-  "post/like",
+  "like",
   async ({ likeable_id, likeable_type }, thunkAPI) => {
     try {
       const response = await likeApi({ likeable_id, likeable_type });
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(extractError(error));
+    }
+  }
+);
+
+export const unLike = createAsyncThunk(
+  "unLike",
+  async ({ likeable_id, likeable_type }, thunkAPI) => {
+    try {
+      const response = await unLikeApi({ likeable_id, likeable_type });
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(extractError(error));

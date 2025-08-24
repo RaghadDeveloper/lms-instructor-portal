@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import "./Comment.css";
 import { useState } from "react";
-import { like } from "../../features/like/likeThunk";
+import { like, unLike } from "../../features/like/likeThunk";
 import { BiSolidLike } from "react-icons/bi";
 import CommentReplies from "../CommentReplies/CommentReplies";
 import { HiOutlineDotsVertical } from "react-icons/hi";
@@ -23,7 +23,7 @@ function Comment({
   setComment,
 }) {
   const dispatch = useDispatch();
-  const [isLiked, setIsLiked] = useState(false);
+  const [isLiked, setIsLiked] = useState(comment.is_liked);
   const [likes, setLikes] = useState(comment.likes_count);
   const [isReply, setIsReply] = useState(false);
 
@@ -39,9 +39,15 @@ function Comment({
   };
 
   const handleCommentLike = () => {
-    dispatch(like({ likeable_id: comment.id, likeable_type: "comment" }));
-    setIsLiked(true);
-    setLikes(likes + 1);
+    if (isLiked) {
+      dispatch(unLike({ likeable_id: comment.id, likeable_type: "comment" }));
+      setIsLiked(false);
+      setLikes(likes - 1);
+    } else {
+      dispatch(like({ likeable_id: comment.id, likeable_type: "comment" }));
+      setIsLiked(true);
+      setLikes(likes + 1);
+    }
   };
 
   const handleEditComment = () => {
