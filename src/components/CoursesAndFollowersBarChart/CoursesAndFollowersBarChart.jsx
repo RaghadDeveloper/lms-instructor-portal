@@ -14,6 +14,7 @@ import {
   coursesStatistics,
   followsStatistics,
 } from "../../features/statistics/statisticsThunk";
+import { motion } from "framer-motion";
 
 const formatter = new Intl.DateTimeFormat("en", { month: "short" });
 
@@ -42,7 +43,13 @@ function CoursesAndFollowersBarChart() {
   });
 
   return (
-    <div className="statistic-card card6">
+    <motion.div
+      whileHover={{ scale: 1.02 }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="statistic-card card6"
+    >
       <div className="header">
         <h4>Courses and Followers</h4>
         <select value={year} onChange={(e) => setYear(e.target.value)}>
@@ -61,7 +68,7 @@ function CoursesAndFollowersBarChart() {
         <Bar dataKey="Courses" fill="#2c7da0" />
         <Bar dataKey="Followers" fill="#3caddd" />
       </BarChart>
-    </div>
+    </motion.div>
   );
 }
 

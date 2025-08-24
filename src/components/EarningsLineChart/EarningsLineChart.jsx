@@ -11,6 +11,7 @@ import {
 } from "recharts";
 import { useEffect, useState } from "react";
 import { earningsStatistics } from "../../features/statistics/statisticsThunk";
+import { motion } from "framer-motion";
 
 const formatter = new Intl.DateTimeFormat("en", { month: "short" });
 
@@ -39,7 +40,13 @@ function EarningsLineChart() {
   }, [earnings]);
 
   return (
-    <div className="statistic-card card5">
+    <motion.div
+      whileHover={{ scale: 1.02 }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="statistic-card card5"
+    >
       <div className="header">
         <h4>Earnings</h4>
         <select value={year} onChange={(e) => setYear(e.target.value)}>
@@ -70,7 +77,7 @@ function EarningsLineChart() {
           activeDot={{ r: 6 }}
         />
       </LineChart>
-    </div>
+    </motion.div>
   );
 }
 
