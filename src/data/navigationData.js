@@ -17,9 +17,9 @@ export const navigationData = [
     link: "/courses",
   },
   {
-    icon: RiLineChartLine,
-    title: "Course Statisics",
-    link: "/course-statistics",
+    icon: PiArticleNyTimesLight,
+    title: "Posts",
+    link: "/posts",
   },
   {
     icon: AiOutlineUser,
@@ -40,10 +40,5 @@ export const navigationData = [
     icon: MdNotificationsActive,
     title: "Notifications",
     link: "/notifications",
-  },
-  {
-    icon: PiArticleNyTimesLight,
-    title: "Posts",
-    link: "/posts",
   },
 ];

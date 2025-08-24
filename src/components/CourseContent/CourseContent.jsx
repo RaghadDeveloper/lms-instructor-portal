@@ -3,6 +3,7 @@ import "./CourseContent.css";
 import Button from "../Button/Button";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { motion } from "framer-motion";
 
 function CourseContent({ lessons }) {
   const navigate = useNavigate();
@@ -10,7 +11,12 @@ function CourseContent({ lessons }) {
   const { course } = useSelector((state) => state.courses);
 
   return (
-    <div className="course-content">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="course-content"
+    >
       <h3>Course Content</h3>
 
       {lessons?.map((lesson, index) => (
@@ -49,7 +55,7 @@ function CourseContent({ lessons }) {
       >
         Edit course
       </Button>
-    </div>
+    </motion.div>
   );
 }
 

@@ -60,6 +60,7 @@ const courseSlice = createSlice({
       .addCase(getCourses.fulfilled, (state, action) => {
         state.loading = false;
         state.courses = action.payload.data?.courses;
+        state.course = null;
         state.pagination = {
           currentPage: action.payload.data?.pagination.current_page,
           prev: action.payload.data?.pagination.prev_page,

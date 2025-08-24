@@ -46,6 +46,11 @@ const lessonsSlice = createSlice({
       state.loading = false;
       state.error = null;
     },
+    clearLessons: (state) => {
+      state.loading = false;
+      state.error = null;
+      state.lessons = [];
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -172,5 +177,5 @@ const lessonsSlice = createSlice({
   },
 });
 
-export const { clearError } = lessonsSlice.actions;
+export const { clearError, clearLessons } = lessonsSlice.actions;
 export default lessonsSlice.reducer;

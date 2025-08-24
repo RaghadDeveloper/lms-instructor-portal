@@ -8,9 +8,6 @@
   border-radius: 4px;
   justify-content: space-between;
   cursor: pointer;
-}
-
-.course-card:hover {
   box-shadow: 2px 5px 5px var(--primay-gray\24);
 }
 

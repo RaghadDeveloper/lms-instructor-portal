@@ -1,5 +1,6 @@
 import "./VideoCard.css";
 import { useNavigate, useParams } from "react-router-dom";
+import { motion } from "framer-motion";
 
 function formatTime(timeStr) {
   const [hours, minutes] = timeStr.split(":").map(Number);
@@ -14,7 +15,10 @@ function VideoCard({ num, lesson }) {
   const { lessonId } = useParams();
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
       className={`video-card ${id == lessonId ? "active" : "f"}`}
       onClick={() => navigate(`lesson/${id}`)}
     >
@@ -26,7 +30,7 @@ function VideoCard({ num, lesson }) {
         <p>Duration: {formatTime(video_duration)}</p>
         <p>{is_free ? "Free" : ""}</p>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

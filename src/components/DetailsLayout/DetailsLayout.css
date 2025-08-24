@@ -3,6 +3,8 @@
   color: var(--very-dark);
   height: fit-content;
   top: 1rem;
+  position: sticky;
+  bottom: 2rem;
 }
 
 .details-layout .category {

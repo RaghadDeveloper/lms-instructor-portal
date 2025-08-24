@@ -25,6 +25,10 @@
   color: var(--very-light);
 }
 
+.video-info.card .edit-btn:hover {
+  color: var(--primary-color);
+}
+
 .video-info.card .row {
   display: flex;
   justify-content: space-evenly;

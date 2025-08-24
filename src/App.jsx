@@ -12,7 +12,6 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import Posts from "./pages/Posts/Posts";
 import Courses from "./pages/Courses/Courses";
 import Profile from "./pages/Profile/Profile";
-import CourseStatistics from "./pages/CourseStatistics/CourseStatistics";
 import Messages from "./pages/Messages/Messages";
 import Notifications from "./pages/Notifications/Notifications";
 import CourseDetails from "./pages/CourseDetails/CourseDetails";
@@ -92,7 +91,6 @@ function App() {
               />
             </Route>
             <Route path="/profile" element={<Profile />} />
-            <Route path="/course-statistics" element={<CourseStatistics />} />
             <Route path="/messages" element={<Messages />} />
             <Route path="/feedback" element={<FeedBack />} />
             <Route path="/notifications" element={<Notifications />} />

@@ -1,6 +1,7 @@
 import "./CourseCard.css";
 import { FaRegUser, FaStar } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 function CourseCard({ course }) {
   const navigate = useNavigate();
@@ -17,7 +18,15 @@ function CourseCard({ course }) {
   } = course;
 
   return (
-    <div className="course-card" onClick={() => navigate(`${id}`)}>
+    <motion.div
+      whileHover={{ scale: 1.03 }}
+      whileTap={{ scale: 0.97 }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="course-card"
+      onClick={() => navigate(`${id}`)}
+    >
       <img src={image_url} alt="Course Img" />
 
       <div>
@@ -41,7 +50,7 @@ function CourseCard({ course }) {
         </div>
         <p className="price">{price === "Free" ? price : `$${price}`}</p>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
