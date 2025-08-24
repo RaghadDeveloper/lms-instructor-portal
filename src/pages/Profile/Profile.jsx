@@ -8,6 +8,7 @@ import {
   getMyFollowers,
   getProfile,
 } from "../../features/profile/profileThunks";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
 function Profile() {
   const dispatch = useDispatch();

@@ -1,0 +1,39 @@
+.profile-card {
+  margin: 0 auto;
+}
+
+.profile-card .back-btn {
+  position: absolute;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+.profile-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+  justify-content: center;
+  width: 450px;
+  margin: 0 auto;
+}
+
+.profile-card h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.profile-card form .profile-img img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 2px solid var(--primary-color);
+  object-fit: cover;
+}
+
+.dark .profile-card .date-field,
+.dark .profile-card .date-field input {
+  color: var(--very-light);
+}

@@ -5,10 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import profileImg from "./../../assets/images/profileImg.jpg";
 import UploadImage from "../UploadImage/UploadImage";
-import { updateAvatar } from "../../features/profile/profileThunks";
 import { MdOutlineModeEdit } from "react-icons/md";
 import { useState } from "react";
 import axios from "axios";
+import Button from "../Button/Button";
+import { updateProfile } from "../../features/profile/profileThunks";
 
 function ProfileCard() {
   const dispatch = useDispatch();
@@ -50,7 +51,7 @@ function ProfileCard() {
       }
 
       setPreview(URL.createObjectURL(file));
-      await dispatch(updateAvatar({ avatar_url: secureUrl }));
+      await dispatch(updateProfile({ avatar_url: secureUrl }));
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
@@ -74,13 +75,20 @@ function ProfileCard() {
           />
         </div>
 
-        <h2 className="user-name">{profile?.user_name}</h2>
+        <h2 className="user-name">{profile?.username}</h2>
         <h4 className="headline">{profile?.bio}</h4>
         <div className="info-group">
           <InfoBlock label={"Posts"} value={profile?.posts_count} />
           <InfoBlock label={"Courses"} value={profile?.courses_count} />
           <InfoBlock label={"Followers"} value={profile?.followers_counter} />
         </div>
+        <Button
+          type={"button"}
+          className={"primary"}
+          onClick={() => navigate("edit")}
+        >
+          Edit Profile
+        </Button>
       </header>
       <div className="user-info">
         <h5>Email:</h5>

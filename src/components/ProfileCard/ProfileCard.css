@@ -18,6 +18,14 @@
   align-items: center;
   gap: 1rem;
   padding-bottom: 2rem;
+  position: relative;
+}
+
+.profile-card .profile-header .btn.primary {
+  position: absolute;
+  width: fit-content;
+  top: -2rem;
+  right: -0.5rem;
 }
 
 .profile-card .profile-header .profile-img img {

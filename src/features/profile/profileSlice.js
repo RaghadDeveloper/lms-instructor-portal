@@ -4,7 +4,7 @@ import {
   getMyFollowers,
   getProfile,
   storeUserCategories,
-  updateAvatar,
+  updateProfile,
 } from "./profileThunks";
 
 const initialState = {
@@ -78,12 +78,12 @@ const profileSlice = createSlice({
       .addCase(storeUserCategories.rejected, handleRejected)
 
       // updateAvatar
-      .addCase(updateAvatar.fulfilled, (state, action) => {
+      .addCase(updateProfile.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.profile.avatar_url = action.payload.data.avatar_url;
+        state.profile = action.payload.data;
       })
-      .addCase(updateAvatar.rejected, handleRejected);
+      .addCase(updateProfile.rejected, handleRejected);
   },
 });
 
