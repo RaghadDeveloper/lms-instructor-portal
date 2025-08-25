@@ -6,6 +6,15 @@
   padding: 0;
   display: flex;
   flex-direction: column;
+  border-radius: 4px;
+}
+
+.chat .no-chat {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-size: 1.5rem;
 }
 
 .dark .chat {
@@ -16,13 +25,12 @@
   display: flex;
   gap: 1.5rem;
   align-items: center;
-  background-color: var(--secondary-gray);
+  border-bottom: 1px solid var(--secondary-gray);
   padding: 0.5rem 1rem;
   position: sticky;
   top: 0;
 }
 
-.dark .chat .chat-header,
 .dark .chat .message-input {
   background-color: var(--primay-gray);
 }
@@ -31,6 +39,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .chat .chat-header .user-name {
@@ -72,6 +81,7 @@
   position: relative;
   height: 3.5rem;
   background-color: var(--secondary-gray);
+  border-radius: 4px;
 }
 
 .chat .message-input textarea {

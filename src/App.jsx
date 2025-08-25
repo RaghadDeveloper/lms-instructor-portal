@@ -94,6 +94,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/profile/edit" element={<EditProfile />} />
             <Route path="/messages" element={<Messages />} />
+            <Route path="/messages/:userId" element={<Messages />} />
             <Route path="/feedback" element={<FeedBack />} />
             <Route path="/notifications" element={<Notifications />} />
           </Route>
