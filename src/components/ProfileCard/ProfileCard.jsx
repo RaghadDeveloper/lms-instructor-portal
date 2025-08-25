@@ -94,18 +94,22 @@ function ProfileCard() {
         <h5>Email:</h5>
         <p>{profile?.email}</p>
       </div>
-      <div className="user-info">
-        <h5>Birth date:</h5>
-        <p>{formatDate(profile?.birth_date || "")}</p>
-      </div>
-      <div className="user-info">
-        <h5>Specializations:</h5>
-        <ul className="specializations">
-          {categories?.map((category) => (
-            <li key={category.id}>{category.name}</li>
-          ))}
-        </ul>
-      </div>
+      {profile?.birth_date && (
+        <div className="user-info">
+          <h5>Birth date:</h5>
+          <p>{formatDate(profile?.birth_date || "")}</p>
+        </div>
+      )}
+      {categories && (
+        <div className="user-info">
+          <h5>Specializations:</h5>
+          <ul className="specializations">
+            {categories?.map((category) => (
+              <li key={category.id}>{category.name}</li>
+            ))}
+          </ul>
+        </div>
+      )}
       <div className="user-info">
         <h5>Change password:</h5>
         <div className="password">

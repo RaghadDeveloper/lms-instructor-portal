@@ -9,6 +9,7 @@ function TextArea({
   onChange,
   minLength,
   disabled,
+  required,
 }) {
   return (
     <div className="textarea">
@@ -19,7 +20,7 @@ function TextArea({
         value={value}
         onChange={onChange}
         disabled={disabled}
-        required
+        required={required ?? true}
         minLength={minLength}
       />
       <label htmlFor={id}>{label}</label>

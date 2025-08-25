@@ -22,10 +22,10 @@ function Header() {
 
   return (
     <header className={`main-header ${theme}`}>
-      <div className="search-bar">
+      {/* <div className="search-bar">
         <input type="text" placeholder="search..." />
         <BiSearch className="icon" />
-      </div>
+      </div> */}
 
       <div className="header-icons">
         <Link to={"/notifications"}>

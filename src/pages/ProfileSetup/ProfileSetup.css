@@ -12,6 +12,7 @@
 .profile-setup .button-container {
   display: flex;
   justify-content: flex-end;
+  gap: 1rem;
 }
 
 .profile-setup button {
@@ -39,8 +40,9 @@
   margin: 0;
 }
 
-.profile-setup input {
+.profile-setup textarea {
   min-width: 450px;
+  height: 75px !important;
 }
 
 .row.specialization {

@@ -6,3 +6,7 @@
   gap: 1rem;
   min-width: 450px;
 }
+
+.form-body .error {
+  max-width: 450px;
+}

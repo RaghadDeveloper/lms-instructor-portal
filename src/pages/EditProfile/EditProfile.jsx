@@ -8,23 +8,33 @@ import UploadImage from "../../components/UploadImage/UploadImage";
 import TextInput from "../../components/TextInput/TextInput";
 import TextArea from "../../components/TextArea/TextArea";
 import Button from "../../components/Button/Button";
-import { updateProfile } from "../../features/profile/profileThunks";
+import {
+  storeUserCategories,
+  updateProfile,
+} from "../../features/profile/profileThunks";
 import { GrFormPrevious } from "react-icons/gr";
 import { useNavigate } from "react-router-dom";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+import Option from "../../components/Option/Option";
 
 function EditProfile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { categories } = useSelector((state) => state.categories);
   const { profile, error, loading } = useSelector((state) => state.profile);
   const [preview, setPreview] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
-    username: profile.username,
-    avatar_url: profile.avatar_url,
-    birth_date: profile.birth_date,
-    bio: profile.bio,
+    username: profile?.username || "",
+    avatar_url: profile?.avatar_url,
+    birth_date: profile?.birth_date,
+    bio: profile?.bio || "",
   });
+  const [category_ids, setUserCategories] = useState([]);
+
+  const addUserCategory = (category) => {
+    setUserCategories((prev) => [...prev, category]);
+  };
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -75,12 +85,29 @@ function EditProfile() {
       ...formData,
       avatar_url: imageUrl,
     };
-    const result = await dispatch(updateProfile(finalFormData));
-    if (updateProfile.fulfilled.match(result)) navigate("/profile");
+
+    try {
+      let resultAction2;
+      const resultAction1 = await dispatch(updateProfile(finalFormData));
+      if (category_ids.length > 0) {
+        resultAction2 = await dispatch(storeUserCategories({ category_ids }));
+      }
+
+      if (
+        (updateProfile.fulfilled.match(resultAction1) &&
+          category_ids.length > 0 &&
+          storeUserCategories.fulfilled.match(resultAction2)) ||
+        (updateProfile.fulfilled.match(resultAction1) &&
+          category_ids.length === 0)
+      )
+        navigate("/profile");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
-    <div className="profile-card">
+    <div className="profile-card edit">
       <button className="back-btn" onClick={() => navigate(-1)}>
         <GrFormPrevious />
       </button>
@@ -105,13 +132,14 @@ function EditProfile() {
           disabled={loading || isLoading}
         />
         <TextArea
-          id="headline"
+          id="bio"
           type="text"
           name={"bio"}
-          label={"Headline"}
+          label={"Bio "}
           value={formData.bio}
           onChange={handleChange}
           disabled={loading || isLoading}
+          required={false}
         />
         <div className="date-field">
           <label htmlFor="birth_date">Birth date</label>
@@ -124,7 +152,21 @@ function EditProfile() {
             disabled={loading || isLoading}
           />
         </div>
-        <Button className={"primary"} disabled={loading || isLoading}>
+        <h2>Specialization</h2>
+        <div className="row specialization">
+          {categories.map((category) => (
+            <Option
+              key={category.id}
+              option={category}
+              onSelect={addUserCategory}
+            />
+          ))}
+        </div>
+        <Button
+          type={"submit"}
+          className={"primary"}
+          disabled={loading || isLoading}
+        >
           Save Edit
         </Button>
         {error && <ErrorMessage error={error} />}

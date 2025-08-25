@@ -12,13 +12,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  createProfile,
+  updateProfile,
   storeUserCategories,
 } from "../../features/profile/profileThunks";
 import { fetchCategories } from "../../features/categories/categoriesThunk";
 import { useNavigate } from "react-router-dom";
 import SquareLoader from "../../components/SquareLoader/SquareLoader";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+import TextArea from "../../components/TextArea/TextArea";
 
 function ProfileSetup() {
   const dispatch = useDispatch();
@@ -95,16 +96,19 @@ function ProfileSetup() {
       ...formData,
       avatar_url: imageUrl,
     };
-
     try {
-      const resultAction1 = await dispatch(createProfile(finalFormData));
-      const resultAction2 = await dispatch(
-        storeUserCategories({ category_ids })
-      );
+      let resultAction2;
+      const resultAction1 = await dispatch(updateProfile(finalFormData));
+      if (category_ids.length > 0) {
+        resultAction2 = await dispatch(storeUserCategories({ category_ids }));
+      }
 
       if (
-        createProfile.fulfilled.match(resultAction1) &&
-        storeUserCategories.fulfilled.match(resultAction2)
+        (updateProfile.fulfilled.match(resultAction1) &&
+          category_ids.length > 0 &&
+          storeUserCategories.fulfilled.match(resultAction2)) ||
+        (updateProfile.fulfilled.match(resultAction1) &&
+          category_ids.length === 0)
       )
         navigate("/");
     } finally {
@@ -129,14 +133,15 @@ function ProfileSetup() {
               disabled={isLoading}
             />
             <div className="column">
-              <TextInput
-                id="headline"
+              <TextArea
+                id="bio"
                 type="text"
                 name={"bio"}
-                label={"Headline"}
+                label={"Bio"}
                 value={formData.bio}
                 onChange={handleChange}
                 disabled={isLoading}
+                required={false}
               />
               <div className="date-field">
                 <label htmlFor="birth_date">Birth date</label>
@@ -161,6 +166,14 @@ function ProfileSetup() {
             ))}
           </div>
           <div className="button-container">
+            <Button
+              type={"button"}
+              className={"border"}
+              disabled={isLoading}
+              onClick={() => navigate("/")}
+            >
+              Skip
+            </Button>
             <Button type={"submit"} className={"primary"} disabled={isLoading}>
               Continue
             </Button>

@@ -159,9 +159,17 @@ function CoursesPageHeader({ setIsFiltering, page }) {
   }, [searchKey, dispatch]);
 
   useEffect(() => {
-    const active = Object.values(filters).some((val) => val);
-    setIsFiltering(active);
-  }, [filters, setIsFiltering]);
+    const activeFilter =
+      selectedCategoryId || isFree !== "" || selectedSort || selectedStatus;
+
+    setIsFiltering(!!activeFilter);
+  }, [
+    selectedCategoryId,
+    isFree,
+    selectedSort,
+    selectedStatus,
+    setIsFiltering,
+  ]);
 
   return (
     <header className="courses-page-header">

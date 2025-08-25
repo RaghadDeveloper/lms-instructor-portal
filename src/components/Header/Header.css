@@ -1,12 +1,12 @@
 .main-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   width: 100%;
   background-color: white;
   padding: 0.5rem;
   border-left: 1.5px solid var(--secondary-gray\36);
-  /* position: fixed; */
-  /* z-index: 100; */
+  /* position: fixed;
+  z-index: 100; */
 }
 .main-header.dark {
   background-color: var(--dark-bg);
