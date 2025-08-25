@@ -101,6 +101,7 @@
   outline: none;
 }
 
+.dark .chat .message-input .send-icon,
 .dark .chat .message-input textarea,
 .dark .chat .message-input textarea::placeholder {
   color: var(--very-light);

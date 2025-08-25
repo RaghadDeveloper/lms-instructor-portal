@@ -4,6 +4,7 @@ import {
   getAllChatApi,
   getChatApi,
   getUserProfileApi,
+  sendMessageApi,
 } from "./chatsApi";
 
 const extractError = (error) => {
@@ -52,6 +53,18 @@ export const getUserProfile = createAsyncThunk(
   async (userId, thunkAPI) => {
     try {
       const response = await getUserProfileApi(userId);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(extractError(error));
+    }
+  }
+);
+
+export const sendMessage = createAsyncThunk(
+  "message/send",
+  async (message, thunkAPI) => {
+    try {
+      const response = await sendMessageApi(message);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(extractError(error));

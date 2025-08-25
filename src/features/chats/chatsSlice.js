@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllChat, getChat, getUserProfile } from "./chatsThunk";
+import { getAllChat, getChat, getUserProfile, sendMessage } from "./chatsThunk";
 
 const initialState = {
   loading: false,
@@ -59,7 +59,15 @@ const chatsSlice = createSlice({
         state.error = null;
         state.chat = action.payload.data;
       })
-      .addCase(getChat.rejected, handleRejected);
+      .addCase(getChat.rejected, handleRejected)
+
+      // sendMessage
+      .addCase(sendMessage.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.chat.messages.push(action.payload.data);
+      })
+      .addCase(sendMessage.rejected, handleRejected);
   },
 });
 

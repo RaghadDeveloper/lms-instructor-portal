@@ -10,3 +10,6 @@ export const deleteChatApi = (chatId) =>
 
 export const getUserProfileApi = (userId) =>
   axiosInstance.get(`/users/profile?user_id=${userId}`);
+
+export const sendMessageApi = (message) =>
+  axiosInstance.post("/send-message", message);
