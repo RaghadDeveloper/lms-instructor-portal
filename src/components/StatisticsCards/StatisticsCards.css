@@ -1,6 +1,6 @@
 .statistics-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(268px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(301px, 1fr));
   justify-content: space-between;
   margin-bottom: 1.2rem;
   grid-gap: 1.2rem;
@@ -17,4 +17,10 @@
 .statistic-card .header select {
   width: fit-content;
   padding-right: 1rem;
+}
+
+@media (max-width: 1680px) {
+  .statistics-cards {
+    grid-template-columns: repeat(auto-fill, minmax(268px, 1fr));
+  }
 }

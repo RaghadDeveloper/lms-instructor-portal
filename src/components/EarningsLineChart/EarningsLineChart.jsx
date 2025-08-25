@@ -18,7 +18,7 @@ const formatter = new Intl.DateTimeFormat("en", { month: "short" });
 function EarningsLineChart() {
   const dispatch = useDispatch();
   const [year, setYear] = useState(2025);
-  const [maxEarning, setMaxEarning] = useState(2025);
+  const [maxEarning, setMaxEarning] = useState();
   const { earnings } = useSelector((state) => state.statistics);
 
   const earningsStatisticsData = earnings?.statistics?.map((item) => ({
