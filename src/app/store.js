@@ -11,6 +11,7 @@ import notificationsReducer from "../features/notifications/notificationsSlice";
 import statisticsReducer from "../features/statistics/statisticsSlice";
 import quizReducer from "../features/quiz/quizSlice";
 import chatsReducer from "../features/chats/chatsSlice";
+import usersReducre from "../features/users/usersSlice";
 
 const store = configureStore({
   reducer: {
@@ -26,6 +27,7 @@ const store = configureStore({
     statistics: statisticsReducer,
     quiz: quizReducer,
     chats: chatsReducer,
+    users: usersReducre,
   },
 });
 
