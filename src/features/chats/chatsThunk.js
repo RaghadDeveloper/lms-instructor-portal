@@ -1,10 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   deleteChatApi,
+  updateMessageApi,
   getAllChatApi,
   getChatApi,
   getUserProfileApi,
   sendMessageApi,
+  deleteMessageApi,
 } from "./chatsApi";
 
 const extractError = (error) => {
@@ -65,6 +67,30 @@ export const sendMessage = createAsyncThunk(
   async (message, thunkAPI) => {
     try {
       const response = await sendMessageApi(message);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(extractError(error));
+    }
+  }
+);
+
+export const updateMessage = createAsyncThunk(
+  "message/update",
+  async (message, thunkAPI) => {
+    try {
+      const response = await updateMessageApi(message);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(extractError(error));
+    }
+  }
+);
+
+export const deleteMessage = createAsyncThunk(
+  "message/delete",
+  async (messageId, thunkAPI) => {
+    try {
+      const response = await deleteMessageApi(messageId);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(extractError(error));

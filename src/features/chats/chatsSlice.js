@@ -1,8 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllChat, getChat, getUserProfile, sendMessage } from "./chatsThunk";
+import {
+  deleteMessage,
+  getAllChat,
+  getChat,
+  getUserProfile,
+  sendMessage,
+  updateMessage,
+} from "./chatsThunk";
 
 const initialState = {
   loading: false,
+  loadingAllChats: false,
   error: null,
   chats: [],
   chat: null,
@@ -44,9 +52,12 @@ const chatsSlice = createSlice({
       .addCase(getUserProfile.rejected, handleRejected)
 
       // getAllChats
-      .addCase(getAllChat.pending, handlePending)
+      .addCase(getAllChat.pending, (state) => {
+        state.loadingAllChats = true;
+        state.error = null;
+      })
       .addCase(getAllChat.fulfilled, (state, action) => {
-        state.loading = false;
+        state.loadingAllChats = false;
         state.error = null;
         state.chats = action.payload.data;
       })
@@ -67,7 +78,27 @@ const chatsSlice = createSlice({
         state.error = null;
         state.chat.messages.push(action.payload.data);
       })
-      .addCase(sendMessage.rejected, handleRejected);
+      .addCase(sendMessage.rejected, handleRejected)
+
+      // updateMessage
+      .addCase(updateMessage.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.chat.messages = state.chat.messages.map((message) =>
+          message.id === action.payload.data.id ? action.payload.data : message
+        );
+      })
+      .addCase(updateMessage.rejected, handleRejected)
+
+      // deleteMessage
+      .addCase(deleteMessage.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.chat.messages = state.chat.messages.filter(
+          (message) => message.id !== action.meta.arg
+        );
+      })
+      .addCase(deleteMessage.rejected, handleRejected);
   },
 });
 

@@ -17,6 +17,10 @@
   font-size: 1.5rem;
 }
 
+.chat .loading {
+  margin: 1rem;
+}
+
 .dark .chat {
   background-color: var(--dark-bg);
 }
@@ -56,25 +60,7 @@
 }
 
 .chat .msgs::-webkit-scrollbar {
-  background-color: white;
-}
-
-.chat .msgs .msg1 {
-  padding: 0.5rem;
-  max-width: 70%;
-  width: fit-content;
-  background-color: var(--secondary-gray\36);
-  border-radius: 4px;
-}
-
-.chat .msgs .msg2 {
-  padding: 0.5rem;
-  max-width: 70%;
-  width: fit-content;
-  align-self: self-end;
-  background-color: var(--very-light-gray);
-  color: var(--very-dark);
-  border-radius: 4px;
+  display: none;
 }
 
 .chat .message-input {

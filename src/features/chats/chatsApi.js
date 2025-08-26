@@ -13,3 +13,9 @@ export const getUserProfileApi = (userId) =>
 
 export const sendMessageApi = (message) =>
   axiosInstance.post("/send-message", message);
+
+export const updateMessageApi = (message) =>
+  axiosInstance.patch("/message/update", message);
+
+export const deleteMessageApi = (messageId) =>
+  axiosInstance.delete(`/message/delete?message_id=${messageId}`);

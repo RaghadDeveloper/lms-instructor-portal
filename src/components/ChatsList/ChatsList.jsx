@@ -6,7 +6,7 @@ import { getAllChat } from "../../features/chats/chatsThunk";
 
 function ChatsList() {
   const dispatch = useDispatch();
-  const { chats } = useSelector((state) => state.chats);
+  const { loadingAllChats, chats } = useSelector((state) => state.chats);
 
   useEffect(() => {
     dispatch(getAllChat());
@@ -15,13 +15,17 @@ function ChatsList() {
   return (
     <div className="chats-list">
       <h2>All Chats</h2>
-      <ul>
-        {!chats.length ? (
-          <p>You don't have any chat yet</p>
-        ) : (
-          chats?.map((chat) => <UserItem key={chat.id} chat={chat} />)
-        )}
-      </ul>
+      {loadingAllChats ? (
+        <p>Loading...</p>
+      ) : !chats.length ? (
+        <p>You don't have any chat yet</p>
+      ) : (
+        <ul>
+          {chats?.map((chat) => (
+            <UserItem key={chat.id} chat={chat} />
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

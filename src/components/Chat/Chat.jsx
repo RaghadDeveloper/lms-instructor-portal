@@ -2,15 +2,14 @@ import "./Chat.css";
 import img from "./../../assets/images/profileImg.jpg";
 import { LuSend } from "react-icons/lu";
 import { useDispatch, useSelector } from "react-redux";
-import Loader from "../Loader/Loader";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { sendMessage } from "../../features/chats/chatsThunk";
+import { updateMessage, sendMessage } from "../../features/chats/chatsThunk";
+import Message from "../Message/Message";
 
 function Chat() {
   const dispatch = useDispatch();
   const { loading, user, chat } = useSelector((state) => state.chats);
-  const { profile } = useSelector((state) => state.profile);
   const { userId } = useParams();
   const [message, setMessage] = useState(() => ({
     receiver_id: "",
@@ -22,18 +21,33 @@ function Chat() {
       setMessage((prev) => ({
         ...prev,
         receiver_id: userId,
+        content: "",
       }));
     }
   }, [userId]);
 
   const handleSubmit = async () => {
-    await dispatch(sendMessage(message));
+    if (message.id) {
+      const result = await dispatch(updateMessage(message));
+      if (updateMessage.fulfilled.match(result))
+        setMessage({
+          receiver_id: userId,
+          content: "",
+        });
+    } else {
+      const result = await dispatch(sendMessage(message));
+      if (sendMessage.fulfilled.match(result))
+        setMessage({
+          receiver_id: userId,
+          content: "",
+        });
+    }
   };
 
   return (
     <div className="chat">
       {loading ? (
-        <Loader />
+        <p className="loading">Loading chat...</p>
       ) : !chat ? (
         <p className="no-chat">Select a chat to start messaging</p>
       ) : (
@@ -45,14 +59,11 @@ function Chat() {
 
           <div className="msgs">
             {chat.messages.map((message) => (
-              <div
+              <Message
                 key={message.id}
-                className={`${
-                  profile.user_id === message.sender_id ? "msg1" : "msg2"
-                }`}
-              >
-                {message.content}
-              </div>
+                message={message}
+                setMessage={setMessage}
+              />
             ))}
           </div>
 

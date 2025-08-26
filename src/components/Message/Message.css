@@ -1,0 +1,55 @@
+.msg {
+  width: 100%;
+}
+
+.msg .msg1,
+.msg .msg2 {
+  padding: 0.5rem;
+  max-width: 70%;
+  width: fit-content;
+  border-radius: 4px;
+  position: relative;
+}
+
+.msg1 {
+  background-color: var(--secondary-gray\36);
+}
+
+.msg2 {
+  align-self: self-end;
+  background-color: var(--very-light-gray);
+  color: var(--very-dark);
+  justify-self: end;
+}
+
+.msg pre {
+  text-wrap: wrap;
+}
+
+.msg-actions {
+  width: fit-content;
+  display: none;
+  position: absolute;
+  top: 50%;
+  right: -4.5rem;
+  transform: translateY(-50%);
+}
+
+.msg-edit-btn,
+.msg-del-btn {
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--primay-gray);
+}
+
+.dark .msg-edit-btn,
+.dark .msg-del-btn {
+  color: var(--very-light);
+}
+
+.msg:hover .msg-actions {
+  display: flex;
+  gap: 1rem;
+}
