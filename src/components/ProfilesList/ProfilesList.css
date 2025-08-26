@@ -35,9 +35,24 @@
 
 .profile-list li {
   display: flex;
+  justify-content: space-between;
+  padding: 0.4rem 1rem;
+}
+
+.profile-list li div {
+  display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.4rem 1rem;
+}
+
+.profile-list li span {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.profile-list .star {
+  color: #fbbf24;
 }
 
 .profile-list li img {

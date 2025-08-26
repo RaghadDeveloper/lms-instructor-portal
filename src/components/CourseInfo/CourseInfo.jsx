@@ -44,9 +44,16 @@ function CourseInfo() {
     };
   }, [showProfilesList]);
 
-  const handleGetStudents = async () => {
+  const handleGetSubscribers = async () => {
+    if (!subscribers_count) return;
     setShowProfilesList(true);
     await dispatch(getAllProfiles({ subscribers_course_id: id }));
+  };
+
+  const handleGetRatings = async () => {
+    if (!rating) return;
+    setShowProfilesList(true);
+    await dispatch(getAllProfiles({ ratings_course_id: id }));
   };
 
   return (
@@ -88,11 +95,15 @@ function CourseInfo() {
           />
           <InfoBlock label={"Duration"} value={formatTime(course_duration)} />
           <InfoBlock label={"Lessons"} value={lessons_count} />
-          <InfoBlock label={"Rating"} value={rating} />
+          <InfoBlock
+            label={"Rating"}
+            value={rating}
+            onClick={handleGetRatings}
+          />
           <InfoBlock
             label={"Students"}
             value={subscribers_count}
-            onClick={handleGetStudents}
+            onClick={handleGetSubscribers}
           />
         </div>
       </div>
