@@ -38,6 +38,12 @@ function VideoInfo({ lesson, onCommentsClick }) {
     await dispatch(getAllProfiles({ views_lesson_id: lessonId }));
   };
 
+  const handleGetLikes = async () => {
+    if (!lesson?.likes_count) return;
+    setShowProfilesList(true);
+    await dispatch(getAllProfiles({ likes_lesson_id: lessonId }));
+  };
+
   return (
     <>
       <div className="video-info card">
@@ -71,7 +77,11 @@ function VideoInfo({ lesson, onCommentsClick }) {
             value={lesson?.views_count}
             onClick={handleGetViews}
           />
-          <InfoBlock label={"Likes"} value={lesson?.likes_count} />
+          <InfoBlock
+            label={"Likes"}
+            value={lesson?.likes_count}
+            onClick={handleGetLikes}
+          />
           <InfoBlock
             label={"Comments"}
             value={lesson?.comment_count}
