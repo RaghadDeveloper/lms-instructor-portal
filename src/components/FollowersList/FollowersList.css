@@ -20,8 +20,14 @@
   margin-top: 2rem;
 }
 
-.followers-list p {
+.followers-list > p {
   margin-left: 1rem;
+}
+
+.followers-list .see-more {
+  padding: 1rem;
+  font-size: 1.2rem;
+  cursor: pointer;
 }
 
 .dark .followers-list {

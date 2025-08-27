@@ -12,7 +12,11 @@ const initialState = {
   error: null,
   profile: null,
   categories: null,
-  followers: null,
+  followers: [],
+  pagination: {
+    currentPage: 1,
+    lastPage: 1,
+  },
 };
 
 const handlePending = (state) => {
@@ -51,11 +55,14 @@ const profileSlice = createSlice({
       .addCase(getProfile.rejected, handleRejected)
 
       // getFollowers
-      .addCase(getMyFollowers.pending, handlePending)
       .addCase(getMyFollowers.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.followers = action.payload.data;
+        state.followers = [...state.followers, ...action.payload.data];
+        state.pagination = {
+          currentPage: action.payload.meta.current_page,
+          lastPage: action.payload.meta.last_page,
+        };
       })
       .addCase(getMyFollowers.rejected, handleRejected)
 

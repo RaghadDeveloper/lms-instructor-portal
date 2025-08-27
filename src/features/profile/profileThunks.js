@@ -29,9 +29,9 @@ export const getProfile = createAsyncThunk(
 
 export const getMyFollowers = createAsyncThunk(
   "profile/getFollowers",
-  async (_, thunkAPI) => {
+  async (page, thunkAPI) => {
     try {
-      const response = await getMyFollowersApi();
+      const response = await getMyFollowersApi(page);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(extractError(error));

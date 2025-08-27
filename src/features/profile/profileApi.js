@@ -2,7 +2,8 @@ import axiosInstance from "../../api/axiosInstance";
 
 export const getProfileApi = () => axiosInstance.get("/my-profile");
 
-export const getMyFollowersApi = () => axiosInstance.get("/users/my-followers");
+export const getMyFollowersApi = (page) =>
+  axiosInstance.get(`/users/my-followers?page=${page}`);
 
 export const createProfileApi = (data) => axiosInstance.post("/profile", data);
 

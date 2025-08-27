@@ -1,9 +1,15 @@
 import "./FollowersList.css";
 import UserItem from "../UserItem/UserItem";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getMyFollowers } from "../../features/profile/profileThunks";
 
 function FollowersList() {
-  const { followers } = useSelector((state) => state.profile);
+  const dispatch = useDispatch();
+  const { followers, pagination } = useSelector((state) => state.profile);
+
+  const getMoreFollowers = async () => {
+    await dispatch(getMyFollowers(pagination.currentPage + 1));
+  };
 
   return (
     <div className="followers-list">
@@ -14,6 +20,11 @@ function FollowersList() {
       {followers?.map((follower) => (
         <UserItem key={follower.id} user={follower} />
       ))}
+      {pagination.currentPage !== pagination.lastPage && (
+        <p onClick={getMoreFollowers} className="see-more">
+          see more
+        </p>
+      )}
     </div>
   );
 }
