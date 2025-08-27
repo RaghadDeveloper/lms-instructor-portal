@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import PostComments from "../PostComments/PostComments";
 import { BiLike, BiSolidLike } from "react-icons/bi";
 import { like, unLike } from "../../features/like/likeThunk";
+import { getAllProfiles } from "../../features/users/usersThunk";
+import ProfilesList from "../ProfilesList/ProfilesList";
 
 function formatDate(dateString, label = "Created at") {
   const date = new Date(dateString);
@@ -22,6 +24,7 @@ function PostCard({ post, setEditPost, menuOpenPostId, setMenuOpenPostId }) {
   const [isLiked, setIsLiked] = useState(post.is_liked);
   const [likes, setLikes] = useState(post.likes_count);
   const [commentsCount, setCommentsCount] = useState(post.comments_count);
+  const [showProfilesList, setShowProfilesList] = useState(false);
 
   const date =
     post?.created_at === post?.updated_at
@@ -59,8 +62,14 @@ function PostCard({ post, setEditPost, menuOpenPostId, setMenuOpenPostId }) {
     }
   };
 
+  const handleGetLikes = async () => {
+    if (!likes) return;
+    setShowProfilesList(true);
+    await dispatch(getAllProfiles({ likes_post_id: post.id }));
+  };
+
   useEffect(() => {
-    if (showComments) {
+    if (showComments || showProfilesList) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
@@ -69,7 +78,7 @@ function PostCard({ post, setEditPost, menuOpenPostId, setMenuOpenPostId }) {
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, [showComments]);
+  }, [showComments, showProfilesList]);
 
   return (
     <>
@@ -105,19 +114,39 @@ function PostCard({ post, setEditPost, menuOpenPostId, setMenuOpenPostId }) {
           )}
         </div>
         <div className="post-footer">
-          <div onClick={handlePostLike}>
-            {isLiked ? <BiSolidLike className="liked" /> : <BiLike />}
-            <span>{likes}</span>
+          <div className="post-actions">
+            <div onClick={handlePostLike}>
+              {isLiked ? <BiSolidLike className="liked" /> : <BiLike />}
+              <span className={`${isLiked ? "liked" : ""}`}>Like</span>
+            </div>
+            <div className="divider"></div>
+            <div
+              onClick={() => {
+                setShowComments(true);
+                dispatch(getPostComments(post.id));
+              }}
+            >
+              <FaRegComment />
+              <span>Comment</span>
+            </div>
           </div>
-          <div className="divider"></div>
-          <div
-            onClick={() => {
-              setShowComments(true);
-              dispatch(getPostComments(post.id));
-            }}
-          >
-            <FaRegComment />
-            <span>{commentsCount}</span>
+          <div className="post-actions">
+            {likes > 0 && (
+              <span className="info" onClick={handleGetLikes}>
+                {likes} Likes
+              </span>
+            )}
+            {commentsCount > 0 && (
+              <span
+                className="info"
+                onClick={() => {
+                  setShowComments(true);
+                  dispatch(getPostComments(post.id));
+                }}
+              >
+                {commentsCount} Comments
+              </span>
+            )}
           </div>
         </div>
       </div>
@@ -129,6 +158,7 @@ function PostCard({ post, setEditPost, menuOpenPostId, setMenuOpenPostId }) {
           setCommentsCount={setCommentsCount}
         />
       )}
+      {showProfilesList && <ProfilesList setIsShow={setShowProfilesList} />}
     </>
   );
 }

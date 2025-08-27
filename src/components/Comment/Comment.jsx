@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import "./Comment.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { like, unLike } from "../../features/like/likeThunk";
 import { BiSolidLike } from "react-icons/bi";
 import CommentReplies from "../CommentReplies/CommentReplies";
@@ -13,6 +13,8 @@ import {
   deleteLessonComment,
   getLessonComments,
 } from "../../features/lessons/lessonsThunk";
+import { getAllProfiles } from "../../features/users/usersThunk";
+import ProfilesList from "../ProfilesList/ProfilesList";
 
 function Comment({
   comment,
@@ -26,8 +28,21 @@ function Comment({
   const [isLiked, setIsLiked] = useState(comment.is_liked);
   const [likes, setLikes] = useState(comment.likes_count);
   const [isReply, setIsReply] = useState(false);
+  const [showProfilesList, setShowProfilesList] = useState(false);
 
   const isMenuOpen = menuOpenCommentId === comment.id;
+
+  useEffect(() => {
+    if (showProfilesList) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [showProfilesList]);
 
   const toggleMenu = (e) => {
     e.stopPropagation();
@@ -36,6 +51,12 @@ function Comment({
     } else {
       setMenuOpenCommentId(comment.id);
     }
+  };
+
+  const handleGetLikes = async () => {
+    if (!comment.likes_count) return;
+    setShowProfilesList(true);
+    await dispatch(getAllProfiles({ likes_comment_id: comment.id }));
   };
 
   const handleCommentLike = () => {
@@ -101,7 +122,7 @@ function Comment({
               {!type && <span onClick={() => setIsReply(true)}>Reply</span>}
             </div>
             {likes > 0 && (
-              <div>
+              <div className="likes" onClick={handleGetLikes}>
                 {likes}
                 <BiSolidLike className="liked" />
               </div>
@@ -117,6 +138,7 @@ function Comment({
           setCommentsCount={setCommentsCount}
         />
       )}
+      {showProfilesList && <ProfilesList setIsShow={setShowProfilesList} />}
     </>
   );
 }

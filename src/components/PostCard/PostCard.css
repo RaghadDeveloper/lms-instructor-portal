@@ -123,6 +123,7 @@
   gap: 2rem;
   border-top: 1px solid var(--secondary-gray);
   padding: 1rem 2rem;
+  justify-content: space-between;
 }
 
 .post-card .post-footer div {
@@ -136,6 +137,16 @@
 .post-card .post-footer .divider {
   width: 1px;
   background-color: var(--primary-color);
+}
+
+.post-footer .post-actions {
+  display: flex;
+  gap: 1.2rem !important;
+}
+
+.post-footer .info:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .post-card .liked {

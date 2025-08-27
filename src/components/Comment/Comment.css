@@ -45,6 +45,11 @@
   align-items: center;
 }
 
+.comment .reactions .likes:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 .comment .reactions span {
   margin-left: 0.6rem;
   cursor: pointer;
