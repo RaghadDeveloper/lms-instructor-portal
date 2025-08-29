@@ -10,6 +10,7 @@ import {
 const initialState = {
   loading: false,
   error: null,
+  categoryError: null,
   profile: null,
   categories: null,
   followers: [],
@@ -76,10 +77,13 @@ const profileSlice = createSlice({
       .addCase(createProfile.rejected, handleRejected)
 
       // storeCategories
-      .addCase(storeUserCategories.pending, handlePending)
+      .addCase(storeUserCategories.pending, (state) => {
+        state.loading = true;
+        state.categoryError = null;
+      })
       .addCase(storeUserCategories.fulfilled, (state, action) => {
         state.loading = false;
-        state.error = null;
+        state.categoryError = null;
         state.categories = action.payload.categories;
       })
       .addCase(storeUserCategories.rejected, handleRejected)

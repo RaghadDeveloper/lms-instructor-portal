@@ -6,7 +6,7 @@ export const getChatApi = (chatId) =>
   axiosInstance(`/chats/chat?conversation_id=${chatId}`);
 
 export const deleteChatApi = (chatId) =>
-  axiosInstance(`/chats/chat/delete/${chatId}`);
+  axiosInstance.delete(`/chats/chat/delete`, chatId);
 
 export const getUserProfileApi = (userId) =>
   axiosInstance.get(`/users/profile?user_id=${userId}`);

@@ -53,6 +53,7 @@ function LessonEditor() {
   }, [courseId]);
 
   async function handleSubmit(lessonInfo) {
+    if (!lessonInfo.video_url) alert("vidoerg ejrkgnj");
     let imageUrl = lessonInfo.image_url;
     let videoUrl = lessonInfo.video_url;
 

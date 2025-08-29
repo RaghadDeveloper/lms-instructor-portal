@@ -42,6 +42,10 @@ const lessonsSlice = createSlice({
   name: "lessons",
   initialState,
   reducers: {
+    setError: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
     clearError: (state) => {
       state.loading = false;
       state.error = null;
@@ -177,5 +181,5 @@ const lessonsSlice = createSlice({
   },
 });
 
-export const { clearError, clearLessons } = lessonsSlice.actions;
+export const { clearError, setError, clearLessons } = lessonsSlice.actions;
 export default lessonsSlice.reducer;

@@ -30,7 +30,7 @@ function FileInput({ id, label, name, value, onChange, disabled }) {
         onChange={handleFileChange}
         disabled={disabled}
         accept="image/*"
-        required={typeof value !== "string"}
+        // required={typeof value !== "string"}
       />
       <label
         htmlFor={id}

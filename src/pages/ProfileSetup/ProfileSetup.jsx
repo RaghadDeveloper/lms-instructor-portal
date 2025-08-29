@@ -61,6 +61,10 @@ function ProfileSetup() {
     setUserCategories((prev) => [...prev, category]);
   };
 
+  const removeUserCategory = (category) => {
+    setUserCategories((prev) => prev.filter((cat) => cat !== category));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     let imageUrl = formData.avatar_url;
@@ -162,6 +166,7 @@ function ProfileSetup() {
                 key={category.id}
                 option={category}
                 onSelect={addUserCategory}
+                onDeselect={removeUserCategory}
               />
             ))}
           </div>

@@ -25,3 +25,10 @@
 .user-item:last-child {
   border: none;
 }
+
+.user-item button {
+  background: none;
+  border: none;
+  flex: 1;
+  text-align: end;
+}

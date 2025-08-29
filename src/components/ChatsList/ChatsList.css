@@ -4,6 +4,8 @@
   padding: 1rem;
   border-radius: 4px;
   height: 100%;
+  /* padding-bottom: 5rem; */
+  position: relative;
 }
 
 .chats-list h2 {
@@ -15,3 +17,36 @@
   background-color: var(--dark-bg);
   color: var(--very-light);
 }
+/* 
+.chats-list .add-chat-btn {
+  position: absolute;
+  right: 1rem;
+  bottom: -4rem;
+  z-index: 100;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  box-shadow: 2px 4px 13px 5px var(--primay-gray\24);
+  cursor: pointer;
+  color: var(--very-dark);
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  border: none;
+}
+
+.followers-list11 {
+  width: 40%;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0px 0px 10px 10px var(--primay-gray\24);
+  z-index: 1000;
+}
+
+.followers-list11 .followers-list {
+  width: 100%;
+} */

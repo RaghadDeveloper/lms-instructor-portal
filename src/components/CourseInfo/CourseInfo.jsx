@@ -30,6 +30,7 @@ function CourseInfo() {
     tags,
     approval_status,
     rejection_notes,
+    my_earnings,
   } = course;
 
   useEffect(() => {
@@ -90,9 +91,10 @@ function CourseInfo() {
 
         <div className="row">
           <InfoBlock
-            label={"price"}
+            label={"Price"}
             value={price === "Free" ? price : `$${price}`}
           />
+          <InfoBlock label={"Earning"} value={`$${my_earnings}`} />
           <InfoBlock label={"Duration"} value={formatTime(course_duration)} />
           <InfoBlock label={"Lessons"} value={lessons_count} />
           <InfoBlock

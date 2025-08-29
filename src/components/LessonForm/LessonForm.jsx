@@ -8,9 +8,11 @@ import FileInput from "../FileInput/FileInput";
 import TextArea from "../TextArea/TextArea";
 import CheckBox from "../../components/CheckBox/CheckBox";
 import Button from "../Button/Button";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Progress from "../Progress/Progress";
 import { useParams } from "react-router-dom";
+import { setError } from "../../features/lessons/lessonsSlice";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 function LessonForm({
   initialData,
@@ -24,6 +26,7 @@ function LessonForm({
   setUploading,
   coursePrice,
 }) {
+  const dispatch = useDispatch();
   const [lessonInfo, setLessonInfo] = useState(initialData);
   const [fileSize, setFileSize] = useState(0);
   const [fileName, setFileName] = useState("");
@@ -104,17 +107,16 @@ function LessonForm({
 
   function handleSubmit(e) {
     e.preventDefault();
+    if (!lessonInfo.video_url) {
+      dispatch(setError("the video is requird"));
+      return;
+    } else if (!lessonInfo.image_url) {
+      dispatch(setError("the image is requird"));
+      return;
+    }
     setIsSubmit(true);
     onSubmit(lessonInfo);
   }
-
-  useEffect(() => {
-    if (error) {
-      alert(error);
-      cancelUpload();
-      setIsSubmit(false);
-    }
-  }, [error]);
 
   return (
     <FormBody onSubmit={handleSubmit}>
@@ -166,6 +168,7 @@ function LessonForm({
             disabled={loading || isSubmit}
           />
         )}
+        {error && <ErrorMessage error={error} />}
       </Grid>
       <Button
         type={"submit"}

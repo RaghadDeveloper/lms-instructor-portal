@@ -30,11 +30,13 @@ function UploadVideo({
       )}
       <input
         id="fileInput"
+        name="video"
         type="file"
         accept="video/*"
         onChange={handleVideoChange}
         hidden
         disabled={uploading || disabled}
+        // required
       />
       {(uploading || preview) && (
         <div className="loading-info">

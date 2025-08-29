@@ -21,7 +21,12 @@ function EditProfile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { categories } = useSelector((state) => state.categories);
-  const { profile, error, loading } = useSelector((state) => state.profile);
+  const {
+    categories: userCategories,
+    profile,
+    error,
+    loading,
+  } = useSelector((state) => state.profile);
   const [preview, setPreview] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -34,6 +39,10 @@ function EditProfile() {
 
   const addUserCategory = (category) => {
     setUserCategories((prev) => [...prev, category]);
+  };
+
+  const removeUserCategory = (category) => {
+    setUserCategories((prev) => prev.filter((cat) => cat !== category));
   };
 
   const handleChange = (e) => {
@@ -87,18 +96,14 @@ function EditProfile() {
     };
 
     try {
-      let resultAction2;
       const resultAction1 = await dispatch(updateProfile(finalFormData));
-      if (category_ids.length > 0) {
-        resultAction2 = await dispatch(storeUserCategories({ category_ids }));
-      }
+      const resultAction2 = await dispatch(
+        storeUserCategories({ category_ids })
+      );
 
       if (
-        (updateProfile.fulfilled.match(resultAction1) &&
-          category_ids.length > 0 &&
-          storeUserCategories.fulfilled.match(resultAction2)) ||
-        (updateProfile.fulfilled.match(resultAction1) &&
-          category_ids.length === 0)
+        updateProfile.fulfilled.match(resultAction1) &&
+        storeUserCategories.fulfilled.match(resultAction2)
       )
         navigate("/profile");
     } finally {
@@ -159,6 +164,8 @@ function EditProfile() {
               key={category.id}
               option={category}
               onSelect={addUserCategory}
+              onDeselect={removeUserCategory}
+              userCategories={userCategories}
             />
           ))}
         </div>

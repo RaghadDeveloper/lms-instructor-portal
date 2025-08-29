@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  deleteChat,
   deleteMessage,
   getAllChat,
   getChat,
@@ -71,6 +72,16 @@ const chatsSlice = createSlice({
         state.chat = action.payload.data;
       })
       .addCase(getChat.rejected, handleRejected)
+
+      // deleteChat
+      .addCase(deleteChat.pending, handlePending)
+      .addCase(deleteChat.fulfilled, (state, action) => {
+        console.log(action);
+        state.loading = false;
+        state.error = null;
+        // state.chat = action.payload.data;
+      })
+      .addCase(deleteChat.rejected, handleRejected)
 
       // sendMessage
       .addCase(sendMessage.fulfilled, (state, action) => {
