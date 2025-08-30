@@ -6,6 +6,7 @@ import {
   searchCoursesApi,
   updateCourseApi,
   searchCourseTitleApi,
+  deleteCourseApi,
 } from "./coursesApi";
 
 const extractError = (error) => {
@@ -82,6 +83,18 @@ export const updateCourse = createAsyncThunk(
   async ({ courseId, courseInfo }, thunkAPI) => {
     try {
       const response = await updateCourseApi({ courseId, courseInfo });
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(extractError(error));
+    }
+  }
+);
+
+export const deleteCourse = createAsyncThunk(
+  "course/delete",
+  async (courseId, thunkAPI) => {
+    try {
+      const response = await deleteCourseApi(courseId);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(extractError(error));

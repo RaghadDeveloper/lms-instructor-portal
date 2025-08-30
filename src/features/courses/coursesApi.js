@@ -27,3 +27,6 @@ export const updateCourseApi = ({ courseId, courseInfo }) =>
       "Content-Type": "multipart/form-data",
     },
   });
+
+export const deleteCourseApi = (courseId) =>
+  axiosInstance.delete(`/course/${courseId}`);

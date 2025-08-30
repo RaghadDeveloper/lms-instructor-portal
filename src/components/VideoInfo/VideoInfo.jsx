@@ -6,6 +6,9 @@ import { useEffect, useState } from "react";
 import { getAllProfiles } from "../../features/users/usersThunk";
 import { useDispatch } from "react-redux";
 import ProfilesList from "../ProfilesList/ProfilesList";
+import { deleteLesson } from "../../features/lessons/lessonsThunk";
+import Button from "../Button/Button";
+import { FiDelete } from "react-icons/fi";
 
 function formatTime(timeStr) {
   const [hours, minutes] = timeStr.split(":").map(Number);
@@ -19,6 +22,7 @@ function VideoInfo({ lesson, onCommentsClick }) {
   const navigate = useNavigate();
   const [showProfilesList, setShowProfilesList] = useState(false);
   const { lessonId, courseId } = useParams();
+  const [showDelete, setShowDelete] = useState(false);
 
   useEffect(() => {
     if (showProfilesList) {
@@ -44,6 +48,13 @@ function VideoInfo({ lesson, onCommentsClick }) {
     await dispatch(getAllProfiles({ likes_lesson_id: lessonId }));
   };
 
+  const handleDelete = async () => {
+    const result = await dispatch(deleteLesson(lessonId));
+    if (deleteLesson.fulfilled.match(result)) {
+      navigate(`/courses/${courseId}`);
+    } else alert("Lesson doesn't deleted,please try again!");
+  };
+
   return (
     <>
       <div className="video-info card">
@@ -56,14 +67,19 @@ function VideoInfo({ lesson, onCommentsClick }) {
             <span>01. </span>
             {lesson?.title}
           </h2>
-          <button
-            className="edit-btn"
-            onClick={() =>
-              navigate(`/courses/${courseId}/lesson/edit/${lessonId}`)
-            }
-          >
-            <FaRegEdit />
-          </button>
+          <div className="video-actions">
+            <button
+              className="edit-btn"
+              onClick={() =>
+                navigate(`/courses/${courseId}/lesson/edit/${lessonId}`)
+              }
+            >
+              <FaRegEdit />
+            </button>
+            <button className="edit-btn" onClick={() => setShowDelete(true)}>
+              <FiDelete />
+            </button>
+          </div>
         </div>
 
         <p>{lesson?.description}</p>
@@ -90,6 +106,18 @@ function VideoInfo({ lesson, onCommentsClick }) {
         </div>
       </div>
       {showProfilesList && <ProfilesList setIsShow={setShowProfilesList} />}
+      {showDelete && (
+        <>
+          <div className="overlay" onClick={() => setShowDelete(false)} />
+          <div className="delete-modal">
+            <p>Are you sure you want to delete this Lesson?</p>
+            <Button className={"danger"} onClick={handleDelete}>
+              Yes
+            </Button>
+            <span onClick={() => setShowDelete(false)}>&times;</span>
+          </div>
+        </>
+      )}
     </>
   );
 }

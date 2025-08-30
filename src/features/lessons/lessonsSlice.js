@@ -8,6 +8,7 @@ import {
   updateLesson,
   deleteLessonComment,
   updateLessonComment,
+  deleteLesson,
 } from "./lessonsThunk";
 
 const initialState = {
@@ -93,6 +94,18 @@ const lessonsSlice = createSlice({
         );
       })
       .addCase(updateLesson.rejected, handleRejected)
+
+      // deleteLesson
+      .addCase(deleteLesson.pending, handlePending)
+      .addCase(deleteLesson.fulfilled, (state, action) => {
+        console.log(action);
+        state.loading = false;
+        state.lesson = action.payload.data;
+        state.lessons = state.lessons.filter(
+          (lesson) => Number(lesson.id) !== Number(action.meta.arg)
+        );
+      })
+      .addCase(deleteLesson.rejected, handleRejected)
 
       // getLessonComments
       .addCase(getLessonComments.pending, (state) => {

@@ -20,6 +20,9 @@ export const updateLessonApi = ({ lessonId, lessonInfo }) =>
     },
   });
 
+export const deleteLessonApi = (lessonId) =>
+  axiosInstance.delete(`/lesson/${lessonId}`);
+
 export const getLessonCommentsApi = (lessonId) =>
   axiosInstance.get(
     `/all-comments?commentable_id=${lessonId}&commentable_type=lesson`

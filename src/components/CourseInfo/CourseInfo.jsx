@@ -94,7 +94,10 @@ function CourseInfo() {
             label={"Price"}
             value={price === "Free" ? price : `$${price}`}
           />
-          <InfoBlock label={"Earning"} value={`$${my_earnings}`} />
+          <InfoBlock
+            label={"Earning"}
+            value={`$${Math.ceil(my_earnings) ?? "0"}`}
+          />
           <InfoBlock label={"Duration"} value={formatTime(course_duration)} />
           <InfoBlock label={"Lessons"} value={lessons_count} />
           <InfoBlock
