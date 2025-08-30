@@ -9,12 +9,14 @@ import {
 } from "../../features/chats/chatsThunk";
 import { useState } from "react";
 import Button from "../Button/Button";
+import { MdOutlineDeleteSweep } from "react-icons/md";
 
 function UserItem({ user, chat }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showDelete, setShowDelete] = useState(false);
   const { loading } = useSelector((state) => state.chats);
+  const { profile } = useSelector((state) => state.profile);
 
   const handleClick = async (e) => {
     e.stopPropagation();
@@ -25,8 +27,20 @@ function UserItem({ user, chat }) {
     }
     const result = await dispatch(getChat(chat.id));
     if (getChat.fulfilled.match(result)) {
-      dispatch(getUserProfile(chat.receiver_id));
-      navigate(`/messages/${chat.receiver_id}`);
+      dispatch(
+        getUserProfile(
+          chat.receiver_id !== profile?.user_id
+            ? chat.receiver_id
+            : chat.sender_id
+        )
+      );
+      navigate(
+        `/messages/${
+          chat.receiver_id !== profile?.user_id
+            ? chat.receiver_id
+            : chat.sender_id
+        }`
+      );
     }
   };
 
@@ -41,15 +55,21 @@ function UserItem({ user, chat }) {
           src={user?.avatar_url || chat.receiver_avatar || img}
           className="user-img"
         />
-        <p className="user-name">{user?.username || chat.receiver_name}</p>
+        <p className="user-name">
+          {user?.username ||
+            (chat?.receiver_id !== profile?.user_id
+              ? chat?.receiver_name
+              : "sender name")}
+        </p>
         {chat && (
           <button
+            className="del-chat"
             onClick={(e) => {
               e.stopPropagation();
               setShowDelete(true);
             }}
           >
-            del
+            <MdOutlineDeleteSweep />
           </button>
         )}
       </li>
@@ -57,7 +77,7 @@ function UserItem({ user, chat }) {
         <>
           <div className="modal-overlay" onClick={() => setShowDelete(false)} />
           <div className="delete-modal">
-            <p>Are you sure you want to delete this Message?</p>
+            <p>Are you sure you want to delete this Chat?</p>
             <Button
               className={"danger"}
               onClick={handleDeleteChat}

@@ -21,6 +21,45 @@
   position: relative;
 }
 
+.profile-card .action-btn {
+  position: absolute;
+  right: 0rem;
+  padding: 4px;
+  border-radius: 50%;
+  aspect-ratio: 1;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.profile-card .action-menu {
+  background-color: white;
+  position: absolute;
+  top: 2.2rem;
+  right: 2.2rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 1px 4px 12px 5px var(--primay-gray\24);
+}
+
+.dark .profile-card .action-menu {
+  background-color: var(--dark-bg);
+  box-shadow: 1px 2px 10px 2px var(--secondary-gray\36);
+}
+
+.profile-card .action-menu > p {
+  padding: 1rem 2rem;
+  cursor: pointer;
+}
+
+.profile-card .action-menu p:hover {
+  background-color: var(--secondary-gray\36);
+}
+
 .profile-card .profile-header .btn.primary {
   position: absolute;
   width: fit-content;

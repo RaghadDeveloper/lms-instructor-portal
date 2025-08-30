@@ -9,18 +9,40 @@ import { MdOutlineModeEdit } from "react-icons/md";
 import { useState } from "react";
 import axios from "axios";
 import Button from "../Button/Button";
-import { updateProfile } from "../../features/profile/profileThunks";
+import {
+  deleteProfile,
+  updateProfile,
+} from "../../features/profile/profileThunks";
+import { HiOutlineDotsVertical } from "react-icons/hi";
+import { logoutSuccess } from "../../features/auth/authSlice";
 
 function ProfileCard() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [preview, setPreview] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { categories, profile } = useSelector((state) => state.profile);
 
   const formatDate = (dateStr) => {
     const [year, month, day] = dateStr.split("-");
     return `${day}/${month}/${year}`;
+  };
+
+  const toggleMenu = (e) => {
+    e.stopPropagation();
+    if (isMenuOpen) {
+      setIsMenuOpen(false);
+    } else {
+      setIsMenuOpen(true);
+    }
+  };
+
+  const handleDelete = async () => {
+    const result = await dispatch(deleteProfile());
+    if (deleteProfile.fulfilled.match(result)) {
+      dispatch(logoutSuccess());
+    }
   };
 
   const handleImageChange = async (e) => {
@@ -82,13 +104,15 @@ function ProfileCard() {
           <InfoBlock label={"Courses"} value={profile?.courses_count} />
           <InfoBlock label={"Followers"} value={profile?.followers_counter} />
         </div>
-        <Button
-          type={"button"}
-          className={"primary"}
-          onClick={() => navigate("edit")}
-        >
-          Edit Profile
-        </Button>
+        <span className="action-btn" onClick={toggleMenu}>
+          <HiOutlineDotsVertical />
+        </span>
+        {isMenuOpen && (
+          <div className="action-menu" onClick={(e) => e.stopPropagation()}>
+            <p onClick={() => navigate("edit")}>Edit profile</p>
+            <p onClick={handleDelete}>Delete account</p>
+          </div>
+        )}
       </header>
       <div className="user-info">
         <h5>Email:</h5>

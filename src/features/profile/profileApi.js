@@ -12,3 +12,5 @@ export const storeUserCategoriesApi = (data) =>
 
 export const updateProfileApi = (data) =>
   axiosInstance.patch("/profile/update_profile", data);
+
+export const deleteProfileApi = () => axiosInstance.delete("/user/delete");

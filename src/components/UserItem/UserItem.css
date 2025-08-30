@@ -20,15 +20,26 @@
 
 .user-item .user-name {
   font-size: 1.2rem;
+  flex: 1;
 }
 
 .user-item:last-child {
   border: none;
 }
 
-.user-item button {
+.user-item .del-chat {
   background: none;
   border: none;
-  flex: 1;
   text-align: end;
+  font-size: 1.4rem;
+  cursor: pointer;
+  display: none;
+}
+
+.user-item .del-chat:hover {
+  color: #dc3545;
+}
+
+.user-item:hover .del-chat {
+  display: block;
 }
