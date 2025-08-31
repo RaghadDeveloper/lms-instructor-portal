@@ -39,8 +39,8 @@
 .profile-card .action-menu {
   background-color: white;
   position: absolute;
-  top: 2.2rem;
-  right: 2.2rem;
+  top: 1.5rem;
+  right: 1.5rem;
   display: flex;
   flex-direction: column;
   box-shadow: 1px 4px 12px 5px var(--primay-gray\24);
@@ -129,6 +129,7 @@
   display: flex;
   gap: 1rem;
   list-style: none;
+  flex-wrap: wrap;
 }
 
 .profile-card .user-info .password {

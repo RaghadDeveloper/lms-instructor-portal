@@ -26,11 +26,11 @@ export const navigationData = [
     title: "Profile",
     link: "/profile",
   },
-  {
-    icon: TbMessages,
-    title: "Messages",
-    link: "/messages",
-  },
+  // {
+  //   icon: TbMessages,
+  //   title: "Messages",
+  //   link: "/messages",
+  // },
   {
     icon: MdOutlineFeedback,
     title: "Suggestions & Complaints",

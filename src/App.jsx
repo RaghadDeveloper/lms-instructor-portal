@@ -12,7 +12,7 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import Posts from "./pages/Posts/Posts";
 import Courses from "./pages/Courses/Courses";
 import Profile from "./pages/Profile/Profile";
-import Messages from "./pages/Messages/Messages";
+// import Messages from "./pages/Messages/Messages";
 import Notifications from "./pages/Notifications/Notifications";
 import CourseDetails from "./pages/CourseDetails/CourseDetails";
 import CourseInfo from "./components/CourseInfo/CourseInfo";
@@ -93,8 +93,8 @@ function App() {
             </Route>
             <Route path="/profile" element={<Profile />} />
             <Route path="/profile/edit" element={<EditProfile />} />
-            <Route path="/messages" element={<Messages />} />
-            <Route path="/messages/:userId" element={<Messages />} />
+            {/* <Route path="/messages" element={<Messages />} /> */}
+            {/* <Route path="/messages/:userId" element={<Messages />} /> */}
             <Route path="/feedback" element={<FeedBack />} />
             <Route path="/notifications" element={<Notifications />} />
           </Route>

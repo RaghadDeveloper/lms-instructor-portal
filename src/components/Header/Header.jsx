@@ -31,9 +31,9 @@ function Header() {
         <Link to={"/notifications"}>
           <MdNotificationsActive className="icon" />
         </Link>
-        <Link to={"/messages"}>
+        {/* <Link to={"/messages"}>
           <TbMessages className="icon" />
-        </Link>
+        </Link> */}
 
         <div className="divider"></div>
         <HiOutlineMoon className="icon" onClick={toggleTheme} />

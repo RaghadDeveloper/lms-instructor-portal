@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 const AnimatedNumber = ({ target, duration = 2 }) => {
   const count = useMotionValue(0);
   const rounded = useTransform(count, (latest) => Math.floor(latest));
-  const [display, setDisplay] = useState(0);
+  const [display, setDisplay] = useState("0");
 
   useEffect(() => {
     const controls = animate(count, target, {
@@ -17,7 +17,7 @@ const AnimatedNumber = ({ target, duration = 2 }) => {
 
   useEffect(() => {
     const unsubscribe = rounded.on("change", (v) => {
-      setDisplay(v);
+      setDisplay(v.toLocaleString());
     });
     return () => unsubscribe();
   }, []);

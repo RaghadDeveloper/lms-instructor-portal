@@ -160,10 +160,15 @@ function CoursesPageHeader({ setIsFiltering, page }) {
 
   useEffect(() => {
     const activeFilter =
-      selectedCategoryId || isFree !== "" || selectedSort || selectedStatus;
+      searchKey ||
+      selectedCategoryId ||
+      isFree !== "" ||
+      selectedSort ||
+      selectedStatus;
 
     setIsFiltering(!!activeFilter);
   }, [
+    searchKey,
     selectedCategoryId,
     isFree,
     selectedSort,
